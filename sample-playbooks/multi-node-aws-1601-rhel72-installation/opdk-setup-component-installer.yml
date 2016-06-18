@@ -1,5 +1,4 @@
 ---
-
 - hosts: planet
   gather_facts: yes
   vars_files:
