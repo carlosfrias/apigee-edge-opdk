@@ -1,0 +1,8 @@
+---
+- include: opdk-setup-migrate-cs-zk.yml
+- include: opdk-setup-migrate-qpid-ps.yml
+- include: opdk-setup-migrate-ldap.yml
+- include: opdk-setup-migrate-edge.yml
+- include: opdk-setup-migrate-mp.yml
+- include: opdk-setup-migrate-router.yml
+- include: opdk-setup-migrate-ui.yml

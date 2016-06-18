@@ -1,0 +1,6 @@
+---
+# tasks file for opdk-setup-validate-cleanup
+
+- name: Validate OPDK Installation
+  shell: '{{ apigee_validate_cmd }} clean -f {{ apigee_validate_config_file }}'
+

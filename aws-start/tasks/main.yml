@@ -1,0 +1,16 @@
+---
+# tasks file for aws-start
+- name: Load EC2 instance ids
+  ec2_facts:
+
+- name: Start EC2 instance ids
+  ec2:
+    state: running
+    instance_ids: '{{ ansible_ec2_instance_id }}'
+    aws_access_key: '{{ aws_access_key }}'
+    aws_secret_key: '{{ aws_secret_key }}'
+    aws_region: '{{ aws_region }}'
+    vpc_subnet_id: '{{ vpc_subnet_id }}'
+    key_name: '{{ key_name }}'
+    aws_zone: '{{ aws_zone }}'
+

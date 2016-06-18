@@ -1,0 +1,20 @@
+---
+- hosts: dc-1
+  tasks:
+  - name: Ec2 facts
+    ec2_facts:
+    register: facts
+
+  - name: Ec2 Facts report
+    debug:
+      var: facts
+
+- hosts: dc-1
+  tasks:
+  - name: Setup module
+    setup:
+    register: setup
+
+  - name: Setup facts
+    debug:
+      var: setup

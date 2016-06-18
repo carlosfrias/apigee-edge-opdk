@@ -1,0 +1,39 @@
+---
+# tasks file for opdk-setup-os-qpid-rollback
+
+- name: Remove packages with dependency collisions.
+  yum:
+    name: "{{ item }}"
+    state: absent
+    update_cache: yes
+  with_items:
+    - db4-cxx
+    - boost-filesystem
+    - boost-system
+    - boost-test
+    - boost
+    - boost-devel
+    - python-qpid
+    - qpid
+    - boost-program-options
+    - libdb-cxx
+
+#- name: Remove python qpid packages
+#  shell: 'rpm -e $(rpm -qa | egrep "^(python-qpid-|qpid)")'
+#  ignore_errors: yes
+#
+#- name: Update qpid os version 7 packages
+#  register: update_status
+#  yum:
+#    name: "{{ item }}"
+#    state: absent
+#    update_cache: yes
+#  with_items:
+#  - nss-softokn-freebl
+#  - perl-libs
+#  - zlib
+
+- name: Update limits.conf
+  file:
+    path: /etc/security/limits.d/apigee.limits.conf
+    state: absent

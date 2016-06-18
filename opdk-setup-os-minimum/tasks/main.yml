@@ -1,0 +1,108 @@
+---
+# tasks file for opdk-setup-os
+- name: Amazon Redhat AMI
+  shell: "yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional"
+  when: "{{ ansible_bios_version | search('amazon') and ansible_os_family | lower == 'redhat' and ansible_distribution | lower != 'oraclelinux' }}"
+
+- name: Update vm.swappiness
+  lineinfile:
+    dest: /etc/sysctl.conf
+    regexp: "^(vm.swappiness)"
+    line: '\1 = {{ vm_swappiness }}'
+    backup: yes
+    backrefs: yes
+
+- name: Add yum epel repository for redhat family version 6
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - epel-release
+    - centos-release-SCL
+  when: ansible_distribution_major_version == "6" and ansible_os_family | lower == "redhat"
+  tags:
+  - epel
+
+- name: Add yum epel repository for redhat family version 7
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+  when: ansible_distribution_major_version == "7" and ansible_os_family | lower == "redhat"
+  tags:
+  - epel
+
+- name: Add yum epel repository for Oracle Linux 6
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm'
+  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "oraclelinux"
+  register: epel_repo
+
+- name: Proactively remove qpid packages that cause yum update failures, ignore errors
+  shell: 'rpm -e $(rpm -qa | egrep "(apigee-qpidd-|qpid-|python-qpid|libqpid)")'
+  ignore_errors: true
+
+- name: Keep yum downloads small
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - deltarpm
+  when: epel_repo.changed
+
+- name: Speed up yum
+  shell: yum makecache {{ item }}
+  with_items:
+  - yum-presto
+  - fast
+  when: epel_repo.changed
+  register: yum_status
+
+- name: Update basic yum os packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - bind-utils
+  - chkconfig
+  - curl
+  - tar
+  - wget
+  - yum-utils
+  - unzip
+  - rsync
+  - which
+  - libselinux-python
+  - nss
+
+- name: Update for apigee installation environment
+  lineinfile:
+    dest: /etc/environment
+    regexp: "^export CONTINUE_ON_WARNING="
+    line: 'export CONTINUE_ON_WARNING={{ apigee_continue_on_warning }}'
+    backup: yes
+
+- name: Add pip package manager
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - python-pip
+
+- name: Update pip package manager
+  shell: 'pip install --upgrade pip'
+  register: pip_status
+
+- name: Update python packages
+  register: pip_status
+  pip:
+    name: '{{ item }}'
+    state: present
+  with_items:
+  - httplib2
+  - pexpect
+  - passlib

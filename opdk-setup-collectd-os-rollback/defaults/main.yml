@@ -1,0 +1,12 @@
+---
+# defaults file for opdk-setup-collectd-rollback
+collectd_pid_file: /var/run/collectd.pid
+collectd_base_dir: /usr/var/lib/collectd
+collectd_plugin_dir: /usr/lib/collectd
+collectd_types_db_dir: /usr/share/collectd
+collectd_conf_dir: /etc/collectd.d
+collectd_conf_file: /etc/collectd.conf
+collectd_src_parent_dir: /usr/local/src
+collectd_pkg_name: collectd
+collectd_version: 5.4.1
+collectd_src_filename: '{{ collectd_pkg_name }}-{{ collectd_version }}.tar.gz'

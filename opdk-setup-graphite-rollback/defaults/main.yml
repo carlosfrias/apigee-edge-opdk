@@ -1,0 +1,15 @@
+---
+# defaults file for opdk-setup-graphite
+# Apache User
+graphite_carbon_index_dir: /var/lib/graphite-web  # apache
+graphite_web_storage_dir: /var/lib/graphite-web  # apache
+graphite_carbon_log_dir: /var/log/graphite-web
+
+# Root User
+graphite_web_conf_dir: /etc/graphite-web
+graphite_web_content_dir: /usr/share/graphite/webapp/content
+graphite_root_dir: /usr/share/graphite
+
+# Carbon User
+graphite_carbon_rdd_dir: /var/lib/carbon/rrd
+graphite_carbon_whisper_dir: /var/lib/carbon/whisper

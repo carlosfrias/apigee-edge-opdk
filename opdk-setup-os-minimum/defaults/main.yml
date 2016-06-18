@@ -1,0 +1,19 @@
+---
+# defaults file for opdk-setup-os
+opdk_user_name: apigee
+opdk_group_name: "{{ opdk_user_name }}"
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee4
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+open_jdk_path: /usr/lib/jvm/java-openjdk
+
+opdk_major_version: '4'
+opdk_minor_version: '15'
+opdk_build_version: '07.03'
+opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
+
+apigee_continue_on_warning: y
+oracle_jdk: jdk-7u79-linux-x64.rpm
+oracle_jdk_path: /usr/java/jdk1.7.0_79
+
+vm_swappiness: 60 # Default value on most linux systems.

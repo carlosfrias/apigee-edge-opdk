@@ -1,0 +1,46 @@
+<Plugin "java">
+
+  <Plugin "GenericJMX">
+    # Heap memory usage
+
+    <MBean "memory_heap">
+      ObjectName "java.lang:type=Memory"
+      #InstanceFrom ""
+      InstancePrefix "memory-heap"
+
+      # Creates four values: committed, init, max, used
+      <Value>
+        Type "memory"
+        #InstancePrefix ""
+        #InstanceFrom ""
+        Table true
+        Attribute "HeapMemoryUsage"
+      </Value>
+    </MBean>
+
+    <MBean "memory_pool_perm_gen">
+      ObjectName "java.lang:name=* Perm Gen,type=MemoryPool"
+      InstancePrefix "memory_pool-"
+      InstanceFrom "name"
+      <Value>
+        Type "memory"
+        #InstancePrefix ""
+        #InstanceFrom ""
+        Table true
+        Attribute "Usage"
+      </Value>
+    </MBean>
+
+    <Connection>
+      Host "{{ mp_host }}"
+      ServiceURL "service:jmx:rmi:///jndi/rmi://{{ mp_host }}:{{ mp_jmx_port }}/platform"
+      #Collect "memory_pool"
+      Collect "memory_heap"
+      #Collect "memory_nonheap"
+      #Collect "garbage_collector"
+      Collect "memory_pool_perm_gen"
+    </Connection>
+
+  </Plugin>
+
+</Plugin>

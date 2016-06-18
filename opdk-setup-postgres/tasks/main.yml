@@ -1,0 +1,102 @@
+---
+# tasks file for opdk-setup-ps
+- include: common_integrated_facts.yml
+
+- include: aws_integrated_facts.yml
+
+- name: Status of Postgres Database Port
+  register: pg_db_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ pg_db_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Status of Postgres External Managment Port
+  register: pg_ext_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ pg_ext_mgmt_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Status of Postgres Internal Management Port
+  register: pg_int_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ pg_int_mgmt_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Status of Postgres JMX Port
+  register: pg_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ pg_jmx_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- block:
+
+  - include: 4150703-main.yml
+
+  when: opdk_version == '4.15.07.03'
+
+- block:
+
+  - include: 4160100-main.yml
+
+  when: opdk_version == '4.16.01'
+
+- name: Status of Postgres Database Port
+  register: pg_db_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ pg_db_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Status of Postgres External Managment Port
+  register: pg_ext_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ pg_ext_mgmt_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Status of Postgres Internal Management Port
+  register: pg_int_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ pg_int_mgmt_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Status of Postgres JMX Port
+  register: pg_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ pg_jmx_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Postgres Database Port Failed
+  fail:
+    msg: "Postgres Database port failed to start"
+  when: pg_db_port_status | failed
+
+- name: Postgres External Management Port Failed
+  fail:
+    msg: "Message Processor External Management port failed to start"
+  when: not pg_ext_mgmt_port_status.state == 'started'
+
+- name: Qpid Internal Management Port Failed
+  fail:
+    msg: "Message Processor Internal Management port failed to start"
+  when: not pg_int_mgmt_port_status.state == 'started'
+
+- name: Qpid JMX Port startup failed
+  fail:
+    msg: "Message Processor JMX port failed to start"
+  when: not pg_jmx_port_status.state == 'started'
+

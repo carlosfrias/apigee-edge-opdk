@@ -1,0 +1,18 @@
+---
+# defaults file for opdk-setup-rmp
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee4
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_bin: "{{ apigee_installation_home }}/bin"
+apigee_share_installer_path: "{{ apigee_installation_home }}/share/installer"
+apigee_setup: "{{ apigee_share_installer_path }}/apigee-setup.sh"
+all_status: "{{ apigee_bin }}/all-status.sh"
+opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
+opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
+opdk_staging_folder_name: opdk
+opdk_user_home: /home/{{ opdk_user_name }}
+opdk_user_name: apigee
+
+router_jmx_port: 1100
+router_ext_mgmt_port: 8081
+router_int_mgmt_port: 4527

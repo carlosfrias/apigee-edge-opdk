@@ -1,0 +1,27 @@
+Hostname    "{{ ms_host }}"
+FQDNLookup   true
+BaseDir     "{{ collectd_base_dir }}"
+PIDFile     "{{ collectd_pid_file }}"
+PluginDir   "{{ collectd_plugin_dir }}"
+TypesDB     "{{ collectd_types_db_dir }}/types.db"
+TypesDB     "{{ collectd_types_db_dir }}/types_custom.db"
+Interval     {{ collectd_interval }}
+Timeout      {{ collectd_timeout }}
+ReadThreads  {{ collectd_read_threads }}
+
+WriteQueueLimitHigh  {{ collectd_write_queue_limit_high }}
+
+LoadPlugin syslog
+LoadPlugin cpu
+LoadPlugin interface
+LoadPlugin load
+LoadPlugin memory
+
+LoadPlugin java
+<Plugin "java">
+  JVMArg "-verbose:jni"
+  JVMArg "-Djava.class.path={{ collectd_types_db_dir }}/java/collectd-api.jar:{{ collectd_types_db_dir }}/java/generic-jmx.jar"
+  LoadPlugin "org.collectd.java.GenericJMX"
+</Plugin>
+
+Include "/etc/collectd.d/*.conf"

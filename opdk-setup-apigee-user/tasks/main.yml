@@ -1,0 +1,60 @@
+---
+# tasks file for opdk-setup-apigee-user
+- include: common_integrated_facts.yml
+
+- include: aws_integrated_facts.yml
+
+- name: Create the apigee group
+  group:
+    name: "{{ opdk_group_name }}"
+    state: present
+
+- name: Create the apigee user
+  delegate_to: '{{ public_address }}'
+  user:
+    name: "{{ opdk_user_name }}"
+    comment: "OPDK user"
+    group: "{{ opdk_group_name }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+  register: opdk_user_info
+
+- name: Prep known_hosts file for apigee user
+  copy:
+    content: "{{ local_address }}"
+    dest: '{{opdk_user_info.home}}/.ssh/known_hosts_prep'
+
+- name: Download public key for apigee user
+  fetch:
+    flat: yes
+    dest: ssh_keys/ssh_pub_key_{{ public_address }}.pub
+    src: "{{ opdk_user_info.ssh_key_file }}.pub"
+
+- name: Download known_hosts file for apigee user
+  fetch:
+    flat: yes
+    dest: ssh_keys/known_hosts_prep_{{ public_address }}.txt
+    src: "{{ opdk_user_info.home }}/.ssh/known_hosts_prep"
+
+- name: Remove known_hosts prep file
+  file:
+    path: "{{ opdk_user_info.home }}/.ssh/known_hosts_prep"
+    state: absent
+
+- name: Confirm that OPDK staging folder is in place
+  file:
+    path: '{{ opdk_installer_path }}'
+    state: directory
+    group: '{{ opdk_group_name }}'
+    owner: '{{ opdk_user_name }}'
+    recurse: yes
+    mode: 0755
+
+- name: Setup permission for apigee installation home
+  file:
+    path: '{{ apigee_installation_home }}'
+    group: '{{ opdk_group_name }}'
+    owner: '{{ opdk_user_name }}'
+    mode: 0755
+    state: directory

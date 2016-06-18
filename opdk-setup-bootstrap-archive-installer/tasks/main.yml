@@ -1,0 +1,10 @@
+---
+# tasks file for opdk-setup-bootstrap-archive-installer
+- name: Configure local repository
+  shell: "bash /tmp/repos/bootstrap.sh apigeeprotocol='file://' apigeerepobasepath=/tmp/repos"
+
+- name: Install apigee setup service
+  shell: '{{ apigee_service }} apigee-setup install'
+
+- name: Install apigee migration service
+  shell: '{{ apigee_service }} apigee-migrate install'

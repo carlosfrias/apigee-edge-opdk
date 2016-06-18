@@ -1,0 +1,10 @@
+---
+- name: Setup Postgres
+  ignore_errors: yes
+  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p ps"
+  when: pg_db_port_status | failed and pg_ext_mgmt_port_status | failed and pg_int_mgmt_port_status | failed and pg_jmx_port_status | failed
+  register: ps_install
+
+- name: Postgres install status
+  debug:
+    var: ps_install

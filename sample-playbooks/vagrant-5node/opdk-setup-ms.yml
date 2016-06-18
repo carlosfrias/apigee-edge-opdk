@@ -1,0 +1,7 @@
+---
+- hosts: ms
+  become: true
+
+  roles:
+  - opdk-setup-ms
+  - opdk-setup-org

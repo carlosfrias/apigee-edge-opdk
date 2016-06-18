@@ -1,0 +1,70 @@
+---
+- include: aws_load_facts.yml
+
+- hosts: dc-1
+  strategy: free
+  roles:
+  - opdk-setup-installer
+  tags:
+  - installer
+
+- hosts: ds
+  serial: 1
+  roles:
+  - opdk-setup-ds
+  tags:
+  - ds
+
+- hosts: ldap
+  serial: 1
+  roles:
+  - opdk-setup-ldap
+  tags:
+  - ldap
+
+- hosts: ms
+  strategy: free
+  roles:
+  - opdk-setup-ms
+  tags:
+  - ms
+
+- hosts: rmp
+  strategy: free
+  roles:
+  - opdk-setup-rmp
+  - opdk-setup-rmp-tuning
+  tags:
+  - rmp
+
+- hosts: qpid
+  strategy: free
+  roles:
+  - opdk-setup-qpid
+  tags:
+  - qpid
+
+- hosts: pg
+  strategy: free
+  roles:
+  - opdk-setup-postgres
+  tags:
+  - pg
+
+- include: opdk-setup-ssh.yml
+  tags:
+  - ssh
+
+- hosts: pg
+  roles:
+  - opdk-setup-sax-replication
+  tags:
+  - replication
+
+- hosts: dc-1
+  strategy: free
+  roles:
+  - opdk-startup
+  - opdk-setup-status
+  tags:
+  - finish

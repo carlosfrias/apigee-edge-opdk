@@ -1,0 +1,12 @@
+---
+# tasks file for apigee-dns-resolver
+- name: Update dns resolver_conf
+  lineinfile:
+    dest: /etc/resolv.conf
+    line: '{{ item.line }}'
+    state: present
+    backup: yes
+  with_items:
+  - { regexp: '^{{ nameserver_1 }}', line: '{{ nameserver_1 }}' }
+  - { regexp: '^{{ nameserver_2 }}', line: '{{ nameserver_2 }}' }
+  when: "{{ ansible_bios_version | search('VirtualBox') }}"

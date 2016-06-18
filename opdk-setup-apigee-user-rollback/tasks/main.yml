@@ -1,0 +1,18 @@
+---
+# tasks file for opdk-setup-user-rollback
+- name: Remove the apigee user
+  user:
+    name: "{{ opdk_user_name }}"
+    comment: "OPDK user"
+    group: "{{ opdk_group_name }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+    state: absent
+    force: yes
+  register: opdk_user_info
+
+- name: Remove the apigee group
+  group:
+    name: "{{ opdk_group_name }}"
+    state: absent

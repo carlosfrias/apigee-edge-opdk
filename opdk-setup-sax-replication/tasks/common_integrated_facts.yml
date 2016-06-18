@@ -1,0 +1,19 @@
+---
+#- debug: var=ansible_hostname
+#- pause:
+
+- name: Get slave public address
+  set_fact:
+    slave_public_address: "{{ hostvars[ansible_hostname]['groups']['pgstandby'][0] }}"
+
+- name: Get slave local address
+  set_fact:
+    slave_local_address: "{{ hostvars[ansible_hostname]['groups']['pgstandby']['ansible_eth0']['ipv4']['address'] }}"
+
+- name: Get master public address
+  set_fact:
+    master_public_address: "{{ hostvars[ansible_hostname]['groups']['pgmaster'][0] }}"
+
+- name: Get master local address
+  set_fact:
+    master_local_address: "{{ hostvars[ansible_hostname]['groups']['pgmaster']['ansible_eth0']['ipv4']['address'] }}"

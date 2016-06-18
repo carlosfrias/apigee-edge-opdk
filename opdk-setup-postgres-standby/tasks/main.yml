@@ -1,0 +1,25 @@
+---
+# tasks file for opdk-setup-postgres-standby
+
+- name: Stop postgres
+  shell: '{{ apigee_service }} apigee-postgresql stop'
+
+- name: Remove Postgres data directory
+  file:
+    path: '{{ apigee_installation_home }}/data/apigee-postgresql'
+    state: absent
+
+- name: Postgres replication standby
+  shell: '{{ apigee_service }} apigee-postgresql setup-replication-on-standby -f {{ opdk_response_file_path }}'
+  register: results
+
+#- name: Postgres replication standby report
+#  debug:
+#    var: results
+
+- name: Validate posgres replication standby
+  shell: '{{ apigee_service }} apigee-postgresql postgres-check-standby'
+
+#- name: Start postgres
+#  shell: '{{ apigee_service }} apigee-postgresql start'
+

@@ -1,0 +1,22 @@
+---
+# defaults file for opdk-setup-local-repository
+opdk_user_name: apigee
+opdk_group_name: "{{ opdk_user_name }}"
+opdk_user_home: /home/{{ opdk_user_name }}
+opdk_staging_folder_name: opdk
+opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
+#apigee_bootstrap: '{{ opdk_installer_path }}/bootstrap.sh'
+apigee_bootstrap: '/tmp/bootstrap.sh'
+
+apigee_repo_user: '{{ opdk_user_name }}'
+apigee_repo_uri: software.apigee.com
+apigee_repo_url: https://{{ apigee_repo_uri }}/bootstrap.sh
+
+apigee_installation_path_prefix: /opt
+apigee_data_path_prefix: '{{ apigee_installation_path_prefix }}'
+apigee_installation_dir: apigee
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
+archive_data_dir: '{{ apigee_installation_home }}/data/apigee-mirror'
+archive_name: apigee-4.16.01.tar.gz
+archive_path: '{{ archive_data_dir }}/{{ archive_name }}'

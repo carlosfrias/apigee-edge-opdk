@@ -1,0 +1,79 @@
+---
+
+- hosts: planet
+  strategy: free
+  tasks:
+  - setup:
+  - ec2_facts:
+  tags:
+  - facts
+  - common
+
+- hosts: planet
+  connection: local
+  strategy: free
+  vars_files:
+  - aws_settings.yml
+  roles:
+  - aws-terminate
+  tags:
+  - terminate
+
+
+- hosts: localhost
+  connection: local
+  strategy: free
+  vars_files:
+  - aws_settings.yml
+  roles:
+  - aws-create
+  tags:
+  - create
+
+- hosts: planet
+  connection: local
+  gather_facts: false
+  strategy: free
+  vars_files:
+  - aws_settings.yml
+  roles:
+  - aws-start
+  tags:
+  - start
+
+- hosts: planet
+  connection: local
+  strategy: free
+  vars_files:
+  - aws_settings.yml
+  roles:
+  - aws-stop
+  tags:
+  - stop
+
+
+- hosts: planet
+  tasks:
+  - name: Load EC2 instance ids
+    ec2_facts:
+    tags:
+    - storage
+
+  - name: Create EBS volume
+    ec2_vol:
+      aws_access_key: '{{ aws_access_key_id }}'
+      aws_secret_key: '{{ aws_secret_access_key }}'
+      aws_region: '{{ aws_region }}'
+      instance: '{{ ansible_ec2_instance_id }}'
+      volume_size: 10
+      volume_type: gp2
+      device_name: /dev/sdb
+      name: cfrias_storage
+    register: ec2_vol
+    tags:
+    - storage
+
+  - debug:
+      var: ec2_vol
+    tags:
+    - storage

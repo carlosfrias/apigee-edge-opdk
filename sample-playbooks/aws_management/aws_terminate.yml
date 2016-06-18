@@ -1,0 +1,17 @@
+---
+- hosts: '{{ hosts }}'
+  tasks:
+  - setup:
+  - ec2_facts:
+  roles:
+  - aws-terminate
+
+- hosts: '{{ hosts }}'
+  connection: local
+  strategy: free
+  vars_files:
+  - aws_settings.yml
+  roles:
+  - aws-terminate
+
+

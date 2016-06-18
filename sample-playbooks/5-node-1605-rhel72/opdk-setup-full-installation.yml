@@ -1,0 +1,19 @@
+---
+# Prime each target server with the correct setup
+- include: aws_facts.yml
+  tags:
+  - aws
+
+- include: opdk-setup-os.yml
+  tags:
+  - os
+
+- include: opdk-setup-openjdk.yml
+  tags:
+  - openjdk
+
+- include: opdk-setup-bootstrap.yml
+
+- include: opdk-setup-openjdk.yml
+
+- include: opdk-setup-installation.yml

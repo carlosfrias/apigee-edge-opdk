@@ -1,0 +1,35 @@
+---
+# tasks file for opdk-setup-collectd-rollback
+- name: Stop collectd if it's running
+  shell: "kill -9 `cat {{ collectd_pid_file }}`"
+  ignore_errors: yes
+
+- name: Stop services
+  service:
+    name: '{{ item }}'
+    state: stopped
+  with_items:
+  - carbon-cache
+  - carbon-aggregator
+  ignore_errors: yes
+
+- name: Remove OS folders
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+  - '{{ collectd_pid_file }}'
+  - '{{ collectd_base_dir }}'
+  - '{{ collectd_plugin_dir }}'
+  - '{{ collectd_types_db_dir }}'
+  - '{{ collectd_conf_dir }}'
+  - '{{ collectd_conf_file }}'
+  - '{{ collectd_src_parent_dir }}/{{ collectd_pkg_name }}-{{ collectd_version }}'
+
+- name: Remove collectd & dependencies
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+  - /usr/bin/collectd
+  - /usr/include/collectd

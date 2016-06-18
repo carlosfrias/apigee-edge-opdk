@@ -1,0 +1,4 @@
+---
+# tasks file for opdk-migration-qpid-ps
+- name: Perform migration
+  shell: '{{ apigee_migrate }} -c qpid,ps -f {{ opdk_migrate_response_file_path }}'

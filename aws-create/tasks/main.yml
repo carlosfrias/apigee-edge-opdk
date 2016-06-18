@@ -1,0 +1,36 @@
+---
+# tasks file for aws-create
+- name: Provision AMI instances
+  ec2:
+    assign_public_ip: '{{ assign_public_ip }}'
+    image: "{{ image_id }}"
+    instance_type: '{{ instance_type }}'
+    aws_access_key: '{{ aws_access_key }}'
+    aws_secret_key: '{{ aws_secret_key }}'
+    aws_region: '{{ aws_region }}'
+    key_name: '{{ key_name }}'
+    wait: '{{ wait }}'
+    state: present
+    group: '{{ security_group }}'
+    vpc_subnet_id: '{{ vpc_subnet_id }}'
+    volumes:
+      - device_name: /dev/sda1
+        volume_type: '{{ volume_type }}'
+        volume_size: '{{ volume_size }}'
+        delete_on_termination: true
+    instance_tags:
+      Name: '{{ name_prefix }}-{{ session_name }}-n{{ item }}'
+      application: '{{ application }}'
+      bag: '{{ bag }}'
+      department: '{{ department }}'
+      company_env: '{{ company_env }}'
+      owner_contact_info: '{{ owner_contact_info }}'
+      pod: '{{ pod }}'
+      team_contact_info: '{{ team_contact_info }}'
+      env: '{{ env }}'
+  register: status
+  with_sequence: start={{ start }} end={{ node_count }}
+
+- name: Provision AMI instances Report
+  debug:
+    var: status

@@ -1,0 +1,9 @@
+---
+# tasks file for opdk-extension-ds
+
+- include: common_integrated_facts.yml
+
+- include: aws_integrated_facts.yml
+
+- name: Rebuild Cassandra nodes
+  shell: '{{ nodetool }} -h {{ local_address }} rebuild {{ opdk_region }}'

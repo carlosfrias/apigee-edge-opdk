@@ -1,0 +1,9 @@
+---
+- hosts: router
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-migration-router
+  tags:
+  - router

@@ -1,0 +1,62 @@
+#Required jmx_memory.conf
+
+LoadPlugin java
+
+<Plugin "java">
+  <Plugin "GenericJMX">
+    <MBean "nio_connected">
+      ObjectName "NIO:name=currentConnected,type=total"
+      InstancePrefix "NIO-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        #Table true
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "nio_accepted">
+      ObjectName "NIO:name=currentAccepted,type=total"
+      InstancePrefix "NIO-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        #Table true
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "nio_poolsize">
+      ObjectName "NIO:name=currentPoolSize,type=total"
+      InstancePrefix "NIO-"
+      InstanceFrom "name"w
+      <Value>
+        Type "gauge"
+        #Table true
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+
+    <MBean "nio_timeouts">
+      ObjectName "NIO:name=timeouts,type=total"
+      InstancePrefix "NIO-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        #Table true
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <Connection>
+      Host "{{ ms_host }}"
+      ServiceURL "service:jmx:rmi:///jndi/rmi://{{ ms_host }}:{{ ms_jmx_port }}/platform"
+      Collect "nio_connected"
+      Collect "nio_accepted"
+      #Collect "nio_poolsize"
+      #Collect "nio_timeouts"
+    </Connection>
+  </Plugin>
+</Plugin>
+

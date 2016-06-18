@@ -1,0 +1,18 @@
+---
+# defaults file for opdk-migration-ldap
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
+apigee_migrate: '{{ apigee_installation_home }}/apigee-migrate/bin/migrate.sh'
+opdk_version: '4.16.01'
+
+opdk_user_name: apigee
+opdk_group_name: "{{ opdk_user_name }}"
+opdk_user_home: /home/{{ opdk_user_name }}
+opdk_staging_folder_name: opdk
+opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
+opdk_migrate_response_filename: migrate_response.txt
+opdk_migrate_response_file_path: "{{ opdk_installer_path }}/{{ opdk_migrate_response_filename }}"
+
+apigee_migrate_cmd: 'bash {{ apigee_migrate }}'

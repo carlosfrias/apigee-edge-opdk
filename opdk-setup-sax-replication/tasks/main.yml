@@ -1,0 +1,73 @@
+---
+# tasks file for opdk-setup-sax-replication-master
+- include: common_integrated_facts.yml
+  when: "{{ ansible_ec2_instance_id is not defined }}"
+
+- include: aws_integrated_facts.yml
+  when: "{{ ansible_ec2_instance_id is defined }}"
+
+- name: Check for master postgres server HTTP port
+  register: master_pgserver_self_port_status
+  ignore_errors: true
+  wait_for:
+    host: '{{ master_local_address }}'
+    port: '{{ pgserver_self_port }}'
+    timeout: 1
+
+- name: Check for slave postgres server HTTP port
+  register: slave_pgserver_self_port_status
+  ignore_errors: true
+  delegate_to: '{{ slave_public_address }}'
+  wait_for:
+    host: '{{ slave_local_address }}'
+    port: '{{ pgserver_self_port }}'
+    timeout: 1
+
+- name: Stop slave postgresql
+  ignore_errors: yes
+  shell: '{{ apigee_service }} postgresql stop'
+  when: inventory_hostname == slave_public_address and slave_pgserver_self_port_status.state == 'started'
+
+- name: Setup Postgres replication for master
+  become: yes
+  become_user: "{{ opdk_user_name }}"
+  become_method: sudo
+  shell: "{{ apigee_postgres_replication_setup }} -m -a {{ slave_local_address }} -d {{ postgres_data_path }} -k {{ opdk_user_ssh_private_key }} && /opt/apigee4/bin/postgres-check-master.sh"
+  when: inventory_hostname == master_public_address
+  register: result
+
+- name: Setup Postgres replication for slave
+  become: yes
+  become_user: "{{ opdk_user_name }}"
+  become_method: sudo
+  shell: "{{ apigee_postgres_replication_setup }} -s -a {{ master_local_address }} -d {{ postgres_data_path }} -k {{ opdk_user_ssh_private_key }} && /opt/apigee4/bin/postgres-check-standby.sh"
+  when: inventory_hostname == slave_public_address
+  register: result
+
+- name: Confirm master postgres server DB port
+  register: master_pgserver_self_port_status
+  ignore_errors: true
+  wait_for:
+    host: '{{ master_local_address }}'
+    port: '{{ pg_db_port }}'
+    timeout: 1
+  when: inventory_hostname == master_public_address
+
+- name: Confirm slave postgres server DB port
+  register: slave_pgserver_self_port_status
+  ignore_errors: true
+  wait_for:
+    host: '{{ slave_local_address }}'
+    port: '{{ pg_db_port }}'
+    timeout: 1
+  when: inventory_hostname == slave_public_address
+
+- name: Master postgres server DB port failed to start
+  fail:
+    msg: "Master postgres server is not running"
+  when: inventory_hostname == master_public_address and (master_pgserver_self_port_status | failed or not master_pgserver_self_port_status.state == 'started')
+
+- name: Slave postgres server DB port failed to start
+  fail:
+    msg: "Slave postgres server is not running"
+  when: inventory_hostname == slave_public_address and (slave_pgserver_self_port_status | failed or not slave_pgserver_self_port_status.state == 'started')

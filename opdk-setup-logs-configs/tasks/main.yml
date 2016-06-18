@@ -1,0 +1,168 @@
+---
+# tasks file for opdk-setup-logs
+- name: Find installation logs and configs to download
+  shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
+  register: logs
+  with_items:
+  - { dir: '{{ apigee_installation_home }}', name: '*log' }
+  - { dir: '/tmp', name: '*log' }
+  - { dir: '/var/log/carbon', name: '*.log' }
+  - { dir: '/var/log/httpd', name: '*log' }
+  - { dir: '/var/log/grafana', name: '*log' }
+  - { dir: '/var/log/graphite-web', name: '*log' }
+  - { dir: '/var/log/', name: 'mysqldlog' }
+  - { dir: '/etc', name: 'hosts' }
+  - { dir: '/etc', name: 'environment' }
+  - { dir: '/etc', name: 'resolv.conf' }
+  - { dir: '/etc/carbon', name: '*conf' }
+  - { dir: '/etc', name: 'collectd.conf' }
+  - { dir: '/etc/grafana', name: '*ini' }
+  - { dir: '/etc/collectd.d', name: '*.conf' }
+  - { dir: '{{ apigee_installation_home }}', name: 'apigee-env.sh' }
+  - { dir: '{{ apigee_installation_home }}', name: '*cfg' }
+  - { dir: '{{ apigee_installation_home }}', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}', name: '*sys' }
+  - { dir: '/var/log', name: 'messages' }
+  - { dir: '{{ graphite_web_conf_dir }}', name: '*py' }
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[0].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[0].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[1].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[1].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[2].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[2].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[3].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[3].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[4].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[4].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[5].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: ' {{logs.results[5].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[6].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[6].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[7].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[7].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[8].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[8].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[9].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[9].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[10].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[10].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[11].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[11].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[12].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[12].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[13].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[13].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[14].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[14].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[15].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[15].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[16].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[16].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[17].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[17].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[18].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[18].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs {{ logs.results[19].item.name }}
+  fetch:
+    src: "{{ item }}"
+    dest: installation-logs-configs
+  with_items: '{{ logs.results[18].stdout_lines }}'
+  ignore_errors: yes

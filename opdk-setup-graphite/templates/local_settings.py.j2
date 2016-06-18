@@ -1,0 +1,25 @@
+ALLOWED_HOSTS = [ '0.0.0.0:3000' ]
+
+DEBUG = True
+
+GRAPHITE_ROOT = '{{ graphite_root_dir }}'
+
+CONF_DIR = '{{ graphite_web_conf_dir }}'
+STORAGE_DIR = '{{ graphite_web_storage_dir }}'
+CONTENT_DIR = '{{ graphite_web_content_dir }}'
+
+WHISPER_DIR = '{{ graphite_carbon_whisper_dir }}'
+RRD_DIR = '{{ graphite_carbon_rdd_dir}}'
+DATA_DIRS = [WHISPER_DIR, RRD_DIR] # Default: set from the above variables
+LOG_DIR = '{{ graphite_carbon_log_dir }}'
+INDEX_FILE = '{{ graphite_carbon_index_dir }}/index'  # Search index file
+
+
+DATABASES = {
+   'default': {
+       'NAME': 'graphite',
+       'ENGINE': 'django.db.backends.mysql',
+       'USER': '{{ graphite_user_name }}',
+       'PASSWORD': '{{ graphite_user_pass }}',
+   }
+}

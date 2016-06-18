@@ -1,0 +1,6 @@
+---
+# tasks file for opdk-setup-ui
+- name: Apigee UI installation
+  shell: '{{ apigee_setup_16 }} -p ui -f {{ opdk_response_file_path }}'
+  async: 5
+  poll: 0

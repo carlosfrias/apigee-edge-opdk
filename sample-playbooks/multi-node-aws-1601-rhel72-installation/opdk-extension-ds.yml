@@ -1,0 +1,10 @@
+---
+- hosts: ds
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-rebuild-ds
+  - opdk-cass-client-update
+  tags:
+  - rebuild-ds

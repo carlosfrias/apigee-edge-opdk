@@ -1,0 +1,4 @@
+---
+# tasks file for opdk-migration-sax
+- name: Perform migration
+  shell: '{{ apigee_migrate }} -c sax -f {{ opdk_migrate_response_file_path }}'

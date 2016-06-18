@@ -1,0 +1,7 @@
+---
+- hosts: '{{ hosts }}'
+  become: yes
+  strategy: free
+
+  roles:
+  - opdk-setup-installer-rollback

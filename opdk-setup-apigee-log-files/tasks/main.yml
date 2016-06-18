@@ -1,0 +1,39 @@
+---
+# tasks file for opdk-setup-logs
+- name: Find installation logs and configs to download
+  shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
+  register: logs
+  with_items:
+  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
+  - { dir: '{{ apigee_installation_home }}', name: '*log*' }
+  - { dir: '/tmp', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}', name: '*out' }
+  ignore_errors: yes
+
+- name: Download Installation Logs *.txt
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[0].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs *log
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[1].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs /tmp
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[2].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs *out
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[3].stdout_lines }}'
+  ignore_errors: yes

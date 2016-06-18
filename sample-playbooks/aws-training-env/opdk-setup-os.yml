@@ -1,0 +1,93 @@
+---
+- hosts: planet
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-selinux-disable
+  - opdk-shutdown-iptables
+  - opdk-time-sync
+  - opdk-setup-hostfile
+  - opdk-setup-os-common
+  - opdk-setup-os-common-extra
+  tags:
+  - os
+  - common
+
+- hosts: planet
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-apigee-user
+  tags:
+  - apigee
+  - common
+
+- hosts: ds
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-ds
+  tags:
+  - os-ds
+  - common
+
+- hosts: ldap
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-ldap
+  tags:
+  - os-ldap
+  - common
+
+- hosts: rmp
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-rmp
+  tags:
+  - os-rmp
+  - common
+
+- hosts: qpid
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-qpid
+  tags:
+  - os-qpid
+  - common
+
+- hosts: pg
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-postgres
+  tags:
+  - os-sax
+  - common
+
+- hosts: planet
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-system-configs-logs
+  tags:
+  - os-logs
+  - common

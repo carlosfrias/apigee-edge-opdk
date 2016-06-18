@@ -1,0 +1,41 @@
+---
+# tasks file for opdk-setup-os-validation
+- block:
+  - name: Enable OS verification script for development on CentOS 7
+    lineinfile:
+      backrefs: yes
+      backup: yes
+      dest: /etc/redhat-release
+      regexp: ^CentOS.+
+      line: centos 7.0
+    when: ansible_distribution_major_version == "7"
+
+  - name: Enable OS verification script for development on CentOS 6
+    lineinfile:
+      backrefs: yes
+      backup: yes
+      dest: /etc/redhat-release
+      regexp: ^CentOS.+
+      line: centos 6.6
+    when: ansible_distribution_major_version == "6"
+  when: ansible_distribution | lower == "centos" or ansible_distribution | lower == "redhat"
+
+- block:
+  - name: Enable OS verification script for development on Oracle Linux 7
+    lineinfile:
+      backrefs: yes
+      backup: yes
+      dest: /etc/redhat-release
+      regexp: ^Red Hat Enterprise Linux Server+
+      line: centos 7.0
+    when: ansible_distribution_major_version == "7"
+
+  - name: Enable OS verification script for development on Oracle Linux 6
+    lineinfile:
+      backrefs: yes
+      backup: yes
+      dest: /etc/redhat-release
+      regexp: ^Red Hat Enterprise Linux Server+
+      line: centos 6.6
+    when: ansible_distribution_major_version == "6"
+  when: ansible_distribution | lower == "oraclelinux"

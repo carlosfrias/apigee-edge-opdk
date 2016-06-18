@@ -1,0 +1,16 @@
+# Memory and Load Stats
+<LoadPlugin python>
+  Globals true
+</LoadPlugin>
+
+<Plugin python>
+  ModulePath  "{{ python_lib_dir.stdout }}"
+  ModulePath  "{{ collectd_base_dir }}"
+  Import "memory_load_stats"
+
+  <Module memory_load_stats>
+    Verbose true
+  </Module>
+
+</Plugin>
+

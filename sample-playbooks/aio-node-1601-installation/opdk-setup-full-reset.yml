@@ -1,0 +1,15 @@
+---
+- include: aws_terminate.yml
+
+- include: update-root-user.yml
+
+- include: aws_create.yml
+  vars:
+    node_count: 1
+
+- include: update-root-user.yml
+  vars:
+    hosts: planet
+
+- include: opdk-setup-full-installation.yml
+

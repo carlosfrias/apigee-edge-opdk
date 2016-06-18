@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Download bootstrap
+    download_bootstrap:
+      version: '4.16.05'
+      download_dir: tmp

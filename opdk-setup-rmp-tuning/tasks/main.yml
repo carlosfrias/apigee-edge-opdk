@@ -1,0 +1,67 @@
+---
+# tasks file for opdk-setup-rmp-tuning
+
+- name: Update mp http properties
+  lineinfile:
+    dest: '{{ apigee_installation_home }}/conf/apigee/message-processor/http.properties'
+    regexp: '^(HTTPTransport.max.client.count)'
+    line: '\1={{ apigee_httptransport_max_client_count }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update router http properties
+  lineinfile:
+    dest: '{{ apigee_installation_home }}/conf/apigee/router/http.properties'
+    regexp: '^(HTTPTransport.max.client.count)'
+    line: '\1={{ apigee_httptransport_max_client_count }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update router core pool size threadpool properties
+  lineinfile:
+    dest: '{{ apigee_installation_home }}/conf/apigee/router/threadpool.properties'
+    regexp: '^(core.pool.size)'
+    line: '\1={{ apigee_core_pool_size }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update router maximum pool size threadpool properties
+  lineinfile:
+    dest: '{{ apigee_installation_home }}/conf/apigee/router/threadpool.properties'
+    regexp: '^(maximum.pool.size)'
+    line: '\1={{ apigee_maximum_pool_size }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update JVM min mem
+  lineinfile:
+    dest: '{{ apigee_jvm_tuning_file }}'
+    regexp: '^(min_mem)'
+    line: '\1={{ apigee_jvm_min_mem }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update JVM max mem
+  lineinfile:
+    dest: '{{ apigee_jvm_tuning_file }}'
+    regexp: '^(max_mem)'
+    line: '\1={{ apigee_jvm_max_mem }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update JVM max permsize
+  lineinfile:
+    dest: '{{ apigee_jvm_tuning_file }}'
+    regexp: '^(max_permsize)'
+    line: '\1={{ apigee_jvm_max_permsize }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update JVM min permsize
+  lineinfile:
+    dest: '{{ apigee_jvm_tuning_file }}'
+    regexp: '^(min_permsize)'
+    line: '\1={{ apigee_jvm_min_permsize }}'
+    backup: yes
+    backrefs: yes
+

@@ -1,0 +1,83 @@
+---
+# tasks file for opdk-postgres-deregister
+
+- include: common_integrated_facts.yml
+
+- include: aws_integrated_facts.yml
+
+- include: network-interface-name.yml
+
+- include: mgmt_ip.yml
+
+- name: Get Server Self
+  uri:
+    url: 'http://{{ local_address }}:{{ self_port }}/v1/servers/self'
+    user: '{{ opdk_user_email }}'
+    password: '{{ opdk_user_pass }}'
+    body_format: json
+  register: response
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Capture server UUID
+  set_fact:
+    uuid: '{{ response.json.uUID }}'
+
+- name: Obtain listing of environments
+  uri:
+    url: "http://{{ local_mgmt_ip }}:8080/v1/o/{{ org_name }}/e/"
+    user: '{{ opdk_user_email }}'
+    password: '{{ opdk_user_pass }}'
+    body_format: json
+  register: environments
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Capture environment names
+  set_fact:
+    env_names: '{{ environments.json }}'
+
+- name: Deregister server from environments
+  uri:
+    url: "http://{{ local_mgmt_ip }}:8080/v1/o/{{ org_name }}/e/{{ item }}/servers"
+    body: "uuid={{ uuid }}&region={{ opdk_region }}&pod={{ opdk_pod }}&action=remove"
+    user: '{{ opdk_user_email }}'
+    password: '{{ opdk_user_pass }}'
+    method: POST
+    HEADER_Content-Type: "application/x-www-form-urlencoded"
+  register: response
+  delegate_to: '{{ inventory_hostname }}'
+  with_items: '{{ env_names }}'
+  ignore_errors: yes
+
+- name: Deregister server from environments response
+  debug:
+    var: response
+
+- name: Deregister server's type
+  uri:
+    url: "http://{{ local_mgmt_ip }}:8080/v1/servers"
+    body: "type={{ server_type }}&uuid={{ uuid }}&region={{ opdk_region }}&pod={{ opdk_pod }}&action=remove"
+    user: '{{ opdk_user_email }}'
+    password: '{{ opdk_user_pass }}'
+    method: POST
+    HEADER_Content-Type: "application/x-www-form-urlencoded"
+  register: response
+  delegate_to: '{{ inventory_hostname }}'
+  ignore_errors: yes
+
+- name: Deregister server's  type response
+  debug:
+    var: response
+
+- name: Delete server
+  uri:
+    url: "http://{{ local_mgmt_ip }}:8080/v1/servers/{{ uuid }}"
+    user: '{{ opdk_user_email }}'
+    password: '{{ opdk_user_pass }}'
+    method: DELETE
+  register: response
+  delegate_to: '{{ inventory_hostname }}'
+  ignore_errors: yes
+
+- name: Delete server response
+  debug:
+    var: response

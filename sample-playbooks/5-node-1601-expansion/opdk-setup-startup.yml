@@ -1,0 +1,39 @@
+---
+- include: aws_facts.yml
+
+- hosts: ds
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-startup
+  tags:
+  - start-ds
+
+- hosts: ms
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-startup
+  tags:
+  - start-ms
+
+- hosts: rmp
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-startup
+  tags:
+  - startup-rmp
+
+- hosts: pg
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-startup
+  tags:
+  - startup-pg
+

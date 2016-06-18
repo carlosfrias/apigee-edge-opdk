@@ -1,0 +1,18 @@
+---
+# defaults file for opdk-setup-os-rmp
+opdk_major_version: '4'
+opdk_minor_version: '15'
+opdk_build_version: '07.03'
+opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
+
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee4
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_jvm_tuning_file: '{{ apigee_installation_home }}/share/apigee/bin/setenv.sh'
+apigee_jvm_min_mem: 3072m
+apigee_jvm_max_mem: 6500m
+apigee_jvm_max_permsize: 512m
+apigee_jvm_min_permsize: 64m
+apigee_httptransport_max_client_count: 50000
+apigee_core_pool_size: 100
+apigee_maximum_pool_size: 1000

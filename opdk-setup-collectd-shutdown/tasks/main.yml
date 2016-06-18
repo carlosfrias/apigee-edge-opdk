@@ -1,0 +1,12 @@
+---
+# tasks file for opdk-setup-collectd-shutdown
+
+- name: Stop collectd if it's running
+  shell: "kill -9 `cat {{ collectd_pid_file }}`"
+  ignore_errors: yes
+
+- name: Remove collectd pid
+  file:
+    path: '{{ collectd_pid_file }}'
+    state: absent
+  ignore_errors: yes

@@ -1,0 +1,18 @@
+#Apigee nginx/tengine /tenginestats Plugin
+
+<LoadPlugin python>
+  Globals true
+</LoadPlugin>
+
+<Plugin python>
+  ModulePath  "{{ collectd_base_dir }}"
+  Import "tengine_tenginestats"
+
+  <Module tengine_tenginestats>
+    Host "localhost"
+    Port "9080"
+    Timeout "20"
+    Verbose false
+  </Module>
+
+</Plugin>

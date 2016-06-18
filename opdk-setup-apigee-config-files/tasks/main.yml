@@ -1,0 +1,47 @@
+---
+# tasks file for opdk-setup-logs
+- name: Find installation logs and configs to download
+  shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
+  register: logs
+  with_items:
+  - { dir: '{{ apigee_installation_home }}', name: 'apigee-env.sh' }
+  - { dir: '{{ apigee_installation_home }}', name: '*cfg' }
+  - { dir: '{{ apigee_installation_home }}', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
+  ignore_errors: yes
+
+- name: Download Installation Logs apigee-env.sh
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[0].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs *cfg
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[1].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs *conf
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[2].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs *sys
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[3].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs *yaml
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[4].stdout_lines }}'
+  ignore_errors: yes
+

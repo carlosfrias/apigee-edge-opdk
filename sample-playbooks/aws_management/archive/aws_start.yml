@@ -1,0 +1,6 @@
+---
+- hosts: "{{ hosts }}"
+  connection: local
+  gather_facts: false
+  roles:
+  - aws-start

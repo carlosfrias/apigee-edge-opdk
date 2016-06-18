@@ -1,0 +1,10 @@
+---
+# tasks file for opdk-migration-cs-zk
+- block:
+  - name: Perform migration
+    shell: '{{ apigee_migrate_cmd }} -c cs,zk -f {{ opdk_migrate_response_file_path }}'
+
+#  rescue:
+#  - name: Shutdown 15.07
+#  - name: Restart 15.07
+#  - name: Perform migration again

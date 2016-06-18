@@ -1,0 +1,69 @@
+---
+# tasks file for opdk-setup-router
+- name: Status of Router External Management Port
+  register: router_ext_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_ext_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Router Internal Management Port
+  register: router_int_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_int_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Router JMX Port
+  register: router_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Setup Router
+  ignore_errors: yes
+  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p r"
+  when: router_ext_mgmt_port_status | failed and router_int_mgmt_port_status | failed and router_jmx_port_status | failed
+
+- name: Status of Router External Management Port
+  register: router_ext_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_ext_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Router Internal Management Port
+  register: router_int_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_int_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Router JMX Port
+  register: router_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Router External Management Port Failed
+  fail:
+    msg: "Router External Management port failed to start"
+  when: not router_ext_mgmt_port_status.state == 'started'
+
+- name: Router Internal Management Port Failed
+  fail:
+    msg: "Router Internal Management port failed to start"
+  when: not router_int_mgmt_port_status.state == 'started'
+
+- name: Router JMX startup failed
+  fail:
+    msg: "Router JMX failed to start"
+  when: not router_jmx_port_status.state == 'started'

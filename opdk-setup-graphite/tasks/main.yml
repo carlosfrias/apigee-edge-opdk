@@ -1,0 +1,165 @@
+---
+- name: Stop services
+  service:
+    name: '{{ item }}'
+    state: stopped
+  ignore_errors: yes
+  with_items:
+  - httpd
+  - carbon-cache
+  - mysqld
+  - carbon-aggregator
+
+- name: Add Mysql repo
+  yum:
+    name: '{{ item }}'
+    state: present
+  with_items:
+  - 'http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm'
+  when: (ansible_distribution | lower == "centos" and ansible_distribution_major_version == "7")
+
+- name: Install graphite and dependencies
+  yum:
+    name: '{{ item }}'
+    state: present
+    update_cache: yes
+  with_items:
+  - python-carbon
+  - python-whisper
+  - graphite-web
+  - httpd
+  - mysql
+  - mysql-server
+  - MySQL-python
+
+- name: Create configured folders owned by carbon
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: 0755
+    owner: carbon
+    group: carbon
+  with_items:
+  - '{{ graphite_carbon_whisper_dir }}'
+  - '{{ graphite_carbon_rdd_dir }}'
+
+- name: Update pip installation
+  shell: pip install --upgrade pip
+
+- name: Install python system dependencies
+  pip:
+    name: '{{ item.name }}'
+    version: '{{ item.version }}'
+    state: present
+  with_items:
+  - { name: 'pexpect', version: '3.3' }
+  - { name: 'httplib2', version: '0.9.2' }
+
+- name: Start MySql
+  service:
+    name: mysqld
+    state: started
+
+- name: Add user
+  mysql_user:
+    name: '{{ graphite_user_name }}'
+    password: '{{ graphite_user_pass }}'
+    priv: '*.*:ALL,GRANT'
+    state: present
+
+- name: Create graphite db
+  mysql_db:
+    name: graphite
+    state: present
+    login_user: '{{ graphite_user_name }}'
+    login_password: '{{ graphite_user_pass }}'
+
+- name: Update the graphite-web local_settings.py
+  template:
+    src: local_settings.py.j2
+    dest: '{{ graphite_web_conf_dir }}/local_settings.py'
+    group: apache
+    owner: apache
+    mode: 0777
+
+- name: Set graphite sample dir for CentOS 6
+  set_fact:
+    graphite_sample_dir: '{{ graphite_sample_dir_centos_6x }}'
+  when: ansible_distribution | lower == "centos" and ansible_distribution_major_version == "6"
+
+- name: Set graphite sample dir for CentOS 7
+  set_fact:
+    graphite_sample_dir: '{{ graphite_sample_dir_centos_7x }}'
+  when: ansible_distribution | lower == "centos" and ansible_distribution_major_version == "7"
+
+- name: Move conf files into place
+  copy:
+    dest: '{{ item.dest }}'
+    src: '{{ item.src }}'
+    remote_src: true
+    group: apache
+    owner: apache
+  with_items:
+  - { src: '{{ graphite_sample_dir }}/storage-aggregation.conf.example', dest: '{{ graphite_web_storage_dir }}/storage-aggregation.conf'}
+  - { src: '{{ graphite_sample_dir }}/storage-schemas.conf.example', dest: '{{ graphite_web_storage_dir }}/storage-schemas.conf'}
+
+- name: Python package for CentOS 6.x
+  set_fact:
+    python_version: '{{ python_centos_6x }}'
+  when: ansible_distribution | lower == "centos" and ansible_distribution_major_version == "6"
+
+- name: Python package for CentOS 7.x
+  set_fact:
+    python_version: '{{ python_centos_7x }}'
+  when: ansible_distribution | lower == "centos" and ansible_distribution_major_version == "7"
+
+- name: Create database tables
+  expect:
+    command: '{{ python_version }}/site-packages/graphite/manage.py syncdb'
+    responses:
+      Would you like to create one now? (yes/no): 'yes'
+      Username (leave blank to use 'root'): 'root'
+      E-mail address: '{{ opdk_user_email }}'
+      Password:  '{{ opdk_user_pass }}'
+      Password (again): '{{ opdk_user_pass }}'
+  register: db_table_results
+  poll: 0
+  async: 10000
+
+- name: Create database table results
+  debug:
+    var: db_table_results
+
+- name: Setup CORS for grafana
+  template:
+    src: graphite-web.conf.j2
+    dest: /etc/httpd/conf.d/graphite-web.conf
+
+- name: Remove orig conf
+  file:
+    path: /etc/httpd/conf.d/welcome.conf
+    state: absent
+
+- name: Create configured folders owned by apache
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: 0755
+    owner: apache
+    group: apache
+    recurse: yes
+  with_items:
+  - '{{ graphite_root_dir }}'
+  - '{{ graphite_web_storage_dir }}'
+  - '{{ graphite_carbon_log_dir }}'
+  - /var/www
+
+- name: Start services
+  service:
+    name: '{{ item }}'
+    state: restarted
+  with_items:
+  - mysqld
+  - httpd
+  - carbon-cache
+  - carbon-aggregator

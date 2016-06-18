@@ -1,0 +1,6 @@
+---
+- name: Apigee Management Server installation
+  shell: '{{ apigee_setup_16 }} -p ms -f {{ opdk_response_file_path }}'
+
+- name: Install Apigee adminapi, remove ignore_errors when available on 16.01
+  shell: '{{ apigee_adminapi_cmd }}'

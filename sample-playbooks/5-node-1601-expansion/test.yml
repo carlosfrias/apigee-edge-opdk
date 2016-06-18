@@ -1,0 +1,17 @@
+---
+
+- hosts: dc-1-pgmaster
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-postgres-master
+  tags:
+  - master
+
+- hosts: dc-2-pgstandby
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-postgres-standby
+  tags:
+  - standby

@@ -1,0 +1,23 @@
+---
+- hosts: dc-1-pgstandby
+  vars:
+    server_type: postgres-server
+    self_port: 8084
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-server-deregistration
+  tags:
+  - pg-deregistration
+
+#- hosts: dc-1-pgstandby
+#  vars:
+#    server_type: qpid-server
+#    self_port: 8083
+#    opdk_pod: analytics
+#  vars_files:
+#  - opdk-setup-settings.yml
+#  roles:
+#  - opdk-server-deregistration
+#  tags:
+#  - qpid-deregistration

@@ -1,0 +1,7 @@
+---
+# tasks file for opdk-setup-grafana-shutdown
+- name: Start grafana service
+  service:
+    name: grafana-server
+    enabled: yes
+    state: stopped

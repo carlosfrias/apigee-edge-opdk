@@ -1,0 +1,12 @@
+---
+# tasks file for opdk-setup-graphite-shutdown
+
+- name: Start services
+  service:
+    name: '{{ item }}'
+    state: stopped
+  with_items:
+  - mysqld
+  - httpd
+  - carbon-cache
+  - carbon-aggregator

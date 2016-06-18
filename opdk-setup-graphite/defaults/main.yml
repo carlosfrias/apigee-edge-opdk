@@ -1,0 +1,31 @@
+---
+# defaults file for opdk-setup-graphite
+graphite_user_name: graphite
+graphite_user_pass: Apigee123!
+opdk_user_email: opdk@apigee.com
+opdk_user_pass: Apigee123!
+
+# Sample directory and default versions changed between CentOS 6.x and 7.x
+graphite_sample_dir_centos_7x: /usr/share/doc/python-carbon-0.9.15/conf
+graphite_sample_dir_centos_6x: /usr/share/doc/python-carbon-0.9.12
+
+# Apache User
+graphite_carbon_index_dir: /var/lib/graphite-web
+graphite_web_storage_dir: /var/lib/graphite-web
+graphite_carbon_log_dir: /var/log/graphite-web
+
+# Root User
+graphite_web_conf_dir: /etc/graphite-web
+graphite_root_dir: /usr/share/graphite
+graphite_web_content_dir: '{{ graphite_root_dir }}/webapp/content'
+
+# Carbon User
+graphite_carbon_rdd_dir: /var/lib/carbon/rrd
+graphite_carbon_whisper_dir: /var/lib/carbon/whisper
+
+graphite_log_dir: /var/log/httpd
+
+mysql_port: 3306
+
+python_centos_6x: /usr/lib/python2.6
+python_centos_7x: /usr/lib/python2.7

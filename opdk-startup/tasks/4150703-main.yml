@@ -1,0 +1,19 @@
+---
+- name: Start Apigee
+  shell: '{{ all_start }}'
+
+- name: Start collectd, if available
+  shell: collectd -C {{ collectd_conf_file }}
+  ignore_errors: true
+
+- name: Start remaining services, if available
+  service:
+    name: '{{ item }}'
+    state: started
+  ignore_errors: true
+  with_items:
+  - httpd
+  - carbon-cache
+  - carbon-aggregator
+  - mysqld
+  - grafana-server

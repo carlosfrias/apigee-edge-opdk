@@ -1,0 +1,76 @@
+<Plugin "java">
+
+  <Plugin "GenericJMX">
+
+    <MBean "threadpool_activeThreadCount">
+      ObjectName "THREADPOOL:name=activeThreadCount,scope=Main,type=statistics"
+      InstancePrefix "ThreadPool-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "threadpool_completedTaskCount">
+      ObjectName "THREADPOOL:name=completedTaskCount,scope=Main,type=statistics"
+      InstancePrefix "ThreadPool-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "threadpool_corePoolSize">
+      ObjectName "THREADPOOL:name=corePoolSize,scope=Main,type=statistics"
+      InstancePrefix "ThreadPool-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "threadpool_currentPoolSize">
+      ObjectName "THREADPOOL:name=currentPoolSize,scope=Main,type=statistics"
+      InstancePrefix "ThreadPool-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "threadpool_largestPoolSize">
+      ObjectName "THREADPOOL:name=largestPoolSize,scope=Main,type=statistics"
+      InstancePrefix "ThreadPool-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "threadpool_maxAllowedPoolSize">
+      ObjectName "THREADPOOL:name=maxAllowedPoolSize,scope=Main,type=statistics"
+      InstancePrefix "ThreadPool-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <Connection>
+      Host "{{ mp_host }}"
+      ServiceURL "service:jmx:rmi:///jndi/rmi://{{ mp_host }}:{{ mp_jmx_port }}/platform"
+      Collect "threadpool_activeThreadCount"
+      #Collect "threadpool_completedTaskCount"
+      #Collect "threadpool_corePoolSize"
+      #Collect "threadpool_currentPoolSize"
+      #Collect "threadpool_largestPoolSize"
+      #Collect "threadpool_maxAllowedPoolSize"
+    </Connection>
+  </Plugin>
+</Plugin>

@@ -1,0 +1,76 @@
+<Plugin "java">
+
+  <Plugin "GenericJMX">
+    <MBean "apigeehttp_server">
+      ObjectName "Http:base\ path=\"/ServerStatistics\""
+      InstancePrefix "http"
+
+      <Value>
+        Type "http_requests" 
+        Attribute "ActiveClientCount"
+        InstancePrefix "active-client-count"
+      </Value>
+
+      <Value>
+        Type "http_requests"
+        Attribute "RequestCount"
+        InstancePrefix "request-count"
+      </Value>
+
+      <Value>
+        Type "http_requests"
+        Attribute "ResponseCount"
+        InstancePrefix "response-count"
+      </Value>
+
+      <Value>
+        Type "http_requests"
+        Attribute "1XXResponseCount"
+        InstancePrefix "1xx-response-count"
+      </Value>
+
+      <Value>
+        Type "http_requests"
+        Attribute "2XXResponseCount"
+        InstancePrefix "2xx-response-count"
+      </Value>
+
+      <Value>
+        Type "http_requests"
+        Attribute "3XXResponseCount"
+        InstancePrefix "3xx-response-count"
+      </Value>
+
+      <Value>
+        Type "http_requests"
+        Attribute "4XXResponseCount"
+        InstancePrefix "4xx-response-count"
+      </Value>
+
+      <Value>
+        Type "http_requests"
+        Attribute "5XXResponseCount"
+        InstancePrefix "5xx-response-count"
+      </Value>
+    </MBean>
+
+    <MBean "apigeehttp_client">
+      ObjectName "Http:base\ path=\"/ClientStatistics\""
+      InstancePrefix "http"
+
+    # use http_requests type throughout, which is really just a DERIVE counter with Min=0
+      <Value>
+        Type "http_requests" 
+        Attribute "ConnectFailureCount"
+        InstancePrefix "connect-failure-count"
+      </Value>
+
+    </MBean>
+    <Connection>
+      Host "{{ mp_host }}"
+      ServiceURL "service:jmx:rmi:///jndi/rmi://{{ mp_host }}:{{ mp_jmx_port }}/apigee"
+      Collect "apigeehttp_server"
+    </Connection>
+  </Plugin>
+</Plugin>
+

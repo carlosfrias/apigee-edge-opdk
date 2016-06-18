@@ -1,0 +1,14 @@
+---
+- hosts: dc-1
+
+  vars:
+    apigee_installation_path_prefix: /opt/apigee4
+
+  roles:
+  - opdk-setup-installer
+  - opdk-setup-aio
+  - opdk-setup-org
+  - opdk-setup-rmp-tuning
+  - opdk-startup
+  - opdk-setup-apigee-configs-logs
+  - opdk-setup-status

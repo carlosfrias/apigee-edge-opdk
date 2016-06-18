@@ -1,0 +1,75 @@
+## Require enable_jmx
+
+LoadPlugin java
+
+<Plugin "java">
+  <Plugin "GenericJMX">
+
+    # Standard Java mbeans
+    # Memory usage by memory pool.
+    <MBean "memory_pool">
+      ObjectName "java.lang:type=MemoryPool,*"
+      InstancePrefix "memory_pool-"
+      InstanceFrom "name"
+      <Value>
+        Type "memory"
+        #InstancePrefix ""
+        #InstanceFrom ""
+        Table true
+        Attribute "Usage"
+      </Value>
+    </MBean>
+
+    # Non-heap memory usage
+    <MBean "memory_nonheap">
+      ObjectName "java.lang:type=Memory"
+      #InstanceFrom ""
+      InstancePrefix "memory-nonheap"
+
+      # Creates four values: committed, init, max, used
+      <Value>
+        Type "memory"
+        #InstancePrefix ""
+        #InstanceFrom ""
+        Table true
+        Attribute "NonHeapMemoryUsage"
+      </Value>
+    </MBean>
+
+    <MBean "garbage_collector">
+      ObjectName "java.lang:type=GarbageCollector,*"
+      InstancePrefix "gc-"
+      InstanceFrom "name"
+
+      <Value>
+        Type "invocations"
+        #InstancePrefix ""
+        #InstanceFrom ""
+        Table false
+        Attribute "CollectionCount"
+      </Value>
+
+      <Value>
+        Type "total_time_in_ms"
+        InstancePrefix "collection_time"
+        #InstanceFrom ""
+        Table false
+        Attribute "CollectionTime"
+      </Value>
+    </MBean>
+
+    <Connection>
+      Host "{{ ms_host }}"
+      ServiceURL "service:jmx:rmi:///jndi/rmi://{{ ms_host }}:{{ ms_jmx_port }}/platform"
+
+      #Collect "memory_pool"
+      Collect "memory_heap"
+      #Collect "memory_nonheap"
+      #Collect "garbage_collector"
+      Collect "memory_pool_perm_gen"
+
+    </Connection>
+
+  </Plugin>
+
+</Plugin>

@@ -1,0 +1,16 @@
+.vagrant
+*.iml
+archives
+.DS_Store
+ssh_keys
+ansible.log
+*.zip
+license.txt
+*.log
+*.tar.gz
+*.rpm
+*.tar
+ansible_fact_cache_dir
+*jar
+.ansible_cache*
+configs_and_logs

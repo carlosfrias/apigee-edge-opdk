@@ -1,0 +1,10 @@
+---
+- include: aws_facts.yml
+
+- hosts: dc-1
+  become: true
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-installer-rollback
+

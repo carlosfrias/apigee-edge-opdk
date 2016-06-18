@@ -1,0 +1,5 @@
+---
+# tasks file for opdk-cass-client-update
+- name: Update apigee cassandra client
+  shell: '{{ apigee_service }} apigee-cassandra-client update'
+

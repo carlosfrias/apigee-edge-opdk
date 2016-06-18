@@ -1,0 +1,17 @@
+#disk usage percent plugin
+
+<LoadPlugin python>
+  Globals true
+</LoadPlugin>
+
+<Plugin python>
+  ModulePath  "{{ collectd_base_dir }}"
+  Import "diskusage_percent"
+
+  <Module diskusage_percent>
+    Host "localhost"
+    Verbose false
+  </Module>
+
+</Plugin>
+

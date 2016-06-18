@@ -1,0 +1,27 @@
+---
+# defaults file for opdk-setup-postgres-standby
+opdk_major_version: '4'
+opdk_minor_version: '15'
+opdk_build_version: '07.03'
+opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
+
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee4
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_bin: "{{ apigee_installation_home }}/bin"
+apigee_share_installer_path: "{{ apigee_installation_home }}/share/installer"
+apigee_setup: "{{ apigee_share_installer_path }}/apigee-setup.sh"
+all_status: "{{ apigee_bin }}/all-status.sh"
+opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
+opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
+opdk_staging_folder_name: opdk
+opdk_user_home: /home/{{ opdk_user_name }}
+opdk_user_name: apigee
+
+pg_db_port: 5432
+pg_ext_mgmt_port: 8084
+pg_int_mgmt_port: 4530
+pg_jmx_port: 1103
+
+apigee_setup_16: '{{ apigee_installation_home }}/apigee-setup/bin/setup.sh'
+apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
