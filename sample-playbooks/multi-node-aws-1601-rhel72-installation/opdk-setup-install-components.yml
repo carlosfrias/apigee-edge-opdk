@@ -13,10 +13,3 @@
 
 - include: opdk-setup-validate-cleanup.yml
 
-- include: opdk-setup-org.yml
-
-- include: opdk-setup-status.yml
-
-- include: opdk-setup-config-files.yml
-
-- include: opdk-setup-log-files.yml
