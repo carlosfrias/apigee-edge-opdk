@@ -26,6 +26,7 @@
   - opdk-setup-os-common
   tags:
   - os
+  - os-basic
 
 - hosts: planet
   become: true
