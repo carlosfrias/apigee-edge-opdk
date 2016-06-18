@@ -1,17 +1,19 @@
 # Apigee OPDK Roles
 
-This is a set of Ansible roles that are used to install, configure and manage Apigee Edge
-OPDK instances. 
- 
- 
-These roles can perform the following:
+This is a set of Ansible roles that are used to install, configure and manage Apigee
+OPDK instances. The following is a list of functionality provided by these roles:
 
  * Planet installation over multiple nodes
  * AIO profile installation
- * Monitoring configuration with AIO profile
- * Selectively rollback an installation to correct an issue
- * Roles are idempotent
+ * AIO profile with monitoring on 15.07.03
+ * Selectively rollback the installation of a component to assist in the correction of an issue
+ * Roles are idempotent for 15.07
  * Response file is dynamically generated to the defined planet
+ * Installation cover Apigee Edge OPDK 15.07.03, 16.01 and 16.05
+ * Integrated AWS to manage the lifecycle of AMI instances 
+
+ 
+ * Additional work as needed during client engagement.
  
 ## Usage Samples
 The sample-playbooks folder contains usage samples that can guide you to 

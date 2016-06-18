@@ -1,4 +1,17 @@
 ---
+
+- hosts: planet
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-aws
+  tags:
+  - apigee
+  - os
+  - aws
+
 - hosts: planet
   become: true
   strategy: free
@@ -9,6 +22,7 @@
   - opdk-shutdown-iptables
   - opdk-time-sync
   - opdk-setup-hostfile
+  - opdk-setup-os-minimum
   - opdk-setup-os-common
   tags:
   - os

@@ -1,9 +1,5 @@
 ---
 # tasks file for opdk-setup-os
-- name: Amazon Redhat AMI
-  shell: "yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional"
-  when: "{{ ansible_bios_version | search('amazon') and ansible_os_family | lower == 'redhat' and ansible_distribution | lower != 'oraclelinux' }}"
-
 - name: Update vm.swappiness
   lineinfile:
     dest: /etc/sysctl.conf

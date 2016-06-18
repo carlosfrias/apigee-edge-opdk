@@ -1,8 +1,10 @@
 ---
+- include: ../../facts.yml
+
 - hosts: planet
   connection: local
+  gather_facts: false
   strategy: free
-  vars_files:
-  - aws_settings.yml
   roles:
-  - aws-stop
+  - aws-start
+
