@@ -1,0 +1,25 @@
+---
+# tasks file for opdk-setup-os-rmp
+- name: Update ipv4 tcp timeout for the rmp
+  lineinfile:
+    dest: /etc/sysctl.conf
+    regexp: "^(net.ipv4.tcp_fin_timeout)"
+    line: '\1 = {{ apigee_net_ipv4_tcp_fin_timeout }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update fs file max count for the rmp
+  lineinfile:
+    dest: /etc/sysctl.conf
+    regexp: "^(fs.file-max)"
+    line: '\1 = {{ apigee_fs_file_max }}'
+    backup: yes
+    backrefs: yes
+
+- name: Update limits config
+  copy:
+    src: rmp.limits.conf
+    dest: /etc/security/limits.d/rmp.limits.conf
+    owner: root
+    group: root
+    mode: 0644

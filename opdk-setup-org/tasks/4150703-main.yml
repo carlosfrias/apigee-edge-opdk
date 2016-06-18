@@ -1,0 +1,82 @@
+---
+- name: Get user status
+  uri:
+    url: 'http://{{ local_address }}:{{ ms_http_port }}/v1/users/{{ user_name }}'
+    user: '{{ admin_user }}'
+    password: '{{ admin_pass }}'
+    body_format: json
+    force_basic_auth: yes
+  register: user_results
+
+- name: User Status Report
+  debug:
+    var: user_results
+
+- name: Create user
+  shell: "{{ create_user }} -P {{ admin_pass }} -u {{ user_name }} -p {{ user_pass }} -f {{ first_name }} -l {{ last_name }}"
+  when: not user_results.status == 200
+  register: user_create_results
+
+- name: Create user report
+  debug:
+    var: user_create_results
+
+- name: Get org status
+  uri:
+    url: 'http://{{ local_address }}:{{ ms_http_port }}/v1/organizations/{{ org_name }}'
+    user: '{{ admin_user }}'
+    password: '{{ admin_pass }}'
+    body_format: json
+    force_basic_auth: yes
+  register: org_results
+  ignore_errors: true
+
+- name: Org status report
+  debug:
+    var: org_results
+
+- name: Create an organization
+  shell: "{{ create_org }} -a {{ user_name }} -o {{ org_name }} -P {{ admin_pass }}"
+  when: not org_results.status == 200
+  register: create_status
+
+- name: Create organization status
+  debug:
+    var: create_status
+
+- name: Create roles
+  shell: "{{ create_roles }} -o {{ org_name }} -P {{ admin_pass }}"
+  when: not org_results.status == 200
+  register: create_role
+
+- name: Create roles status report
+  debug:
+    var: create_role
+
+- name: Get environment status
+  uri:
+    url: 'http://{{ local_address }}:{{ ms_http_port }}/v1/organizations/{{ org_name }}/environments/{{ env_name }}'
+    user: '{{ admin_user }}'
+    password: '{{ admin_pass }}'
+    body_format: json
+    force_basic_auth: yes
+  register: env_results
+  ignore_errors: true
+
+- name: Environment status report
+  debug:
+    var: env_results
+
+- name: Print name of virtual_host_alias
+  debug:
+    msg: "virtual_host_alias: {{ virtual_host_alias }}"
+
+- name: Add an environment
+  shell: "{{ add_env }} -o {{ org_name }} -e {{ env_name }} -P {{ admin_pass }} -A -v {{ virtual_host_name }} -p {{ virtual_host_port }} -a {{ virtual_host_alias }}"
+  when: not env_results.status == 200
+  ignore_errors: true
+  register: add_env_status
+
+- name: Add environment status report
+  debug:
+    var: add_env_status

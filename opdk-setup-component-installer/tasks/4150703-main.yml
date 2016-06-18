@@ -1,0 +1,55 @@
+---
+# tasks file for opdk-setup-installer
+- name: Create opdk staging folder
+  file:
+    path: "{{ opdk_staging_path_prefix }}"
+    state: directory
+    group: '{{ opdk_group_name }}'
+    owner: '{{ opdk_user_name }}'
+    mode: 0755
+  when: opdk_version | version_compare('4.15.07', '<=')
+
+- name: Check for existence of installation archive
+  stat:
+    path: "{{ opdk_installer_archive_path }}"
+  register: archive_exists
+  when: opdk_version | version_compare('4.15.07', '<=')
+
+- name: Check for expansion of binaries
+  stat:
+    path: "{{ opdk_staging_path_prefix }}/{{ opdk_installer_file_basename }}"
+  register: expanded
+  when: opdk_version | version_compare('4.15.07', '<=')
+
+- name: Upload installation binaries
+  copy:
+    src: "{{ opdk_installer_archive_name }}"
+    dest: "{{ opdk_installer_archive_path }}"
+  register: results
+  when: not archive_exists.stat.exists and not expanded.stat.exists and opdk_version | version_compare('4.15.07', '<=')
+
+- name: Uncompress binaries on servers
+  unarchive:
+    copy: no
+    src: "{{ opdk_installer_archive_path }}"
+    dest: "{{ opdk_staging_path_prefix }}"
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+  when: not expanded.stat.exists and opdk_version | version_compare('4.15.07', '<=')
+
+- name: Check for existence of apigee home dir
+  stat:
+    path: "{{ apigee_installation_home }}/var/log"
+  register: opdk
+  when: opdk_version | version_compare('4.15.07', '<=')
+
+- name: Run Apigee Install
+  shell: "{{ apigee_install_command }}"
+  when: not opdk.stat.exists
+  register: install_status
+  when: opdk_version | version_compare('4.15.07', '<=')
+
+- name: Apigee install status report
+  debug:
+    var: install_status
+  when: opdk_version | version_compare('4.15.07', '<=')

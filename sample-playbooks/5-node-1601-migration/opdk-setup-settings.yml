@@ -1,0 +1,12 @@
+---
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
+apigee_migrate: '{{ apigee_installation_home }}/apigee-migrate/bin/migrate.sh'
+
+opdk_version: '4.16.01'
+
+opdk_license_file_name: ~/.apigee/license.txt
+
+

@@ -1,0 +1,22 @@
+---
+- include: opdk-setup-installer.yml
+
+- include: opdk-setup-ds.yml
+
+- include: opdk-setup-ms.yml
+
+- include: opdk-setup-ui.yml
+
+- include: opdk-setup-rmp.yml
+
+- include: opdk-setup-ssh.yml
+  tags:
+  - ssh
+
+- include: opdk-setup-sax.yml
+
+- include: opdk-setup-startup.yml
+
+- include: opdk-setup-org.yml
+
+- include: opdk-setup-status.yml

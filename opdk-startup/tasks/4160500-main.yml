@@ -1,0 +1,8 @@
+---
+- name: Start Apigee
+  shell: '{{ apigee_all_start_command }}'
+  register: start_cmd_report
+
+- name: Report apigee start
+  debug:
+    var: start_cmd_report

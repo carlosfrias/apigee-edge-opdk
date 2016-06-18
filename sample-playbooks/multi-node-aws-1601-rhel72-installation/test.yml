@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    version: '4.16.05'
+  tasks:
+  - assert:
+      that:
+      - version | version_compare('4.15.07', '==')

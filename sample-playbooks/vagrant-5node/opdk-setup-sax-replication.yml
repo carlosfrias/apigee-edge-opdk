@@ -1,0 +1,16 @@
+---
+- hosts: pgmaster
+  vars:
+    target_host_name: "{{ hostvars[ansible_hostname]['groups']['pgstandby'][0] }}"
+    replication_target: m
+  become: true
+  roles:
+  - opdk-setup-sax-replication
+
+- hosts: pgstandby
+  become: true
+  vars:
+    target_host_name: "{{ hostvars[ansible_hostname]['groups']['pgmaster'][0] }}"
+    replication_target: s
+  roles:
+  - opdk-setup-sax-replication

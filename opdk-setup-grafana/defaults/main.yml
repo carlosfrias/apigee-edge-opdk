@@ -1,0 +1,13 @@
+---
+# defaults file for opdk-setup-grafana
+grafana_db_name: grafana
+grafana_user_name: grafana
+grafana_user_pass: Apigee123!
+grafana_data_dir: /var/lib/grafana
+grafana_log_dir: /var/log/grafana
+grafana_admin_user: admin
+grafana_admin_pass: admin
+grafana_log_level: Debug
+grafana_init_file: /etc/grafana/grafana.ini
+
+grafana_http_port: 3000

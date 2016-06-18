@@ -1,0 +1,13 @@
+---
+
+- name: Install Open JDK
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - java-1.7.0-openjdk-devel
+  register: install_jdk_status
+
+- name: Install Open JDK status report
+  debug:
+    var: install_jdk_status

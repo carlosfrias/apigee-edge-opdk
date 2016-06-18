@@ -1,0 +1,22 @@
+---
+# defaults file for opdk-setup-apigee-user
+opdk_user_name: apigee
+opdk_group_name: "{{ opdk_user_name }}"
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee4
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+open_jdk_path: /usr/lib/jvm/java-openjdk
+
+opdk_major_version: '4'
+opdk_minor_version: '15'
+opdk_build_version: '07.03'
+opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
+
+apigee_setup: '{{ apigee_installation_home }}/apigee-setup/bin/setup.sh'
+
+opdk_user_home: /home/{{ opdk_user_name }}
+opdk_staging_folder_name: opdk
+opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
+apigee_bootstrap: '{{ opdk_installer_path }}/bootstrap.sh'
+opdk_staging_path_prefix: "{{ opdk_installer_path }}/{{ opdk_version }}"
+

@@ -1,0 +1,4 @@
+---
+# tasks file for opdk-migration-ldap
+- name: Perform migration
+  shell: '{{ apigee_migrate_cmd }} -c ldap -f {{ opdk_migrate_response_file_path }}'

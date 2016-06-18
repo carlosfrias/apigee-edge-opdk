@@ -1,0 +1,9 @@
+---
+- hosts: '{{ hosts }}'
+  connection: local
+  vars_files:
+  - aws_settings.yml
+  roles:
+  - aws-terminate
+
+

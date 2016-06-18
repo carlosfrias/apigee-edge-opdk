@@ -1,0 +1,22 @@
+---
+- include: opdk-setup-ds.yml
+
+- include: opdk-setup-ms.yml
+
+- include: opdk-setup-rmp.yml
+
+- include: opdk-setup-postgres.yml
+
+- include: opdk-setup-startup.yml
+
+- include: opdk-setup-validate.yml
+
+- include: opdk-setup-validate-cleanup.yml
+
+- include: opdk-setup-org.yml
+
+- include: opdk-setup-status.yml
+
+- include: opdk-setup-config-files.yml
+
+- include: opdk-setup-log-files.yml

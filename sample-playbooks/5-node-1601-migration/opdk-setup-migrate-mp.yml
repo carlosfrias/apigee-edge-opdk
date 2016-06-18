@@ -1,0 +1,9 @@
+---
+- hosts: mp
+#  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-migration-mp
+  tags:
+  - mp

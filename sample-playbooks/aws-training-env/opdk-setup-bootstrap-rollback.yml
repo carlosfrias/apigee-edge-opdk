@@ -1,0 +1,9 @@
+---
+- hosts: "{{ hosts }}"
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-bootstrap-rollback
+  tags:
+  - bootstrap-rollback

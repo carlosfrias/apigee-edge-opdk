@@ -1,0 +1,25 @@
+---
+# defaults file for opdk-setup-checkout-binaries
+
+opdk_major_version: '4'
+opdk_minor_version: '15.07'
+opdk_build_version: '03'
+opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
+
+opdk_user_name: apigee
+opdk_group_name: "{{ opdk_user_name }}"
+opdk_user_home: /home/{{ opdk_user_name }}
+opdk_staging_folder_name: opdk
+opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
+
+opdk_installer_file_prefix: apigee-edge
+opdk_installer_file_basename: '{{ opdk_installer_file_prefix}}-{{ opdk_version }}'
+opdk_installer_file_suffix: 'zip'
+opdk_installer_archive_filename: '{{ opdk_installer_file_basename }}.{{ opdk_installer_file_suffix }}'
+
+opdk_staging_path_prefix: "{{ opdk_installer_path }}/{{ opdk_version }}"
+opdk_installer_staging_folder_path: "{{ opdk_staging_path_prefix }}/{{ opdk_installer_file_basename }}"
+
+apigee_repo_host: ftp.apigee.com
+apigee_repo_archives_uri: API%20Services/Archive
+opdk_download_uri: 'https://{{ apigee_repo_user }}:{{ apigee_repo_password }}@{{ apigee_repo_host }}/{{ apigee_repo_archives_uri }}/{{ opdk_major_version }}.{{ opdk_minor_version }}/{{ opdk_installer_archive_filename }}'

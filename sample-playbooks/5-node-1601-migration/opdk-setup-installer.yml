@@ -1,0 +1,10 @@
+---
+- hosts: planet
+  strategy: free
+  gather_facts: yes
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-installer
+  tags:
+  - installer

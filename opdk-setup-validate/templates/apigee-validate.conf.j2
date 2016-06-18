@@ -1,0 +1,39 @@
+{% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
+MSIP={{ hostvars[groups['dc-1-ms'][0]][interfaceName].ipv4.address }}
+{% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
+MSIP={{ hostvars[groups['dc-2-ms'][0]][interfaceName].ipv4.address }}
+{% else %}
+MSIP=Neither a dc-1 or dc-2 inventory group was defined
+{% endif %}
+
+ADMIN_EMAIL={{ opdk_user_email }}
+
+APIGEE_PORT_HTTP_MS={{ ms_http_port }}
+
+APIGEE_ADMINPW={{ opdk_user_pass }}
+
+{% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
+REGION=dc-1
+{% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
+REGION=dc-2
+{% else %}
+REGION=Neither a dc-1 or dc-2 inventory group was defined
+{% endif %}
+
+MP_POD={{ mp_pod }}
+
+{% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
+MP_IP={{ hostvars[groups['dc-1-rmp'][0]][interfaceName].ipv4.address }}
+{% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
+MP_IP={{ hostvars[groups['dc-2-rmp'][0]][interfaceName].ipv4.address }}
+{% else %}
+MP_IP=Neither a dc-1 or dc-2 inventory group was defined
+{% endif %}
+MP_PORT={{ mp_self_port }}
+{% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
+HOST_ALIAS={{ groups['dc-1-rmp'][0] }}
+{% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
+HOST_ALIAS={{ groups['dc-2-rmp'][0] }}
+{% else %}
+HOST_ALIAS=Neither a dc-1 or dc-2 inventory group was defined
+{% endif %}

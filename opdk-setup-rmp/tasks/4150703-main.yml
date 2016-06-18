@@ -1,0 +1,98 @@
+---
+- name: Checking for Router HTTP Port
+  register: router_self_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_ext_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Checking for Router JMX Port
+  register: router_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Checking for Message Processor Server HTTP Port
+  register: mp_self_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_self_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Checking for Message Processor Server JMX Port
+  register: mp_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Install Message Processor and Router
+  ignore_errors: yes
+  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p rmp"
+  when: router_self_port_status | failed and mp_jmx_port_status | failed and router_jmx_port_status | failed and mp_self_port_status | failed
+  register: rmp_install
+
+- name: Message Processor and Router Installation Report
+  debug:
+    var: rmp_install
+
+- name: Confirm Router HTTP Port
+  register: router_self_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_ext_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Router port status report
+  debug:
+    var: router_self_port_status
+
+- name: Confirm Message Processor Server HTTP Port
+  register: mp_self_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Confirm Router JMX Port
+  register: router_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ router_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Confirm Message Processor Server JMX Port
+  register: mp_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Router HTTP startup failed
+  fail:
+    msg: "Router HTTP failed to start"
+  when: router_self_port_status | failed
+
+- name: Message Processor startup failed
+  fail:
+    msg: "Message processor HTTP failed to start"
+  when: mp_self_port_status| failed
+
+- name: Router JMX startup failed
+  fail:
+    msg: "Router JMX failed to start"
+  when: router_jmx_port_status | failed
+
+- name: Message Processor JMX startup failed
+  fail:
+    msg: "Message processor JMX failed to start"
+  when: mp_jmx_port_status | failed

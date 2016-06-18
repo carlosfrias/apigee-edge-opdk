@@ -1,0 +1,10 @@
+---
+- hosts: dc-1
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-migration-installer
+  tags:
+  - migration_installer
+

@@ -1,0 +1,92 @@
+<Plugin "java">
+
+  <Plugin "GenericJMX">
+
+    <MBean "METRICS_PREVIOUS_inboundtraffic_2XX">
+      ObjectName "METRICS.PREVIOUS:name=ResponsesSent_2XX,scope=*,type=inboundtraffic"
+      InstancePrefix "METRICS-PREVIOUS-"
+      InstanceFrom "type"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+        InstanceFrom "scope"
+      </Value>
+    </MBean>
+    <MBean "METRICS_PREVIOUS_inboundtraffic_4XX">
+      ObjectName "METRICS.PREVIOUS:name=ResponsesSent_4XX,scope=*,type=inboundtraffic"
+      InstancePrefix "METRICS-PREVIOUS-"
+      InstanceFrom "type"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+        InstanceFrom "scope"
+      </Value>
+    </MBean>
+    <MBean "METRICS_PREVIOUS_inboundtraffic_5XX">
+      ObjectName "METRICS.PREVIOUS:name=ResponsesSent_5XX,scope=*,type=inboundtraffic"
+      InstancePrefix "METRICS-PREVIOUS-"
+      InstanceFrom "type"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+        InstanceFrom "scope"
+      </Value>
+    </MBean>
+
+    <MBean "METRICS_PREVIOUS_outboundtraffic_2XX">
+      ObjectName "METRICS.PREVIOUS:name=ResponsesReceived_2XX,scope=*,type=outboundtraffic"
+      InstancePrefix "METRICS-PREVIOUS-"
+      InstanceFrom "type"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+        InstanceFrom "scope"
+      </Value>
+    </MBean>
+    <MBean "METRICS_PREVIOUS_outboundtraffic_4XX">
+      ObjectName "METRICS.PREVIOUS:name=ResponsesReceived_4XX,scope=*,type=outboundtraffic"
+      InstancePrefix "METRICS-PREVIOUS-"
+      InstanceFrom "type"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+        InstanceFrom "scope"
+      </Value>
+    </MBean>
+    <MBean "METRICS_PREVIOUS_outboundtraffic_5XX">
+      ObjectName "METRICS.PREVIOUS:name=ResponsesReceived_5XX,scope=*,type=outboundtraffic"
+      InstancePrefix "METRICS-PREVIOUS-"
+      InstanceFrom "type"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        Attribute "Value"
+        InstanceFrom "scope"
+      </Value>
+    </MBean>
+
+    <Connection>
+      Host "{{ router_host }}"
+      ServiceURL "service:jmx:rmi:///jndi/rmi://{{ router_host }}:{{ router_jmx_port }}/platform"
+      Collect "METRICS_PREVIOUS_outboundtraffic_2XX"
+      Collect "METRICS_PREVIOUS_outboundtraffic_4XX"
+      Collect "METRICS_PREVIOUS_outboundtraffic_5XX"
+      Collect "METRICS_PREVIOUS_outboundtraffic_AverageRequestLatency"
+      Collect "METRICS_PREVIOUS_outboundtraffic_ResponseCount"
+      Collect "METRICS_PREVIOUS_inboundtraffic_2XX"
+      Collect "METRICS_PREVIOUS_inboundtraffic_4XX"
+      Collect "METRICS_PREVIOUS_inboundtraffic_5XX"
+      Collect "METRICS_PREVIOUS_inboundtraffic_AverageRequestLatency"
+      Collect "METRICS_PREVIOUS_inboundtraffic_ResponseCount"
+
+      Collect "METRICS_CUMULATIVE_faults_ApigeeErrors"
+      #Collect "METRICS_CUMULATIVE_faults_TargetErrors"
+      #Collect "METRICS_CUMULATIVE_faults_PolicyErrors"
+    </Connection>
+  </Plugin>
+</Plugin>

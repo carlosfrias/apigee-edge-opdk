@@ -1,0 +1,40 @@
+---
+# tasks file for opdk-setup-ld
+
+- name: Status of LDAP Port
+  register: ld_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ ld_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+- block:
+
+  - include: 4150703-main.yml
+
+  when: opdk_version == '4.15.07.03'
+
+- block:
+
+  - include: 4160100-main.yml
+
+  when: opdk_version == '4.16.01'
+
+- block:
+
+  - include: 4160500-main.yml
+
+  when: opdk_version == '4.16.05'
+
+- name: Status of LDAP Port
+  register: ld_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ ld_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: LDAP Port Failed
+  fail:
+    msg: "LDAP port failed to start"
+  when: not ld_port_status.state == 'started'

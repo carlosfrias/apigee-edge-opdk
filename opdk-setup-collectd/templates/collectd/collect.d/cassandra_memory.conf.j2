@@ -1,0 +1,24 @@
+<Plugin "java">
+
+  <Plugin "GenericJMX">
+
+    # Heap memory usage
+    <MBean "memory_heap">
+      ObjectName "java.lang:type=Memory"
+      InstancePrefix "cassandra-memory-heap"
+
+      # Creates four values: committed, init, max, used
+      <Value>
+        Type "memory"
+        Table true
+        Attribute "HeapMemoryUsage"
+      </Value>
+    </MBean>
+
+    <Connection>
+      ServiceURL "service:jmx:rmi:///jndi/rmi://{{ cassandra_host }}:{{ cassandra_jmx_port }}/jmxrmi"
+      Collect "memory_heap"
+    </Connection>
+  </Plugin>
+</Plugin>
+

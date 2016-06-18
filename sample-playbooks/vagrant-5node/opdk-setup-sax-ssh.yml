@@ -1,0 +1,14 @@
+---
+- hosts: pgmaster
+  become: true
+  vars:
+    target_host_name: "{{ hostvars[ansible_hostname]['groups']['pgstandby'][0] }}"
+  roles:
+  - opdk-setup-ssh
+
+- hosts: pgstandby
+  become: true
+  vars:
+    target_host_name: "{{ hostvars[ansible_hostname]['groups']['pgmaster'][0] }}"
+  roles:
+  - opdk-setup-ssh

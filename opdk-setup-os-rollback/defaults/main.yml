@@ -1,0 +1,4 @@
+---
+# defaults file for opdk-setup-rollback-os
+opdk_user_name: apigee
+opdk_group_name: "{{ opdk_user_name }}"

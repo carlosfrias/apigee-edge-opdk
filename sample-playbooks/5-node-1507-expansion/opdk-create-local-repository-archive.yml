@@ -1,0 +1,6 @@
+---
+- hosts: ms
+
+  roles:
+  - opdk-create-local-repository-archive
+

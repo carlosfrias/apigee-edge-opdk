@@ -1,0 +1,17 @@
+---
+# defaults file for apigee-startup
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee4
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_bin: "{{ apigee_installation_home }}/bin"
+all_start: "{{ apigee_bin }}/all-start.sh"
+all_status: "{{ apigee_bin }}/all-status.sh"
+collectd_conf_file: /etc/collectd.conf
+
+opdk_major_version: '4'
+opdk_minor_version: '15'
+opdk_build_version: '07.03'
+opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
+
+apigee_all: "{{ apigee_installation_home }}/apigee-service/bin/apigee-all"
+apigee_all_start_command: "{{ apigee_all}} start"

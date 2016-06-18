@@ -1,0 +1,10 @@
+---
+# tasks file for opdk-setup-demote-apigee-setup
+- name: Remove sudo from apigee-setup/bin/setup.sh
+  replace:
+    dest: '{{ apigee_setup }}'
+    regexp: '^(\s*)(sudo\s*)(.*)$'
+    replace: '\1\3'
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+

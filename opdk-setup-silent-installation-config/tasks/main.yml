@@ -1,0 +1,26 @@
+---
+# tasks file for opdk-setup-silent-file
+
+- include: network-interface-name.yml
+
+- include: common_integrated_facts.yml
+
+- include: aws_integrated_facts.yml
+
+- name: Construct the response file
+  template:
+    src: response.txt.j2
+    dest: "{{ opdk_response_file_path }}"
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+    mode: 0644
+  when: provided_response_file is not defined or not provided_response_file
+
+- name: Copy provided response file
+  copy:
+    src: "{{ provided_response_file }}"
+    dest: "{{ opdk_response_file_path }}"
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+    mode: 0644
+  when: provided_response_file is defined and provided_response_file

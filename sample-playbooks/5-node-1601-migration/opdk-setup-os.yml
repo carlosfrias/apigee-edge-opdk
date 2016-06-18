@@ -1,0 +1,15 @@
+---
+- hosts: dc-1
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-selinux-disable
+  - opdk-shutdown-iptables
+  - opdk-time-sync
+  - opdk-setup-hostfile
+  - opdk-setup-apigee-user
+  - opdk-setup-os-common
+  - opdk-setup-os-dev-validation
+  tags:
+  - os

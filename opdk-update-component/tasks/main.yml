@@ -1,0 +1,4 @@
+---
+# tasks file for opdk-update-component
+- name: Perform component update
+  shell: '{{ apigee_service }} -c {{ apigee_component }} -f {{ opdk_migrate_response_file_path }}'

@@ -1,0 +1,56 @@
+---
+- hosts: planet
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+   - opdk-setup-selinux-disable
+   - opdk-dns-resolver
+   - opdk-shutdown-iptables
+   - opdk-time-sync
+   - opdk-setup-hostfile
+   - opdk-setup-apigee-user
+   - opdk-setup-os-common
+   - opdk-setup-os-common-extra
+
+- hosts: ds
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-ds
+
+- hosts: ldap
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-ldap
+
+- hosts: rmp
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-rmp
+
+- hosts: qpid
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-qpid
+
+- hosts: pg
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-postgres
+
+- hosts: planet
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-system-configs-logs

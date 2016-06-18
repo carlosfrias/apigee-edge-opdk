@@ -1,0 +1,13 @@
+---
+# tasks file for apigee-shutdown-iptables
+- name: Stop Iptables service
+  service:
+    name: iptables
+    state: stopped
+  when: (ansible_distribution | lower == "centos" or ansible_distribution | lower == "oraclelinux")  and ansible_distribution_major_version | version_compare("6", "==") and not ansible_virtualization_type | lower == "docker"
+
+- name: Stop Iptables service
+  service:
+    name: firewalld
+    state: stopped
+  when: (ansible_distribution | lower == "centos" or ansible_distribution | lower == "oraclelinux")  and ansible_distribution_major_version | version_compare("7", "==") and not ansible_virtualization_type | lower == "docker"

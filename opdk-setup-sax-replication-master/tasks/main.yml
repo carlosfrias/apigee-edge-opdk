@@ -1,0 +1,64 @@
+---
+# tasks file for opdk-setup-sax-replication-master
+- name: Capture Interface Name if running Virtualbox
+  set_fact:
+    interfaceName: "ansible_eth1"
+  when: "{{ ansible_bios_version | search('VirtualBox') }}"
+
+- name: Capture Interface Name if not running Virtualbox
+  set_fact:
+    interfaceName: "ansible_eth0"
+  when: "{{ not ansible_bios_version | search('VirtualBox') }}"
+
+- name: Set peer Address for master
+  set_fact:
+    target_host_address: "{{ hostvars[target_host_name][interfaceName].ipv4.address }}"
+
+#- name: Collected All Status
+#  shell: "{{ all_status }}"
+#  register: results
+#
+#- name: Collect Postgresql runtime info
+#  set_fact:
+#    pg_is_running: '{{ results.stdout | search(".*postgresql\s.*is running.*") }}'
+#
+#- name: Stop Postgresql if it is running
+#  shell: '{{ apigee_service }} postgresql stop'
+#  when: pg_is_running
+
+- name: Setup Postgres replication
+  become: yes
+  become_user: "{{ opdk_user_name }}"
+  become_method: sudo
+  shell: "{{ apigee_postgres_replication_setup }} -m -a {{ target_host_address }} -d {{ postgres_data_path }} -k {{ opdk_user_ssh_private_key }}"
+  register: results
+  ignore_errors: yes
+  retries: 1
+  delay: 10
+
+#- name: Start Postgresql
+#  shell: '{{ apigee_service }} postgresql start'
+
+- name: Collected All Status
+  shell: "{{ all_status }}"
+  register: results
+
+- name: Fail if postgresql is not running
+  fail:
+    msg: "Postgresql is not running"
+  when: 'not {{ results.stdout | search(".*postgresql\s.*is running.*") }}'
+
+- name: Fail if postgres-server is not running
+  fail:
+    msg: "Postgres-server is not running"
+  when: 'not {{ results.stdout | search(".*postgres-server\s.*is running.*") }}'
+
+- name: Fail if qpidd is not running
+  fail:
+    msg: "Qpidd is not running"
+  when: 'not {{ results.stdout | search(".*qpidd\s.*is running.*") }}'
+
+- name: Fail if qpid-server is not running
+  fail:
+    msg: "Qpid-server is not running"
+  when: 'not {{ results.stdout | search(".*qpid-server\s.*is running.*") }}'

@@ -1,0 +1,7 @@
+---
+# defaults file for opdk-setup-bootstrap-archive-installer
+apigee_installation_path_prefix: /opt
+apigee_data_path_prefix: '{{ apigee_installation_path_prefix }}'
+apigee_installation_dir: apigee
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'

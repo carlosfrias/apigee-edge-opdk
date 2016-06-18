@@ -1,0 +1,57 @@
+<Plugin "java">
+
+  <Plugin "GenericJMX">
+    <MBean "nio_connected">
+      ObjectName "NIO:name=currentConnected,type=total"
+      InstancePrefix "MP-NIO-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        #Table true
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "nio_accepted">
+      ObjectName "NIO:name=currentAccepted,type=total"
+      InstancePrefix "MP-NIO-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        #Table true
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "nio_poolsize">
+      ObjectName "NIO:name=currentPoolSize,type=total"
+      InstancePrefix "MP-NIO-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        #Table true
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <MBean "nio_timeouts">
+      ObjectName "NIO:name=timeouts,type=total"
+      InstancePrefix "MP-NIO-"
+      InstanceFrom "name"
+      <Value>
+        Type "gauge"
+        #Table true
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+    <Connection>
+      Host "{{ mp_host }}"
+      ServiceURL "service:jmx:rmi:///jndi/rmi://{{ mp_host }}:{{ mp_jmx_port }}/platform"
+      Collect "nio_connected"
+      Collect "nio_accepted"
+      #Collect "nio_poolsize"
+      #Collect "nio_timeouts"
+    </Connection>
+  </Plugin>
+</Plugin>

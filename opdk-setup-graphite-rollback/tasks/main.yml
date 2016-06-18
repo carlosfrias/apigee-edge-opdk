@@ -1,0 +1,71 @@
+---
+- name: Stop MySql
+  service:
+    name: '{{ item }}'
+    state: stopped
+  ignore_errors: true
+  with_items:
+  - mysqld
+  - httpd
+
+- name: Remove users
+  user:
+    name: '{{ item }}'
+    remove: yes
+    state: absent
+  with_items:
+  - mysql
+  - apache
+  ignore_errors: yes
+
+- name: Remove additional dependencies
+  ignore_errors: yes
+  pip:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+  - pexpect
+  - httplib2
+  - django
+
+- name: Remove files and OS folders
+  ignore_errors: yes
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+  - '{{ graphite_root_dir }}'
+  - "{{ graphite_carbon_rdd_dir }}"
+  - "{{ graphite_carbon_whisper_dir }}"
+  - "{{ graphite_carbon_log_dir }}"
+  - "{{ graphite_carbon_index_dir }}"
+  - "{{ graphite_web_conf_dir }}"
+  - "{{ graphite_web_storage_dir }}"
+  - "{{ graphite_web_content_dir }}"
+  - '/var/lib/mysql'
+  - "/usr/etc/collectd.conf"
+  - "/etc/collectd.conf"
+  - "/etc/collectd.d"
+  - "/etc/httpd/"
+  - "/var/log/httpd/"
+
+- name: Stopping MySql
+  ignore_errors: yes
+  service:
+    name: mysqld
+    state: stopped
+
+- name: Remove graphite and dependencies
+  ignore_errors: yes
+  yum:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+  - graphite-web
+  - graphite-web-selinux
+  - python-carbon
+  - python-whisper
+  - httpd
+  - mysql
+  - mysql-server
+  - MySQL-python

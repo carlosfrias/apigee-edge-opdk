@@ -1,0 +1,41 @@
+---
+# tasks file for opdk-server-analytics-registration
+
+- include: common_integrated_facts.yml
+
+- include: aws_integrated_facts.yml
+
+- include: network-interface-name.yml
+
+- include: mgmt_ip.yml
+
+- name: Get Server Self
+  uri:
+    url: 'http://{{ local_address }}:{{ self_port }}/v1/servers/self'
+    user: '{{ opdk_user_email }}'
+    password: '{{ opdk_user_pass }}'
+    body_format: json
+  register: response
+  delegate_to: '{{ inventory_hostname }}'
+
+- name: Register ax group
+   uri:
+      url: "http://{{ local_mgmt_ip }}:8080/v1/analytics/groups/ax/{{ ax_group_name }}/servers"
+      body: "uuid={{ uuid }}&type={{ server_type }}"
+      user: '{{ opdk_user_email }}'
+      password: '{{ opdk_user_pass }}'
+      body_format: json
+      method: POST
+      HEADER_Content-Type: "application/x-www-form-urlencoded"
+    register: environments
+
+- name: Register consumer group
+   uri:
+      url: "http://{{ local_mgmt_ip }}:8080/v1/analytics/groups/ax/{{ ax_group_name }}/consumer-groups/{{ consumer_group_name }}/datastores"
+      body: "uuid={{ uuid }}"
+      user: '{{ opdk_user_email }}'
+      password: '{{ opdk_user_pass }}'
+      body_format: json
+      method: POST
+      HEADER_Content-Type: "application/x-www-form-urlencoded"
+    register: environments

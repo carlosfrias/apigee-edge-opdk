@@ -1,0 +1,9 @@
+---
+- include: opdk-setup-installation-rollback.yml
+  vars:
+    hosts: dc-1
+
+- include: opdk-setup-bootstrap-rollback.yml
+  vars:
+    hosts: dc-1
+

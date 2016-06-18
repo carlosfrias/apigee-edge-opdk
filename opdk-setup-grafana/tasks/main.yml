@@ -1,0 +1,41 @@
+---
+# tasks file for opdk-setup-grafana
+- name: Add grafana yum repo
+  copy:
+    src: grafana.repo
+    dest: /etc/yum.repos.d/grafana.repo
+
+- name: Install grafana
+  yum:
+    name: '{{ item }}'
+    state: present
+    update_cache: yes
+  with_items:
+  - grafana
+  - initscripts
+  - fontconfig
+
+- name: Update grafana.ini
+  template:
+    src: grafana.ini.j2
+    dest: '{{ grafana_init_file }}'
+
+- name: Add mysql user
+  mysql_user:
+    name: '{{ grafana_user_name }}'
+    password: '{{ grafana_user_pass }}'
+    priv: '*.*:ALL,GRANT'
+    state: present
+
+- name: Create graphite db
+  mysql_db:
+    name: grafana
+    state: present
+    login_user: '{{ grafana_user_name }}'
+    login_password: '{{ grafana_user_pass }}'
+
+- name: Start grafana service
+  service:
+    name: grafana-server
+    enabled: yes
+    state: started

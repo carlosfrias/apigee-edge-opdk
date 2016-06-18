@@ -1,0 +1,3 @@
+---
+# defaults file for opdk-setup-collectd-shutdown
+collectd_pid_file: /var/run/collectd.pid

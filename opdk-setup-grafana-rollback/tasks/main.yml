@@ -1,0 +1,37 @@
+---
+# tasks file for opdk-setup-grafana-rollback
+- name: Stop grafana
+  service:
+    name: grafana-server
+    state: stopped
+  ignore_errors: true
+
+- name: Remove grafana db
+  mysql_db:
+    name: grafana
+    state: absent
+    login_user: '{{ grafana_user_name }}'
+    login_password: '{{ grafana_user_pass }}'
+  ignore_errors: true
+
+- name: Remove grafana mysql user
+  ignore_errors: true
+  mysql_user:
+    name: '{{ grafana_user_name }}'
+    password: '{{ grafana_user_pass }}'
+    priv: '*.*:ALL,GRANT'
+    state: absent
+
+- name: Remove grafana.ini
+  ignore_errors: true
+  file:
+    path: '{{ grafana_init_file }}'
+    state: absent
+
+- name: Remove grafana
+  ignore_errors: true
+  yum:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+  - grafana

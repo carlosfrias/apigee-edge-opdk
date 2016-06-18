@@ -1,0 +1,9 @@
+---
+- name: Setup Qpid
+  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p qs"
+  register: qpid_install
+
+- name: Qpid install report
+  debug:
+    var: qpid_install
+

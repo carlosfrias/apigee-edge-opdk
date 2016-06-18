@@ -1,0 +1,9 @@
+---
+# defaults file for opdk-setup-os-ds
+apigee_net_ipv4_tcp_fin_timeout: 15
+apigee_max_map_count: 131072
+
+opdk_major_version: '4'
+opdk_minor_version: '15'
+opdk_build_version: '07.03'
+opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"

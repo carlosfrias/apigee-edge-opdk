@@ -1,0 +1,79 @@
+<Plugin "java">
+
+<Plugin "GenericJMX">
+
+### Compaction
+   <MBean "CompactionBC">
+      ObjectName "org.apache.cassandra.metrics:name=BytesCompacted,type=Compaction"
+      InstancePrefix "cassandra-metrics-Compaction"
+      <Value>
+        Type "gauge"
+        InstanceFrom "name"
+        Attribute "Count"
+      </Value>
+    </MBean>
+
+   <MBean "CompactionTCC">
+      ObjectName "org.apache.cassandra.metrics:name=TotalCompactionsCompleted,type=Compaction"
+      InstancePrefix "cassandra-metrics-Compaction"
+      <Value>
+        Type "gauge"
+        InstanceFrom "name"
+        Attribute "Count"
+      </Value>
+    </MBean>
+
+   <MBean "CompactionCT">
+      ObjectName "org.apache.cassandra.metrics:name=CompletedTasks,type=Compaction"
+      InstancePrefix "cassandra-metrics-Compaction"
+      <Value>
+        Type "gauge"
+        InstanceFrom "name"
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+   <MBean "CompactionPT">
+      ObjectName "org.apache.cassandra.metrics:name=PendingTasks,type=Compaction"
+      InstancePrefix "cassandra-metrics-Compaction"
+      <Value>
+        Type "gauge"
+        InstanceFrom "name"
+        Attribute "Value"
+      </Value>
+    </MBean>
+
+## ClientRequest Latency
+   <MBean "ClientRequest_Latency">
+      ObjectName "org.apache.cassandra.metrics:name=Latency,scope=*,type=ClientRequest"
+      InstancePrefix "cassandra-metrics-"
+      InstanceFrom "type"
+      InstanceFrom "name"
+      InstanceFrom "scope"
+
+      <Value>
+        Type "gauge"
+        InstancePrefix "75thPercentile"
+        Attribute "75thPercentile"
+      </Value>
+      <Value>
+        Type "gauge"
+        InstancePrefix "OneMinuteRate"
+        Attribute "OneMinuteRate"
+      </Value>
+    </MBean>
+
+
+    <Connection>
+     ServiceURL "service:jmx:rmi:///jndi/rmi://{{ cassandra_host }}:{{ cassandra_jmx_port }}/jmxrmi"
+
+     Collect "CompactionBC"
+     Collect "CompactionTCC"
+     Collect "CompactionCT"
+     Collect "CompactionPT"
+
+     Collect "ClientRequest_Latency"
+    </Connection>
+
+  </Plugin>
+</Plugin>

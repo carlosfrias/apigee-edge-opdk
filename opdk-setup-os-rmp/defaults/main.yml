@@ -1,0 +1,9 @@
+---
+# defaults file for opdk-setup-os-rmp
+
+# Settings for sysctl.conf
+apigee_net_ipv4_tcp_fin_timeout: 15
+apigee_fs_file_max: 300000
+apigee_httptransport_max_client_count: 50000
+apigee_core_pool_size: 100
+apigee_maximum_pool_size: 1000

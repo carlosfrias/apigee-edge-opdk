@@ -1,0 +1,8 @@
+---
+- include: aws_facts.yml
+
+- hosts: dc-1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-status

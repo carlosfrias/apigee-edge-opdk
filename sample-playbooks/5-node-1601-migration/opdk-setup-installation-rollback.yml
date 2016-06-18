@@ -1,0 +1,8 @@
+---
+- hosts: "{{ hosts }}"
+  vars:
+    opdk_version: '4.16.01'
+    apigee_installation_dir: apigee
+  roles:
+  - opdk-setup-installer-rollback
+  - opdk-setup-bootstrap-rollback

@@ -1,0 +1,75 @@
+---
+- name: Checking for Cassandra DB Port
+  register: cassandra_db_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ cassandra_db_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Checking for Cassandra JMX Port
+  register: cassandra_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ cassandra_jmx_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Checking for ZooKeeper Port
+  ignore_errors: true
+  register: zookeeper_jmx_port_status
+  wait_for:
+    port: '{{ zk_jmx_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+
+- name: Setup Cassandra and Zookeeper
+  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p ds"
+  args:
+    chdir: "{{ apigee_share_installer_path }}"
+  register: results
+  ignore_errors: true
+  when: cassandra_db_port_status | failed or zookeeper_jmx_port_status | failed or cassandra_jmx_port_status | failed
+
+- name: Report CS and ZK setup status
+  debug:
+    var: results
+
+- name: Confirming Cassandra DB Port
+  register: cassandra_db_port_status
+  wait_for:
+    port: '{{ cassandra_db_port }}'
+    host: '{{ local_address }}'
+    state: started
+    timeout: 1
+
+- name: Confirming Cassandra JMX Port
+  register: cassandra_jmx_port_status
+  wait_for:
+    port: '{{ cassandra_db_port }}'
+    host: '{{ local_address }}'
+    state: started
+    timeout: 1
+
+- name: Confirming Zookeeper Port
+  register: zookeeper_jmx_port_status
+  wait_for:
+    port: '{{ zk_jmx_port }}'
+    host: '{{ local_address }}'
+    state: started
+    timeout: 1
+
+- name: Cassandra startup failed
+  fail:
+    msg: "Cassandra failed to start"
+  when: not cassandra_db_port_status.state == 'started'
+
+- name: Zookeeper startup failed
+  fail:
+     msg: "ZooKeeper failed to start"
+  when: not zookeeper_jmx_port_status.state == 'started'
+
+- name: Cassandra JMX startup failed
+  fail:
+     msg: "Cassandra JMX failed to start"
+  when: not cassandra_jmx_port_status.state == 'started'

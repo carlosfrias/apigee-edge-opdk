@@ -1,0 +1,98 @@
+---
+# tasks file for opdk-setup-qs
+- name: Status of Qpid External Management Port
+  register: qpid_ext_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ qpid_ext_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Qpid Internal Management Port
+  register: qpid_int_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ qpid_int_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Qpid JMX Port
+  register: qpid_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ qpid_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Qpid Message Processor Router Port
+  register: qpid_router_mp_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ qpid_router_mp_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- block:
+
+  - include: 4150703-main.yml
+
+  when: opdk_version == '4.15.07.03'
+
+- block:
+
+  - include: 4160100-main.yml
+
+  when: opdk_version == '4.16.01'
+
+- name: Status of Qpid External Management Port
+  register: qpid_ext_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ qpid_ext_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Qpid Internal Management Port
+  register: qpid_int_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ qpid_int_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Qpid JMX Port
+  register: qpid_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ qpid_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Qpid Message Processor Router Port
+  register: qpid_router_mp_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ qpid_router_mp_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Qpid External Management Port Failed
+  fail:
+    msg: "Message Processor External Management port failed to start"
+  when: not qpid_ext_mgmt_port_status.state == 'started'
+
+- name: Qpid Internal Management Port Failed
+  fail:
+    msg: "Message Processor Internal Management port failed to start"
+  when: not qpid_int_mgmt_port_status.state == 'started'
+
+- name: Qpid JMX Port startup failed
+  fail:
+    msg: "Message Processor JMX port failed to start"
+  when: not qpid_jmx_port_status.state == 'started'
+
+- name: Qpid Message Processor Router Port startup failed
+  fail:
+    msg: "Message Processor Router port failed to start"
+  when: not qpid_router_mp_port_status.state == 'started'
+

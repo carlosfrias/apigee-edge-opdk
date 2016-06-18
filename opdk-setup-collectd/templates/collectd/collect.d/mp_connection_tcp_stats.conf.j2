@@ -1,0 +1,5 @@
+LoadPlugin exec
+
+<Plugin exec>
+  Exec "nobody" "{{ collectd_base_dir }}/tcpconnstates.rb" "-h" "{{ mp_host }}" "-i" "{{ connection_sampling_interval }}"
+</Plugin>

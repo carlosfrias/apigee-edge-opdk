@@ -1,0 +1,41 @@
+---
+# tasks file for opdk-setup-bootstrap
+
+- name: Set download url for 4.16.01
+  set_fact:
+    bootstrap_download_url: '{{ apigee_repo_url }}/bootstrap.sh'
+  when: opdk_version == '4.16.01'
+
+- name: Set download url for 4.16.05
+  set_fact:
+    bootstrap_download_url: '{{ apigee_repo_url }}/bootstrap_4.16.05.sh'
+  when: opdk_version == '4.16.05'
+
+- name: Set target bootstrap script name for 4.16.01
+  set_fact:
+    bootstrap_script: '{{ opdk_installer_path }}/bootstrap.sh'
+  when: opdk_version == '4.16.01'
+
+- name: Set target bootstrap script name for 4.16.05
+  set_fact:
+    bootstrap_script: '{{ opdk_installer_path }}/bootstrap_4.16.05.sh'
+  when: opdk_version == '4.16.05'
+
+- name: Download bootstrap
+  get_url:
+    force: yes
+    url: '{{ bootstrap_download_url }}'
+    dest: '{{ bootstrap_script }}'
+    url_username: '{{ apigee_repo_user }}'
+    url_password: '{{ apigee_repo_password }}'
+    mode: 0755
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+
+- name: Install bootstrap
+  shell: '{{ bootstrap_script }} apigeeuser={{ apigee_repo_user }} apigeepassword="{{ apigee_repo_password }}" JAVA_FIX=C'
+  register: results
+  env:
+    JAVA_HOME: '{{ java_home }}'
+  failed_when: "{{ results.rc > 0 }}"
+

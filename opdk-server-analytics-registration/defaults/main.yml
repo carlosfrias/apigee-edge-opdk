@@ -1,0 +1,5 @@
+---
+# defaults file for opdk-server-analytics-registration
+
+opdk_user_email: opdk@apigee.com
+opdk_user_pass: Apigee123!

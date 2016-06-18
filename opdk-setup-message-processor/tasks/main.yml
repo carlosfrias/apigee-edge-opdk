@@ -1,0 +1,91 @@
+---
+# tasks file for opdk-setup-rmp
+- name: Status of Message Processor External Management Port
+  register: mp_ext_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_ext_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Message Processor  Internal Management Port
+  register: mp_int_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_int_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Message Processor JMX Port
+  register: mp_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Message Processor Router Port
+  register: mp_router_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_router_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Setup Message Processor
+  ignore_errors: yes
+  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p mp"
+  when: mp_ext_mgmt_port_status | failed and mp_int_mgmt_port_status | failed and mp_jmx_port_status | failed and mp_router_port_status | failed
+
+- name: Status of Message Processor External Management Port
+  register: mp_ext_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_ext_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Message Processor  Internal Management Port
+  register: mp_int_mgmt_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_int_mgmt_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Message Processor JMX Port
+  register: mp_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Status of Message Processor Router Port
+  register: mp_router_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ mp_router_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Message Processor External Management Port Failed
+  fail:
+    msg: "Message Processor External Management port failed to start"
+  when: not mp_ext_mgmt_port_status.state == 'started'
+
+- name: Message Processor Internal Management Port Failed
+  fail:
+    msg: "Message Processor Internal Management port failed to start"
+  when: not mp_int_mgmt_port_status.state == 'started'
+
+- name: Message Processor JMX Port startup failed
+  fail:
+    msg: "Message Processor JMX port failed to start"
+  when: not mp_jmx_port_status.state == 'started'
+
+- name: Message Processor Router Port startup failed
+  fail:
+    msg: "Message Processor Router port failed to start"
+  when: not mp_router_port_status.state == 'started'
+

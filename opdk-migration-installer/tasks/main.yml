@@ -1,0 +1,53 @@
+---
+# tasks file for opdk-migration-installer
+- name: Install apigee-migrate
+  shell: "{{ apigee_migrate_install_cmd }}"
+
+- block:
+  - name: Capture interface Name if running Centos on Virtualbox
+    set_fact:
+      interfaceName: "ansible_eth1"
+    when: "{{ ansible_bios_version | search('VirtualBox') }}"
+
+  - name: Capture Interface Name if running Centos
+    set_fact:
+      interfaceName: "ansible_eth0"
+    when: "{{ not ansible_bios_version | search('VirtualBox') }}"
+  when: "{{ ansible_distribution | lower == 'centos' }} "
+
+- block:
+
+  - block:
+    - name: Capture Interface Name if running Oracle Linux 7 on Virtualbox
+      set_fact:
+        interfaceName: "ansible_enp0s8"
+      when: "{{ ansible_bios_version | search('VirtualBox') }}"
+
+    - name: Capture Interface Name if running Oracle Linux 7
+      set_fact:
+        interfaceName: "ansible_enp0s3"
+      when: "{{ not ansible_bios_version | search('VirtualBox') }}"
+    when: ansible_distribution_major_version == '7'
+
+  - block:
+    - name: Capture Interface Name if running Oracle Linux 6 on Virtualbox
+      set_fact:
+        interfaceName: "ansible_eth1"
+      when: "{{ ansible_bios_version | search('VirtualBox') }}"
+
+    - name: Capture Interface Name if running Oracle Linux 6
+      set_fact:
+        interfaceName: "ansible_eth0"
+      when: "{{ not ansible_bios_version | search('VirtualBox') }}"
+    when: ansible_distribution_major_version == '6'
+
+  when: ansible_distribution | lower == 'oraclelinux'
+
+- name: Copy migrate_response.txt file
+  template:
+    src: migrate_response.txt.j2
+    dest: '{{ opdk_migrate_response_file_path }}'
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+    mode: 0644
+

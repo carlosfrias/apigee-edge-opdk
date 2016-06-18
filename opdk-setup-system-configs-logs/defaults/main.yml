@@ -1,0 +1,3 @@
+---
+# defaults file for opdk-setup-system-config-logs
+conf_logs_dir: configs_and_logs

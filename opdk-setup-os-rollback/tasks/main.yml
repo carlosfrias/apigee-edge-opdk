@@ -1,0 +1,52 @@
+---
+# tasks file for opdk-setup-rollback-os
+- name: Release any apigee user owned processes
+  shell: 'killall -9 -u apigee'
+  ignore_errors: yes
+
+- name: Clean up other JDKs
+  ignore_errors: yes
+  shell: 'rpm -e $(rpm -qa | egrep "^(java|jdk|jre).*")'
+
+- name: remove yum epel repository
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - epel-release
+  when: ansible_distribution | lower == "centos"
+
+- name: remove yum centos-release-SCL repository
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - centos-release-SCL
+  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "centos"
+
+- name: remove yum epel repository for Oracle Linux 7
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+  - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+  when: ansible_distribution_major_version == "7"
+
+- name: remove yum epel repository for Oracle Linux 6
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+  - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm'
+  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "oraclelinux"
+
+- name: Remove the apigee user
+  user:
+    name: "{{ opdk_user_name }}"
+    state: absent
+    remove: yes
+
+- name: Create the apigee group
+  group:
+    name: "{{ opdk_group_name }}"
+    state: absent

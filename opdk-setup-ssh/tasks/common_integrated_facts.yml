@@ -1,0 +1,13 @@
+---
+- name: Get public address
+  set_fact:
+    public_address: '{{ inventory_hostname }}'
+
+- name: Get local address
+  set_fact:
+    local_address: '{{ ansible_eth0.ipv4.address }}'
+
+- name: Get target local address
+  set_fact:
+    target_local_address: '{{ hostvars[target_host_name][interfaceName].ipv4.address }}'
+  when: hostvars[target_host_name][interfaceName].ipv4.address is defined

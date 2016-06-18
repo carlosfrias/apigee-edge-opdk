@@ -1,0 +1,30 @@
+---
+# tasks file for opdk-setup-bootstrap-rollback
+
+- name: Remove apigee, edge, baas and qpid packages
+  shell: 'rpm -e $(rpm -qa | egrep "(apigee-|edge-|baas-|qpid-|python-qpid|libdb-cxx)")'
+  register: remove_all_apigee_status
+  ignore_errors: yes
+
+- name: Clear all artifacts from YUM repo
+  shell: 'yum clean all'
+  ignore_errors: yes
+
+- name: Set target bootstrap script name for 4.16.01
+  set_fact:
+    bootstrap_script: '{{ opdk_installer_path }}/bootstrap.sh'
+  when: opdk_version == '4.16.01'
+
+- name: Set target bootstrap script name for 4.16.05
+  set_fact:
+    bootstrap_script: '{{ opdk_installer_path }}/bootstrap_4.16.05.sh'
+  when: opdk_version == '4.16.01'
+
+- name: Remove bootstrap script and folders
+  ignore_errors: yes
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+  - '{{ apigee_installation_home }}'
+  - '{{ bootstrap_script }}'

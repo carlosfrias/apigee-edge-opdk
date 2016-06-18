@@ -1,0 +1,12 @@
+---
+- hosts: "{{ hosts }}"
+  tasks:
+  - name: Obtain All Status Report
+    command: ./all-status.sh
+    args:
+      chdir: /opt/apigee4/bin
+    register: all_status_results
+
+  - name: Report All Status Results
+    debug:
+      var: all_status_results

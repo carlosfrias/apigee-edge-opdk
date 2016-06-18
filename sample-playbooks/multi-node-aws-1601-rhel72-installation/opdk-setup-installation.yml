@@ -1,0 +1,14 @@
+---
+# Prime each target server with the correct setup
+- include: facts.yml
+
+- include: opdk-setup-os.yml
+
+- include: opdk-setup-openjdk.yml
+
+- include: opdk-setup-bootstrap.yml
+
+- include: opdk-setup-component-installer.yml
+
+- include: opdk-setup-install-components.yml
+

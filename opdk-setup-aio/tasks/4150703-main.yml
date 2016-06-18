@@ -1,0 +1,70 @@
+---
+- name: MS exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/apigee/management-server'
+  register: ms
+
+- name: MP exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/apigee/message-processor'
+  register: mp
+
+- name: PS exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/apigee/postgres-server'
+  register: ps
+
+- name: QS exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/apigee/qpid-server'
+  register: qs
+
+- name: Router exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/apigee/router'
+  register: router
+
+- name: Cassandra exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/cassandra'
+  register: cas
+
+- name: Ldap exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/openldap'
+  register: ldap
+
+- name: Qpid exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/qpid'
+  register: qpid
+
+- name: UI exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/ui'
+  register: ui
+
+- name: ZK exists
+  stat:
+    path: '{{ apigee_installation_home }}/conf/zookeeper'
+  register: zk
+
+- name: Install aio?
+  set_fact:
+    install_aio: '{{ ms.stat.exists and mp.stat.exists and ps.stat.exists and qs.stat.exists and router.stat.exists and cas.stat.exists and ldap.stat.exists and qpid.stat.exists and ui.stat.exists and zk.stat.exists }}'
+
+- name: Report aio installation status
+  debug:
+    msg: "Is AIO installed? {{ install_aio }}"
+
+- block:
+  - name: Setup of aio profile
+    shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p aio"
+    ignore_errors: yes
+    register: aio_install_results
+
+  - name: AIO Install Report
+    debug:
+      var: aio_install_results
+
+  when: not install_aio

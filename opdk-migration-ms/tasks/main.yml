@@ -1,0 +1,4 @@
+---
+# tasks file for opdk-migration-ms
+- name: Perform migration
+  shell: '{{ apigee_migrate }} -c ms -f {{ opdk_migrate_response_file_path }}'

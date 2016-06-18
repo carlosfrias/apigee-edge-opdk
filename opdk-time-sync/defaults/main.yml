@@ -1,0 +1,10 @@
+---
+# defaults file for apigee-time-sync
+timezone: /usr/share/zoneinfo/America/New_York
+
+# Uncomment preferred_server_ip to set a local ntp server
+preferred_server_ip: 128.138.141.172
+
+drift_filename: /var/lib/ntp/drift
+stats_dir: /var/log/ntpstats
+ntp_conf: /etc/ntp.conf

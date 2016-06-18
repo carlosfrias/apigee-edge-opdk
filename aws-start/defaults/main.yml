@@ -1,0 +1,8 @@
+---
+# defaults file for aws-start
+aws_access_key: ''
+aws_secret_key: ''
+aws_region: 'us-east-1'
+vpc_subnet_id: subnet-3fbcb64b
+aws_zone: '{{ aws_region }}d'
+key_name: cfrias

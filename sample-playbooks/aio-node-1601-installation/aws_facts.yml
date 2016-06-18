@@ -1,0 +1,6 @@
+---
+- hosts: '{{ hosts }}'
+  strategy: free
+  tasks:
+  - setup:
+  - ec2_facts:

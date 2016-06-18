@@ -1,0 +1,62 @@
+---
+# tasks file for opdk-setup-hostfile
+
+- include: network-interface-name.yml
+
+- include: common_integrated_facts.yml
+
+- include: aws_integrated_facts.yml
+
+- name: Ensure hostname -i works with IP address, not loop back
+  lineinfile:
+    dest: /etc/hosts
+    state: present
+    regexp: '^(127.0.0.1\s*){{ ansible_nodename }}\s+(.*)$'
+    line: '\1\2'
+    backrefs: yes
+    backup: yes
+
+- block:
+  - name: Remove existing host names IP to prep for a refresh
+    lineinfile:
+      dest: "{{ apigee_hostfile_path }}"
+      state: absent
+      regexp: "^{{ hostvars[item][interface_name].ipv4.address }}"
+      backup: yes
+    with_items: "{{ groups['dc-1'] }}"
+    when: "{{ groups['dc-1'] is defined }}"
+
+  - name: Add missing host ip and host names to /etc/hosts
+    lineinfile:
+      dest: "{{ apigee_hostfile_path }}"
+      regexp: '^{{ hostvars[item][interface_name].ipv4.address }}\s*{{ item }}\s*$'
+      line: "{{ hostvars[item][interface_name].ipv4.address }} {{ item }}"
+      state: present
+      create: yes
+      backup: yes
+    with_items: "{{ groups['dc-1'] }}"
+    when: "{{ groups['dc-1'] is defined }}"
+  when: "{{ groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] }}"
+
+- block:
+  - name: Remove existing host names IP to prep for a refresh
+    lineinfile:
+      dest: "{{ apigee_hostfile_path }}"
+      state: absent
+      regexp: "^{{ hostvars[item][interface_name].ipv4.address }}"
+      backup: yes
+    with_items: "{{ groups['dc-2'] }}"
+    when: "{{ groups['dc-2'] is defined }}"
+
+  - name: Add missing host ip and host names to /etc/hosts
+    lineinfile:
+      dest: "{{ apigee_hostfile_path }}"
+      regexp: '^{{ hostvars[item][interface_name].ipv4.address }}\s*{{ item }}\s*$'
+      line: "{{ hostvars[item][interface_name].ipv4.address }} {{ item }}"
+      state: present
+      create: yes
+      backup: yes
+    with_items: "{{ groups['dc-2'] }}"
+    when: "{{ groups['dc-2'] is defined }}"
+
+  when: "{{ groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] }}"

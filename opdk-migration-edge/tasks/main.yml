@@ -1,0 +1,4 @@
+---
+# tasks file for opdk-migration-edge
+- name: Perform migration
+  shell: '{{ apigee_migrate_cmd }} -c edge -f {{ opdk_migrate_response_file_path }}'

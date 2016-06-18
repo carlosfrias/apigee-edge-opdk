@@ -1,0 +1,8 @@
+---
+# defaults file for opdk-setup-demote-apigee-setup
+apigee_installation_path_prefix: /opt
+apigee_installation_dir: apigee
+apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+apigee_setup: '{{ apigee_installation_home }}/apigee-setup/bin/setup.sh'
+opdk_group_name: "{{ opdk_user_name }}"
+opdk_user_name: apigee

@@ -1,0 +1,19 @@
+---
+# tasks file for opdk-setup-checkout-binaries
+- name: Create opdk staging folder
+  when: opdk_version == '4.15.07.03'
+  file:
+    path: "{{ opdk_staging_path_prefix }}"
+    state: directory
+    group: '{{ opdk_group_name }}'
+    owner: '{{ opdk_user_name }}'
+    mode: 0755
+
+- name: Download opdk binaries from ftp.apigee.com
+  unarchive:
+    src: '{{ opdk_download_uri }}'
+    dest: '{{ opdk_staging_path_prefix }}'
+    copy: no
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+

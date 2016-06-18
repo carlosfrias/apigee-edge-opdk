@@ -1,0 +1,83 @@
+---
+- name: Checking for Management Server Port
+  register: ms_http_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ ms_http_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Checking for Management Server JMX Port
+  register: ms_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ ms_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Checking for UI Port
+  register: ui_http_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ ui_http_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Checking for Proxy Port
+  register: edge_proxy_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ edge_proxy_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- block:
+  - name: Setup Management Server
+    shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p ms"
+    when: ms_http_port_status | failed or ms_jmx_port_status | failed or ui_http_port_status | failed
+    register: ms_results
+
+  always:
+    - name: Setup management server status report
+      debug:
+        var: ms_results
+
+- name: Confirm Management Server Port
+  register: ms_http_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ ms_http_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Confirm Management Server JMX Port
+  register: ms_jmx_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ ms_jmx_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Confirm UI Port
+  register: ui_http_port_status
+  ignore_errors: true
+  wait_for:
+    port: '{{ ui_http_port }}'
+    host: '{{ ansible_hostname }}'
+    timeout: 1
+
+- name: Management server startup failed
+  ignore_errors: true
+  fail:
+    msg: "Management server failed to start"
+  when: ms_http_port_status | failed or not ms_http_port_status.state == 'started'
+
+- name: Management JMX server startup failed
+  fail:
+    msg: "JMX management server failed to start"
+  when: ms_jmx_port_status | failed or not ms_jmx_port_status.state == 'started'
+
+- name: UI startup failed
+  fail:
+    msg: "UI failed to start"
+  when: ui_http_port_status | failed or not ui_http_port_status.state == 'started'

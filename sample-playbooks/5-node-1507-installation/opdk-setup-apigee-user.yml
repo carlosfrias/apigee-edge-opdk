@@ -1,0 +1,8 @@
+---
+- hosts: dc-1
+  become: true
+  roles:
+  - opdk-setup-apigee-user
+  tags:
+  - user
+

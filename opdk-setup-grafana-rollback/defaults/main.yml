@@ -1,0 +1,5 @@
+---
+# defaults file for opdk-setup-grafana-rollback
+grafana_init_file: /etc/grafana/grafana.ini
+grafana_user_name: grafana
+grafana_user_pass: Apigee123!

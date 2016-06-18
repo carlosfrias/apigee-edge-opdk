@@ -1,0 +1,37 @@
+cassandra_cf_store     pending_tasks:GAUGE:0:2147483648, memtbl_col_cnt:GAUGE:0:U, memtbl_data_size:GAUGE:0:U, memtbl_switch_cnt:COUNTER:0:U, read_cnt:COUNTER:0:U, rcnt_rd_latency:GAUGE:0:2147483648, tot_rd_latency:COUNTER:0:U, write_cnt:COUNTER:0:U, rcnt_wr_latency:GAUGE:0:2147483648, tot_wr_latency:COUNTER:0:U, disk_used_total:GAUGE:0:U, disk_used_live:GAUGE:0:U, ss_table_count:GAUGE:0:1000000, bloom_false_pos:COUNTER:0:U, bloom_rcnt_f_ratio:GAUGE:0:1, bloom_false_ratio:GAUGE:0:1
+cassandra_cf_store     pending_tasks:GAUGE:0:2147483648, memtbl_col_cnt:GAUGE:0:U, memtbl_data_size:GAUGE:0:U, memtbl_switch_cnt:COUNTER:0:U, read_cnt:COUNTER:0:U, rcnt_rd_latency:GAUGE:0:2147483648, tot_rd_latency:COUNTER:0:U, write_cnt:COUNTER:0:U, rcnt_wr_latency:GAUGE:0:2147483648, tot_wr_latency:COUNTER:0:U, disk_used_total:GAUGE:0:U, disk_used_live:GAUGE:0:U, ss_table_count:GAUGE:0:1000000, bloom_false_pos:COUNTER:0:U, bloom_rcnt_f_ratio:GAUGE:0:1, bloom_false_ratio:GAUGE:0:1
+c_pending_tasks       value:GAUGE:0:2147483648
+c_memtbl_column_count      value:GAUGE:0:U 
+c_memtbl_data_size    value:GAUGE:0:U
+c_memtbl_switch_count   value:COUNTER:0:U 
+c_read_count            value:COUNTER:0:U 
+c_rcnt_read_latency     value:GAUGE:0:2147483648 
+c_tot_read_latency      value:COUNTER:0:U 
+c_write_count           value:COUNTER:0:U 
+c_rcnt_wr_latency     value:GAUGE:0:2147483648 
+c_tot_wr_latency      value:COUNTER:0:U 
+c_disk_used_total     value:GAUGE:0:U 
+c_disk_used_live      value:GAUGE:0:U 
+c_ss_table_count      value:GAUGE:0:1000000 
+c_bloom_false_pos     value:COUNTER:0:U 
+c_bloom_rcnt_f_ratio  value:GAUGE:0:1 
+c_bloom_false_ratio   value:GAUGE:0:1
+c_core_pool_size      value:GAUGE:0:U
+c_totl_blockd_tasks   value:GAUGE:0:U
+c_curr_blockd_tasks   value:GAUGE:0:U
+c_active_count        value:GAUGE:0:U
+c_pending_tasks       value:GAUGE:0:U
+c_completed_tasks     value:GAUGE:0:U
+jmx_memory            value:GAUGE:0:U
+gateway               value:GAUGE:0:U
+s_usergrid_authentication_success_count		value:COUNTER:0:U
+s_usergrid_authentication_failure_count		value:COUNTER:0:U
+s_user_auth_success_count	value:COUNTER:0:U
+s_user_auth_fail_count		value:COUNTER:0:U
+s_user_invalid_cred_format_count	value:COUNTER:0:U
+s_external_ipd_comm_failure_count	value:COUNTER:0:U
+if_interface          rx:DERIVE:0:U, tx:DERIVE:0:U, rx_err:DERIVE:0:U, tx_err:DERIVE:0:U
+phymem                value:GAUGE:0:U
+disk                  value:GAUGE:0:U
+disk_io_time          io_time:DERIVE:0:U, weighted_io_time:DERIVE:0:U
+pending_operations    value:GAUGE:0:U

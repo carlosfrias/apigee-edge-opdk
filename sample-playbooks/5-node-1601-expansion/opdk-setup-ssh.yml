@@ -1,0 +1,14 @@
+---
+- hosts: dc-1-pgmaster
+  serial: 1
+  vars:
+    target_host_name: "{{ hostvars[inventory_hostname]['groups']['dc-2-pgstandby'][0] }}"
+  roles:
+  - opdk-setup-ssh
+
+- hosts: dc-2-pgstandby
+  serial: 1
+  vars:
+    target_host_name: "{{ hostvars[inventory_hostname]['groups']['dc-1-pgmaster'][0] }}"
+  roles:
+  - opdk-setup-ssh
