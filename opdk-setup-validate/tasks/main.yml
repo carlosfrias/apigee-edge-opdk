@@ -15,6 +15,6 @@
       '(?i)Press a key:': '\n'
   register: status
 
-- name: Validate OPDK Installation REport
+- name: Validate OPDK Installation Report
   debug:
     var: status

@@ -12,6 +12,10 @@
 
 - include: opdk-setup-install-components.yml
 
+- include: opdk-setup-startup.yml
+
+- include: opdk-setup-validate.yml
+
 - include: opdk-setup-org.yml
 
 - include: opdk-setup-status.yml

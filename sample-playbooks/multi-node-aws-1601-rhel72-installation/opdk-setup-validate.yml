@@ -2,10 +2,18 @@
 
 - include: facts.yml
 
-- hosts: rmp
+- hosts: ms
   vars_files:
   - opdk-setup-settings.yml
   roles:
   - opdk-setup-validate
   tags:
   - validate
+
+- hosts: ms
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-validate-cleanup
+  tags:
+  - validate-cleanup
