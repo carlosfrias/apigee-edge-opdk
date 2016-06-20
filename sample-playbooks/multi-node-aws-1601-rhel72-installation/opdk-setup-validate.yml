@@ -2,7 +2,7 @@
 
 - include: facts.yml
 
-- hosts: ms
+- hosts: rmp
   vars_files:
   - opdk-setup-settings.yml
   roles:
@@ -10,7 +10,7 @@
   tags:
   - validate
 
-- hosts: ms
+- hosts: rmp
   vars_files:
   - opdk-setup-settings.yml
   roles:
