@@ -26,4 +26,3 @@ edge_proxy_port: 9001
 apigee_setup_16: '{{ apigee_installation_home }}/apigee-setup/bin/setup.sh'
 
 apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
-apigee_adminapi_cmd: 'bash {{ apigee_service }} apigee-adminapi install'

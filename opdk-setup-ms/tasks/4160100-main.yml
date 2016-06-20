@@ -1,6 +1,3 @@
 ---
 - name: Install Apigee Management Server
   shell: '{{ apigee_setup_16 }} -p ms -f {{ opdk_response_file_path }}'
-
-- name: Install Apigee adminapi
-  shell: '{{ apigee_adminapi_cmd }}'
