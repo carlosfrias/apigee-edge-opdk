@@ -42,6 +42,10 @@ prd-rbl-cas-w2-i-43d21398 ansible_host=10.65.194.158
 prd-rbl-cas-w2-i-f3d31228 ansible_host=10.65.194.133
 prd-rbl-cas-w2-i-f4d3122f ansible_host=10.65.194.132
 
+[ms:children]
+dc-1-ms
+dc-2-ms
+
 [dc-1-ms]
 prd-rbl-app-w2-i-0a24c3a5
 
