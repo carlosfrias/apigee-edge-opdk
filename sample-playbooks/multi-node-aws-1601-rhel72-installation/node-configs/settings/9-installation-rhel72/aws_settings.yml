@@ -1,6 +1,4 @@
 ---
-centos: ami-6374af08 # centos 7.2
-oraclelinux: ami-e9c98683 # oracle linux 6.7
 rhel: ami-2051294a # rhel 7.2
 image_id: '{{ rhel }}'
 instance_type: 't2.medium'

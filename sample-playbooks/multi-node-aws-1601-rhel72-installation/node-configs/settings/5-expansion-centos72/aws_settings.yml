@@ -1,5 +1,5 @@
 ---
-centos: ami-6374af08 # centos 7.2
+centos: ami-6374af08
 image_id: '{{ centos }}'
 instance_type: 't2.medium'
 key_name: cfrias

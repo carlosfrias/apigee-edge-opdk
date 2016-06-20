@@ -10,6 +10,7 @@
     wait_for:
       port: 22
       timeout: 300
+      delay: 30
 
   - name: Build EC2 facts cache
     ec2_facts:
