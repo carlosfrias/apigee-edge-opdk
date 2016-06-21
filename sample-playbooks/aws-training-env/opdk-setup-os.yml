@@ -5,6 +5,19 @@
   vars_files:
   - opdk-setup-settings.yml
   roles:
+  - opdk-setup-aws
+  tags:
+  - apigee
+  - os
+  - aws
+  - common
+
+- hosts: planet
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
   - opdk-setup-selinux-disable
   - opdk-shutdown-iptables
   - opdk-time-sync
