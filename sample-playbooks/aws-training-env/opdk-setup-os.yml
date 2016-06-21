@@ -9,8 +9,8 @@
   - opdk-shutdown-iptables
   - opdk-time-sync
   - opdk-setup-hostfile
+  - opdk-setup-os-minimum
   - opdk-setup-os-common
-  - opdk-setup-os-common-extra
   tags:
   - os
   - common

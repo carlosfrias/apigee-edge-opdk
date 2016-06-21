@@ -5,5 +5,5 @@
   - opdk-setup-settings.yml
   roles:
   - opdk-setup-bootstrap-rollback
-  - opdk-setup-os-common-rollback
+  - opdk-setup-os-rollback
 

@@ -42,24 +42,46 @@ prd-rbl-cas-w2-i-43d21398 ansible_host=10.65.194.158
 prd-rbl-cas-w2-i-f3d31228 ansible_host=10.65.194.133
 prd-rbl-cas-w2-i-f4d3122f ansible_host=10.65.194.132
 
+[ms:children]
+dc-1-ms
+dc-2-ms
+
 [dc-1-ms]
 prd-rbl-app-w2-i-0a24c3a5
+
+[ds:children]
+dc-1-ds
+dc-2-ds
 
 [dc-1-ds]
 prd-rbl-cas-w2-i-c223c46d
 prd-rbl-cas-w2-i-dc23c473
 prd-rbl-cas-w2-i-dd23c472
 
+[rmp:children]
+dc-1-rmp
+dc-2-rmp
+
 [dc-1-rmp]
 prd-rbl-api-w2-i-0424c3ab
 prd-rbl-api-w2-i-0524c3aa
 prd-rbl-api-w2-i-0724c3a8
 
+[pg:children]
+dc-1-pgmaster
+dc-2-pgmaster
+dc-1-pgstandby
+dc-2-pgstandby
+
 [dc-1-pgmaster]
-prd-rbl-sql-w2a-t
+prd-rbl-fsf-w2a-t
 
 [dc-1-pgstandby]
-prd-rbl-fsf-w2a-t
+prd-rbl-sql-w2a-t
+
+[qpid:children]
+dc-1-qpid
+dc-2-qpid
 
 [dc-1-qpid]
 prd-rbl-app-w2-i-0024c3af
@@ -98,8 +120,8 @@ prd-rbl-sql-w2b-t
 prd-rbl-fsf-w2b-t
 
 [dc-2-pg]
-prd-rbl-app-w2-i-ced01115
-prd-rbl-app-w2-i-cfd01114
+prd-rbl-sql-w2b-t
+#prd-rbl-fsf-w2b-t
 
 [dc-2-qpid]
 prd-rbl-app-w2-i-ced01115

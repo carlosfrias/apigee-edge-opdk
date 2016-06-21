@@ -1,6 +1,6 @@
 ---
 
-- hosts: dc-1
+- hosts: planet
   gather_facts: yes
   vars_files:
   - opdk-setup-settings.yml
@@ -10,12 +10,12 @@
   - silent-file
   - common
 
-- hosts: dc-1
+- hosts: planet
   gather_facts: yes
   vars_files:
   - opdk-setup-settings.yml
   roles:
-  - opdk-setup-installer
+  - opdk-setup-component-installer
   tags:
   - installer
   - common
