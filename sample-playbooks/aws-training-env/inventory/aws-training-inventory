@@ -121,7 +121,7 @@ prd-rbl-fsf-w2b-t
 
 [dc-2-pg]
 prd-rbl-sql-w2b-t
-#prd-rbl-fsf-w2b-t
+prd-rbl-fsf-w2b-t
 
 [dc-2-qpid]
 prd-rbl-app-w2-i-ced01115
