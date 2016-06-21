@@ -9,7 +9,7 @@ vpc_subnet_id: subnet-3fbcb64b
 wait: yes
 assign_public_ip: yes
 name_prefix: cfrias
-session_name: 1601-5-ol67-expansion-1
+session_name: 1601-ol67-installation-3
 application: edge
 bag: infrastructure
 department: 45

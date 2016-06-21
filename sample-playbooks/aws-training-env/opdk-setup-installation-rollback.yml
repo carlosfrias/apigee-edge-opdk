@@ -6,4 +6,3 @@
   roles:
   - opdk-setup-bootstrap-rollback
   - opdk-setup-os-rollback
-

@@ -9,6 +9,7 @@
   - { dir: '/etc', name: 'resolv.conf' }
   - { dir: '/var/log', name: 'messages' }
   - { dir: '/etc', name: 'sysctl.conf' }
+  - { dir: '/etc', name: 'sudoers' }
   - { dir: '/etc/security', name: 'limits.conf' }
   - { dir: '/etc/security/limits.d', name: '*conf' }
   ignore_errors: yes
@@ -60,4 +61,11 @@
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[6].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[7].stdout_lines }}'
   ignore_errors: yes

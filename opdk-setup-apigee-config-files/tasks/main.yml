@@ -5,6 +5,7 @@
   register: logs
   with_items:
   - { dir: '{{ apigee_installation_home }}', name: 'apigee-env.sh' }
+  - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
   - { dir: '{{ apigee_installation_home }}', name: '*cfg' }
   - { dir: '{{ apigee_installation_home }}', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
@@ -43,5 +44,12 @@
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[4].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download Installation Logs *yaml
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[5].stdout_lines }}'
   ignore_errors: yes
 
