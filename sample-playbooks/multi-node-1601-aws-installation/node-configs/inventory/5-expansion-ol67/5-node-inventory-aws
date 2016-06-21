@@ -1,48 +1,48 @@
-[tag_Name_cfrias_1601_ol67_installation_1_n1]
-[tag_Name_cfrias_1601_ol67_installation_1_n2]
-[tag_Name_cfrias_1601_ol67_installation_1_n3]
-[tag_Name_cfrias_1601_ol67_installation_1_n4]
-[tag_Name_cfrias_1601_ol67_installation_1_n5]
-[tag_Name_cfrias_1601_ol67_installation_3_n1]
-[tag_Name_cfrias_1601_ol67_installation_3_n2]
-[tag_Name_cfrias_1601_ol67_installation_3_n3]
-[tag_Name_cfrias_1601_ol67_installation_3_n4]
-[tag_Name_cfrias_1601_ol67_installation_3_n5]
+[tag_Name_cfrias_1601_centos72_1_n1]
+[tag_Name_cfrias_1601_centos72_1_n2]
+[tag_Name_cfrias_1601_centos72_1_n3]
+[tag_Name_cfrias_1601_centos72_1_n4]
+[tag_Name_cfrias_1601_centos72_1_n5]
+[tag_Name_cfrias_1601_centos72_3_n1]
+[tag_Name_cfrias_1601_centos72_3_n2]
+[tag_Name_cfrias_1601_centos72_3_n3]
+[tag_Name_cfrias_1601_centos72_3_n4]
+[tag_Name_cfrias_1601_centos72_3_n5]
 
 
-[tag_Name_cfrias_1601_ol67_installation_1_n1:vars]
+[tag_Name_cfrias_1601_centos72_1_n1:vars]
 rack=:1,1
 
-[tag_Name_cfrias_1601_ol67_installation_1_n2:vars]
+[tag_Name_cfrias_1601_centos72_1_n2:vars]
 rack=:1,1
 
-[tag_Name_cfrias_1601_ol67_installation_1_n3:vars]
+[tag_Name_cfrias_1601_centos72_1_n3:vars]
 zk_observer=true
 rack=:1,1
 
-[tag_Name_cfrias_1601_ol67_installation_3_n1:vars]
+[tag_Name_cfrias_1601_centos72_3_n1:vars]
 rack=:2,1
 
-[tag_Name_cfrias_1601_ol67_installation_3_n2:vars]
+[tag_Name_cfrias_1601_centos72_3_n2:vars]
 rack=:2,1
 
-[tag_Name_cfrias_1601_ol67_installation_3_n3:vars]
+[tag_Name_cfrias_1601_centos72_3_n3:vars]
 rack=:2,1
 
 
 [dc-1:children]
-tag_Name_cfrias_1601_ol67_installation_1_n1
-tag_Name_cfrias_1601_ol67_installation_1_n2
-tag_Name_cfrias_1601_ol67_installation_1_n3
-tag_Name_cfrias_1601_ol67_installation_1_n4
-tag_Name_cfrias_1601_ol67_installation_1_n5
+tag_Name_cfrias_1601_centos72_1_n1
+tag_Name_cfrias_1601_centos72_1_n2
+tag_Name_cfrias_1601_centos72_1_n3
+tag_Name_cfrias_1601_centos72_1_n4
+tag_Name_cfrias_1601_centos72_1_n5
 
 [dc-2:children]
-tag_Name_cfrias_1601_ol67_installation_3_n1
-tag_Name_cfrias_1601_ol67_installation_3_n2
-tag_Name_cfrias_1601_ol67_installation_3_n3
-tag_Name_cfrias_1601_ol67_installation_3_n4
-tag_Name_cfrias_1601_ol67_installation_3_n5
+tag_Name_cfrias_1601_centos72_3_n1
+tag_Name_cfrias_1601_centos72_3_n2
+tag_Name_cfrias_1601_centos72_3_n3
+tag_Name_cfrias_1601_centos72_3_n4
+tag_Name_cfrias_1601_centos72_3_n5
 
 
 [planet:children]
@@ -55,14 +55,14 @@ dc-1-ds
 dc-2-ds
 
 [dc-1-ds:children]
-tag_Name_cfrias_1601_ol67_installation_1_n1
-tag_Name_cfrias_1601_ol67_installation_1_n2
-tag_Name_cfrias_1601_ol67_installation_1_n3
+tag_Name_cfrias_1601_centos72_1_n1
+tag_Name_cfrias_1601_centos72_1_n2
+tag_Name_cfrias_1601_centos72_1_n3
 
 [dc-2-ds:children]
-tag_Name_cfrias_1601_ol67_installation_3_n1
-tag_Name_cfrias_1601_ol67_installation_3_n2
-tag_Name_cfrias_1601_ol67_installation_3_n3
+tag_Name_cfrias_1601_centos72_3_n1
+tag_Name_cfrias_1601_centos72_3_n2
+tag_Name_cfrias_1601_centos72_3_n3
 
 
 [ldap:children]
@@ -70,10 +70,10 @@ dc-1-ldap
 dc-2-ldap
 
 [dc-1-ldap:children]
-tag_Name_cfrias_1601_ol67_installation_1_n1
+tag_Name_cfrias_1601_centos72_1_n1
 
 [dc-2-ldap:children]
-tag_Name_cfrias_1601_ol67_installation_3_n1
+tag_Name_cfrias_1601_centos72_3_n1
 
 
 [ms:children]
@@ -81,10 +81,10 @@ dc-1-ms
 dc-2-ms
 
 [dc-1-ms:children]
-tag_Name_cfrias_1601_ol67_installation_1_n1
+tag_Name_cfrias_1601_centos72_1_n1
 
 [dc-2-ms:children]
-tag_Name_cfrias_1601_ol67_installation_3_n1
+tag_Name_cfrias_1601_centos72_3_n1
 
 
 [mp:children]
@@ -92,12 +92,12 @@ dc-1-mp
 dc-2-mp
 
 [dc-1-mp:children]
-tag_Name_cfrias_1601_ol67_installation_1_n2
-tag_Name_cfrias_1601_ol67_installation_1_n3
+tag_Name_cfrias_1601_centos72_1_n2
+tag_Name_cfrias_1601_centos72_1_n3
 
 [dc-2-mp:children]
-tag_Name_cfrias_1601_ol67_installation_3_n2
-tag_Name_cfrias_1601_ol67_installation_3_n3
+tag_Name_cfrias_1601_centos72_3_n2
+tag_Name_cfrias_1601_centos72_3_n3
 
 
 [rmp:children]
@@ -105,12 +105,12 @@ dc-1-rmp
 dc-2-rmp
 
 [dc-1-rmp:children]
-tag_Name_cfrias_1601_ol67_installation_1_n2
-tag_Name_cfrias_1601_ol67_installation_1_n3
+tag_Name_cfrias_1601_centos72_1_n2
+tag_Name_cfrias_1601_centos72_1_n3
 
 [dc-2-rmp:children]
-tag_Name_cfrias_1601_ol67_installation_3_n2
-tag_Name_cfrias_1601_ol67_installation_3_n3
+tag_Name_cfrias_1601_centos72_3_n2
+tag_Name_cfrias_1601_centos72_3_n3
 
 
 [router:children]
@@ -118,12 +118,12 @@ dc-1-router
 dc-2-router
 
 [dc-1-router:children]
-tag_Name_cfrias_1601_ol67_installation_1_n2
-tag_Name_cfrias_1601_ol67_installation_1_n3
+tag_Name_cfrias_1601_centos72_1_n2
+tag_Name_cfrias_1601_centos72_1_n3
 
 [dc-2-router:children]
-tag_Name_cfrias_1601_ol67_installation_3_n2
-tag_Name_cfrias_1601_ol67_installation_3_n3
+tag_Name_cfrias_1601_centos72_3_n2
+tag_Name_cfrias_1601_centos72_3_n3
 
 
 [qpid:children]
@@ -131,10 +131,10 @@ dc-1-qpid
 dc-2-qpid
 
 [dc-1-qpid:children]
-tag_Name_cfrias_1601_ol67_installation_1_n5
+tag_Name_cfrias_1601_centos72_1_n5
 
 [dc-2-qpid:children]
-tag_Name_cfrias_1601_ol67_installation_3_n5
+tag_Name_cfrias_1601_centos72_3_n5
 
 [pg:children]
 dc-1-pg
@@ -150,13 +150,13 @@ pgstandby
 dc-1-pgmaster
 
 [dc-1-pgmaster:children]
-tag_Name_cfrias_1601_ol67_installation_1_n4
+tag_Name_cfrias_1601_centos72_1_n4
 
 [pgstandby:children]
 dc-2-pgstandby
 
 [dc-2-pgstandby:children]
-tag_Name_cfrias_1601_ol67_installation_3_n5
+tag_Name_cfrias_1601_centos72_3_n5
 
 [dc-1-pgstandby:children]
-tag_Name_cfrias_1601_ol67_installation_1_n5
+tag_Name_cfrias_1601_centos72_1_n5
