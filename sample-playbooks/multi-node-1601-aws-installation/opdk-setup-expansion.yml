@@ -11,8 +11,7 @@
 
 - include: opdk-setup-component-installer.yml
   vars:
-    hosts: 'dc-2'
-
+    hosts: 'planet'
 
 - include: opdk-setup-ds.yml
   vars:
