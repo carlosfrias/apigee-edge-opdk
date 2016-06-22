@@ -5,12 +5,32 @@
 - include: opdk-setup-os.yml
 
 - include: opdk-setup-openjdk.yml
+  vars:
+    hosts: 'dc-1'
 
 - include: opdk-setup-bootstrap.yml
+  vars:
+    hosts: 'dc-1'
 
 - include: opdk-setup-component-installer.yml
+  vars:
+    hosts: 'dc-1'
 
-- include: opdk-setup-install-components.yml
+- include: opdk-setup-ds.yml
+  vars:
+    hosts: 'dc-1-ds'
+
+- include: opdk-setup-ms.yml
+  vars:
+    hosts: 'dc-1-ds'
+
+- include: opdk-setup-rmp.yml
+  vars:
+    hosts: 'dc-1-rmp'
+
+- include: opdk-setup-postgres.yml
+  vars:
+    hosts: 'dc-1-pg'
 
 - include: opdk-setup-startup.yml
 
