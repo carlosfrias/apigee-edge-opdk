@@ -70,10 +70,11 @@ tag_Name_cfrias_1601_rhel72_3_n3
 rack=:2,1
 
 [tag_Name_cfrias_1601_rhel72_3_n2:vars]
-rack=2,1
+rack=:2,1
 
 [tag_Name_cfrias_1601_rhel72_3_n3:vars]
-rack=2,1
+rack=:2,1
+zk_observer=true
 
 [ms:children]
 dc-1-ms
