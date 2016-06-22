@@ -19,7 +19,7 @@
 
 - include: opdk-setup-ms.yml
   vars:
-    hosts: 'dc-2-ds'
+    hosts: 'dc-2-ms'
 
 - include: opdk-setup-rmp.yml
   vars:
