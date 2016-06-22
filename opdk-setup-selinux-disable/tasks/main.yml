@@ -8,7 +8,11 @@
     backrefs: yes
     backup: yes
 
+- name: Obtain status of selinux
+  shell: sestatus
+  register: status
+
 - name: Temporarily disable selinux on redhat OS families version 7
   shell: setenforce 0
-  when: ansible_os_family | lower == 'redhat' and ansible_distribution_major_version == "7"
+  when: "ansible_os_family | lower == 'redhat' and ansible_distribution_major_version == '7' and 'enabled' in status.stdout"
 
