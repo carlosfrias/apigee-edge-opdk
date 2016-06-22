@@ -37,5 +37,5 @@
   register: results
   env:
     JAVA_HOME: '{{ java_home }}'
-  failed_when: "{{ results.rc > 0 }}"
+  failed_when: results.rc > 0 or results | failed
 
