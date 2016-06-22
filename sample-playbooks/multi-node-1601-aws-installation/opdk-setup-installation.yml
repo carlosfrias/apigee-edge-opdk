@@ -6,15 +6,15 @@
 
 - include: opdk-setup-openjdk.yml
   vars:
-    hosts: 'planet'
+    hosts: 'dc-1'
 
 - include: opdk-setup-bootstrap.yml
   vars:
-    hosts: 'planet'
+    hosts: 'dc-1'
 
 - include: opdk-setup-component-installer.yml
   vars:
-    hosts: 'planet'
+    hosts: 'dc-1'
 
 - include: opdk-setup-ds.yml
   vars:
