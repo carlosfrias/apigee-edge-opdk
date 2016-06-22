@@ -5,7 +5,7 @@
   register: logs
   with_items:
   - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
-  - { dir: '{{ apigee_installation_home }}', name: '*log*' }
+  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*log*' }
   - { dir: '/tmp', name: '*log' }
   - { dir: '{{ apigee_installation_home }}', name: '*out' }
   ignore_errors: yes

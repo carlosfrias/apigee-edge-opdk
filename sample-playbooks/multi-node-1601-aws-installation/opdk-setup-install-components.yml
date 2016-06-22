@@ -1,9 +1,0 @@
----
-- include: opdk-setup-ds.yml
-
-- include: opdk-setup-ms.yml
-
-- include: opdk-setup-rmp.yml
-
-- include: opdk-setup-postgres.yml
-
