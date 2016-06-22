@@ -88,6 +88,20 @@
   strategy: free
   vars_files:
   - opdk-setup-settings.yml
+  tasks:
+  - name: Ensure libdb-cxx is installed
+    yum:
+      name: '{{ libdb_cxx }}'
+      state: present
+  tags:
+  - os-sax
+  - common
+
+- hosts: pg
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
   roles:
   - opdk-setup-os-postgres
   tags:
