@@ -56,6 +56,9 @@ apigee_repo_uri: 'software.apigee.com'
 # Apigee bootstrap script location
 bootstrap_script: '{{ opdk_installer_path }}/bootstrap.sh'
 
+# Apigee archive that is created when a mirror is used.
+archive_name: apigee-{{ opdk_version }}.tar.gz
+
 # Apigee Edge Ports
 ms_jmx_port: 1099
 ms_http_port: 8080
