@@ -1,4 +1,3 @@
 ---
 # defaults file for opdk-setup-jdk
-jdk_version: '1.7'
-open_jdk_path: /usr/lib/jvm/java-openjdk
+

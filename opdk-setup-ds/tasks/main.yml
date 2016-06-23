@@ -6,8 +6,12 @@
 - include: '4150703-main.yml'
   when: opdk_version == '4.15.07.03'
 
-- include: '4160100-main.yml'
+- name: Apigee DS installation
+  shell: '{{ apigee_setup_16 }} -p ds -f {{ opdk_response_file_path }}'
   when: opdk_version == '4.16.01'
 
-- include: '4160500-main.yml'
+- name: Apigee DS installation
+  shell: '{{ apigee_setup }} -p ds -f {{ opdk_response_file_path }}'
+  async: 5
+  poll: 0
   when: opdk_version == '4.16.05'

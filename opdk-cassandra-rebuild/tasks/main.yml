@@ -5,5 +5,15 @@
 
 - include: aws_integrated_facts.yml
 
+- name: Determine OPDK region of this node
+  set_fact:
+    opdk_region: 'dc-1'
+  when: "{{ inventory_hostname in groups['dc-1'] }}"
+
+- name: Determine OPDK region of this node
+  set_fact:
+    opdk_region: 'dc-2'
+  when: "{{ inventory_hostname in groups['dc-2'] }}"
+
 - name: Rebuild Cassandra nodes
   shell: '{{ nodetool }} -h {{ local_address }} rebuild {{ opdk_region }}'

@@ -59,7 +59,7 @@
 
 - block:
   - name: Setup of aio profile
-    shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p aio"
+    shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p aio"
     ignore_errors: yes
     register: aio_install_results
 

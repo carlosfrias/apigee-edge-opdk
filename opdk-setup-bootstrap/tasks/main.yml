@@ -6,10 +6,10 @@
     bootstrap_download_url: '{{ apigee_repo_url }}/bootstrap.sh'
   when: opdk_version == '4.16.01'
 
-- name: Set download url for 4.16.05
+- name: Set download url for bootstrap version greater than 4.16.0.03
   set_fact:
-    bootstrap_download_url: '{{ apigee_repo_url }}/bootstrap_4.16.05.sh'
-  when: opdk_version == '4.16.05'
+    bootstrap_download_url: '{{ apigee_repo_url }}/bootstrap_{{ opdk_version }}.sh'
+  when: opdk_version | version_compare('4.16.01.03', '<')
 
 - name: Set target bootstrap script name for 4.16.01
   set_fact:

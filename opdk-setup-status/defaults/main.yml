@@ -1,13 +1,13 @@
 ---
 # defaults file for opdk-setup-status
-opdk_major_version: '4'
-opdk_minor_version: '15'
-opdk_build_version: '07.03'
-opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
+#opdk_major_version: '4'
+#opdk_minor_version: '15'
+#opdk_build_version: '07.03'
+#opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
 
-apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee4
-apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
+#apigee_installation_dir: apigee4
+#apigee_installation_path_prefix: /opt
+#apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
 apigee_bin: "{{ apigee_installation_home }}/bin"
 all_status: "{{ apigee_bin }}/all-status.sh"
 

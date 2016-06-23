@@ -1,12 +1,11 @@
 ---
 - hosts: '{{ hosts }}'
   tasks:
-  - name: Obtain status of selinux
-    shell: /usr/sbin/sestatus
-    register: status
-
-  - debug: var=status
-
-  - assert:
-      that:
-        - "'disabled' in status.stdout"
+  - name: Determine OPDK region of this node
+    set_fact:
+      opdk_region: 'dc-1'
+    when: "{{ inventory_hostname in groups['dc-1'] }}"
+  - name: Determine OPDK region of this node
+    set_fact:
+      opdk_region: 'dc-2'
+    when: "{{ inventory_hostname in groups['dc-2'] }}"

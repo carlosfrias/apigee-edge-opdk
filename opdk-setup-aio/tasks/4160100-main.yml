@@ -1,6 +1,6 @@
 ---
 - name: Apigee AIO installation
-  shell: '{{ apigee_setup_16 }} -p aio -f {{ opdk_response_file_path }}'
+  shell: '{{ apigee_setup }} -p aio -f {{ opdk_response_file_path }}'
   register: aio_install_results
 
 - name: AIO Install Report
