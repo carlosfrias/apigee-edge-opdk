@@ -1,7 +1,6 @@
 ---
 # defaults file for opdk-setup-default-settings
 
-
 # Target Java JDK version
 jdk_version: '1.7'
 
