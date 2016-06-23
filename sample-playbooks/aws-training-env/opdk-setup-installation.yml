@@ -11,8 +11,6 @@
 
 - include: opdk-setup-validate.yml
 
-- include: opdk-setup-validate-cleanup.yml
-
 - include: opdk-setup-org.yml
 
 - include: opdk-setup-status.yml
