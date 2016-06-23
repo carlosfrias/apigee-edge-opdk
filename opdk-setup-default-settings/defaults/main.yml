@@ -1,0 +1,14 @@
+---
+# defaults file for opdk-setup-default-settings
+# Default Apigee Edge Private Cloud Version
+opdk_version: '4.16.01'
+
+# Default apigee installation home
+apigee_installation_home: /opt/apigee
+
+# Target Java JDK version
+jdk_version: '1.7'
+
+# System file path to use in JAVA_HOME
+jdk_path: /usr/lib/jvm/java-openjdk
+
