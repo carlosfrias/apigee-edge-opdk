@@ -5,8 +5,8 @@
   ignore_errors: yes
 
 - name: Clean up other JDKs
-  ignore_errors: yes
   shell: 'rpm -e $(rpm -qa | egrep "^(java|jdk|jre).*")'
+  ignore_errors: yes
 
 - name: remove yum epel repository
   yum:
@@ -39,6 +39,10 @@
   with_items:
   - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm'
   when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "oraclelinux"
+  
+- name: Clear all artifacts from YUM repo
+  shell: 'yum clean all'
+  ignore_errors: yes
 
 - name: Remove the apigee user
   user:
