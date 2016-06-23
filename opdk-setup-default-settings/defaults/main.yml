@@ -14,6 +14,13 @@ opdk_user_name: apigee
 # OPDK OS group name
 opdk_group_name: "{{ opdk_user_name }}"
 
+# OPDK User Email
+opdk_user_email: opdk@apigee.com
+
+# OPDK User Password
+opdk_user_pass: Apigee123!
+
+
 # Default Apigee Edge Private Cloud Version
 opdk_version: '4.16.01'
 
@@ -32,9 +39,11 @@ apigee_setup: '{{ apigee_installation_home }}/apigee-setup/bin/setup.sh'
 # Apigee all command for 4.16.xx
 apigee_all: '{{ apigee_installation_home }}/apigee-service/bin/apigee-all'
 
-
 # Apigee staging installation folder
 opdk_installer_path: "/tmp"
+
+# Apigee license file path
+opdk_license_file_path: "{{ opdk_installer_path }}/license.txt"
 
 # Apigee silent installation configuration file
 opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"

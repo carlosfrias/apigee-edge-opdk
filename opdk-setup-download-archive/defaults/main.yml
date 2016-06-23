@@ -1,7 +1,4 @@
 ---
 # defaults file for opdk-setup-local-repository
-apigee_bootstrap: '/tmp/bootstrap.sh'
-
-
 archive_name: apigee-{{ opdk_version }}.tar.gz
 archive_path: '{{ apigee_installation_home }}/data/apigee-mirror/{{ archive_name }}'
