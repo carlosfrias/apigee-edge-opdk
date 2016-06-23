@@ -38,6 +38,7 @@
   tags:
   - apigee
   - common
+  - os
 
 - hosts: ds
   become: true
@@ -49,6 +50,7 @@
   tags:
   - os-ds
   - common
+  - os
 
 - hosts: ldap
   become: true
@@ -60,6 +62,7 @@
   tags:
   - os-ldap
   - common
+  - os
 
 - hosts: rmp
   become: true
@@ -71,6 +74,7 @@
   tags:
   - os-rmp
   - common
+  - os
 
 - hosts: qpid
   become: true
@@ -82,6 +86,22 @@
   tags:
   - os-qpid
   - common
+  - os
+
+- hosts: pg
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  tasks:
+  - name: Ensure libdb-cxx is installed
+    yum:
+      name: '{{ libdb_cxx }}'
+      state: present
+  tags:
+  - os-sax
+  - common
+  - os
 
 - hosts: pg
   become: true
@@ -93,6 +113,7 @@
   tags:
   - os-sax
   - common
+  - os
 
 - hosts: planet
   become: true
@@ -104,3 +125,4 @@
   tags:
   - os-logs
   - common
+  - os

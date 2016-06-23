@@ -30,6 +30,15 @@ tag_Name_cfrias_1601_rhel72_1_n1
 tag_Name_cfrias_1601_rhel72_1_n2
 tag_Name_cfrias_1601_rhel72_1_n3
 
+[tag_Name_cfrias_1601_rhel72_1_n1:vars]
+rack=:1,1
+
+[tag_Name_cfrias_1601_rhel72_1_n2:vars]
+rack=:1,1
+
+[tag_Name_cfrias_1601_rhel72_1_n3:vars]
+rack=:1,1
+
 [ms:children]
 dc-1-ms
 

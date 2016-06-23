@@ -1,9 +1,12 @@
 ---
-- hosts: localhost
-  connection: local
-  vars:
-    version: '4.16.05'
+- hosts: '{{ hosts }}'
   tasks:
+  - name: Obtain status of selinux
+    shell: /usr/sbin/sestatus
+    register: status
+
+  - debug: var=status
+
   - assert:
       that:
-      - version | version_compare('4.15.07', '==')
+        - "'disabled' in status.stdout"

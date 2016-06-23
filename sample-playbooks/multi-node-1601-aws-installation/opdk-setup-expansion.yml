@@ -1,36 +1,35 @@
 ---
-# Prime each target server with the correct setup
 - include: facts.yml
 
 - include: opdk-setup-os.yml
 
 - include: opdk-setup-openjdk.yml
   vars:
-    hosts: 'dc-1'
+    hosts: 'dc-2'
 
 - include: opdk-setup-bootstrap.yml
   vars:
-    hosts: 'dc-1'
+    hosts: 'dc-2'
 
 - include: opdk-setup-component-installer.yml
   vars:
-    hosts: 'dc-1'
+    hosts: 'planet'
 
 - include: opdk-setup-ds.yml
   vars:
-    hosts: 'dc-1-ds'
+    hosts: 'dc-2-ds'
 
 - include: opdk-setup-ms.yml
   vars:
-    hosts: 'dc-1-ms'
+    hosts: 'dc-2-ms'
 
 - include: opdk-setup-rmp.yml
   vars:
-    hosts: 'dc-1-rmp'
+    hosts: 'dc-2-rmp'
 
 - include: opdk-setup-postgres.yml
   vars:
-    hosts: 'dc-1-pg'
+    hosts: 'dc-2-pg'
 
 - include: opdk-setup-startup.yml
 

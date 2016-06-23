@@ -1,5 +1,5 @@
 ---
-- hosts: planet
+- hosts: '{{ hosts }}'
   gather_facts: yes
   vars_files:
   - opdk-setup-settings.yml
@@ -9,7 +9,7 @@
   - silent-file
   - common
 
-- hosts: planet
+- hosts: '{{ hosts }}'
   gather_facts: yes
   vars_files:
   - opdk-setup-settings.yml

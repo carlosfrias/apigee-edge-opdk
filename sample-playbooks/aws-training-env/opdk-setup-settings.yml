@@ -6,7 +6,6 @@ apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-servic
 apigee_migrate: '{{ apigee_installation_home }}/apigee-migrate/bin/migrate.sh'
 
 opdk_version: '4.16.01'
-
 opdk_license_file_name: ~/.apigee/license.txt
 
 admin_user: ApigeeAdmin@T-Mobile.com  
@@ -23,3 +22,11 @@ virtual_host_alias: '127.0.0.1'
 env_name: AWS_TRN01
 ms_http_port: 8080
 ax_group: axgroup001
+libdb_cxx: ftp://rpmfind.net/linux/centos/7.2.1511/os/x86_64/Packages/libdb-cxx-5.3.21-19.el7.x86_64.rpm
+
+opdk_skip_smpt: 'y'
+opdk_smtp_host: 'smtp.example.com'
+opdk_smtp_port: '25'
+opdk_smtp_user: 'smtp@example.com'
+opdk_smtp_password: 'smtppwd'
+opdk_smtp_ssl: 'n'
