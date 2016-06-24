@@ -10,17 +10,10 @@
     path: '{{ apigee_provision_dir }}'
   register: apigee_provision_status
 
-- name: Apigee Management Server installation
+- name: Apigee provision installation
   shell: '{{ apigee_service }} apigee-provision install'
   when: not apigee_provision_status.stat.exists
 
-- name: Apigee Management Server installation
+- name: Apigee organziation setup
   shell: '{{ apigee_service }} apigee-provision setup-org -f {{ onboarding_config_file_path }}'
   ignore_errors: yes
-  register: ms_install_results
-  async: 10
-  poll: 0
-
-- name: Managment Server Install Report
-  debug:
-    var: ms_install_results
