@@ -104,3 +104,5 @@ test_port: 9001
 cassandra_db_port: 9160
 open_ldap_port: 10389
 
+# Local folder in which to store logs and config files
+conf_logs_dir: configs_and_logs
