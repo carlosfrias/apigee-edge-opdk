@@ -8,6 +8,17 @@
     backup: yes
     backrefs: yes
 
+- name: Add yum epel repository
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - epel-release
+  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "centos"
+  register: epel_repo
+  tags:
+  - epel
+
 - name: Add yum epel repository and centos release SCL for centos version 6
   yum:
     name: "{{ item }}"
@@ -25,7 +36,7 @@
     name: "{{ item }}"
     state: present
   with_items:
-  - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm'
+  - '{{ epel_ol67 }}'
   when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "oraclelinux"
   register: epel_repo
   tags:
@@ -36,7 +47,7 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+    - '{{ epel_rhel72 }}'
   when: ansible_distribution_major_version == "7" and ansible_distribution | lower == "redhat"
   register: epel_repo
   tags:

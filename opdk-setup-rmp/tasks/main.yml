@@ -1,20 +1,18 @@
 ---
 # tasks file for opdk-setup-rmp
 
-- block:
-
-  - include: 4150703-main.yml
-
+- include: 4150703-main.yml
   when: opdk_version == '4.15.07.03'
 
-- block:
-
-  - include: 4160100-main.yml
-
+- name: Router and Message Processor installation
+  shell: '{{ apigee_setup }} -p rmp -f {{ opdk_response_file_path }}'
+  register: rmp_install_results
   when: opdk_version == '4.16.01'
 
-- block:
-
-  - include: 4160500-main.yml
-
+- name: Router and Message Processor installation
+  shell: '{{ apigee_setup }} -p rmp -f {{ opdk_response_file_path }}'
+  ignore_errors: yes
+  register: rmp_install_results
+  poll: 60
+  async: 3
   when: opdk_version == '4.16.05'

@@ -1,9 +1,0 @@
----
-# defaults file for opdk-shutdown
-apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee4
-apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
-apigee_bin: "{{ apigee_installation_home }}/bin"
-all_stop: "{{ apigee_bin }}/all-stop.sh"
-apigee_pid_path: "{{ apigee_installation_home }}/var"
-apigee_lock_path: "{{ apigee_installation_home }}/var/lock/subsys"

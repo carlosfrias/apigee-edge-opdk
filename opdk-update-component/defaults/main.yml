@@ -1,13 +1,3 @@
 ---
 # defaults file for opdk-update-component
-apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee
-apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
-apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
 
-opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
-
-opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
-opdk_user_home: /home/{{ opdk_user_name }}
-opdk_staging_folder_name: opdk
-opdk_user_name: apigee

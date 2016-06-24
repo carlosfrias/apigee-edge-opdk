@@ -5,10 +5,6 @@
 
 - include: aws_integrated_facts.yml
 
-#- name: Setup hostvars name
-#  set_fact:
-#    hostvarname: '{{ public_address }}'
-
 - name: target_host_name
   debug:
     var: target_host_name
@@ -38,7 +34,7 @@
 - name: Update known_hosts
   become_user: "{{ opdk_user_name }}"
   known_hosts:
-    path: /home/{{ opdk_user_name }}/.ssh/known_hosts
+    path: '{{ opdk_user_home }}/.ssh/known_hosts'
     key: "{{ known_hosts_content.stdout }}"
     name: "{{ known_hosts_prep }}"
     state: present

@@ -16,6 +16,7 @@
   - opdk-setup-postgres-master
   tags:
   - pg
+  - pgmaster
 
 - hosts: pgstandby
   serial: 1
@@ -26,3 +27,4 @@
   - opdk-setup-postgres-standby
   tags:
   - pg
+  - pgstandby
