@@ -1,5 +1,3 @@
 ---
 # defaults file for opdk-setup-ms
-apigee_installation_home: /opt/apigee4
-apigee_setup_4_15: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh"
 
