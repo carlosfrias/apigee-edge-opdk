@@ -19,7 +19,7 @@
 - block:
   - name: Remove existing host names IP to prep for a refresh
     lineinfile:
-      dest: "{{ apigee_hostfile_path }}"
+      dest: "{{ hostfile_path }}"
       state: absent
       regexp: "^{{ hostvars[item][interface_name].ipv4.address }}"
       backup: yes
@@ -28,7 +28,7 @@
 
   - name: Add missing host ip and host names to /etc/hosts
     lineinfile:
-      dest: "{{ apigee_hostfile_path }}"
+      dest: "{{ hostfile_path }}"
       regexp: '^{{ hostvars[item][interface_name].ipv4.address }}\s*{{ item }}\s*$'
       line: "{{ hostvars[item][interface_name].ipv4.address }} {{ item }}"
       state: present
@@ -41,7 +41,7 @@
 - block:
   - name: Remove existing host names IP to prep for a refresh
     lineinfile:
-      dest: "{{ apigee_hostfile_path }}"
+      dest: "{{ hostfile_path }}"
       state: absent
       regexp: "^{{ hostvars[item][interface_name].ipv4.address }}"
       backup: yes
@@ -50,7 +50,7 @@
 
   - name: Add missing host ip and host names to /etc/hosts
     lineinfile:
-      dest: "{{ apigee_hostfile_path }}"
+      dest: "{{ hostfile_path }}"
       regexp: '^{{ hostvars[item][interface_name].ipv4.address }}\s*{{ item }}\s*$'
       line: "{{ hostvars[item][interface_name].ipv4.address }} {{ item }}"
       state: present

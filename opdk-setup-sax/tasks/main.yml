@@ -1,20 +1,23 @@
 ---
 # tasks file for opdk-setup-sax
 
-- block:
+- include: 4150703-main.yml
+  when: opdk_version | version_compare('4.16.01', '<')
 
-  - include: 4150703-main.yml
+- name: Fix permissions on pgdata folder
+  file:
+    path: '{{ apigee_posgresql_data_dir }}'
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+    mode: 0700
+    state: directory
+  when: opdk_version | version_compare('4.16.01', '>=')
 
-  when: opdk_version == '4.15.07.03'
+- name: Sax installation
+  shell: '{{ apigee_setup }} -p sax -f {{ opdk_response_file_path }}'
+  when: opdk_version | version_compare('4.16.01', '>=') and opdk_version | version_compare('4.16.05', '<')
 
-- block:
-
-  - include: 4160100-main.yml
-
-  when: opdk_version == '4.16.01'
-
-- block:
-
-  - include: 4160500-main.yml
-
-  when: opdk_version == '4.16.05'
+- name: Sax installation
+  shell: '{{ apigee_setup }} -p sax -f {{ opdk_response_file_path }}'
+  register: sax_install_results
+  when: opdk_version | version_compare('4.16.05', '>=')

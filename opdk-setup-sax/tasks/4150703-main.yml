@@ -1,5 +1,4 @@
 ---
-
 - name: Check for ingest JMX port
   register: ingest_jmx_port_status
   ignore_errors: true
@@ -7,14 +6,6 @@
     host: '{{ ansible_hostname }}'
     port: '{{ ingest_jmx_port }}'
     timeout: 1
-
-#- name: Check for postgres JMX port
-#  register: pgserver_jmx_port_status
-#  ignore_errors: true
-#  wait_for:
-#    host: '{{ ansible_hostname }}'
-#    port: '{{ pgserver_jmx_port }}'
-#    timeout: 1
 
 - name: Check for postgres DB port
   register: pg_db_port_status
@@ -32,20 +23,10 @@
     port: '{{ qpid_self_port }}'
     timeout: 1
 
-#- name: Check for postgres server HTTP port
-#  register: pgserver_self_port_status
-#  ignore_errors: true
-#  wait_for:
-#    host: '{{ ansible_hostname }}'
-#    port: '{{ pgserver_self_port }}'
-#    timeout: 1
-
 - name: Setup Qpid and Postgres
-  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p sax"
+  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p sax"
   ignore_errors: yes
   when: ingest_jmx_port_status | failed or pg_db_port_status | failed or qpid_self_port_status | failed
-#  when: ingest_jmx_port_status | failed or pg_db_port_status | failed or qpid_self_port_status | failed or pgserver_self_port_status | failed
-#  when: ingest_jmx_port_status | failed or pgserver_jmx_port_status | failed or pg_db_port_status | failed or qpid_self_port_status | failed or pgserver_self_port_status | failed
 
 - name: Confirm ingest JMX port
   ignore_errors: true
@@ -54,14 +35,6 @@
     host: '{{ ansible_hostname }}'
     port: '{{ ingest_jmx_port }}'
   register: ingest_jmx_port_status
-
-#- name: Confirm posgtgres JMX port
-#  ignore_errors: true
-#  wait_for:
-#    timeout: 1
-#    host: '{{ ansible_hostname }}'
-#    port: '{{ pgserver_jmx_port }}'
-#  register: pgserver_jmx_port_status
 
 - name: Confirm postgres DB port
   ignore_errors: true
@@ -79,23 +52,10 @@
     port: '{{ qpid_self_port }}'
   register: qpid_self_port_status
 
-#- name: Confirm postgres server HTTP port
-#  ignore_errors: true
-#  wait_for:
-#    timeout: 1
-#    host: '{{ ansible_hostname }}'
-#    port: '{{ pgserver_self_port }}'
-#  register: pgserver_self_port_status
-
 - name: Ingest JMX port startup failed
   fail:
     msg: "Ingest JMX port failed to start"
   when: not ingest_jmx_port_status.state == 'started'
-
-#- name: Postgres server JMX port startup failed
-#  fail:
-#    msg: "Postgres server JMX port failed to start"
-#  when: not pgserver_jmx_port_status.state == 'started'
 
 - name: Postgres DB port startup failed
   fail:
@@ -106,10 +66,3 @@
   fail:
     msg: "Qpid HTTP port failed to start"
   when: not qpid_self_port_status.state == 'started'
-
-
-#- name: Postgres HTTP port startup failed
-#  fail:
-#    msg: "Postgres HTTP port failed to start"
-#  when: not pgserver_self_port_status.state == 'started'
-

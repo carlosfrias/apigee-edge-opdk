@@ -1,13 +1,5 @@
 ---
 # tasks file for opdk-setup-installer
-- name: Create opdk staging folder
-  file:
-    path: "{{ opdk_staging_path_prefix }}"
-    state: directory
-    group: '{{ opdk_group_name }}'
-    owner: '{{ opdk_user_name }}'
-    mode: 0755
-  when: opdk_version | version_compare('4.15.07', '<=')
 
 - name: Check for existence of installation archive
   stat:
@@ -17,7 +9,7 @@
 
 - name: Check for expansion of binaries
   stat:
-    path: "{{ opdk_staging_path_prefix }}/{{ opdk_installer_file_basename }}"
+    path: "{{ opdk_installer_path }}/{{ opdk_installer_file_basename }}"
   register: expanded
   when: opdk_version | version_compare('4.15.07', '<=')
 
@@ -44,7 +36,7 @@
   when: opdk_version | version_compare('4.15.07', '<=')
 
 - name: Run Apigee Install
-  shell: "{{ apigee_install_command }}"
+  shell: "{{ opdk_installer_path }}/apigee-install.sh -r {{ apigee_installation_path_prefix }} -d {{ apigee_data_path_prefix }} -j {{ java_home }}"
   when: not opdk.stat.exists
   register: install_status
   when: opdk_version | version_compare('4.15.07', '<=')

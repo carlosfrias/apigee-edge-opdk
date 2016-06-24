@@ -1,5 +1,0 @@
----
-- name: Sax installation
-  shell: '{{ apigee_setup_16 }} -p sax -f {{ opdk_response_file_path }}'
-  register: sax_install_results
-

@@ -1,20 +1,13 @@
 ---
-# tasks file for opdk-setup-jdk
-- include: jdk17-main.yml
-  when: jdk_version == '1.7'
+- name: Install Java JDK
+  yum:
+    name: "java-{{ jdk_version }}.0-openjdk-devel"
+    state: present
 
-- include: jdk18-main.yml
-  when: jdk_version == '1.8'
-
-- name: Update JAVA_HOME with Open Jdk
+- name: Update environment with path to JAVA_HOME
   lineinfile:
     dest: /etc/environment
     regexp: "^export JAVA_HOME"
-    line: 'export JAVA_HOME={{ open_jdk_path }}'
+    line: 'export JAVA_HOME={{ java_home }}'
     backup: yes
-  register: environ_status
-
-- name: Update JAVA_HOME with Open Jdk
-  debug:
-    var: environ_status
 

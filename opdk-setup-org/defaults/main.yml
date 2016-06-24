@@ -1,9 +1,5 @@
 ---
 # defaults file for opdk-setup-org
-opdk_major_version: '4'
-opdk_minor_version: '15'
-opdk_build_version: '07.03'
-opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
 
 admin_user: opdk@apigee.com
 admin_pass: Apigee123!
@@ -20,25 +16,11 @@ env_name: test
 ms_http_port: 8080
 ax_group: axgroup001
 
-apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee4
-apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
-apigee_bin: "{{ apigee_installation_home }}/bin"
-apigee_conf: "{{ apigee_installation_home }}/conf"
-all_status: "{{ apigee_bin }}/all-status.sh"
-all_start: "{{ apigee_bin }}/all-start.sh"
-all_stop: "{{ apigee_bin }}/all-stop.sh"
-
 create_user: "{{ apigee_bin }}/create-user.sh"
 create_org: "{{ apigee_bin }}/create-org.sh"
 create_roles: "{{ apigee_bin }}/create-roles.sh"
 add_env: "{{ apigee_bin }}/add-env.sh"
 
-apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
-apigee_provision_dir: '{{ apigee_installation_home }}/apigee-provision'
-opdk_user_name: apigee
-opdk_user_home: /home/{{ opdk_user_name }}
-opdk_staging_folder_name: opdk
-opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
 onboarding_config: 'apigee-provision-setup-org.conf'
 onboarding_config_file_path: "{{ opdk_installer_path }}/{{ onboarding_config }}"
+apigee_provision_dir: '{{ apigee_installation_home }}/apigee-provision'

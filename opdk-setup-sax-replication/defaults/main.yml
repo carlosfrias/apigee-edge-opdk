@@ -1,27 +1,6 @@
 ---
 # defaults file for opdk-setup-sax-replication-master
-opdk_major_version: '4'
-opdk_minor_version: '15'
-opdk_build_version: '07.03'
-opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
 
-installation_folder: /opt
-apigee_installation_home: "{{ installation_folder }}/apigee4"
-apigee_bin: "{{ apigee_installation_home }}/bin"
-all_status: "{{ apigee_bin }}/all-status.sh"
-apigee_service: "{{ apigee_bin }}/apigee-service"
-apigee_install: "{{ installer_staging_folder_path }}/apigee-install.sh"
-apigee_share_installer_path: "{{ apigee_installation_home }}/share/installer"
-apigee_setup: "{{ apigee_share_installer_path }}/apigee-setup.sh"
 apigee_postgres_replication_setup: "{{ apigee_share_installer_path }}/apigee-postgres-replication-setup.sh"
 postgres_data_path: /opt/apigee4/data/postgresql
-opdk_user_name: apigee
-opdk_group_name: "{{ opdk_user_name }}"
-opdk_user_home: /home/{{ opdk_user_name }}
 opdk_user_ssh_private_key: "{{ opdk_user_home }}/.ssh/id_rsa"
-
-ingest_jmx_port: 1102
-pgserver_jmx_port: 1103
-pg_db_port: 5432
-qpid_self_port: 8083
-pgserver_self_port: 8084

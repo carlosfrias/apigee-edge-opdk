@@ -1,6 +1,0 @@
----
-#- block:
-- name: Apigee DS installation
-  shell: '{{ apigee_setup_16 }} -p ds -f {{ opdk_response_file_path }}'
-  async: 5
-  poll: 0

@@ -1,9 +1,0 @@
----
-- name: Router and Message Processor installation
-  shell: '{{ apigee_setup_16 }} -p rmp -f {{ opdk_response_file_path }}'
-  register: rmp_install_results
-#  ignore_errors: yes
-
-#- name: Router and Message Processor Install Report
-#  debug:
-#    var: rmp_install_results

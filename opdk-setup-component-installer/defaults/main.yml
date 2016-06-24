@@ -1,29 +1,12 @@
 ---
 # defaults file for opdk-setup-installer
-opdk_version: "4.15.07.03"
 
-opdk_user_name: apigee
-opdk_group_name: "{{ opdk_user_name }}"
-opdk_user_home: /home/{{ opdk_user_name }}
-
-opdk_staging_folder_name: opdk
-opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
 opdk_installer_file_prefix: apigee-edge
 opdk_installer_file_basename: '{{ opdk_installer_file_prefix}}-{{ opdk_version }}'
 opdk_installer_file_suffix: 'zip'
-opdk_staging_path_prefix: "{{ opdk_installer_path }}/{{ opdk_version }}"
 opdk_installer_archive_name: "{{ opdk_installer_file_basename }}.{{ opdk_installer_file_suffix }}"
-opdk_installer_archive_path: "{{ opdk_staging_path_prefix }}/{{ opdk_installer_archive_name }}"
+opdk_installer_archive_path: "{{ opdk_installer_path }}/{{ opdk_installer_archive_name }}"
 
-opdk_license_file_name: license.txt
-opdk_license_file_dir: "{{ opdk_installer_path }}"
-opdk_license_file_path: "{{ opdk_license_file_dir }}/license.txt"
 
 apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee4
-apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
-
-apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
-
-apigee_install_script: "{{ opdk_installer_staging_folder_path }}/apigee-install.sh"
-apigee_install_command: "{{ apigee_install_script }} -r {{ apigee_installation_path_prefix }} -d {{ apigee_data_path_prefix }} -j {{ open_jdk_path }}"
+apigee_data_path_prefix: /opt

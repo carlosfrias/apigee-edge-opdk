@@ -1,12 +1,2 @@
 ---
 # defaults file for opdk-cass-client-update
-opdk_major_version: '4'
-opdk_minor_version: '16'
-opdk_build_version: '01.00'
-opdk_version: "{{ opdk_major_version }}.{{opdk_minor_version }}.{{ opdk_build_version }}"
-
-apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee
-apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
-
-apigee_service: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'

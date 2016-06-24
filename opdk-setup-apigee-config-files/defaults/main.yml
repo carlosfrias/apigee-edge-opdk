@@ -1,16 +1,3 @@
 ---
 # defaults file for opdk-setup-logs
-apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee4
-apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
-apigee_bin: "{{ apigee_installation_home }}/bin"
-all_status: "{{ apigee_bin }}/all-status.sh"
-graphite_web_conf_dir: /etc/graphite-web
 
-opdk_user_name: apigee
-opdk_user_home: /home/{{ opdk_user_name }}
-opdk_staging_folder_name: opdk
-opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
-opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
-
-conf_logs_dir: configs_and_logs

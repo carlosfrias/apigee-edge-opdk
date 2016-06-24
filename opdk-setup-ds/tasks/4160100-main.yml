@@ -1,4 +1,0 @@
----
-- name: Apigee DS installation
-  shell: '{{ apigee_setup_16 }} -p ds -f {{ opdk_response_file_path }}'
-  register: ds_install_results

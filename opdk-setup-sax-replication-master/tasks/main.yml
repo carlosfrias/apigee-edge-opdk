@@ -14,34 +14,14 @@
   set_fact:
     target_host_address: "{{ hostvars[target_host_name][interfaceName].ipv4.address }}"
 
-#- name: Collected All Status
-#  shell: "{{ all_status }}"
-#  register: results
-#
-#- name: Collect Postgresql runtime info
-#  set_fact:
-#    pg_is_running: '{{ results.stdout | search(".*postgresql\s.*is running.*") }}'
-#
-#- name: Stop Postgresql if it is running
-#  shell: '{{ apigee_service }} postgresql stop'
-#  when: pg_is_running
-
 - name: Setup Postgres replication
   become: yes
   become_user: "{{ opdk_user_name }}"
   become_method: sudo
   shell: "{{ apigee_postgres_replication_setup }} -m -a {{ target_host_address }} -d {{ postgres_data_path }} -k {{ opdk_user_ssh_private_key }}"
-  register: results
   ignore_errors: yes
   retries: 1
   delay: 10
-
-#- name: Start Postgresql
-#  shell: '{{ apigee_service }} postgresql start'
-
-- name: Collected All Status
-  shell: "{{ all_status }}"
-  register: results
 
 - name: Fail if postgresql is not running
   fail:

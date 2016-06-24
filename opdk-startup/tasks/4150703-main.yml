@@ -1,6 +1,6 @@
 ---
 - name: Start Apigee
-  shell: '{{ all_start }}'
+  shell: '{{ apigee_installation_home }}/bin/all-start.sh'
 
 - name: Start collectd, if available
   shell: collectd -C {{ collectd_conf_file }}

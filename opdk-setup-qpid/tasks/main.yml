@@ -32,17 +32,14 @@
     host: '{{ ansible_hostname }}'
     timeout: 1
 
-- block:
+- name: Qpid installation for version less than 4.16.01
+  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p qs"
+  when: opdk_version | version_compare('4.16.01', '<')
 
-  - include: 4150703-main.yml
-
-  when: opdk_version == '4.15.07.03'
-
-- block:
-
-  - include: 4160100-main.yml
-
-  when: opdk_version == '4.16.01'
+- name: Qpid installation for version greater than or equal to 4.16.01
+  shell: '{{ apigee_setup }} -p qs -f {{ opdk_response_file_path }}'
+  register: qs_install_results
+  when: opdk_version | version_compare('4.16.01', '>=')
 
 - name: Status of Qpid External Management Port
   register: qpid_ext_mgmt_port_status
