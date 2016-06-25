@@ -23,7 +23,7 @@
     host: '{{ local_address }}'
     timeout: 1
 
-- name: Setup Cassandra and Zookeeper
+- name: Setup Cassandra and Zookeeper for version less than 4.16.01
   shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p ds"
   register: results
   ignore_errors: true

@@ -1,20 +1,8 @@
 ---
 # tasks file for opdk-setup-ms
 
-- block:
+- include: 4150703-main.yml
+  when: opdk_version | version_compare('4.16.01', '<')
 
-    - include: 4150703-main.yml
-
-  when: opdk_version == '4.15.07.03'
-
-- block:
-
-    - include: 4160100-main.yml
-
-  when: opdk_version == '4.16.01'
-
-- block:
-
-    - include: 4160500-main.yml
-
-  when: opdk_version == '4.16.05'
+- include: 4160100-main.yml
+  when: opdk_version | version_compare('4.16.01', '>=')

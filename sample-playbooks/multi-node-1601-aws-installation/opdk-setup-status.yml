@@ -1,7 +1,7 @@
 ---
 - include: facts.yml
 
-- hosts: planet
+- hosts: '{{ hosts }}'
   vars_files:
   - opdk-setup-settings.yml
   roles:

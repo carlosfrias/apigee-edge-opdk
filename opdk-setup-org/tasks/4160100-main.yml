@@ -4,6 +4,7 @@
   template:
     src: '{{ onboarding_config }}.j2'
     dest: '{{ onboarding_config_file_path }}'
+    mode: 0644
 
 - name: Obtain apigee-provision status
   stat:
@@ -14,6 +15,6 @@
   shell: '{{ apigee_service }} apigee-provision install'
   when: not apigee_provision_status.stat.exists
 
-- name: Apigee organziation setup
+- name: Apigee organization setup
   shell: '{{ apigee_service }} apigee-provision setup-org -f {{ onboarding_config_file_path }}'
   ignore_errors: yes
