@@ -4,5 +4,9 @@
 - include: 4150703-main.yml
   when: opdk_version | version_compare('4.16.01', '<')
 
-- include: 4160100-main.yml
+- name: Install Apigee Management Server
+  shell: '{{ apigee_setup }} -p ms -f {{ opdk_response_file_path }}'
+  async: 10
+  poll: 0
   when: opdk_version | version_compare('4.16.01', '>=')
+
