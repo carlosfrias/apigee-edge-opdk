@@ -39,6 +39,8 @@
 - include: opdk-setup-org.yml
 
 - include: opdk-setup-status.yml
+  vars:
+    hosts: 'dc-1'
 
 - include: opdk-setup-config-files.yml
 
