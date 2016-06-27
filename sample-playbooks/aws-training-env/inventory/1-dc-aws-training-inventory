@@ -6,6 +6,7 @@ prd-rbl-app-w2-i-0a24c3a5 ansible_host=10.65.194.92
 prd-rbl-cas-w2-i-c223c46d ansible_host=10.65.194.12 rack=:1,1
 prd-rbl-cas-w2-i-dc23c473 ansible_host=10.65.194.11 rack=:1,1
 prd-rbl-cas-w2-i-dd23c472 ansible_host=10.65.194.13 rack=:1,1
+
 prd-rbl-api-w2-i-0424c3ab ansible_host=10.65.194.6
 prd-rbl-api-w2-i-0524c3aa ansible_host=10.65.194.8
 prd-rbl-api-w2-i-0724c3a8 ansible_host=10.65.194.7
@@ -42,14 +43,17 @@ prd-rbl-api-w2-i-0524c3aa
 prd-rbl-api-w2-i-0724c3a8
 
 [pg:children]
+dc-1-pg
+
+[dc-1-pg:children]
 dc-1-pgmaster
 dc-1-pgstandby
 
 [dc-1-pgmaster]
-prd-rbl-fsf-w2a-t
+prd-rbl-sql-w2a-t
 
 [dc-1-pgstandby]
-prd-rbl-sql-w2a-t
+prd-rbl-fsf-w2a-t
 
 [qpid:children]
 dc-1-qpid
@@ -58,7 +62,4 @@ dc-1-qpid
 prd-rbl-app-w2-i-0024c3af
 prd-rbl-app-w2-i-0324c3ac
 
-[dc-1-pg]
-prd-rbl-sql-w2a-t
-prd-rbl-fsf-w2a-t
 
