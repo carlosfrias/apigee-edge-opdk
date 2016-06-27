@@ -1,10 +1,11 @@
 ---
 - include: facts.yml
 
-- hosts: '{{ hosts }}'
+- hosts: planet
   vars_files:
   - opdk-setup-settings.yml
   roles:
-  - opdk-setup-status
+  - opdk-setup-apigee-log-files
   tags:
-  - status
+  - logs
+  - apigee-logs

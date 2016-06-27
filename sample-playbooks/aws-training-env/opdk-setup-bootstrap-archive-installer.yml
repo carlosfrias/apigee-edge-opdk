@@ -1,5 +1,5 @@
 ---
-- hosts: dc-1
+- hosts: planet
   strategy: free
   roles:
   - opdk-setup-bootstrap-archive-installer

@@ -1,4 +1,5 @@
 ---
+
 - hosts: planet
   become: true
   strategy: free
@@ -10,7 +11,6 @@
   - apigee
   - os
   - aws
-  - common
 
 - hosts: planet
   become: true
@@ -26,7 +26,7 @@
   - opdk-setup-os-common
   tags:
   - os
-  - common
+  - os-basic
 
 - hosts: planet
   become: true
@@ -37,7 +37,6 @@
   - opdk-setup-apigee-user
   tags:
   - apigee
-  - common
   - os
 
 - hosts: ds
@@ -48,9 +47,8 @@
   roles:
   - opdk-setup-os-ds
   tags:
-  - os-ds
-  - common
   - os
+  - os-ds
 
 - hosts: ldap
   become: true
@@ -60,9 +58,8 @@
   roles:
   - opdk-setup-os-ldap
   tags:
-  - os-ldap
-  - common
   - os
+  - os-ldap
 
 - hosts: rmp
   become: true
@@ -72,9 +69,8 @@
   roles:
   - opdk-setup-os-rmp
   tags:
-  - os-rmp
-  - common
   - os
+  - os-rmp
 
 - hosts: qpid
   become: true
@@ -84,24 +80,8 @@
   roles:
   - opdk-setup-os-qpid
   tags:
+  - os
   - os-qpid
-  - common
-  - os
-
-- hosts: pg
-  become: true
-  strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
-  tasks:
-  - name: Ensure libdb-cxx is installed
-    yum:
-      name: '{{ libdb_cxx }}'
-      state: present
-  tags:
-  - os-sax
-  - common
-  - os
 
 - hosts: pg
   become: true
@@ -111,9 +91,8 @@
   roles:
   - opdk-setup-os-postgres
   tags:
-  - os-sax
-  - common
   - os
+  - os-pg
 
 - hosts: planet
   become: true
@@ -123,6 +102,6 @@
   roles:
   - opdk-setup-system-configs-logs
   tags:
-  - os-logs
-  - common
   - os
+  - os-logs
+  - logs

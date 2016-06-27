@@ -1,5 +1,5 @@
 ---
-- hosts: dc-1
+- hosts: planet
   become: true
   roles:
   - opdk-setup-bootstrap-archive

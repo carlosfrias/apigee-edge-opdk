@@ -1,5 +1,5 @@
 ---
-- hosts: planet
+- hosts: '{{ hosts }}'
   become: true
   roles:
   - opdk-setup-openjdk

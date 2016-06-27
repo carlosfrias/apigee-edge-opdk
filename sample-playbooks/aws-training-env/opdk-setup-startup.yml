@@ -7,6 +7,7 @@
   - opdk-startup
   tags:
   - start-ds
+  - startup
 
 - hosts: ms
   serial: 1
@@ -16,6 +17,7 @@
   - opdk-startup
   tags:
   - start-ms
+  - startup
 
 - hosts: rmp
   serial: 1
@@ -25,6 +27,7 @@
   - opdk-startup
   tags:
   - start-rmp
+  - startup
 
 - hosts: sax
   serial: 1
@@ -34,4 +37,5 @@
   - opdk-startup
   tags:
   - startup-sax
+  - startup
 

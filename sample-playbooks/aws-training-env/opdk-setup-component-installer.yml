@@ -1,0 +1,20 @@
+---
+- hosts: '{{ hosts }}'
+  gather_facts: yes
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-silent-installation-config
+  tags:
+  - silent-file
+  - common
+
+- hosts: '{{ hosts }}'
+  gather_facts: yes
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-component-installer
+  tags:
+  - installer
+  - common
