@@ -1,5 +1,5 @@
 ---
-- hosts: rmp
+- hosts: '{{ hosts }}'
   strategy: free
   vars_files:
   - opdk-setup-settings.yml
