@@ -6,7 +6,6 @@ prd-rbl-app-w2-i-0a24c3a5 ansible_host=10.65.194.92
 prd-rbl-cas-w2-i-c223c46d ansible_host=10.65.194.12 rack=:1,1
 prd-rbl-cas-w2-i-dc23c473 ansible_host=10.65.194.11 rack=:1,1
 prd-rbl-cas-w2-i-dd23c472 ansible_host=10.65.194.13 rack=:1,1
-
 prd-rbl-api-w2-i-0424c3ab ansible_host=10.65.194.6
 prd-rbl-api-w2-i-0524c3aa ansible_host=10.65.194.8
 prd-rbl-api-w2-i-0724c3a8 ansible_host=10.65.194.7
@@ -14,11 +13,6 @@ prd-rbl-sql-w2a-t ansible_host=10.65.194.117
 prd-rbl-fsf-w2a-t ansible_host=10.65.194.98
 prd-rbl-app-w2-i-0024c3af ansible_host=10.65.194.20
 prd-rbl-app-w2-i-0324c3ac ansible_host=10.65.194.21
-prd-rbl-app-w2-i-5824c3f7 ansible_host=10.65.194.4
-prd-rbl-app-w2-i-5b24c3f4 ansible_host=10.65.194.5
-prd-rbl-cas-w2-i-1023c4bf ansible_host=10.65.194.64
-prd-rbl-cas-w2-i-1123c4be ansible_host=10.65.194.63
-prd-rbl-cas-w2-i-1323c4bc ansible_host=10.65.194.65
 
 [ms:children]
 dc-1-ms
