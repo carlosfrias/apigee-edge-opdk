@@ -7,10 +7,16 @@
 
 - include: aws_integrated_facts.yml
 
+- name: Remove the old response file
+  file:
+    path: "{{ opdk_response_file_path }}"
+    state: absent
+
 - name: Construct the response file
   template:
     src: response.txt.j2
     dest: "{{ opdk_response_file_path }}"
+    force: yes
     owner: '{{ opdk_user_name }}'
     group: '{{ opdk_group_name }}'
     mode: 0644
