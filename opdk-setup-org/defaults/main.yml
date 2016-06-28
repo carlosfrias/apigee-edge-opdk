@@ -21,6 +21,6 @@ create_org: "{{ apigee_bin }}/create-org.sh"
 create_roles: "{{ apigee_bin }}/create-roles.sh"
 add_env: "{{ apigee_bin }}/add-env.sh"
 
-onboarding_config: 'apigee-provision-setup-org.conf'
+onboarding_config: 'apigee-provision.conf'
 onboarding_config_file_path: "{{ opdk_installer_path }}/{{ onboarding_config }}"
 apigee_provision_dir: '{{ apigee_installation_home }}/apigee-provision'
