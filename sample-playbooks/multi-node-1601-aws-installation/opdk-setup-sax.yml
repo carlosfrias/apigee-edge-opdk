@@ -1,13 +1,6 @@
 ---
 
 - hosts: pg
-  tasks:
-  - name: Proactively remove selinux packages with version conflict
-    yum:
-      name:
-      state: absent
-
-- hosts: pg
   serial: 1
   vars_files:
   - opdk-setup-settings.yml
