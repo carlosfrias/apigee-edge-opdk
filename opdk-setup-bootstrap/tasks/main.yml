@@ -37,5 +37,9 @@
   register: results
   env:
     JAVA_HOME: '{{ java_home }}'
-  failed_when: results.rc > 0 or results | failed
+  failed_when: results.rc > 0 or results | failed or 'Errno' in results.stdout
+
+- name: Install bootstrap results
+  debug:
+    var: results
 
