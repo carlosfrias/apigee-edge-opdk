@@ -23,22 +23,39 @@
   vars:
     hosts: 'dc-1-ds'
 
-- include: opdk-setup-ms.yml
-  vars:
-    hosts: 'dc-2-ms'
-    opdk_ldap_type: '2'
+- hosts: dc-1-ms
+  roles:
+  - opdk-cassandra-client-update
 
 - include: opdk-setup-ms.yml
   vars:
     hosts: 'dc-1-ms'
-    opdk_ldap_type: '2'
+
+- hosts: dc-2-ds
+  vars:
+    opdk_region: dc-1
+  roles:
+  - opdk-cassandra-rebuild
+  tags:
+  - rebuild
+
+- include: opdk-setup-ms.yml
+  vars:
+    hosts: 'dc-2-ms'
 
 - include: opdk-setup-rmp.yml
   vars:
     hosts: 'dc-2-rmp'
+
 - include: opdk-setup-rmp.yml
   vars:
     hosts: 'dc-1-rmp'
+
+- hosts: dc-2-qpid
+  roles:
+  - opdk-setup-qpid
+  tags:
+  - qpid
 
 - include: opdk-setup-postgres.yml
   vars:

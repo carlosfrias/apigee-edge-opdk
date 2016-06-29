@@ -1,4 +1,8 @@
 ---
+- name: Remove old apigee-provision file
+  file:
+    path: '{{ onboarding_config_file_path }}'
+    state: absent
 
 - name: Prepare onboarding config file
   template:
