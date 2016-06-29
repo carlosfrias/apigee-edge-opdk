@@ -2,19 +2,16 @@
 
 - hosts: planet
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
   - opdk-setup-aws
   tags:
-  - apigee
   - os
   - aws
 
 - hosts: planet
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
@@ -30,18 +27,16 @@
 
 - hosts: planet
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
   - opdk-setup-apigee-user
   tags:
-  - apigee
+  - user
   - os
 
 - hosts: ds
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
@@ -52,7 +47,6 @@
 
 - hosts: ldap
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
@@ -63,7 +57,6 @@
 
 - hosts: rmp
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
@@ -74,7 +67,6 @@
 
 - hosts: qpid
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
@@ -85,7 +77,6 @@
 
 - hosts: pg
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
@@ -96,7 +87,6 @@
 
 - hosts: planet
   become: true
-  strategy: free
   vars_files:
   - opdk-setup-settings.yml
   roles:
