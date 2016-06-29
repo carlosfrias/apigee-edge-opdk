@@ -16,6 +16,7 @@
   - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}', name: '*sh' }
   ignore_errors: yes
 
 - name: Download config files apigee-env.sh
