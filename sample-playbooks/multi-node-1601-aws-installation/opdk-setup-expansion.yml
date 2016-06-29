@@ -55,10 +55,6 @@
   vars:
     hosts: 'dc-2-pg'
 
-#- include: opdk-setup-postgres.yml
-#  vars:
-#    hosts: 'dc-1-pg'
-
 - include: opdk-setup-startup.yml
 
 - include: opdk-setup-validate.yml
@@ -67,7 +63,7 @@
 
 - include: opdk-setup-status.yml
   vars:
-    hosts: 'dc-1'
+    hosts: 'planet'
 
 - include: opdk-setup-config-files.yml
 

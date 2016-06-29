@@ -19,6 +19,22 @@
   vars:
     hosts: 'dc-2-ds'
 
+- include: opdk-setup-ds.yml
+  vars:
+    hosts: 'dc-1-ds'
+
+- include: opdk-cassandra-client-update.yml
+  vars:
+     hosts: 'dc-1-ms'
+
+- include: opdk-setup-ms.yml
+  vars:
+    hosts: 'dc-1-ms'
+
+- include: opdk-cassandra-rebuild.yml
+  vars:
+    hosts: 'dc-2-ds'
+
 - include: opdk-setup-ms.yml
   vars:
     hosts: 'dc-2-ms'
@@ -26,6 +42,14 @@
 - include: opdk-setup-rmp.yml
   vars:
     hosts: 'dc-2-rmp'
+
+- include: opdk-setup-rmp.yml
+  vars:
+    hosts: 'dc-1-rmp'
+
+- include: opdk-setup-qpid.yml
+  vars:
+    hosts: 'dc-2-qpid'
 
 - include: opdk-setup-postgres.yml
   vars:
@@ -38,7 +62,11 @@
 - include: opdk-setup-org.yml
 
 - include: opdk-setup-status.yml
+  vars:
+    hosts: 'planet'
 
 - include: opdk-setup-config-files.yml
 
 - include: opdk-setup-log-files.yml
+
+- include: opdk-setup-property-files.yml

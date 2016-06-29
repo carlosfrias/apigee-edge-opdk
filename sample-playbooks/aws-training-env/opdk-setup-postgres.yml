@@ -1,12 +1,4 @@
 ---
-- hosts: qpid
-  vars_files:
-  - opdk-setup-settings.yml
-  roles:
-  - opdk-setup-qpid
-  tags:
-  - qpid
-
 - hosts: pgmaster
   serial: 1
   vars_files:
