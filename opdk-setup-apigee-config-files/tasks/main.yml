@@ -19,84 +19,84 @@
   - { dir: '{{ apigee_installation_home }}', name: '*sh' }
   ignore_errors: yes
 
-- name: Download config files apigee-env.sh
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[0].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files *cfg
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[1].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files *conf
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[2].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files *yaml
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[3].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files from /customer
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[4].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files from /customer
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[5].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files from /customer
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[6].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files from /customer
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[7].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files from /customer
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[8].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files from /customer
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[9].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files from /customer
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[10].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download config files from /customer
+- name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'

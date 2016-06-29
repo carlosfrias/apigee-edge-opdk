@@ -10,28 +10,28 @@
   - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
   ignore_errors: yes
 
-- name: Download Installation Logs *.txt
+- name: Download logs
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[0].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *log
+- name: Download logs
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[1].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs /tmp
+- name: Download logs
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[2].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *out
+- name: Download logs
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'

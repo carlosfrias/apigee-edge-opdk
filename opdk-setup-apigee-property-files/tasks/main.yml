@@ -15,63 +15,63 @@
   - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[0].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[1].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[2].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[3].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[4].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[5].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[6].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[7].stdout_lines }}'
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
