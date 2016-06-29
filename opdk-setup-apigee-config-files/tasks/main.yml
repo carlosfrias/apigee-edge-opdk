@@ -4,12 +4,18 @@
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
   with_items:
-  - { dir: '{{ apigee_installation_home }}', name: 'apigee-env.sh' }
-  - { dir: '{{ apigee_installation_home }}', name: '*cfg' }
-  - { dir: '{{ apigee_installation_home }}', name: '*conf' }
   - { dir: '/tmp', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
   - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*router/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
   ignore_errors: yes
 
 - name: Download config files apigee-env.sh
