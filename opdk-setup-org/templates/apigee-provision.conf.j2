@@ -1,7 +1,5 @@
-IP1={{ hostvars[hostvars[inventory_hostname]['groups']['ms'][0]][interface_name].ipv4.address }}
-
 # Specify the IP or DNS name of the Management Server.
-MSIP="$IP1"
+MSIP="{{ hostvars[hostvars[inventory_hostname]['groups']['ms'][0]][interface_name].ipv4.address }}"
 
 # Specify the Edge admin credentials.
 ADMIN_EMAIL={{ admin_user }}

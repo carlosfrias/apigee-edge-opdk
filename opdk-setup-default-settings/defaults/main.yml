@@ -50,10 +50,13 @@ apigee_all: '{{ apigee_installation_home }}/apigee-service/bin/apigee-all'
 opdk_installer_path: "/tmp"
 
 # Apigee license file path
-opdk_license_file_path: "{{ opdk_installer_path }}/license.txt"
+opdk_license_file_path: "{{ opdk_installer_path }}/license.conf"
 
 # Apigee silent installation configuration file
-opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
+opdk_response_file_path: "{{ opdk_installer_path }}/silent_install.conf"
+
+# Silent installation configuration file that is provided manually
+provided_response_file: ''
 
 # Apigee validate config file path
 apigee_validate_config_file: '{{ opdk_installer_path }}/apigee-validate.conf'

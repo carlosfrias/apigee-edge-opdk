@@ -14,7 +14,7 @@
 
 - name: Construct the response file
   template:
-    src: response.txt.j2
+    src: 'silent_install.conf.j2'
     dest: "{{ opdk_response_file_path }}"
     force: yes
     owner: '{{ opdk_user_name }}'

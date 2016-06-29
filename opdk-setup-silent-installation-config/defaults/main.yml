@@ -17,5 +17,3 @@ opdk_smtp_user: 'smtp@example.com'
 opdk_smtp_password: 'smtppwd'
 opdk_smtp_ssl: 'n'
 opdk_bind_on_all_interfaces: 'y'
-
-provided_response_file: ''
