@@ -2,8 +2,6 @@
 - include: facts.yml
 
 - hosts: planet
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-apigee-config-files
   tags:

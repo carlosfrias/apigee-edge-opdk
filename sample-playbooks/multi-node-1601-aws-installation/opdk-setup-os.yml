@@ -3,8 +3,6 @@
 - hosts: planet
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-aws
   tags:
@@ -15,8 +13,6 @@
 - hosts: planet
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-selinux-disable
   - opdk-shutdown-iptables
@@ -31,8 +27,6 @@
 - hosts: planet
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-apigee-user
   tags:
@@ -42,8 +36,6 @@
 - hosts: ds
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-os-ds
   tags:
@@ -53,8 +45,6 @@
 - hosts: ldap
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-os-ldap
   tags:
@@ -64,8 +54,6 @@
 - hosts: rmp
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-os-rmp
   tags:
@@ -75,8 +63,6 @@
 - hosts: qpid
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-os-qpid
   tags:
@@ -86,8 +72,6 @@
 - hosts: pg
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-os-postgres
   tags:
@@ -97,8 +81,6 @@
 - hosts: planet
   become: true
   strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-system-configs-logs
   tags:
