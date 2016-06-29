@@ -26,6 +26,8 @@
 - hosts: dc-1-ms
   roles:
   - opdk-cassandra-client-update
+  tags:
+  - c-update
 
 - include: opdk-setup-ms.yml
   vars:
@@ -37,7 +39,7 @@
   roles:
   - opdk-cassandra-rebuild
   tags:
-  - rebuild
+  - c-rebuild
 
 - include: opdk-setup-ms.yml
   vars:
