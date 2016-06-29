@@ -4,10 +4,10 @@
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
   with_items:
-  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
-  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*log*' }
   - { dir: '/tmp', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*log' }
   - { dir: '{{ apigee_installation_home }}', name: '*out' }
+  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
   ignore_errors: yes
 
 - name: Download Installation Logs *.txt
