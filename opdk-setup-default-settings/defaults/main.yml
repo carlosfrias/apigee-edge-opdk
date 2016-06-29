@@ -53,7 +53,7 @@ opdk_installer_path: "/tmp"
 opdk_license_file_path: "{{ opdk_installer_path }}/license.conf"
 
 # Apigee silent installation configuration file
-opdk_response_file_path: "{{ opdk_installer_path }}/silent_install.conf"
+opdk_response_file_path: "{{ opdk_installer_path }}/silent-install.conf"
 
 # Silent installation configuration file that is provided manually
 provided_response_file: ''
