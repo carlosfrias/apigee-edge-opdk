@@ -7,6 +7,7 @@
   - { dir: '{{ apigee_installation_home }}', name: 'apigee-env.sh' }
   - { dir: '{{ apigee_installation_home }}', name: '*cfg' }
   - { dir: '{{ apigee_installation_home }}', name: '*conf' }
+  - { dir: '/tmp', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
   - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
   ignore_errors: yes
