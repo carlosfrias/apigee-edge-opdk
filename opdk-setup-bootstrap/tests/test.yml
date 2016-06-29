@@ -3,3 +3,13 @@
   remote_user: root
   roles:
     - opdk-setup-bootstrap
+
+- hosts: '{{ hosts }}'
+  tasks:
+  - name: Bootstrap test
+    download_bootstrap:
+      dest_dir: '.'
+      version: '4.16.05'
+    tags:
+    - test
+
