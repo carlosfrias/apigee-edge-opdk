@@ -1,0 +1,9 @@
+---
+- include: facts.yml
+
+- hosts: planet
+  roles:
+  - opdk-setup-apigee-property-files
+  tags:
+  - properties
+  - apigee-properties
