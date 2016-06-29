@@ -6,7 +6,7 @@
   roles:
   - opdk-setup-silent-installation-config
   tags:
-  - silent-file
+  - silent-install
   - common
 
 - hosts: '{{ hosts }}'
