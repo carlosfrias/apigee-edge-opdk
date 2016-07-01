@@ -33,14 +33,14 @@
   - apigee
   - os
 
-#- hosts: ds
-#  become: true
-#  strategy: free
-#  roles:
-#  - opdk-setup-os-ds
-#  tags:
-#  - os
-#  - os-ds
+- hosts: cassandra
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-os-ds
+  tags:
+  - os
+  - os-ds
 
 #- hosts: ldap
 #  become: true

@@ -1,0 +1,9 @@
+---
+- include: facts.yml
+
+- hosts: '{{ hosts }}'
+  roles:
+  - opdk-setup-apigee-log-files
+  tags:
+  - logs
+  - apigee-logs

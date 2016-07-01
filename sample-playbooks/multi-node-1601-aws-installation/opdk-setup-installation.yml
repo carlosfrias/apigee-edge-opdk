@@ -49,7 +49,3 @@
 - include: opdk-setup-config-files.yml
 
 - include: opdk-setup-log-files.yml
-
-- include: test.yml
-  vars:
-    hosts: 'localhost'

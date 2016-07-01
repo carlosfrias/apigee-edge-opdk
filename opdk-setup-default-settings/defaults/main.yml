@@ -114,13 +114,11 @@ open_ldap_port: 10389
 conf_logs_dir: configs_and_logs
 
 #--------------------------------
+# Baas Default Variables, this section could be a candidate for
+# export into another role just for Baas defaults.
 
+# Organization name used in Edge and Baas setups
 org_name: opdk
-
-
-
-
-#--------------------------------
 
 # Default location and name of the Baas Silent Install file
 opdk_baas_silent_install_file_path: /tmp/baas-silent-install.conf

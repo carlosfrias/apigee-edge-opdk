@@ -10,9 +10,9 @@ AS_PASSWD={{ baas_admin_pass }}
 
 # Specify Cassandra configuration information.
 {% if groups['dc-1-cassandra'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-cassandra'] | length > 0 %}
-CASS_HOSTS="{% for host in groups['dc-1-cassandra'] %}{{ hostvars[host][interface_name].ipv4.address }}{%  if hostvars[host].rack is defined and hostvars[host].rack %}{{ hostvars[host].rack }}{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
+CASS_HOSTS="{% for host in groups['dc-1-cassandra'] %}{{ hostvars[host][interface_name].ipv4.address }}:1,1{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc-2-cassandra'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-cassandra'] | length > 0 %}
-CASS_HOSTS="{% for host in groups['dc-2-cassandra'] %}{{ hostvars[host][interface_name].ipv4.address }}{%  if hostvars[host].rack is defined and hostvars[host].rack %}{{ hostvars[host].rack }}{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
+CASS_HOSTS="{% for host in groups['dc-2-cassandra'] %}{{ hostvars[host][interface_name].ipv4.address }}:2,1{% if not loop.last %} {% endif %}{% endfor %}"
 {% else %}
 CASS_HOSTS="{% for host in groups['cassandra'] %}{{ hostvars[host][interface_name].ipv4.address }}{%  if hostvars[host].rack is defined and hostvars[host].rack %}{{ hostvars[host].rack }}{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
 {% endif %}
@@ -59,19 +59,18 @@ BAAS_USERGRID_CLUSTERNAME="{{ baas_cluster_name }}"
 # URL and port of the load balancer for the API BaaS Stack nodes, # or IP/DNS and port of a single Stack node with no load balancer.
 {% if baas_load_balancer_host is defined and baas_load_balancer_host and baas_load_balancer_port is defined and baas_load_balancer_port %}
 BAAS_USERGRID_URL=http://{{ baas_load_balancer_host }}:{{ baas_load_balancer_port }}
-{% elif groups['portal'][0] is defined and groups['portal'][0] and groups['portal'][0].port is defined and groups['portal'][0].port %}
-BAAS_USERGRID_URL=http://{{ groups['portal'][0] }}:{{ groups['portal'].port }}
+{% elif groups['portal'][0] is defined and groups['portal'][0] and baas_portal_port is defined and baas_portal_port %}
+BAAS_USERGRID_URL=http://{{ groups['portal'][0] }}:{{ baas_portal_port }}
 {% endif %}
 
 # API BaaS Portal information.
 # URL and port number of load balancer, if there is one in front of the Portal, # or the URL and port of the Portal node.
 {% if groups['dc-1-portal'] is defined and inventory_hostname in groups['dc-1'] %}
-BAAS_PORTAL_URL="http://{{ groups['dc-1-portal'][0] }}:{{ hostvars[groups['dc-1-portal'][0]].port }}"
+BAAS_PORTAL_URL="http://{{ groups['dc-1-portal'][0] }}:{{baas_portal_port }}"
 {% elif groups['dc-2-portal'] is defined and inventory_hostname in groups['dc-2'] %}
-BAAS_PORTAL_URL="http://{{ groups['dc-2-portal'][0] }}:{{ hostvars[groups['dc-2-portal'][0]].port }}"
+BAAS_PORTAL_URL="http://{{ groups['dc-2-portal'][0] }}:{{ baas_portal_port }}"
 {% else %}
-    # else
-BAAS_PORTAL_URL="http://{{ groups['portal'] }}:{{ hostvars[groups['portal']].port }}"
+BAAS_PORTAL_URL="http://{{ groups['portal'] }}:{{ baas_portal_port }}"
 {% endif %}
 
 # Portal port. Default value is 9000.

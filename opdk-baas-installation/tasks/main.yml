@@ -10,8 +10,8 @@
 - name: Install Baas profile - {{ profile }}
   shell: '{{ apigee_setup }} -p {{ profile }} -f {{ opdk_baas_silent_install_file_path }}'
   register: result
-  async: 45
-  poll: 0
+#  async: 45
+#  poll: 0
 
 - name: Baas profile installation report
   debug:

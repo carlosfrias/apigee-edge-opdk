@@ -43,9 +43,6 @@ tag_Name_cfrias_1601_baas_rhel72_1_n6
 [portal:children]
 dc-1-portal
 
-[portal:vars]
-port=8080
-
 [dc-1-portal:children]
 tag_Name_cfrias_1601_baas_rhel72_1_n7
 
@@ -56,12 +53,3 @@ dc-1-cassandra
 tag_Name_cfrias_1601_baas_rhel72_1_n8
 tag_Name_cfrias_1601_baas_rhel72_1_n9
 tag_Name_cfrias_1601_baas_rhel72_1_n10
-
-[tag_Name_cfrias_1601_baas_rhel72_1_n8:vars]
-rack=:1,1
-
-[tag_Name_cfrias_1601_baas_rhel72_1_n9:vars]
-rack=:1,1
-
-[tag_Name_cfrias_1601_baas_rhel72_1_n10:vars]
-rack=:1,1
