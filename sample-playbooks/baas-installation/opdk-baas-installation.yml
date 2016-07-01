@@ -1,0 +1,47 @@
+---
+- include: facts.yml
+
+- include: opdk-setup-os.yml
+
+- include: opdk-setup-openjdk.yml
+  vars:
+    hosts: 'dc-1'
+
+- include: opdk-setup-bootstrap.yml
+  vars:
+    hosts: 'dc-1'
+
+- include: opdk-setup-component-installer.yml
+  vars:
+    hosts: 'dc-1'
+
+- hosts: 'cassandra'
+  roles:
+  - { role: opdk-baas-installation, profile: 'c' }
+  tags:
+  - cassandra
+
+- hosts: 'elastic'
+  roles:
+  - { role: opdk-baas-installation, profile: 'e' }
+  tags:
+  - elastic
+
+- hosts: 'baas'
+  roles:
+  - { role: opdk-baas-installation, profile: 'b' }
+  tags:
+  - baas
+
+- hosts: 'portal'
+  roles:
+  - { role: opdk-baas-installation, profile: 'p' }
+  tags:
+  - portal
+
+- hosts: 'portal'
+  roles:
+  - opdk-baas-onboarding
+  tags:
+  - org
+

@@ -1,0 +1,9 @@
+---
+- include: facts.yml
+
+- hosts: "{{ hosts }}"
+  strategy: free
+  become: yes
+  roles:
+  - opdk-setup-os-rollback
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../api_platform/api_platform.iml" filepath="$PROJECT_DIR$/../api_platform/api_platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opdk-roles.iml" filepath="$PROJECT_DIR$/opdk-roles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sandbox/svb-workspace/svb-workspace.iml" filepath="$PROJECT_DIR$/../sandbox/svb-workspace/svb-workspace.iml" />
+    </modules>
+  </component>
+</project>

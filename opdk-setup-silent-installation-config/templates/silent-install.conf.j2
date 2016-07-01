@@ -32,14 +32,14 @@ REGION=dc-2
 USE_ZK_CLUSTER={{ opdk_use_zk_cluster }}
 ZK_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if hostvars[host]['zk_observer'] is defined and hostvars[host]['zk_observer'] %}:observer{% endif %} {% endfor %}"
 {% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
-ZK_CLIENT_HOSTS="{% for host in groups['dc-1-ds'] %}{{ hostvars[host][interface_name].ipv4.address }} {% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc-1-ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc-2-ds'] %}{{ hostvars[host][interface_name].ipv4.address }} {% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc-2-ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% else %}
-ZK_CLIENT_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }} {% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% endif %}
 USE_CASS_CLUSTER={{ opdk_use_cass_cluster }}
-CASS_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{%  if hostvars[host].rack is defined and hostvars[host].rack %}{{ hostvars[host].rack }}{% endif %} {% endfor %}"
+CASS_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if hostvars[host].rack is defined and hostvars[host].rack %}{{ hostvars[host].rack }}{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
 CASS_USERNAME={{ opdk_cass_username }}
 CASS_PASSWORD={{ opdk_cass_password }}
 SKIP_SMTP={{ opdk_skip_smpt }}

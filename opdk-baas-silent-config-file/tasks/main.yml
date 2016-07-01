@@ -1,5 +1,5 @@
 ---
-# tasks file for opdk-setup-silent-file
+# tasks file for baas-silent-config-file
 
 - include: network-interface-name.yml
 
@@ -7,15 +7,10 @@
 
 - include: aws_integrated_facts.yml
 
-- name: Remove the old response file
-  file:
-    path: "{{ opdk_response_file_path }}"
-    state: absent
-
 - name: Construct the silent-install file
   template:
-    src: 'silent-install.conf.j2'
-    dest: "{{ opdk_response_file_path }}"
+    src: 'baas-silent-install.conf.j2'
+    dest: "{{ opdk_baas_silent_install_file_path }}"
     force: yes
     owner: '{{ opdk_user_name }}'
     group: '{{ opdk_group_name }}'
@@ -24,8 +19,8 @@
 
 - name: Copy provided silent-install file
   copy:
-    src: "{{ provided_response_file }}"
-    dest: "{{ opdk_response_file_path }}"
+    src: "{{ opdk_baas_provided_silent_install_file }}"
+    dest: "{{ opdk_baas_silent_install_file_path }}"
     owner: '{{ opdk_user_name }}'
     group: '{{ opdk_group_name }}'
     mode: 0644
