@@ -46,3 +46,8 @@
 #  tags:
 #  - org
 
+- include: opdk-setup-config-files.yml
+
+- include: opdk-setup-log-files.yml
+
+- include: opdk-setup-property-files.yml

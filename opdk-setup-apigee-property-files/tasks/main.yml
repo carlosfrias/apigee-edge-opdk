@@ -1,6 +1,6 @@
 ---
 # tasks file for opdk-setup-logs
-- name: Find installation logs and configs to download
+- name: Find installation property files to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
   with_items:
@@ -15,66 +15,22 @@
   - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
   ignore_errors: yes
 
-- name: Download properties
+- name: Pull results out of property search
+  set_fact:
+    results: '{{ item }}'
+  with_flattened:
+  - '{{ logs.results }}'
+
+- name: Pull lines out of results
+  set_fact:
+    lines: '{{ item }}'
+  with_flattened:
+  - '{{ results.stdout_lines }}'
+
+- name: Download property files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[0].stdout_lines }}'
+  with_items:
+  - "{{ lines }}"
   ignore_errors: yes
-
-- name: Download properties
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[1].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download properties
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[2].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download properties
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[3].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download properties
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[4].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download properties
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[5].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download properties
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[6].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download properties
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[7].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download properties
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[8].stdout_lines }}'
-  ignore_errors: yes
-
