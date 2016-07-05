@@ -1,8 +1,5 @@
 ---
 # tasks file for opdk-setup-rollback-os
-- name: Release any apigee user owned processes
-  shell: 'killall -9 -u apigee'
-  ignore_errors: yes
 
 - name: Clean up other JDKs
   shell: 'rpm -e $(rpm -qa | egrep "^(java|jdk|jre).*")'
@@ -44,13 +41,25 @@
   shell: 'yum clean all'
   ignore_errors: yes
 
+- name: Release any apigee user owned processes
+  shell: 'killall5 -9 -u apigee'
+  ignore_errors: yes
+  async: 45
+  poll: 0
+
 - name: Remove the apigee user
+  ignore_errors: yes
   user:
     name: "{{ opdk_user_name }}"
     state: absent
     remove: yes
+  async: 45
+  poll: 0
 
 - name: Create the apigee group
+  ignore_errors: yes
   group:
     name: "{{ opdk_group_name }}"
     state: absent
+  async: 45
+  poll: 0

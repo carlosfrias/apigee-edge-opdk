@@ -1,7 +1,7 @@
 ---
 # defaults file for opdk-setup-logs
 apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee4
+apigee_installation_dir: apigee
 apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
 apigee_bin: "{{ apigee_installation_home }}/bin"
 all_status: "{{ apigee_bin }}/all-status.sh"
@@ -25,3 +25,5 @@ property_files:
   - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*properties' }
   - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*properties' }
   - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*baas-usergrid/', name: '*properties' }

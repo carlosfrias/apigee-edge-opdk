@@ -32,6 +32,11 @@
     owner: '{{ opdk_user_name }}'
     group: '{{ opdk_group_name }}'
 
+#- name: Download bootstrap
+#  bootstrap:
+#    version: '{{ opdk_version }}'
+#    dest_dir: '{{ bootstrap_script }}'
+
 - name: Install bootstrap
   shell: '{{ bootstrap_script }} apigeeuser={{ apigee_repo_user }} apigeepassword="{{ apigee_repo_password }}" JAVA_FIX=C'
   register: results

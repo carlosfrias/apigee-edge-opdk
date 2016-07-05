@@ -1,7 +1,12 @@
 ---
 # tasks file for opdk-baas-onboarding
 - name: Create Baas org and user
-  shell: '{{ apigee_installation_home }}/baas-usergrid/bin/create_org_and_user.py -o {{ org_name }} -a {{ opdk_user_name }} -p {{ opdk_user_pass }}'
+  expect:
+    command: 'python {{ apigee_installation_home }}/baas-usergrid/bin/create_org_and_user.py -o {{ org_name }} -a {{ baas_regular_user_name }} -p {{ opdk_user_pass }}'
+    responses:
+      (?i)username for authentication: '{{ baas_admin_name }}'
+      (?i)password for authentication: '{{ opdk_user_pass }}'
+
   register: result
 
 - name: Bass org and user report

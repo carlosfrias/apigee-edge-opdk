@@ -2,7 +2,7 @@
 # tasks file for opdk-setup-bootstrap-rollback
 
 - name: Remove apigee, edge, baas and qpid packages
-  shell: 'rpm -e $(rpm -qa | egrep "(apigee-|edge-|baas-|qpid-|python-qpid|libdb-cxx)")'
+  shell: 'rpm -e $(rpm -qa | egrep "(apigee-|edge-|baas-|qpid-|python-qpid|libdb-cxx|nginx)")'
   register: remove_all_apigee_status
   ignore_errors: yes
 

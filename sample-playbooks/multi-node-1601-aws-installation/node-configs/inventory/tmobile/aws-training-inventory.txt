@@ -8,9 +8,9 @@ dc-2
 
 [dc-1]
 prd-rbl-app-w2-i-0a24c3a5 ansible_host=10.65.194.92
-prd-rbl-cas-w2-i-c223c46d ansible_host=10.65.194.12 rack=:1,1
-prd-rbl-cas-w2-i-dc23c473 ansible_host=10.65.194.11 rack=:1,1
-prd-rbl-cas-w2-i-dd23c472 ansible_host=10.65.194.13 rack=:1,1
+prd-rbl-cas-w2-i-c223c46d ansible_host=10.65.194.12
+prd-rbl-cas-w2-i-dc23c473 ansible_host=10.65.194.11
+prd-rbl-cas-w2-i-dd23c472 ansible_host=10.65.194.13
 prd-rbl-api-w2-i-0424c3ab ansible_host=10.65.194.6
 prd-rbl-api-w2-i-0524c3aa ansible_host=10.65.194.8
 prd-rbl-api-w2-i-0724c3a8 ansible_host=10.65.194.7
@@ -26,9 +26,9 @@ prd-rbl-cas-w2-i-1323c4bc ansible_host=10.65.194.65
 
 [dc-2]
 prd-rbl-app-w2-i-fed31225 ansible_host=10.65.194.160
-prd-rbl-cas-w2-i-d1d0110a ansible_host=10.65.194.217 rack=:2,1
-prd-rbl-cas-w2-i-d2d01109 ansible_host=10.65.194.219 rack=:2,1
-prd-rbl-cas-w2-i-d3d01108 ansible_host=10.65.194.218 rack=:2,1 zk_observer=true
+prd-rbl-cas-w2-i-d1d0110a ansible_host=10.65.194.217
+prd-rbl-cas-w2-i-d2d01109 ansible_host=10.65.194.219
+prd-rbl-cas-w2-i-d3d01108 ansible_host=10.65.194.218 zk_observer=true
 prd-rbl-api-w2-i-ccd31217 ansible_host=10.65.194.224
 prd-rbl-api-w2-i-cdd31216 ansible_host=10.65.194.223
 prd-rbl-api-w2-i-ced31215 ansible_host=10.65.194.222

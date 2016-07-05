@@ -3,25 +3,37 @@
 - name: Find installation log files to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
-  with_items: '{{ log_files }}'
+  with_items:
+  - { dir: '/tmp', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}', name: '*out' }
+  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
   ignore_errors: yes
 
-- name: Pull results out of logs search
-  set_fact:
-    results: '{{ item }}'
-  with_flattened:
-  - '{{ logs.results }}'
-
-- name: Pull lines out of results
-  set_fact:
-    lines: '{{ item }}'
-  with_flattened:
-  - '{{ results.stdout_lines }}'
-
-- name: Download log files
+- name: Download logs
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
-  with_items:
-  - "{{ lines }}"
+  with_items: '{{ logs.results[0].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download logs
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[1].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download logs
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[2].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download logs
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[3].stdout_lines }}'
   ignore_errors: yes

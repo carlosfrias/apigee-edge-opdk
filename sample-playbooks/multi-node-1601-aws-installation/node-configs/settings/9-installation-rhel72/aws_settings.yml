@@ -8,7 +8,7 @@ vpc_subnet_id: subnet-3fbcb64b
 wait: yes
 assign_public_ip: yes
 name_prefix: cfrias
-session_name: 1601-rhel72-1
+session_name: 1601-edge-rhel72-1
 application: edge
 bag: infrastructure
 department: 45

@@ -3,104 +3,119 @@
 - name: Find config files to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
-  with_items: '{{ config_files }}'
+  with_items:
+  - { dir: '/tmp', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*router/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}', name: '*sh' }
   ignore_errors: yes
-
-- name: Pull results out of config search
-  set_fact:
-    results: '{{ item }}'
-  with_flattened:
-  - '{{ logs.results }}'
-
-- name: Pull lines out of results
-  set_fact:
-    lines: '{{ item }}'
-  with_flattened:
-  - '{{ results.stdout_lines }}'
 
 - name: Download config files
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
-  with_items:
-  - "{{ lines }}"
+  with_items: '{{ logs.results[0].stdout_lines }}'
   ignore_errors: yes
 
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[1].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[2].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[3].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[4].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[5].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[6].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[7].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[8].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[9].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[10].stdout_lines }}'
-#  ignore_errors: yes
-#
-#- name: Download config files
-#  fetch:
-#    src: "{{ item }}"
-#    dest: '{{ conf_logs_dir }}'
-#  with_items: '{{ logs.results[11].stdout_lines }}'
-#  ignore_errors: yes
-#
-#
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[1].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[2].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[3].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[4].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[5].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[6].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[7].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[8].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[9].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[10].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[11].stdout_lines }}'
+  ignore_errors: yes
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[12].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[13].stdout_lines }}'
+  ignore_errors: yes
+
+

@@ -2,7 +2,7 @@
 # defaults file for opdk-setup-logs
 
 log_files:
-  - { dir: '/tmp', name: '*log' }
+  - { dir: '/tmp/', name: '*log' }
   - { dir: '{{ apigee_installation_home }}/var/log/', name: '*log' }
   - { dir: '{{ apigee_installation_home }}', name: '*out' }
   - { dir: '{{ opdk_installer_path }}', name: '*.txt' }

@@ -58,9 +58,9 @@ BAAS_USERGRID_CLUSTERNAME="{{ baas_cluster_name }}"
 
 # URL and port of the load balancer for the API BaaS Stack nodes, # or IP/DNS and port of a single Stack node with no load balancer.
 {% if baas_load_balancer_host is defined and baas_load_balancer_host and baas_load_balancer_port is defined and baas_load_balancer_port %}
-BAAS_USERGRID_URL=http://{{ baas_load_balancer_host }}:{{ baas_load_balancer_port }}
-{% elif groups['portal'][0] is defined and groups['portal'][0] and baas_portal_port is defined and baas_portal_port %}
-BAAS_USERGRID_URL=http://{{ groups['portal'][0] }}:{{ baas_portal_port }}
+BAAS_USERGRID_URL="http://{{ baas_load_balancer_host }}:{{ baas_load_balancer_port }}"
+{% elif groups['portal'][0] is defined and groups['baas'][0] and baas_portal_port is defined and baas_portal_port %}
+BAAS_USERGRID_URL="http://{{ groups['baas'][0] }}:{{ baas_load_balancer_port }}"
 {% endif %}
 
 # API BaaS Portal information.
@@ -79,8 +79,8 @@ BAAS_PORTAL_LISTEN_PORT={{ baas_portal_port }}
 # SMTP information. BaaS requires an SMTP server.
 SMTPHOST={{ baas_smtp_host }}
 SMTPPORT={{ baas_smtp_port }}
-SMTPUSER={{ baas_smtp_user }}
-SMTPPASSWORD={{ baas_smtp_user_pass }}
+SMTPUSER='{{ baas_smtp_user }}'
+SMTPPASSWORD='{{ baas_smtp_user_pass }}'
 SMTPSSL={{ baas_smtp_ssl }}
 
 LICENSE_FILE={{ opdk_license_file_path }}
