@@ -14,3 +14,14 @@ opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
 opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
 
 conf_logs_dir: configs_and_logs
+
+property_files:
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*router/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }

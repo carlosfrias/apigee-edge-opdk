@@ -3,11 +3,7 @@
 - name: Find installation log files to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
-  with_items:
-  - { dir: '/tmp', name: '*log' }
-  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*log' }
-  - { dir: '{{ apigee_installation_home }}', name: '*out' }
-  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
+  with_items: '{{ log_files }}'
   ignore_errors: yes
 
 - name: Pull results out of logs search
