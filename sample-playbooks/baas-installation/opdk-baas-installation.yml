@@ -28,6 +28,7 @@
   - elastic
 
 - hosts: 'baas'
+  serial: 1
   roles:
   - { role: opdk-baas-installation, profile: 'b' }
   tags:
@@ -39,7 +40,7 @@
   tags:
   - portal
 
-- hosts: 'baas'
+- hosts: 'baas[0]'
   roles:
   - opdk-baas-onboarding
   tags:

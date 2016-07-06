@@ -6,9 +6,5 @@
     responses:
       (?i)username for authentication: '{{ baas_admin_name }}'
       (?i)password for authentication: '{{ opdk_user_pass }}'
-
   register: result
-
-- name: Bass org and user report
-  debug:
-    var: result
+  ignore_errors: true
