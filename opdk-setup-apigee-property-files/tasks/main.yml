@@ -1,16 +1,95 @@
 ---
 # tasks file for opdk-setup-logs
-- name: Find installation logs and configs to download
+- name: Find installation property files to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
   with_items:
-  - { dir: '{{ apigee_installation_home }}', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*router/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*properties' }
   ignore_errors: yes
 
-- name: Download Installation Logs *properties
+- name: Download properties
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[0].stdout_lines }}'
   ignore_errors: yes
 
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[1].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[2].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[3].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[4].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[5].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[6].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[7].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[8].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[9].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[10].stdout_lines }}'
+  ignore_errors: yes

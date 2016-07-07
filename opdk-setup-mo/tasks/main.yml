@@ -1,6 +1,6 @@
 ---
 # tasks file for opdk-setup-mo
 - name: Setup Router Server
-  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p mo"
+  shell: "{{ apigee_setup }} -f {{ opdk_installation_config_file }} -p mo"
   register: results
 

@@ -2,7 +2,7 @@
 # defaults file for opdk-setup-default-settings
 
 # Target Java JDK version
-jdk_version: '1.7'
+jdk_version: '1.8'
 
 # System file path to use in JAVA_HOME
 java_home: /usr/lib/jvm/java-openjdk
@@ -50,10 +50,16 @@ apigee_all: '{{ apigee_installation_home }}/apigee-service/bin/apigee-all'
 opdk_installer_path: "/tmp"
 
 # Apigee license file path
-opdk_license_file_path: "{{ opdk_installer_path }}/license.txt"
+opdk_license_file_path: "{{ opdk_installer_path }}/license.conf"
+
+# Apigee license file provided by customer
+opdk_license_file_name: '~/.apigee/license.txt'
 
 # Apigee silent installation configuration file
-opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
+opdk_installation_config_file: "{{ opdk_installer_path }}/silent-install.conf"
+
+# Silent installation configuration file that is provided manually
+provided_response_file: ''
 
 # Apigee validate config file path
 apigee_validate_config_file: '{{ opdk_installer_path }}/apigee-validate.conf'
@@ -106,3 +112,49 @@ open_ldap_port: 10389
 
 # Local folder in which to store logs and config files
 conf_logs_dir: configs_and_logs
+
+#--------------------------------
+# Baas Default Variables, this section could be a candidate for
+# export into another role just for Baas defaults.
+
+# Organization name used in Edge and Baas setups
+org_name: opdk
+
+# Default location and name of the Baas Silent Install file
+opdk_baas_silent_install_file_path: /tmp/baas-silent-install.conf
+
+# Baas silent install file provided by customer
+opdk_baas_provided_silent_install_file: ''
+
+# Define the API BaaS administrator account.
+baas_admin_name: 'baas_admin'
+baas_admin_email: baas_admin@apigee.com
+baas_admin_pass: '{{ opdk_user_pass }}'
+baas_superuser_name: 'superuser'
+baas_superuser_pass: '{{ opdk_user_pass }}'
+
+# Cassandra uname/pword if you enabled Cassandra authentication.
+# Even if you have not enabled Cassandra authentication,
+# you must pass values for these properties.
+opdk_cass_username: '{{ opdk_user_name }}'
+# Default value
+opdk_cass_password: '{{ opdk_user_pass }}'
+
+# API BaaS Stack information.
+# Default cluster name is "apigee_baas"
+baas_cluster_name: 'apigee_baas'
+
+# URL and port of the load balancer for the API BaaS Stack nodes,
+# or IP/DNS and port of a single Stack node with no load balancer.
+baas_load_balancer_host: ''
+baas_load_balancer_port: '8080'
+
+# Portal port. Default value is 9000.
+baas_portal_port: '9000'
+
+# SMTP information. BaaS requires an SMTP server.
+baas_smtp_host: 'smtp.gmail.com'
+baas_smtp_port: '465'
+baas_smtp_user: '{{ baas_admin_email }}'
+baas_smtp_user_pass: '{{ baas_admin_pass }}'
+baas_smtp_ssl: 'n'

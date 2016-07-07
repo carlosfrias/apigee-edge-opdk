@@ -1,6 +1,6 @@
 ---
 - name: Apigee Ldap installation
-  shell: '{{ apigee_setup_16 }} -p ld -f {{ opdk_response_file_path }}'
+  shell: '{{ apigee_setup_16 }} -p ld -f {{ opdk_installation_config_file }}'
   register: ld_install_results
   when: not ld_port_status.state == 'started'
   async: 20

@@ -24,7 +24,7 @@
     timeout: 1
 
 - name: Setup Qpid and Postgres
-  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p sax"
+  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_installation_config_file }} -p sax"
   ignore_errors: yes
   when: ingest_jmx_port_status | failed or pg_db_port_status | failed or qpid_self_port_status | failed
 

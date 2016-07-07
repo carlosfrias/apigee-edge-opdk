@@ -7,7 +7,7 @@
 - include: 4150703-main.yml
   when: opdk_version | version_compare('4.16.01', '<')
 
-- name: Fix permissions on pgdata folder
+- name: Set permissions on pgdata folder
   file:
     path: '{{ apigee_posgresql_data_dir }}'
     owner: '{{ opdk_user_name }}'
@@ -17,5 +17,5 @@
   when: opdk_version | version_compare('4.16.01', '>=')
 
 - name: Postgresql Server installation
-  shell: '{{ apigee_setup }} -p ps -f {{ opdk_response_file_path }}'
+  shell: '{{ apigee_setup }} -p ps -f {{ opdk_installation_config_file }}'
   when: opdk_version | version_compare('4.16.01', '>=')

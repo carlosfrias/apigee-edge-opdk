@@ -1,0 +1,7 @@
+---
+
+- hosts: '{{ hosts }}'
+  roles:
+  - opdk-cassandra-client-update
+  tags:
+  - c-update

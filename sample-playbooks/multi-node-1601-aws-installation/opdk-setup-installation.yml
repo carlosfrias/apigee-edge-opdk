@@ -28,6 +28,10 @@
   vars:
     hosts: 'dc-1-rmp'
 
+- include: opdk-setup-qpid.yml
+  vars:
+    hosts: 'dc-1-qpid'
+
 - include: opdk-setup-postgres.yml
   vars:
     hosts: 'dc-1-pg'
@@ -45,3 +49,5 @@
 - include: opdk-setup-config-files.yml
 
 - include: opdk-setup-log-files.yml
+
+- include: opdk-setup-property-files.yml

@@ -33,7 +33,7 @@
 
 - name: Install Message Processor and Router
   ignore_errors: yes
-  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p rmp"
+  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_installation_config_file }} -p rmp"
   when: router_self_port_status | failed and mp_jmx_port_status | failed and router_jmx_port_status | failed and mp_self_port_status | failed
   register: rmp_install
 

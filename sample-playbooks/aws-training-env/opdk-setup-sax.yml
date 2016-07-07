@@ -1,6 +1,11 @@
 ---
 
-- include: opdk-setup-ssh.yml
+- hosts: pg
+  tasks:
+  - name: Proactively remove selinux packages with version conflict
+    yum:
+      name:
+      state: absent
 
 - hosts: pg
   serial: 1

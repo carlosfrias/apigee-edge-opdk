@@ -1,0 +1,9 @@
+---
+# tasks file for opdk-restart
+
+
+- name: Start Apigee
+  shell: '{{ apigee_all }} restart'
+  register: start_cmd_report
+  when: opdk_version | version_compare('4.16.01', '>=')
+

@@ -1,0 +1,6 @@
+---
+# tasks file for opdk-setup-component
+
+- name: Setup Apigee component for version 4.16.01 or greater - {{ profile }}
+  shell: '{{ apigee_setup }} -p {{ profile }} -f {{ opdk_installation_config_file }}'
+  when: opdk_version | version_compare('4.16.01', '>=')

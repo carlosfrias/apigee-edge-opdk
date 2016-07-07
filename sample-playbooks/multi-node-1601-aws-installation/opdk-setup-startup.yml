@@ -1,8 +1,6 @@
 ---
 - hosts: ds
   serial: 1
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-startup
   tags:
@@ -11,8 +9,6 @@
 
 - hosts: ms
   serial: 1
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-startup
   tags:
@@ -21,8 +17,6 @@
 
 - hosts: rmp
   serial: 1
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-startup
   tags:
@@ -31,8 +25,6 @@
 
 - hosts: sax
   serial: 1
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-startup
   tags:

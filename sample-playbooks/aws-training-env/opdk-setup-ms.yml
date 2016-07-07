@@ -1,5 +1,5 @@
 ---
-- hosts: ms
+- hosts: '{{ hosts }}'
   strategy: free
   vars_files:
   - opdk-setup-settings.yml

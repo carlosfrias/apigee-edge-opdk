@@ -1,0 +1,6 @@
+---
+- include: facts.yml
+
+- include: opdk-setup-bootstrap-rollback.yml
+
+- include: opdk-setup-os-rollback.yml

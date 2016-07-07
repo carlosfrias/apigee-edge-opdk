@@ -1,0 +1,32 @@
+---
+- hosts: ds
+  serial: 1
+  roles:
+  - opdk-restart
+  tags:
+  - restart-ds
+  - restart
+
+- hosts: ms
+  serial: 1
+  roles:
+  - opdk-restart
+  tags:
+  - restart-ms
+  - restart
+
+- hosts: rmp
+  serial: 1
+  roles:
+  - opdk-restart
+  tags:
+  - restart-rmp
+  - restart
+
+- hosts: sax
+  serial: 1
+  roles:
+  - opdk-restart
+  tags:
+  - restart-sax
+  - restart

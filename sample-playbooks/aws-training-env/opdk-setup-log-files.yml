@@ -1,0 +1,11 @@
+---
+- include: facts.yml
+
+- hosts: planet
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-apigee-log-files
+  tags:
+  - logs
+  - apigee-logs

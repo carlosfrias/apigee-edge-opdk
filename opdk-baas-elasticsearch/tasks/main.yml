@@ -1,0 +1,13 @@
+---
+# tasks file for opdk-baas-os-elasticsearch
+- name: Update Elastic Search to use 6G on a standalone node
+  copy:
+    src: elasticsearch.properties
+    dest: '{{ apigee_installation_home }}/customer/application/elasticsearch.properties'
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+    mode: '{{ 0644 }}'
+
+- name: Restart ElasticSearch to pick up the file changes
+  shell: '{{ apigee_service }} apigee-elasticsearch restart'
+

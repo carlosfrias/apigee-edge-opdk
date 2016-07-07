@@ -6,7 +6,6 @@
   - opdk-setup-qpid
   tags:
   - qpid
-  - pg
 
 - hosts: pgmaster
   serial: 1
@@ -16,8 +15,8 @@
   - opdk-setup-postgres
   - opdk-setup-postgres-master
   tags:
-  - pgmaster
   - pg
+  - pgmaster
 
 - hosts: pgstandby
   serial: 1
@@ -27,5 +26,5 @@
   - opdk-setup-postgres
   - opdk-setup-postgres-standby
   tags:
-  - pgstandby
   - pg
+  - pgstandby

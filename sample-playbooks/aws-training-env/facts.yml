@@ -1,0 +1,7 @@
+---
+- hosts: planet
+  strategy: free
+  tasks:
+  - setup:
+  tags:
+  - facts

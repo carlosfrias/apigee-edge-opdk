@@ -1,0 +1,16 @@
+---
+- hosts: '{{ hosts }}'
+  gather_facts: yes
+  roles:
+  - opdk-baas-silent-config-file
+  tags:
+  - silent
+  - common
+
+- hosts: '{{ hosts }}'
+  gather_facts: yes
+  roles:
+  - opdk-setup-component-installer
+  tags:
+  - installer
+  - common

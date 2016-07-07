@@ -8,7 +8,6 @@ user_name: opdk@apigee.com
 user_pass: Apigee123!
 first_name: Opdk
 last_name: User
-org_name: opdk
 virtual_host_port: 9001
 virtual_host_name: default
 virtual_host_alias: '127.0.0.1'
@@ -21,6 +20,6 @@ create_org: "{{ apigee_bin }}/create-org.sh"
 create_roles: "{{ apigee_bin }}/create-roles.sh"
 add_env: "{{ apigee_bin }}/add-env.sh"
 
-onboarding_config: 'apigee-provision-setup-org.conf'
+onboarding_config: 'apigee-provision.conf'
 onboarding_config_file_path: "{{ opdk_installer_path }}/{{ onboarding_config }}"
 apigee_provision_dir: '{{ apigee_installation_home }}/apigee-provision'
