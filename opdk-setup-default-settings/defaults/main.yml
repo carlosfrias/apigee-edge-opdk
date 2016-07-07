@@ -155,6 +155,6 @@ baas_portal_port: '9000'
 # SMTP information. BaaS requires an SMTP server.
 baas_smtp_host: 'smtp.gmail.com'
 baas_smtp_port: '465'
-baas_smtp_user: '{{ opdk_user_email }}'
-baas_smtp_user_pass: '{{ opdk_user_pass }}'
+baas_smtp_user: '{{ baas_admin_email }}'
+baas_smtp_user_pass: '{{ baas_admin_pass }}'
 baas_smtp_ssl: 'n'
