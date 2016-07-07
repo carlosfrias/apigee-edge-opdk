@@ -1,5 +1,5 @@
 ---
-# tasks file for opdk-baas-installation
+# tasks file for opdk-baas-setup-component
 
 - include: network-interface-name.yml
 

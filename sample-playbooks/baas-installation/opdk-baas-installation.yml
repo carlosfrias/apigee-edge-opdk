@@ -17,32 +17,32 @@
 
 - hosts: 'cassandra'
   roles:
-  - { role: opdk-baas-installation, profile: 'c' }
+  - { role: opdk-baas-setup-component, profile: 'c' }
   tags:
   - cassandra
 
 - hosts: 'elastic'
   roles:
-  - { role: opdk-baas-installation, profile: 'e' }
+  - { role: opdk-baas-setup-component, profile: 'e' }
   tags:
   - elastic
 
 - hosts: 'baas'
   serial: 1
   roles:
-  - { role: opdk-baas-installation, profile: 'b' }
+  - { role: opdk-baas-setup-component, profile: 'b' }
   tags:
   - baas
 
 - hosts: 'portal'
   roles:
-  - { role: opdk-baas-installation, profile: 'p' }
+  - { role: opdk-baas-setup-component, profile: 'p' }
   tags:
   - portal
 
 - hosts: 'baas[0]'
   roles:
-  - opdk-baas-onboarding
+  - opdk-baas-create-org-and-user
   tags:
   - org
 

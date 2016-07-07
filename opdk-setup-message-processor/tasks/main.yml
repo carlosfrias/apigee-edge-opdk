@@ -34,7 +34,7 @@
 
 - name: Setup Message Processor
   ignore_errors: yes
-  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p mp"
+  shell: "{{ apigee_setup }} -f {{ opdk_installation_config_file }} -p mp"
   when: mp_ext_mgmt_port_status | failed and mp_int_mgmt_port_status | failed and mp_jmx_port_status | failed and mp_router_port_status | failed
 
 - name: Status of Message Processor External Management Port

@@ -11,7 +11,7 @@ opdk_user_name: apigee
 opdk_user_home: /home/{{ opdk_user_name }}
 opdk_staging_folder_name: opdk
 opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
-opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
+opdk_installation_config_file: "{{ opdk_installer_path }}/response.txt"
 
 conf_logs_dir: configs_and_logs
 

@@ -5,6 +5,6 @@
   when: opdk_version | version_compare('4.16.01', '<')
 
 - name: Qpid installation for version greater than or equal to 4.16.01
-  shell: '{{ apigee_setup }} -p qs -f {{ opdk_response_file_path }}'
+  shell: '{{ apigee_setup }} -p qs -f {{ opdk_installation_config_file }}'
   when: opdk_version | version_compare('4.16.01', '>=')
 

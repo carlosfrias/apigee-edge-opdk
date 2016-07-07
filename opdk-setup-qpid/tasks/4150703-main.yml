@@ -32,7 +32,7 @@
     timeout: 1
 
 - name: Qpid installation for version less than 4.16.01
-  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p qs"
+  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_installation_config_file }} -p qs"
 
 - name: Status of Qpid External Management Port
   register: qpid_ext_mgmt_port_status

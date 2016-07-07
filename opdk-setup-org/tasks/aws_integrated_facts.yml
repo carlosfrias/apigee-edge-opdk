@@ -1,11 +1,15 @@
 ---
 - block:
-  - name: Get public address
+  - name: Get public address for node on AWS
     set_fact:
       public_address: '{{ ansible_ec2_public_ipv4 }}'
 
-  - name: Get private address
+  - name: Get private address for node on AWS
     set_fact:
       local_address: '{{ ansible_ec2_local_ipv4 }}'
+
+  - name: Get public address for RMP node on AWS
+    set_fact:
+      rmp_public_address: "{{ hostvars[groups['rmp'][0]].ansible_ec2_public_ipv4 }}"
 
   when: "{{ ansible_bios_version | search('amazon') and ansible_ec2_public_ipv4 is defined and ansible_ec2_local_ipv4 is defined }}"

@@ -33,7 +33,7 @@
 
 - block:
   - name: Setup Management Server
-    shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p ms"
+    shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_installation_config_file }} -p ms"
     when: ms_http_port_status | failed or ms_jmx_port_status | failed or ui_http_port_status | failed
     register: ms_results
 

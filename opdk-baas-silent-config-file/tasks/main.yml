@@ -3,10 +3,6 @@
 
 - include: network-interface-name.yml
 
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
-
 - name: Construct the silent-install file
   template:
     src: 'baas-silent-install.conf.j2'

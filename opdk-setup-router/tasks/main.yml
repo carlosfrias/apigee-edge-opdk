@@ -26,7 +26,7 @@
 
 - name: Setup Router
   ignore_errors: yes
-  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p r"
+  shell: "{{ apigee_setup }} -f {{ opdk_installation_config_file }} -p r"
   when: router_ext_mgmt_port_status | failed and router_int_mgmt_port_status | failed and router_jmx_port_status | failed
 
 - name: Status of Router External Management Port

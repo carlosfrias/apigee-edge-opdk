@@ -5,6 +5,6 @@
   when: opdk_version | version_compare('4.16.01', '<')
 
 - name: Install Apigee Management Server
-  shell: '{{ apigee_setup }} -p ms -f {{ opdk_response_file_path }}'
+  shell: '{{ apigee_setup }} -p ms -f {{ opdk_installation_config_file }}'
   when: opdk_version | version_compare('4.16.01', '>=')
 
