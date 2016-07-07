@@ -78,12 +78,12 @@
 #  - os
 #  - os-pg
 
-- hosts: planet
-  become: true
-  strategy: free
-  roles:
-  - opdk-setup-system-configs-logs
-  tags:
-  - os
-  - os-logs
-  - logs
+#- hosts: planet
+#  become: true
+#  strategy: free
+#  roles:
+#  - opdk-setup-system-configs-logs
+#  tags:
+#  - os
+#  - os-logs
+#  - logs

@@ -1,7 +1,5 @@
 ---
 - hosts: baas[0]
-  vars:
-    endpoint: http://localhost:8080
   roles:
   - opdk-baas-create-org-and-user
 
