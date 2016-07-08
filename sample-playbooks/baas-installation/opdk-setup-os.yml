@@ -13,21 +13,6 @@
   become: true
   strategy: free
   roles:
-  - opdk-setup-default-settings
-  tasks:
-  - name: Create symlink to data folder
-    file:
-      src: /u01/apigee
-      dest: '{{ apigee_installation_home }}'
-      owner: '{{ opdk_user_name }}'
-      group: '{{ opdk_group_name }}'
-      state: link
-
-
-- hosts: planet
-  become: true
-  strategy: free
-  roles:
   - opdk-setup-selinux-disable
   - opdk-shutdown-iptables
   - opdk-time-sync

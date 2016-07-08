@@ -25,6 +25,7 @@
   file:
     path: '{{ item }}'
     state: absent
+    follow: yes
   with_items:
   - '{{ apigee_installation_home }}'
   - '{{ bootstrap_script }}'
