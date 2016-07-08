@@ -51,10 +51,29 @@
     recurse: yes
     mode: 0755
 
-- name: Setup permission for apigee installation home
-  file:
-    path: '{{ apigee_installation_home }}'
-    group: '{{ opdk_group_name }}'
-    owner: '{{ opdk_user_name }}'
-    mode: 0755
-    state: directory
+- block:
+
+  - name: Setup permission for apigee installation home
+    file:
+      path: '{{ apigee_installation_home }}'
+      group: '{{ opdk_group_name }}'
+      owner: '{{ opdk_user_name }}'
+      mode: 0755
+      state: directory
+
+  rescue:
+
+    - name: Does installation_home exists?
+      stat:
+        path: '{{ apigee_installation_home }}'
+      register: found
+
+    - name: Setup permission for apigee installation home
+      file:
+        path: '{{ apigee_installation_home }}'
+        group: '{{ opdk_group_name }}'
+        owner: '{{ opdk_user_name }}'
+        mode: 0755
+        state: link
+      when: found.stat.exists and found.stat.islnk
+

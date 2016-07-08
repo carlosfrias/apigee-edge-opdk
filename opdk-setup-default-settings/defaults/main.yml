@@ -127,10 +127,10 @@ opdk_baas_silent_install_file_path: /tmp/baas-silent-install.conf
 opdk_baas_provided_silent_install_file: ''
 
 # Define the API BaaS administrator account.
-baas_admin_name: 'baas_admin'
-baas_admin_email: baas_admin@apigee.com
+baas_admin_name: 'superuser'
+baas_admin_email: superuser@apigee.com
 baas_admin_pass: '{{ opdk_user_pass }}'
-baas_superuser_name: 'superuser'
+baas_superuser_name: 'baas_admin'
 baas_superuser_pass: '{{ opdk_user_pass }}'
 
 # Cassandra uname/pword if you enabled Cassandra authentication.

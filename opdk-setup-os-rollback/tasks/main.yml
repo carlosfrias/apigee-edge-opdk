@@ -95,3 +95,4 @@
   delay: 10
   async: 10
   poll: 0
+  when: reboot is defined and reboot
