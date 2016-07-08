@@ -50,30 +50,43 @@
     owner: '{{ opdk_user_name }}'
     recurse: yes
     mode: 0755
+  when: sym_dir is not defined and not sym_dir
 
-- block:
+- name: Confirm that OPDK staging folder is in place
+  file:
+    path: '{{ opdk_installer_path }}'
+    state: directory
+    group: '{{ opdk_group_name }}'
+    owner: '{{ opdk_user_name }}'
+    recurse: yes
+    mode: 0755
+  when: sym_dir is defined and sym_dir
 
-  - name: Setup permission for apigee installation home
-    file:
-      path: '{{ apigee_installation_home }}'
-      group: '{{ opdk_group_name }}'
-      owner: '{{ opdk_user_name }}'
-      mode: 0755
-      state: directory
-
-  rescue:
-
-    - name: Does installation_home exists?
-      stat:
-        path: '{{ apigee_installation_home }}'
-      register: found
-
-    - name: Setup permission for apigee installation home
-      file:
-        path: '{{ apigee_installation_home }}'
-        group: '{{ opdk_group_name }}'
-        owner: '{{ opdk_user_name }}'
-        mode: 0755
-        state: link
-      when: found.stat.exists and found.stat.islnk
+#- block:
+#
+#  - name: Setup permission for apigee installation home
+#    file:
+#
+#      path: '{{ apigee_installation_home }}'
+#      group: '{{ opdk_group_name }}'
+#      owner: '{{ opdk_user_name }}'
+#      mode: 0755
+#      state: directory
+#
+#  rescue:
+#
+#    - name: Does installation_home exists?
+#      stat:
+#        path: '{{ apigee_installation_home }}'
+#      register: found
+#
+#    - name: Setup permission for apigee installation home
+#      file:
+#        src: '{{ link_source }}'
+#        path: '{{ apigee_installation_home }}'
+#        group: '{{ opdk_group_name }}'
+#        owner: '{{ opdk_user_name }}'
+#        mode: 0755
+#        state: link
+#      when: found.stat.exists and found.stat.islnk
 
