@@ -42,51 +42,43 @@
     path: "{{ opdk_user_info.home }}/.ssh/known_hosts_prep"
     state: absent
 
-#- name: Confirm that OPDK staging folder is in place
-#  file:
-#    path: '{{ opdk_installer_path }}'
-#    state: directory
-#    group: '{{ opdk_group_name }}'
-#    owner: '{{ opdk_user_name }}'
-#    recurse: yes
-#    mode: 0755
-#  when: sym_dir is not defined and not sym_dir
-#
-#- name: Confirm that OPDK staging folder is in place
-#  file:
-#    path: '{{ opdk_installer_path }}'
-#    state: link
-#    group: '{{ opdk_group_name }}'
-#    owner: '{{ opdk_user_name }}'
-#    recurse: yes
-#    mode: 0755
-#  when: sym_dir is defined and sym_dir
+- name: Confirm that OPDK staging folder is in place
+  file:
+    path: '{{ opdk_installer_path }}'
+    state: directory
+    group: '{{ opdk_group_name }}'
+    owner: '{{ opdk_user_name }}'
+    recurse: yes
+    mode: 0755
 
-#- block:
-#
-#  - name: Setup permission for apigee installation home
-#    file:
-#
-#      path: '{{ apigee_installation_home }}'
-#      group: '{{ opdk_group_name }}'
-#      owner: '{{ opdk_user_name }}'
-#      mode: 0755
-#      state: directory
-#
-#  rescue:
-#
-#    - name: Does installation_home exists?
-#      stat:
-#        path: '{{ apigee_installation_home }}'
-#      register: found
-#
-#    - name: Setup permission for apigee installation home
-#      file:
-#        src: '{{ link_source }}'
-#        path: '{{ apigee_installation_home }}'
-#        group: '{{ opdk_group_name }}'
-#        owner: '{{ opdk_user_name }}'
-#        mode: 0755
-#        state: link
-#      when: found.stat.exists and found.stat.islnk
+- name: Setup permission for apigee installation home directory
+  file:
+    path: '{{ apigee_installation_home }}'
+    group: '{{ opdk_group_name }}'
+    owner: '{{ opdk_user_name }}'
+    mode: 0755
+    state: directory
+  when: '{{ linked_apigee_installation_home is not defined or not linked_apigee_installation_home }}'
+
+- block:
+
+  - name: Confirm existence or create target directory for apigee installation home link target
+    file:
+      path: '{{ linked_apigee_installation_home }}'
+      group: '{{ opdk_group_name }}'
+      owner: '{{ opdk_user_name }}'
+      mode: 0755
+      state: directory
+
+  - name: Create apigee installation home as a link to provided target - {{ linked_apigee_installation_home }}
+    file:
+      src: '{{ linked_apigee_installation_home }}'
+      path: '{{ apigee_installation_home }}'
+      group: '{{ opdk_group_name }}'
+      owner: '{{ opdk_user_name }}'
+      force: yes
+      mode: 0755
+      state: link
+
+  when: '{{ linked_apigee_installation_home is defined or linked_apigee_installation_home }}'
 
