@@ -1,5 +1,4 @@
 ---
-
 - hosts: planet
   become: true
   strategy: free
@@ -14,10 +13,24 @@
   become: true
   strategy: free
   roles:
+  - opdk-setup-default-settings
+  tasks:
+  - name: Create symlink to data folder
+    file:
+      src: /u01/apigee
+      dest: '{{ apigee_installation_home }}'
+      owner: '{{ opdk_user_name }}'
+      group: '{{ opdk_group_name }}'
+      state: link
+
+
+- hosts: planet
+  become: true
+  strategy: free
+  roles:
   - opdk-setup-selinux-disable
   - opdk-shutdown-iptables
   - opdk-time-sync
-#  - opdk-setup-hostfile
   - opdk-setup-os-minimum
   - opdk-setup-os-common
   tags:
@@ -42,48 +55,3 @@
   - os
   - os-ds
 
-#- hosts: ldap
-#  become: true
-#  strategy: free
-#  roles:
-#  - opdk-setup-os-ldap
-#  tags:
-#  - os
-#  - os-ldap
-
-#- hosts: rmp
-#  become: true
-#  strategy: free
-#  roles:
-#  - opdk-setup-os-rmp
-#  tags:
-#  - os
-#  - os-rmp
-
-#- hosts: qpid
-#  become: true
-#  strategy: free
-#  roles:
-#  - opdk-setup-os-qpid
-#  tags:
-#  - os
-#  - os-qpid
-
-#- hosts: pg
-#  become: true
-#  strategy: free
-#  roles:
-#  - opdk-setup-os-postgres
-#  tags:
-#  - os
-#  - os-pg
-
-#- hosts: planet
-#  become: true
-#  strategy: free
-#  roles:
-#  - opdk-setup-system-configs-logs
-#  tags:
-#  - os
-#  - os-logs
-#  - logs
