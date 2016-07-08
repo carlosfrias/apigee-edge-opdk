@@ -42,25 +42,25 @@
     path: "{{ opdk_user_info.home }}/.ssh/known_hosts_prep"
     state: absent
 
-- name: Confirm that OPDK staging folder is in place
-  file:
-    path: '{{ opdk_installer_path }}'
-    state: directory
-    group: '{{ opdk_group_name }}'
-    owner: '{{ opdk_user_name }}'
-    recurse: yes
-    mode: 0755
-  when: sym_dir is not defined and not sym_dir
-
-- name: Confirm that OPDK staging folder is in place
-  file:
-    path: '{{ opdk_installer_path }}'
-    state: directory
-    group: '{{ opdk_group_name }}'
-    owner: '{{ opdk_user_name }}'
-    recurse: yes
-    mode: 0755
-  when: sym_dir is defined and sym_dir
+#- name: Confirm that OPDK staging folder is in place
+#  file:
+#    path: '{{ opdk_installer_path }}'
+#    state: directory
+#    group: '{{ opdk_group_name }}'
+#    owner: '{{ opdk_user_name }}'
+#    recurse: yes
+#    mode: 0755
+#  when: sym_dir is not defined and not sym_dir
+#
+#- name: Confirm that OPDK staging folder is in place
+#  file:
+#    path: '{{ opdk_installer_path }}'
+#    state: link
+#    group: '{{ opdk_group_name }}'
+#    owner: '{{ opdk_user_name }}'
+#    recurse: yes
+#    mode: 0755
+#  when: sym_dir is defined and sym_dir
 
 #- block:
 #
