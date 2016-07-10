@@ -1,0 +1,10 @@
+---
+
+- hosts: '{{ hosts }}'
+  serial: 1
+  roles:
+  - opdk-setup-postgres
+  - opdk-setup-postgres-standby
+  tags:
+  - pg
+  - pgstandby

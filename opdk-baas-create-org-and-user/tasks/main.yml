@@ -10,7 +10,7 @@
 #  ignore_errors: true
 
 - name: Retrieve access token for superuser - {{ baas_superuser_name }}
-  delegate_to: '{{ inventory_hostname }}'
+  delegate_to: '{{ public_address }}'
   uri:
     url: '{{ endpoint }}/management/token'
     method: POST
@@ -27,7 +27,7 @@
     access_token: '{{ token_response.json.access_token }}'
 
 - name: Create organization - {{ org_name }}
-  delegate_to: '{{ inventory_hostname }}'
+  delegate_to: '{{ public_address }}'
   uri:
     url: '{{ endpoint }}/management/organizations'
     method: POST
@@ -43,7 +43,7 @@
   register: org_response
 
 - name: Activate and confirm user - {{ baas_admin_name }}
-  delegate_to: '{{ inventory_hostname }}'
+  delegate_to: '{{ public_address }}'
   uri:
     url: '{{ endpoint }}/management/users/{{ baas_admin_name }}'
     timeout: 180
