@@ -36,7 +36,7 @@
   vars:
     hosts: 'dc-1-pgmaster'
 
-- include: opdk-setup-postgres-master.yml
+- include: opdk-setup-postgres-standby.yml
   vars:
     hosts: 'dc-1-pgstandby'
 

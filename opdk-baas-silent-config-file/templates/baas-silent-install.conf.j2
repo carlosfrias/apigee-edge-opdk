@@ -4,9 +4,9 @@ HOSTIP={{ hostvars[public_address][interface_name].ipv4.address }}
 
 # Define the API BaaS administrator account.
 # User name - default is "superuser".
-AS_ADMIN="{{ baas_admin_name }}"
-AS_ADMIN_EMAIL={{ baas_admin_email }}
-AS_PASSWD={{ baas_admin_pass }}
+AS_ADMIN="{{ baas_superuser_name }}"
+AS_ADMIN_EMAIL={{ baas_superuser_email }}
+AS_PASSWD={{ baas_superuser_pass }}
 
 # Specify Cassandra configuration information.
 {% if groups['dc-1-cassandra'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-cassandra'] | length > 0 %}

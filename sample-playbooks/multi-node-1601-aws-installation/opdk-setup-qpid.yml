@@ -1,7 +1,6 @@
 ---
 - hosts: '{{ hosts }}'
   roles:
-  - opdk-setup-qpid
   - { role: opdk-setup-component, profile: 'qs' }
   tags:
   - qpid

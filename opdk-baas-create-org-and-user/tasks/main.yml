@@ -35,10 +35,10 @@
     body_format: json
     body:
       organization: '{{ org_name }}'
-#      username: '{{ baas_admin_name }}'
-#      name: '{{ baas_admin_name }}'
-#      email: '{{ baas_admin_email }}'
-#      password: '{{ baas_admin_pass }}'
+      username: '{{ baas_admin_name }}'
+      name: '{{ baas_admin_name }}'
+      email: '{{ baas_admin_email }}'
+      password: '{{ baas_admin_pass }}'
     HEADER_Authorization: 'Bearer {{ access_token }}'
   register: org_response
 

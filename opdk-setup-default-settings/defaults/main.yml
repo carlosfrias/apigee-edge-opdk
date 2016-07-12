@@ -71,7 +71,7 @@ apigee_repo_user: '{{ opdk_user_name }}'
 apigee_repo_uri: 'software.apigee.com'
 
 # Apigee bootstrap script location
-bootstrap_script: '{{ opdk_installer_path }}/bootstrap.sh'
+#bootstrap_script: '{{ opdk_installer_path }}/bootstrap.sh'
 
 # Apigee archive that is created when a mirror is used.
 archive_name: apigee-{{ opdk_version }}.tar.gz
@@ -127,10 +127,11 @@ opdk_baas_silent_install_file_path: /tmp/baas-silent-install.conf
 opdk_baas_provided_silent_install_file: ''
 
 # Define the API BaaS administrator account.
-baas_admin_name: 'superuser'
-baas_admin_email: superuser@apigee.com
+baas_admin_name: 'baas_admin'
+baas_admin_email: '{{ baas_admin_name }}@apigee.com'
 baas_admin_pass: '{{ opdk_user_pass }}'
-baas_superuser_name: 'baas_admin'
+baas_superuser_name: 'superuser'
+baas_superuser_email: 'superuser@apigee.com'
 baas_superuser_pass: '{{ opdk_user_pass }}'
 
 # Cassandra uname/pword if you enabled Cassandra authentication.
@@ -158,3 +159,5 @@ baas_smtp_port: '465'
 baas_smtp_user: '{{ baas_admin_email }}'
 baas_smtp_user_pass: '{{ baas_admin_pass }}'
 baas_smtp_ssl: 'n'
+
+linked_apigee_installation_home: ''

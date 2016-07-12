@@ -2,6 +2,6 @@
 - hosts: '{{ hosts }}'
   strategy: free
   roles:
-  - opdk-setup-rmp
+  - { role: opdk-setup-component, profile: 'rmp' }
   tags:
   - rmp
