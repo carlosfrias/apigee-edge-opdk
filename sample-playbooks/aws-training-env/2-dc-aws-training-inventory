@@ -49,6 +49,16 @@ dc-2-ms
 [dc-1-ms]
 prd-rbl-app-w2-i-0a24c3a5
 
+[ldap:children]
+dc-1-ldap
+dc-2-ldap
+
+[dc-1-ldap:children]
+dc-1-ms
+
+[dc-2-ldap:children]
+dc-2-ms
+
 [ds:children]
 dc-1-ds
 dc-2-ds

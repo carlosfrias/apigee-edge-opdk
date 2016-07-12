@@ -32,15 +32,21 @@
   vars:
     hosts: 'dc-1-qpid'
 
-- include: opdk-setup-postgres.yml
+- include: opdk-setup-postgres-master.yml
   vars:
-    hosts: 'dc-1-pg'
+    hosts: 'dc-1-pgmaster'
+
+- include: opdk-setup-postgres-standby.yml
+  vars:
+    hosts: 'dc-1-pgstandby'
 
 - include: opdk-setup-startup.yml
 
 - include: opdk-setup-validate.yml
 
 - include: opdk-setup-org.yml
+  vars:
+    hosts: 'dc-1-ms[0]'
 
 - include: opdk-setup-status.yml
   vars:

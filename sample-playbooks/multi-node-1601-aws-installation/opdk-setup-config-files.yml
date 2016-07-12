@@ -4,6 +4,7 @@
 - hosts: planet
   roles:
   - opdk-setup-apigee-config-files
+  - opdk-setup-system-configs-logs
   tags:
   - configs
   - logs

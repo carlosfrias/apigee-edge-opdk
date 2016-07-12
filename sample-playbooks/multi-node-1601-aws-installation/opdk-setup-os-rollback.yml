@@ -7,3 +7,10 @@
   roles:
   - opdk-setup-os-rollback
 
+
+- hosts: "{{ hosts }}"
+  strategy: free
+  become: yes
+  roles:
+  - restart-node
+

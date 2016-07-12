@@ -1,5 +1,5 @@
 ---
-- hosts: ds
+- hosts: '{{ hosts }}'
   serial: 1
   roles:
   - { role: opdk-setup-component, profile: 'ds' }

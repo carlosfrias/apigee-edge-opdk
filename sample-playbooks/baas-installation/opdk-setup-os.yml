@@ -1,4 +1,14 @@
 ---
+
+- hosts: planet
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-apigee-user
+  tags:
+  - apigee
+  - os
+
 - hosts: planet
   become: true
   strategy: free
@@ -21,15 +31,6 @@
   tags:
   - os
   - os-basic
-
-- hosts: planet
-  become: true
-  strategy: free
-  roles:
-  - opdk-setup-apigee-user
-  tags:
-  - apigee
-  - os
 
 - hosts: cassandra
   become: true

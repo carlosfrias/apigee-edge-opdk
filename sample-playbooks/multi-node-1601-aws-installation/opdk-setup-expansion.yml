@@ -51,13 +51,13 @@
   vars:
     hosts: 'dc-2-qpid'
 
-- include: opdk-setup-postgres.yml
+- include: opdk-setup-postgres-master.yml
   vars:
-    hosts: 'dc-2-pg'
+    hosts: 'dc-2-pgmaster'
 
-#- include: opdk-setup-postgres.yml
-#  vars:
-#    hosts: 'dc-1-pg'
+- include: opdk-setup-postgres-standby.yml
+  vars:
+    hosts: 'dc-2-pgstandby'
 
 - include: opdk-setup-startup.yml
 
@@ -67,7 +67,7 @@
 
 - include: opdk-setup-status.yml
   vars:
-    hosts: 'dc-1'
+    hosts: 'planet'
 
 - include: opdk-setup-config-files.yml
 
