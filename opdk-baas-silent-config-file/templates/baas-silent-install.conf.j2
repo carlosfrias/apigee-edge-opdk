@@ -66,11 +66,11 @@ BAAS_USERGRID_URL="http://{{ groups['baas'][0] }}:{{ baas_load_balancer_port }}"
 # API BaaS Portal information.
 # URL and port number of load balancer, if there is one in front of the Portal, # or the URL and port of the Portal node.
 {% if groups['dc-1-portal'] is defined and inventory_hostname in groups['dc-1'] %}
-BAAS_PORTAL_URL="http://{{ hostvars[groups['dc-1-portal'][0][interface_name]].ipv4.address }}:{{baas_portal_port }}"
+BAAS_PORTAL_URL="http://{{ public_address }}:{{baas_portal_port }}"
 {% elif groups['dc-2-portal'] is defined and inventory_hostname in groups['dc-2'] %}
-BAAS_PORTAL_URL="http://{{ hostvars[groups['dc-2-portal'][0]][interface_name].ipv4.address }}:{{ baas_portal_port }}"
+BAAS_PORTAL_URL="http://{{ public_address }}:{{ baas_portal_port }}"
 {% else %}
-BAAS_PORTAL_URL="http://{{ hostvars[groups['portal'][0]][interface_name].ipv4.address }}:{{ baas_portal_port }}"
+BAAS_PORTAL_URL="http://{{ public_address }}:{{ baas_portal_port }}"
 {% endif %}
 
 # Portal port. Default value is 9000.
