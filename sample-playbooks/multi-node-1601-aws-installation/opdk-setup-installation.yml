@@ -52,8 +52,8 @@
   vars:
     hosts: 'dc-1'
 
-- include: opdk-setup-config-files.yml
-
-- include: opdk-setup-log-files.yml
-
-- include: opdk-setup-property-files.yml
+#- include: opdk-setup-config-files.yml
+#
+#- include: opdk-setup-log-files.yml
+#
+#- include: opdk-setup-property-files.yml
