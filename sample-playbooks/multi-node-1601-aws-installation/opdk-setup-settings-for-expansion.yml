@@ -9,6 +9,3 @@ opdk_version: '4.16.01'
 
 opdk_license_file_name: ~/.apigee/license.txt
 opdk_ldap_type: '2'
-
-
-
