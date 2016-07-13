@@ -51,34 +51,18 @@
     recurse: yes
     mode: 0755
 
+- name: Installation home stats
+  stat:
+    path: '{{ apigee_installation_home }}'
+  register: installation_home_dir_state
 
-#- name: Setup permission for apigee installation home directory
-#  file:
-#    path: '{{ apigee_installation_home }}'
-#    group: '{{ opdk_group_name }}'
-#    owner: '{{ opdk_user_name }}'
-#    mode: 0755
-#    state: directory
-#  when: '{{ linked_apigee_installation_home is not defined or not linked_apigee_installation_home }}'
-#
-#- name: Confirm existence or create target directory for apigee installation home link target
-#  file:
-#    path: '{{ linked_apigee_installation_home }}'
-#    group: '{{ opdk_group_name }}'
-#    owner: '{{ opdk_user_name }}'
-#    mode: 0755
-#    state: directory
-#  when: '{{ linked_apigee_installation_home is defined and linked_apigee_installation_home }}'
-
-#- name: Create apigee installation home as a link to provided target - {{ linked_apigee_installation_home }}
-#  file:
-#    src: '{{ linked_apigee_installation_home }}'
-#    path: '{{ apigee_installation_home }}'
-#    group: '{{ opdk_group_name }}'
-#    owner: '{{ opdk_user_name }}'
-#    force: yes
-#    mode: 0755
-#    state: link
-#  when: '{{ linked_apigee_installation_home is defined and linked_apigee_installation_home }}'
+- name: Setup permission for apigee installation home directory
+  file:
+    path: '{{ apigee_installation_home }}'
+    group: '{{ opdk_group_name }}'
+    owner: '{{ opdk_user_name }}'
+    mode: 0755
+    state: directory
+  when: '{{ not installation_home_dir_state.stat.exists }}'
 
 
