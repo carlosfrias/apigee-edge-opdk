@@ -4,7 +4,7 @@ HOSTIP={{ hostvars[public_address][interface_name].ipv4.address }}
 
 # Define the API BaaS administrator account.
 # User name - default is "superuser".
-AS_ADMIN="{{ baas_superuser_name }}"
+AS_ADMIN={{ baas_superuser_name }}
 AS_ADMIN_EMAIL={{ baas_superuser_email }}
 AS_PASSWD={{ baas_superuser_pass }}
 

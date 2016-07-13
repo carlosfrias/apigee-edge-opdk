@@ -1,18 +1,12 @@
 ---
 # tasks file for opdk-setup-os-ldap
 
-- block:
-  - name: Update openldap os packages
-    register: status
-    yum:
-      name: "{{ item }}"
-      state: latest
-      update_cache: yes
-    with_items:
-      - openldap-clients
-      - openldap-servers
-
-  always:
-    - name: Update opendldap os packages status report
-      debug:
-        var: status
+- name: Update openldap os packages
+  register: status
+  yum:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - openldap-clients
+    - openldap-servers

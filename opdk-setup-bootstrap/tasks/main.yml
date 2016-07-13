@@ -43,3 +43,7 @@
   debug:
     var: results
 
+- name: Fail the playbook if bootstrap fails to install
+  fail:
+    msg: 'Bootstrap installation failed, no point in letting this go further'
+  when: results | failed

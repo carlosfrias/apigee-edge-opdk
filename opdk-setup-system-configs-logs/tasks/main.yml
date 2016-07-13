@@ -5,6 +5,8 @@
   register: logs
   with_items:
   - { dir: '/etc', name: 'hosts' }
+  - { dir: '/etc', name: 'hosts.allow' }
+  - { dir: '/etc', name: 'hosts.deny' }
   - { dir: '/etc', name: 'environment' }
   - { dir: '/etc', name: 'resolv.conf' }
   - { dir: '/var/log', name: 'messages' }

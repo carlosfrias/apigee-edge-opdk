@@ -2,6 +2,7 @@
 - hosts: '{{ hosts }}'
   strategy: free
   roles:
-  - { role: opdk-setup-component, profile: 'ms' }
+  - opdk-setup-ms
+#  - { role: opdk-setup-component, profile: 'ms' }
   tags:
   - ms
