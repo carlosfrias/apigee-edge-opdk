@@ -56,7 +56,6 @@
     path: '{{ apigee_installation_home }}'
   register: installation_home_dir_state
 
-
 - name: Setup permission for apigee installation home directory
   file:
     path: '{{ apigee_installation_home }}'
