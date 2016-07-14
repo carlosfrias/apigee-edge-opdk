@@ -41,3 +41,12 @@
   - os
   - os-ds
 
+- hosts: baas
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-os-ds
+  tags:
+  - os
+  - os-baas
+
