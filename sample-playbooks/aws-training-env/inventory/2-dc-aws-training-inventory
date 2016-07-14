@@ -1,99 +1,115 @@
-[control-server]
-prd-rbl-app-w2-i-0124c3ae ansible_host=10.65.194.22
-prd-rbl-app-w2-i-cdd01116 ansible_host=10.65.194.163
-
 [planet:children]
 dc-1
 dc-2
 
 [dc-1]
-prd-rbl-app-w2-i-0a24c3a5 ansible_host=10.65.194.92
-prd-rbl-cas-w2-i-c223c46d ansible_host=10.65.194.12
-prd-rbl-cas-w2-i-dc23c473 ansible_host=10.65.194.11
-prd-rbl-cas-w2-i-dd23c472 ansible_host=10.65.194.13
-prd-rbl-api-w2-i-0424c3ab ansible_host=10.65.194.6
-prd-rbl-api-w2-i-0524c3aa ansible_host=10.65.194.8
-prd-rbl-api-w2-i-0724c3a8 ansible_host=10.65.194.7
-prd-rbl-sql-w2a-t ansible_host=10.65.194.117
-prd-rbl-fsf-w2a-t ansible_host=10.65.194.98
-prd-rbl-app-w2-i-0024c3af ansible_host=10.65.194.20
-prd-rbl-app-w2-i-0324c3ac ansible_host=10.65.194.21
-#prd-rbl-app-w2-i-5824c3f7 ansible_host=10.65.194.4
-#prd-rbl-app-w2-i-5b24c3f4 ansible_host=10.65.194.5
-#prd-rbl-cas-w2-i-1023c4bf ansible_host=10.65.194.64
-#prd-rbl-cas-w2-i-1123c4be ansible_host=10.65.194.63
-#prd-rbl-cas-w2-i-1323c4bc ansible_host=10.65.194.65
+devapgw001 ansible_ssh_host=DEVAPGW001.unix.gsm1900.org 
+devapgw002 ansible_ssh_host=DEVAPGW002.unix.gsm1900.org
+devapgw003 ansible_ssh_host=DEVAPGW003.unix.gsm1900.org
+devapgw101 ansible_ssh_host=DEVAPGW101.unix.gsm1900.org
+devapgw102 ansible_ssh_host=DEVAPGW102.unix.gsm1900.org
+devapgw103 ansible_ssh_host=DEVAPGW103.unix.gsm1900.org
+devapgw104 ansible_ssh_host=DEVAPGW104.unix.gsm1900.org
+devapgw105 ansible_ssh_host=DEVAPGW105.unix.gsm1900.org
+devapgw106 ansible_ssh_host=DEVAPGW106.unix.gsm1900.org
+devapgw107 ansible_ssh_host=DEVAPGW107.unix.gsm1900.org
+devapax101 ansible_ssh_host=DEVAPAX101.unix.gsm1900.org
+devapax102 ansible_ssh_host=DEVAPAX102.unix.gsm1900.org
+devapax001 ansible_ssh_host=DEVAPAX001.unix.gsm1900.org 
+devapax002 ansible_ssh_host=DEVAPAX002.unix.gsm1900.org
 
 [dc-2]
-prd-rbl-app-w2-i-fed31225 ansible_host=10.65.194.160
-prd-rbl-cas-w2-i-d1d0110a ansible_host=10.65.194.217
-prd-rbl-cas-w2-i-d2d01109 ansible_host=10.65.194.219
-prd-rbl-cas-w2-i-d3d01108 ansible_host=10.65.194.218
-prd-rbl-api-w2-i-ccd31217 ansible_host=10.65.194.224
-prd-rbl-api-w2-i-cdd31216 ansible_host=10.65.194.223
-prd-rbl-api-w2-i-ced31215 ansible_host=10.65.194.222
-prd-rbl-sql-w2b-t ansible_host=10.65.194.145
-prd-rbl-fsf-w2b-t ansible_host=10.65.194.171
-prd-rbl-app-w2-i-ced01115 ansible_host=10.65.194.167
-prd-rbl-app-w2-i-cfd01114 ansible_host=10.65.194.166
-#prd-rbl-app-w2-i-d5d0110e ansible_host=10.65.194.157
-#prd-rbl-app-w2-i-d6d0110d ansible_host=10.65.194.156
-#prd-rbl-cas-w2-i-43d21398 ansible_host=10.65.194.158
-#prd-rbl-cas-w2-i-f3d31228 ansible_host=10.65.194.133
-#prd-rbl-cas-w2-i-f4d3122f ansible_host=10.65.194.132
+devapgw701 ansible_ssh_host=DEVAPGW701.unix.gsm1900.org 
+devapgw702 ansible_ssh_host=DEVAPGW702.unix.gsm1900.org
+devapgw703 ansible_ssh_host=DEVAPGW703.unix.gsm1900.org
+devapgw801 ansible_ssh_host=DEVAPGW801.unix.gsm1900.org
+devapgw802 ansible_ssh_host=DEVAPGW802.unix.gsm1900.org
+devapgw803 ansible_ssh_host=DEVAPGW803.unix.gsm1900.org
+devapgw804 ansible_ssh_host=DEVAPGW804.unix.gsm1900.org
+devapgw805 ansible_ssh_host=DEVAPGW805.unix.gsm1900.org
+devapgw806 ansible_ssh_host=DEVAPGW806.unix.gsm1900.org
+devapgw807 ansible_ssh_host=DEVAPGW807.unix.gsm1900.org
+devapax801 ansible_ssh_host=DEVAPAX801.unix.gsm1900.org
+devapax802 ansible_ssh_host=DEVAPAX802.unix.gsm1900.org
+devapax701 ansible_ssh_host=DEVAPAX701.unix.gsm1900.org 
+devapax702 ansible_ssh_host=DEVAPAX702.unix.gsm1900.org
 
 [ds:children]
 dc-1-ds
 dc-2-ds
 
+[dc-1-ds]
+devapgw001
+devapgw002
+devapgw003
+
+[dc-2-ds]
+devapgw701
+devapgw702
+devapgw703
+
 [ms:children]
 dc-1-ms
 dc-2-ms
+
+[dc-1-ms]
+devapgw107
+
+[dc-2-ms]
+devapgw807
 
 [rmp:children]
 dc-1-rmp
 dc-2-rmp
 
+[dc-1-rmp]
+devapgw101
+devapgw102
+devapgw103
+devapgw104
+devapgw105
+devapgw106
+
+[dc-2-rmp]
+devapgw801
+devapgw802
+devapgw803
+devapgw804
+devapgw805
+devapgw806
+
 [qpid:children]
 dc-1-qpid
 dc-2-qpid
 
-[dc-1-ds]
-prd-rbl-cas-w2-i-dc23c473
-prd-rbl-cas-w2-i-c223c46d
-prd-rbl-cas-w2-i-dd23c472
-
-[dc-1-ms]
-prd-rbl-app-w2-i-0a24c3a5
-
-[dc-1-rmp]
-prd-rbl-api-w2-i-0424c3ab
-prd-rbl-api-w2-i-0724c3a8
-prd-rbl-api-w2-i-0524c3aa
-
 [dc-1-qpid]
-prd-rbl-app-w2-i-0024c3af
-prd-rbl-app-w2-i-0324c3ac
-
-[dc-2-ds]
-prd-rbl-cas-w2-i-d1d0110a
-prd-rbl-cas-w2-i-d3d01108
-prd-rbl-cas-w2-i-d2d01109
-
-[dc-2-ms]
-prd-rbl-app-w2-i-fed31225
-
-[dc-2-rmp]
-prd-rbl-api-w2-i-ced31215
-prd-rbl-api-w2-i-cdd31216
-prd-rbl-api-w2-i-ccd31217
+devapax101
+devapax102
 
 [dc-2-qpid]
-prd-rbl-app-w2-i-cfd01114
-prd-rbl-app-w2-i-ced01115
+devapax801
+devapax802
+
+[pg:children]
+dc-1-pg
+dc-2-pg
+
+[dc-1-pg]
+devapax001
+devapax002
+
+[dc-2-pg]
+devapax701
+devapax702
 
 [dc-1-pgmaster]
-prd-rbl-sql-w2a-t
+devapax001
+
+[dc-1-pgstandby]
+devapax002
+
+[dc-2-pgmaster]
+devapax701
 
 [dc-2-pgstandby]
-prd-rbl-fsf-w2b-t
+devapax702
