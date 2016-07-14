@@ -40,7 +40,7 @@
   tags:
   - portal
 
-- hosts: 'baas[1]'
+- hosts: 'baas[0]'
   roles:
   - opdk-baas-create-org-and-user
   tags:
