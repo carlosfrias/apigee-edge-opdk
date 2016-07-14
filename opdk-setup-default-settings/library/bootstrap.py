@@ -58,7 +58,7 @@ def main():
     if status_code >= 200 and status_code < 300:
         module.exit_json(changed=True,
                          ansible_facts=dict(
-                                 apigee_facts=dict(
+                                 apigee_bootstrap_facts=dict(
                                          bootstrap_request_status_code=status_code,
                                          bootstrap_file_path=file_path,
                                          bootstrap_filename=bootstrap_filename,

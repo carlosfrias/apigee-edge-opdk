@@ -1,5 +1,25 @@
 ---
-- hosts: baas[0]
+- hosts: baas
   roles:
-  - opdk-baas-create-org-and-user
+  - opdk-setup-default-settings
+  tasks:
 
+  - name: Hello
+    hello:
+      name: 'Carlos'
+
+  - name: Bootstrap download
+    bootstrap:
+      dest_dir: .ansible_cache
+
+  - name: Bootstrap report
+    debug:
+      var: apigee_bootstrap_facts
+
+  - name: Hello report
+    debug:
+      var: apigee_hello_facts
+
+  - name: apigee_facts report
+    debug:
+      var: apigee_facts

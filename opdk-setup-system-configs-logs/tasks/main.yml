@@ -1,20 +1,35 @@
 ---
 # tasks file for opdk-setup-system-config-logs
+#- name: Find system installation logs and configs to download
+#  shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
+#  register: logs
+#  with_items:
+#  - { dir: '/etc', name: 'hosts' }
+#  - { dir: '/etc', name: 'hosts.allow' }
+#  - { dir: '/etc', name: 'hosts.deny' }
+#  - { dir: '/etc', name: 'environment' }
+#  - { dir: '/etc', name: 'resolv.conf' }
+#  - { dir: '/var/log', name: 'messages' }
+#  - { dir: '/etc', name: 'sysctl.conf' }
+#  - { dir: '/etc', name: 'sudoers' }
+#  - { dir: '/etc/security', name: 'limits.conf' }
+#  - { dir: '/etc/security/limits.d', name: '*conf' }
+#  ignore_errors: yes
+
 - name: Find system installation logs and configs to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
   with_items:
-  - { dir: '/etc', name: 'hosts' }
-  - { dir: '/etc', name: 'hosts.allow' }
-  - { dir: '/etc', name: 'hosts.deny' }
-  - { dir: '/etc', name: 'environment' }
-  - { dir: '/etc', name: 'resolv.conf' }
-  - { dir: '/var/log', name: 'messages' }
-  - { dir: '/etc', name: 'sysctl.conf' }
-  - { dir: '/etc', name: 'sudoers' }
-  - { dir: '/etc/security', name: 'limits.conf' }
-  - { dir: '/etc/security/limits.d', name: '*conf' }
+  - '{{ system_config_files }}'
   ignore_errors: yes
+
+- debug: var=logs
+- pause:
+
+- name: Create log download folder
+  file:
+    path: '{{ conf_logs_dir }}'
+    state: directory
 
 - name: Download Installation Logs
   fetch:

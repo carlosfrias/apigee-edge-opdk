@@ -3,8 +3,9 @@
 
 - hosts: '{{ hosts }}'
   roles:
-  - opdk-setup-apigee-log-files
+#  - opdk-setup-apigee-log-files
   - opdk-setup-system-configs-logs
   tags:
   - logs
   - apigee-logs
+  - configs

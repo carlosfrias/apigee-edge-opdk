@@ -1,5 +1,9 @@
 ---
 - hosts: localhost
-  remote_user: root
+  connection: local
+  vars:
+    system_config_files:
+    - { dir: '~', name: '.bashrc' }
+
   roles:
-    - opdk-setup-system-config-logs
+  - opdk-setup-system-configs-logs
