@@ -1,1 +1,0 @@
-python /opt/apigee/baas-usergrid/bin/create_org_and_user.py -o opdk -a baas_user -p Apigee123!

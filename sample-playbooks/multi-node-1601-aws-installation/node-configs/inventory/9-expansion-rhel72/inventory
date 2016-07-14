@@ -66,14 +66,7 @@ tag_Name_cfrias_1601_edge_rhel72_3_n1
 tag_Name_cfrias_1601_edge_rhel72_3_n2
 tag_Name_cfrias_1601_edge_rhel72_3_n3
 
-[tag_Name_cfrias_1601_edge_rhel72_3_n1:vars]
-rack=:2,1
-
-[tag_Name_cfrias_1601_edge_rhel72_3_n2:vars]
-rack=:2,1
-
 [tag_Name_cfrias_1601_edge_rhel72_3_n3:vars]
-rack=:2,1
 zk_observer=true
 
 [ms:children]
