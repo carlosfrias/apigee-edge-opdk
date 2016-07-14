@@ -1,7 +1,0 @@
----
-- hosts: planet
-  become: true
-  roles:
-  - opdk-setup-bootstrap-archive
-  tags:
-  - bootstrap-archive
