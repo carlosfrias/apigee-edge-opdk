@@ -1,0 +1,22 @@
+---
+# tasks file for port-connectivity-validator-router
+- name: Router Internal Mgmt connectivity status
+  wait_for:
+    port: '{{ router_int_mgmt_port }}'
+    host: '{{ inventory_hostname }}'
+    timeout: 1
+  register: mp_int_mgmt_port_status
+
+- name: Router External Mgmt connectivity status
+  wait_for:
+    port: '{{ router_ext_mgmt_port }}'
+    host: '{{ inventory_hostname }}'
+    timeout: 1
+  register: mp_ext_mgmt_port_status
+
+- name: Router JMX connectivity status
+  wait_for:
+    port: '{{ router_jmx_port }}'
+    host: '{{ inventory_hostname }}'
+    timeout: 1
+  register: mp_int_mgmt_port_status

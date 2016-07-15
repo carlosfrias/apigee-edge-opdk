@@ -1,0 +1,22 @@
+---
+# tasks file for port-connectivity-validator
+- name: Cassandra DB1 port connectivity status
+  wait_for:
+    port: '{{ cassandra_db1_port }}'
+    host: '{{ inventory_hostname }}'
+    timeout: 1
+  register: cassandra_db1_port_status
+
+- name: Cassandra DB2 port connectivity status
+  wait_for:
+    port: '{{ cassandra_db2_port }}'
+    host: '{{ inventory_hostname }}'
+    timeout: 1
+  register: cassandra_db2_port_status
+
+- name: Cassandra DB3 port connectivity status
+  wait_for:
+    port: '{{ cassandra_db3_port }}'
+    host: '{{ inventory_hostname }}'
+    timeout: 1
+  register: cassandra_db3_port_status

@@ -2,7 +2,7 @@
 # defaults file for opdk-setup-default-settings
 
 # Target Java JDK version
-jdk_version: '1.8'
+jdk_version: '1.7'
 
 # System file path to use in JAVA_HOME
 java_home: /usr/lib/jvm/java-openjdk
@@ -83,32 +83,43 @@ archive_path: '{{ apigee_installation_home }}/data/apigee-mirror/{{ archive_name
 mp_pod: gateway
 
 # Apigee Edge Ports
-ms_jmx_port: 1099
-router_jmx_port: 1100
+cassandra_jmx_port: 7199
+cassandra_db1_port: 9160
+cassandra_db2_port: 9042
+cassandra_db3_port: 7000
+
+zk_data1_port: 2181
+zk_data2_port: 3181
+zk_data3_port: 2888
+zk_data4_port: 3888
+
+mp_int_mgmt_port: 4528
+mp_ext_mgmt_port: 8082
 mp_jmx_port: 1101
-qpid_jmx_port: 1102
-ingest_jmx_port: 1102
-pgserver_jmx_port: 1103
-pg_jmx_port: 1103
-zk_jmx_port: 2181
+mp_router_port: 8998
+
+ms_jmx_port: 1099
+ms_ext_mgmt_port: 8080
+
+router_jmx_port: 1100
+router_ext_mgmt_port: 8081
 router_int_mgmt_port: 4527
+
+qpid_jmx_port: 1102
 qpid_int_mgmt_port: 4529
+qpid_data_port: 5672
+qpid_ext_mgmt_port: 8083
+
+pg_jmx_port: 1103
 pg_int_mgmt_port: 4530
 pg_db_port: 5432
-qpid_router_mp_port: 5672
-cassandra_jmx_port: 7199
-ms_http_port: 8080
-router_ext_mgmt_port: 8081
-mp_self_port: 8082
-qpid_ext_mgmt_port: 8083
-qpid_self_port: 8083
-pgserver_self_port: 8084
 pg_ext_mgmt_port: 8084
+
 ui_http_port: 9000
+
 edge_proxy_port: 9001
-test_port: 9001
-cassandra_db_port: 9160
-open_ldap_port: 10389
+
+ldap_data_port: 10389
 
 # Local folder in which to store logs and config files
 conf_logs_dir: configs_and_logs

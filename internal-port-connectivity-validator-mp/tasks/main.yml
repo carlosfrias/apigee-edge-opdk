@@ -1,0 +1,16 @@
+---
+# tasks file for port-connectivity-validator-mp
+
+- name: MP Internal Mgmt connectivity status
+  wait_for:
+    port: '{{ mp_int_mgmt_port }}'
+    host: '{{ inventory_hostname}}'
+    timeout: 1
+  register: mp_int_mgmt_port_status
+
+- name: MP Router connectivity status
+  wait_for:
+    port: '{{ mp_router_port }}'
+    host: '{{ inventory_hostname}}'
+    timeout: 1
+  register: mp_router_port_status
