@@ -1,17 +1,24 @@
-Role Name
+fetch-files
 =========
 
-A brief description of the role goes here.
+This is a helper role that is used to download a set of files from an arbitrary set of remote servers. 
+This role is typically used to download logs, configuration files and system files for examination and assessment of
+server state. 
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role expects a collection that defines the directory and file name pattern to search. This role uses the linux 
+find command so any directory naming convention and file naming pattern useful with find can be provided.  
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+fetched_files_dir: This variable defines the local location where fetched files will stored. 
+
+fetched_files: This variable is the name of the collection that contains the directory and file name pattern to 
+search.  Each item in this collection contain the attributes dir and name.
 
 Dependencies
 ------------
@@ -24,15 +31,20 @@ Example Playbook
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: servers
+      vars: 
+        fetched_files_dir: configs_and_logs
+        fetched_files:
+        - { dir: '/opt/apigee/var/log', name: '*.log' }
+        - { dir: '/etc/', name: 'hosts' }
       roles:
-         - { role: username.rolename, x: 42 }
+         - fetch-files
 
 License
 -------
 
-BSD
+MIT License
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+The author of this role is Carlos Frias. I can be reached through Github.com.
