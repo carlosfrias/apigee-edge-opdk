@@ -3,7 +3,8 @@
 
 - hosts: planet
   roles:
-  - opdk-setup-apigee-config-files
+  - { role: fetch-files, fetch_files: '{{ apigee_config_files }}' }
+#  - opdk-setup-apigee-config-files
   - opdk-setup-system-configs-logs
   tags:
   - configs
