@@ -84,14 +84,14 @@ mp_pod: gateway
 
 # Apigee Edge Ports
 cassandra_jmx_port: 7199
-cassandra_db1_port: 9160
-cassandra_db2_port: 9042
-cassandra_db3_port: 7000
+cassandra_thrift_client_port: 9160
+cassandra_cql_native_port: 9042
+cassandra_non_ssl_gossip_port: 7000
+cassandra_ssl_gossip_port: 7001
 
-zk_data1_port: 2181
-zk_data2_port: 3181
-zk_data3_port: 2888
-zk_data4_port: 3888
+zk_data_port: 2181
+zk_leader_port: 2888
+zk_voter_port: 3888
 
 mp_int_mgmt_port: 4528
 mp_ext_mgmt_port: 8082
@@ -107,7 +107,7 @@ router_int_mgmt_port: 4527
 
 qpid_jmx_port: 1102
 qpid_int_mgmt_port: 4529
-qpid_data_port: 5672
+qpid_messaging_port: 5672
 qpid_ext_mgmt_port: 8083
 
 pg_jmx_port: 1103
@@ -163,6 +163,10 @@ baas_load_balancer_port: '8080'
 
 # Portal port. Default value is 9000.
 baas_portal_port: '9000'
+
+# Elastic search port.
+baas_elasticsearch_port_low: '9200'
+baas_elasticsearch_port_high: '9300'
 
 # SMTP information. BaaS requires an SMTP server.
 baas_smtp_host: 'smtp.gmail.com'

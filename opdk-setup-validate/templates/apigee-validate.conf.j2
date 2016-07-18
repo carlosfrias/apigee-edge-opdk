@@ -8,7 +8,7 @@ MSIP=Neither a dc-1 or dc-2 inventory group was defined
 
 ADMIN_EMAIL={{ opdk_user_email }}
 
-APIGEE_PORT_HTTP_MS={{ ms_http_port }}
+APIGEE_PORT_HTTP_MS={{ ms_ext_mgmt_port }}
 
 APIGEE_ADMINPW={{ opdk_user_pass }}
 
@@ -29,7 +29,11 @@ MP_IP={{ hostvars[groups['dc-2-rmp'][0]][interfaceName].ipv4.address }}
 {% else %}
 MP_IP=Neither a dc-1 or dc-2 inventory group was defined
 {% endif %}
-MP_PORT={{ mp_self_port }}
+
+
+MP_PORT={{ mp_ext_mgmt_port }}
+
+
 {% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
 HOST_ALIAS={{ groups['dc-1-rmp'][0] }}
 {% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}

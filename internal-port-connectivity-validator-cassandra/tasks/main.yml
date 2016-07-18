@@ -1,22 +1,41 @@
 ---
 # tasks file for port-connectivity-validator
-- name: Cassandra DB1 port connectivity status
+- name: Cassandra thrift client port connectivity status
   wait_for:
-    port: '{{ cassandra_db1_port }}'
-    host: '{{ inventory_hostname }}'
+    port: '{{ cassandra_thrift_client_port }}'
+    host: '{{ local_address }}'
     timeout: 1
-  register: cassandra_db1_port_status
+  register: cassandra_thrift_client_port_status
+  ignore_errors: yes
 
-- name: Cassandra DB2 port connectivity status
+- name: Cassandra JMX port connectivity status
   wait_for:
-    port: '{{ cassandra_db2_port }}'
-    host: '{{ inventory_hostname }}'
+    port: '{{ cassandra_jmx_port }}'
+    host: '{{ local_address }}'
     timeout: 1
-  register: cassandra_db2_port_status
+  register: cassandra_jmx_port_status
+  ignore_errors: yes
 
-- name: Cassandra DB3 port connectivity status
+- name: Cassandra CQL Native Transport port connectivity status
   wait_for:
-    port: '{{ cassandra_db3_port }}'
-    host: '{{ inventory_hostname }}'
+    port: '{{ cassandra_cql_native_port }}'
+    host: '{{ local_address }}'
     timeout: 1
-  register: cassandra_db3_port_status
+  register: cassandra_cql_native_port_status
+  ignore_errors: yes
+
+- name: Cassandra Non-SSL Gossip port connectivity status
+  wait_for:
+    port: '{{ cassandra_non_ssl_gossip_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: cassandra_non_ssl_port_status
+  ignore_errors: yes
+
+- name: Cassandra SSL Gossip port connectivity status
+  wait_for:
+    port: '{{ cassandra_ssl_gossip_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: cassandra_ssl_port_status
+  ignore_errors: yes

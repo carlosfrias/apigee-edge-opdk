@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
-  remote_user: root
+- include: facts.yml
+
+- hosts: rmp
   roles:
-    - port-connectivity-validator-mp
+    - internal-port-connectivity-validator-mp
+

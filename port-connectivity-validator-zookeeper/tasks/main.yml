@@ -1,9 +1,0 @@
----
-# tasks file for port-connectivity-validator-zookeeper
-
-- name: Zookeeper DB1 port connectivity status
-  wait_for:
-    port: '{{ zk_data1_port }}'
-    host: '{{ inventory_hostname }}'
-    timeout: 1
-  register: zk_data1_port_status

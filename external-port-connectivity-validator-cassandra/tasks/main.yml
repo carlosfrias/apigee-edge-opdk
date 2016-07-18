@@ -1,8 +1,0 @@
----
-# tasks file for external-port-connectivity-validator-cassandra
-- name: Cassandra JMX port connectivity status
-  wait_for:
-    port: '{{ cassandra_jmx_port }}'
-    host: '{{ inventory_hostname }}'
-    timeout: 1
-  register: cassandra_jmx_port_status

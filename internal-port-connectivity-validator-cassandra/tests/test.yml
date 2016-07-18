@@ -1,5 +1,8 @@
 ---
-- hosts: localhost
+
+- include: facts.yml
+
+- hosts: ds
   remote_user: root
   roles:
-    - port-connectivity-validator
+    - internal-port-connectivity-validator-cassandra

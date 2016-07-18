@@ -1,0 +1,25 @@
+---
+# tasks file for internal-port-connectivity-validator-zookeeper
+- name: Zookeeper data port connectivity status
+  wait_for:
+    port: '{{ zk_data_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: zk_data_port_status
+  ignore_errors: yes
+
+- name: Zookeeper leader port connectivity status
+  wait_for:
+    port: '{{ zk_leader_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: zk_leader_port_status
+  ignore_errors: yes
+
+- name: Zookeeper voter port connectivity status
+  wait_for:
+    port: '{{ zk_voter_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: zk_voter_port_status
+  ignore_errors: yes

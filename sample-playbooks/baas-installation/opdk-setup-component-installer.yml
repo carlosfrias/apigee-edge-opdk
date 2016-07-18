@@ -1,14 +1,14 @@
 ---
-- hosts: '{{ hosts }}'
-  gather_facts: yes
+- include: facts.yml
+
+- hosts: planet
   roles:
   - opdk-baas-silent-config-file
   tags:
   - silent
   - common
 
-- hosts: '{{ hosts }}'
-  gather_facts: yes
+- hosts: planet
   roles:
   - opdk-setup-component-installer
   tags:
