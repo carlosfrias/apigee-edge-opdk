@@ -164,7 +164,7 @@ baas_load_balancer_port: '8080'
 # Portal port. Default value is 9000.
 baas_portal_port: '9000'
 
-# Elastic search port.
+# Elastic search ports. Default values
 baas_elasticsearch_port_low: '9200'
 baas_elasticsearch_port_high: '9300'
 
