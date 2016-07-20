@@ -1,0 +1,13 @@
+---
+# tasks file for external-port-connectivity-validator-server
+
+- name: Startup simple http server on port '{{ check_port }}'
+  shell: python -m SimpleHTTPServer {{ check_port }}
+  async: 1
+  poll: 0
+
+- name: Check for available server port
+  wait_for:
+    port: '{{ check_port }}'
+    timeout: 1
+

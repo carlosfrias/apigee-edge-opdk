@@ -8,4 +8,4 @@
     - { dir: '~', name: '.profile' }
 
   roles:
-  - fetch-found-files
+  - fetch-files
