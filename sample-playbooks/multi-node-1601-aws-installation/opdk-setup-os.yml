@@ -17,7 +17,6 @@
   - opdk-setup-selinux-disable
   - opdk-shutdown-iptables
   - opdk-time-sync
-#  - opdk-setup-hostfile
   - opdk-setup-os-minimum
   - opdk-setup-os-common
   tags:
