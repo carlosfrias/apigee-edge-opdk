@@ -9,7 +9,7 @@
     register: result
 
   rescue:
-  - name: First download attempt failed, trying another way
+  - name: First scp download attempt failed, trying with rsync
     synchronize:
       mode: pull
       src: '{{ archive_path }}'

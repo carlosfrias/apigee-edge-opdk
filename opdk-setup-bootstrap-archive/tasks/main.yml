@@ -5,21 +5,7 @@
     path: /tmp/repos
     state: absent
 
-- block:
-
-  - name: Unarchive local archive to remote nodes
-    unarchive:
-      src: '{{ archive_name }}'
-      dest: '/tmp/'
-
-  rescue:
-
-  - name: Unarchive archive already on remote nodes
-    unarchive:
-      copy: no
-      src: '{{ archive_path }}'
-      dest: '/tmp/'
-
-  - name: Clean up apigee-mirror
-    shell: '{{ apigee_service }} apigee-mirror clean'
-
+- name: Unarchive local archive to remote nodes
+  unarchive:
+    src: '{{ archive_name }}'
+    dest: '/tmp/'

@@ -7,7 +7,7 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import os
 from ansible.module_utils.basic import *
-
+from subprocess import call
 
 class CheckRequestHandler(BaseHTTPRequestHandler):
 
@@ -28,12 +28,10 @@ def run(ip, port):
 def main(port):
     module = AnsibleModule(
             argument_spec = dict(
-                    port  = dict(required=False, type='str')
+                    port  = dict(required=True, type='str')
             )
     )
-
-    ip = module.params['ip']
-    # port = module.params['port']
+    port = module.params['port']
     run('127.0.0.1', port)
 
 

@@ -7,9 +7,20 @@
   vars:
     hosts: 'dc-2'
 
+- include: opdk-setup-bootstrap-archive.yml
+  vars:
+    hosts: 'dc-2'
+  when: existing_archive is defined and existing_archive
+
+- include: opdk-setup-bootstrap-create-download.yml
+  vars:
+    hosts: 'dc-2-ms'
+  when: create_archive is defined and create_archive
+
 - include: opdk-setup-bootstrap.yml
   vars:
     hosts: 'dc-2'
+  when: create_archive is not defined or not create_archive
 
 - include: opdk-setup-component-installer.yml
   vars:

@@ -1,7 +1,8 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This role performs port connectivity validations. The approach I take is very quick and dirty. This role will startup an instance of SimpleHTTPServer on the indicated port asynchronously. The server will remain active for 1 second. 
+The Ansible wait_for module is used to determine that the port is indeed available on the server. I think that a future version should include the findings in the ansible cache for later use.  
 
 Requirements
 ------------
@@ -11,28 +12,40 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+check_port: Port that should be checked. This variable is required.  No defaults are provided.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role has a dependency on the opdk-setup-default-settings role. 
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This is an example of how this role can be called. This example assumes you are working with the management server.
 
-    - hosts: servers
+    - hosts: ms
       roles:
-         - { role: username.rolename, x: 42 }
+       - { role: external-port-connectivity-validator-server, check_port: '{{ cassandra_jmx_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ cassandra_thrift_client_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ cassandra_cql_native_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ cassandra_non_ssl_gossip_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ zk_data_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ zk_leader_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ zk_voter_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ ms_jmx_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ ms_ext_mgmt_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ ui_http_port }}' }
+         - { role: external-port-connectivity-validator-server, check_port: '{{ ldap_data_port }}' }
+                
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+The author of this role is Carlos Frias <cfrias@apigee.com>.
+

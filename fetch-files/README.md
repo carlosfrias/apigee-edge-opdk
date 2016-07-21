@@ -42,9 +42,9 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-MIT License
+MIT 
 
 Author Information
 ------------------
 
-The author of this role is Carlos Frias. I can be reached through Github.com.
+The author of this role is Carlos Frias <cfrias@apigee.com>. 

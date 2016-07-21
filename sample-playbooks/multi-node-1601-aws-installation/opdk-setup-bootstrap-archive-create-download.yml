@@ -2,6 +2,7 @@
 - hosts: '{{ hosts }}'
   strategy: free
   roles:
-  - opdk-setup-bootstrap-archive
+  - opdk-setup-bootstrap-create-archive
+  - opdk-setup-bootstrap-download-archive
   tags:
   - bootstrap-archive
