@@ -1,5 +1,5 @@
 ---
-rhel: ami-2051294a
+rhel: ami-755ba918 # ol 6.8
 image_id: '{{ rhel }}'
 instance_type: 't2.medium'
 key_name: cfrias
@@ -8,7 +8,7 @@ vpc_subnet_id: subnet-3fbcb64b
 wait: yes
 assign_public_ip: yes
 name_prefix: cfrias
-session_name: 1601-rhel72-3
+session_name: 1601-edge-ol68-1
 application: edge
 bag: infrastructure
 department: 45
