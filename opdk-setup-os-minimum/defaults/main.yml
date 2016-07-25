@@ -2,5 +2,5 @@
 # defaults file for opdk-setup-os
 apigee_continue_on_warning: y
 vm_swappiness: 60 # Default value on most linux systems.
-epel_ol67: https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-epel_rhel72: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+epel_ol6: https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+epel_rhel7: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm

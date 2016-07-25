@@ -1,0 +1,29 @@
+---
+
+- name: Update dynamic collectd.d
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+  - { src: 'collectd.conf.j2', dest: '{{ collectd_conf_file }}' }
+  - { src: 'collectd/collect.d/aggregation.conf.j2', dest: '{{ collectd_conf_dir }}/aggregation.conf' }
+  - { src: 'collectd/collect.d/cassandra_memory.conf.j2', dest: '{{ collectd_conf_dir }}/cassandra_memory.conf' }
+  - { src: 'collectd/collect.d/cassandra.conf.j2', dest: '{{ collectd_conf_dir }}/cassandra.conf' }
+  - { src: 'collectd/collect.d/diskusage_percent.conf.j2', dest: '{{ collectd_conf_dir }}/diskusage_percent.conf' }
+  - { src: 'collectd/collect.d/graphite.conf.j2', dest: '{{ collectd_conf_dir }}/graphite.conf' }
+  - { src: 'collectd/collect.d/memory_load_stats.conf.j2', dest: '{{ collectd_conf_dir }}/memory_load_stats.conf' }
+  - { src: 'collectd/collect.d/mp_application_stats.conf.j2', dest: '{{ collectd_conf_dir }}/mp_application_stats.conf' }
+  - { src: 'collectd/collect.d/mp_traffic.conf.j2', dest: '{{ collectd_conf_dir }}/mp_traffic.conf' }
+  - { src: 'collectd/collect.d/router_application_stats.conf.j2', dest: '{{ collectd_conf_dir }}/r_application_stats.conf' }
+  - { src: 'collectd/collect.d/mp_connection_stats.conf.j2', dest: '{{ collectd_conf_dir }}/rmp_connection_stats.conf' }
+  - { src: 'collectd/collect.d/mp_connection_tcp_stats.conf.j2', dest: '{{ collectd_conf_dir }}/rmp_connection_tcp_stats.conf' }
+  - { src: 'collectd/collect.d/mp_http_stats.conf.j2', dest: '{{ collectd_conf_dir }}/rmp_http_stats.conf' }
+  - { src: 'collectd/collect.d/mp_memory_stats.conf.j2', dest: '{{ collectd_conf_dir }}/rmp_memory_stats.conf' }
+  - { src: 'collectd/collect.d/mp_thread_stats.conf.j2', dest: '{{ collectd_conf_dir }}/rmp_thread_stats.conf' }
+
+- name: Update static collectd.d
+  copy:
+    src: collectd/conf/{{ item }}
+    dest: '{{ collectd_conf_dir }}/{{ item }}'
+  with_items:
+  - df.conf

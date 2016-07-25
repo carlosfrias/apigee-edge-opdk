@@ -1,0 +1,34 @@
+---
+# tasks file for port-connectivity-validator-mp
+
+- name: Internal MP Mgmt port connectivity status
+  wait_for:
+    port: '{{ mp_int_mgmt_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: mp_int_mgmt_port_status
+  ignore_errors: yes
+
+- name: Internal MP Router port connectivity status
+  wait_for:
+    port: '{{ mp_router_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: mp_router_port_status
+  ignore_errors: yes
+
+- name: Internal MP JMX port connectivity status
+  wait_for:
+    port: '{{ mp_jmx_port }}'
+    host: '{{ local_address}}'
+    timeout: 1
+  register: mp_jmx_port_status
+  ignore_errors: yes
+
+- name: MP Mgmt port connectivity status
+  wait_for:
+    port: '{{ mp_ext_mgmt_port }}'
+    host: '{{ local_address}}'
+    timeout: 1
+  register: mp_ext_mgmt_port_status
+  ignore_errors: yes

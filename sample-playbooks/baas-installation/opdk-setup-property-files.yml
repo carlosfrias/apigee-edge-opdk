@@ -3,7 +3,7 @@
 
 - hosts: '{{ hosts }}'
   roles:
-  - opdk-setup-apigee-property-files
+  - { role: fetch-files, fetch_files: '{{ apigee_property_files }}' }
   tags:
   - configs
   - logs

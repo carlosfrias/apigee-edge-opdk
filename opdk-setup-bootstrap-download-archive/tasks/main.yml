@@ -1,0 +1,23 @@
+---
+# tasks file for opdk-setup-local-repository
+- block:
+  - name: Download archive
+    fetch:
+      src: '{{ archive_path }}'
+      dest: '{{ archive_name }}'
+      flat: yes
+    register: result
+
+  rescue:
+  - name: First scp download attempt failed, trying with rsync
+    synchronize:
+      mode: pull
+      src: '{{ archive_path }}'
+      dest: '{{ archive_name }}'
+    register: result
+
+  always:
+
+  - name: Download archive status report
+    debug:
+      var: result

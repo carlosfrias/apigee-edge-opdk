@@ -1,0 +1,6 @@
+---
+- include: facts.yml
+
+- hosts: ds
+  roles:
+    - internal-port-connectivity-validator-zookeeper

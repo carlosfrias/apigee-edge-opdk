@@ -1,0 +1,87 @@
+---
+- include: facts.yml
+
+- include: opdk-setup-os.yml
+
+- include: opdk-setup-openjdk.yml
+  vars:
+    hosts: 'dc-1'
+
+- include: opdk-setup-bootstrap.yml
+  vars:
+    hosts: 'dc-1-ms'
+  when: create_archive is defined and create_archive
+
+- include: opdk-setup-bootstrap-archive-create-download.yml
+  vars:
+    hosts: 'ms'
+  when: create_archive is defined and create_archive
+
+- include: opdk-setup-bootstrap-rollback.yml
+  vars:
+    hosts: 'dc-1-ms'
+  when: create_archive is defined and create_archive
+
+- include: opdk-setup-os.yml
+  when: create_archive is defined and create_archive
+
+- include: opdk-setup-openjdk.yml
+  vars:
+    hosts: 'dc-1-ms'
+  when: create_archive is defined and create_archive
+
+- include: opdk-setup-bootstrap-archive.yml
+  vars:
+    hosts: 'dc-1'
+  when: (existing_archive is defined and existing_archive) or (create_archive is defined and create_archive)
+
+- include: opdk-setup-bootstrap.yml
+  vars:
+    hosts: 'dc-1'
+  when: create_archive is not defined or not create_archive
+
+- include: opdk-setup-component-installer.yml
+  vars:
+    hosts: 'dc-1'
+
+- include: opdk-setup-ds.yml
+  vars:
+    hosts: 'dc-1-ds'
+
+- include: opdk-setup-ms.yml
+  vars:
+    hosts: 'dc-1-ms'
+
+- include: opdk-setup-rmp.yml
+  vars:
+    hosts: 'dc-1-rmp'
+
+- include: opdk-setup-qpid.yml
+  vars:
+    hosts: 'dc-1-qpid'
+
+- include: opdk-setup-postgres-master.yml
+  vars:
+    hosts: 'dc-1-pgmaster'
+
+- include: opdk-setup-postgres-standby.yml
+  vars:
+    hosts: 'dc-1-pgstandby'
+
+- include: opdk-setup-startup.yml
+
+- include: opdk-setup-validate.yml
+
+- include: opdk-setup-org.yml
+  vars:
+    hosts: 'dc-1-ms[0]'
+
+- include: opdk-setup-status.yml
+  vars:
+    hosts: 'dc-1'
+
+#- include: opdk-setup-config-files.yml
+#
+#- include: opdk-setup-log-files.yml
+#
+#- include: opdk-setup-property-files.yml

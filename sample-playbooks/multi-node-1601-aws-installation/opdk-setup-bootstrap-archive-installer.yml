@@ -1,7 +1,0 @@
----
-- hosts: planet
-  strategy: free
-  roles:
-  - opdk-setup-bootstrap-archive-installer
-  tags:
-  - archive-installer
