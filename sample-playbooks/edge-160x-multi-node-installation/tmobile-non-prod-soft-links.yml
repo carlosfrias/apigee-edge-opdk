@@ -6,11 +6,9 @@
     - /opt/apigee4/apigee4/var
     - /var/prod/data/apigee4
     - /var/prod/logs/apigee4
-    - /tmp/data
-    - /tmp/logs
     apigee_data:
-    - { dest: /tmp/data, src: /var/prod/data/apigee4 }
-    - { dest: /tmp/logs, src: /var/prod/logs/apigee4}
+    - { dest: /tmp/, src: /opt/apigee/data }
+    - { dest: /tmp/, src: /opt/apigee/var/log }
     apigee_links:
     - { dest: /opt/apigee, src: /opt/apigee4/apigee4 }
     - { dest: /opt/apigee/data, src: /var/prod/data/apigee4 }
@@ -34,11 +32,20 @@
   - name: Move data folder
     delegate_to: '{{ inventory_hostname }}'
     synchronize:
+      owner: '{{ opdk_user_name }}'
+      group: '{{ opdk_group_name }}'
       src: '{{ item.src }}'
       dest: '{{ item.dest }}'
     with_items: '{{ apigee_data }}'
     tags:
     - data
+
+  - name: Remove the old data folder
+    file:
+      path: '{{ item.src }}'
+    with_items: '{{ apigee_data }}'
+    tags:
+    - rm_data
 
   - name: Create symlinks
     file:
@@ -59,6 +66,8 @@
     - /opt/apigee4
     - /opt/apigee4/var
     - /var/prod/logs/apigee4
+    apigee_data:
+    - { dest: /tmp, src: /opt/apigee/var/log }
     apigee_links:
     - { dest: /opt/apigee, src: /opt/apigee4/apigee }
     - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4 }
@@ -76,6 +85,24 @@
     with_items: '{{ apigee_dirs }}'
     tags:
     - source
+
+  - name: Move data folder
+    delegate_to: '{{ inventory_hostname }}'
+    synchronize:
+      owner: '{{ opdk_user_name }}'
+      group: '{{ opdk_group_name }}'
+      src: '{{ item.src }}'
+      dest: '{{ item.dest }}'
+    with_items: '{{ apigee_data }}'
+    tags:
+    - data
+
+  - name: Remove the old data folder
+    file:
+      path: '{{ item.src }}'
+    with_items: '{{ apigee_data }}'
+    tags:
+    - rm_data
 
   - name: Create symlinks
     file:
@@ -96,7 +123,7 @@
 
   tasks:
   - name: Capture directory structure
-    shell: tree -l -L 2 /opt/apigee /opt/apigee4 /var/prod
+    shell: tree -l -L 2 /opt/apigee /opt/apigee4 /var/prod /tmp/logs /tmp/data
     register: status
     tags:
     - report
