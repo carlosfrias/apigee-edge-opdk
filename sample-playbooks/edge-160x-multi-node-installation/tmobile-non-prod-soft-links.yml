@@ -2,12 +2,17 @@
 - hosts: ds,pg,qpid,ms
   vars:
     apigee_dirs:
-    - /opt/apigee4
-    - /opt/apigee4/var
+    - /opt/apigee4/apigee4
+    - /opt/apigee4/apigee4/var
     - /var/prod/data/apigee4
     - /var/prod/logs/apigee4
+    - /tmp/data
+    - /tmp/logs
+    apigee_data:
+    - { dest: /tmp/data, src: /var/prod/data/apigee4 }
+    - { dest: /tmp/logs, src: /var/prod/logs/apigee4}
     apigee_links:
-    - { dest: /opt/apigee, src: /opt/apigee4 }
+    - { dest: /opt/apigee, src: /opt/apigee4/apigee4 }
     - { dest: /opt/apigee/data, src: /var/prod/data/apigee4 }
     - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4 }
 
@@ -25,6 +30,15 @@
     with_items: '{{ apigee_dirs }}'
     tags:
     - source
+
+  - name: Move data folder
+    delegate_to: '{{ inventory_hostname }}'
+    synchronize:
+      src: '{{ item.src }}'
+      dest: '{{ item.dest }}'
+    with_items: '{{ apigee_data }}'
+    tags:
+    - data
 
   - name: Create symlinks
     file:
@@ -46,7 +60,7 @@
     - /opt/apigee4/var
     - /var/prod/logs/apigee4
     apigee_links:
-    - { dest: /opt/apigee, src: /opt/apigee4 }
+    - { dest: /opt/apigee, src: /opt/apigee4/apigee }
     - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4 }
 
   roles:
