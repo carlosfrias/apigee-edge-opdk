@@ -1,0 +1,96 @@
+---
+- hosts: ds,pg,qpid,ms
+  vars:
+    apigee_dirs:
+    - /opt/apigee4
+    - /opt/apigee4/var
+    - /var/prod/data/apigee4
+    - /var/prod/logs/apigee4
+    apigee_links:
+    - { dest: /opt/apigee, src: /opt/apigee4 }
+    - { dest: /opt/apigee/data, src: /var/prod/data/apigee4 }
+    - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4 }
+
+  roles:
+  - opdk-setup-default-settings
+
+  tasks:
+
+  - name: Create source folders
+    file:
+      owner: '{{ opdk_user_name }}'
+      group: '{{ opdk_group_name }}'
+      state: directory
+      path:  '{{ item }}'
+    with_items: '{{ apigee_dirs }}'
+    tags:
+    - source
+
+  - name: Create symlinks
+    file:
+      owner: '{{ opdk_user_name }}'
+      group: '{{ opdk_group_name }}'
+      state: link
+      dest: '{{ item.dest }}'
+      src: '{{ item.src }}'
+    with_items: '{{ apigee_links }}'
+    tags:
+    - links
+
+
+
+- hosts: rmp
+  vars:
+    apigee_dirs:
+    - /opt/apigee4
+    - /opt/apigee4/var
+    - /var/prod/logs/apigee4
+    apigee_links:
+    - { dest: /opt/apigee, src: /opt/apigee4 }
+    - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4 }
+
+  roles:
+  - opdk-setup-default-settings
+
+  tasks:
+  - name: Create source folders
+    file:
+      owner: '{{ opdk_user_name }}'
+      group: '{{ opdk_group_name }}'
+      state: directory
+      path: '{{ item }}'
+    with_items: '{{ apigee_dirs }}'
+    tags:
+    - source
+
+  - name: Create symlinks
+    file:
+      owner: '{{ opdk_user_name }}'
+      group: '{{ opdk_group_name }}'
+      state: link
+      dest: '{{ item.dest }}'
+      src: '{{ item.src }}'
+    with_items: '{{ apigee_links }}'
+    tags:
+    - links
+
+
+- hosts: planet
+
+  roles:
+  - opdk-setup-default-settings
+
+  tasks:
+  - name: Capture directory structure
+    shell: tree -l -L 2 /opt/apigee /opt/apigee4 /var/prod
+    register: status
+    tags:
+    - report
+
+  - name: Report directory structure
+    debug:
+      var: status
+    tags:
+    - report
+
+
