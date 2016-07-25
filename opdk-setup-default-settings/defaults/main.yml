@@ -121,6 +121,15 @@ edge_proxy_port: 9001
 
 ldap_data_port: 10389
 
+influxdb_system_port: 25826
+influxdb_port: 8086
+
+grafana_username: admin
+grafana_password: '{{ grafana_username }}'
+
+collectd_installation_config: collectd-installation.conf
+influxdb_host: 127.0.0.1
+
 # Local folder in which to store logs and config files
 conf_logs_dir: configs_and_logs
 

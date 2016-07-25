@@ -8,7 +8,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import os
 from ansible.module_utils.basic import *
 from subprocess import call
-
+6
 class CheckRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -33,6 +33,7 @@ def main(port):
     )
     port = module.params['port']
     run('127.0.0.1', port)
+
 
 
 def test():

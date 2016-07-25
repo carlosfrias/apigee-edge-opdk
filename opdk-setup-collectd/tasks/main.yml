@@ -1,0 +1,14 @@
+---
+# tasks file for opdk-setup-collectd
+- include: apigee-collectd-setup.yml
+
+- include: collectd-build-from-source.yml
+
+- include: apigee-collectd-config-files.yml
+
+- name: Start collectd service
+  shell: 'collectd -C {{ collectd_conf_file }}'
+  when: opdk_version | version_compare('4.16.01', '<')
+
+- include: 4160x-main.yml
+  when: opdk_version | version_compare('4.16.01', '>=')
