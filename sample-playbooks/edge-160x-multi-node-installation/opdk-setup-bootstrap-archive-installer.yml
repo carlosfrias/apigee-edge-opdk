@@ -1,0 +1,7 @@
+---
+- hosts: planet
+  serial: 1
+  roles:
+  - opdk-setup-bootstrap-archive-installer
+  tags:
+  - archive-installer

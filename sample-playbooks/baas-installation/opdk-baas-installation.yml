@@ -6,14 +6,13 @@
 - include: opdk-setup-openjdk.yml
   vars:
     hosts: 'dc-1'
+    jdk_version: '1.8'
 
 - include: opdk-setup-bootstrap.yml
   vars:
     hosts: 'dc-1'
 
 - include: opdk-setup-component-installer.yml
-  vars:
-    hosts: 'dc-1'
 
 - hosts: 'cassandra'
   roles:

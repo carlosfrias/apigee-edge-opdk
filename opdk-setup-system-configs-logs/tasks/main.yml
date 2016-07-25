@@ -1,73 +1,19 @@
 ---
 # tasks file for opdk-setup-system-config-logs
+
 - name: Find system installation logs and configs to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
   with_items:
-  - { dir: '/etc', name: 'hosts' }
-  - { dir: '/etc', name: 'hosts.allow' }
-  - { dir: '/etc', name: 'hosts.deny' }
-  - { dir: '/etc', name: 'environment' }
-  - { dir: '/etc', name: 'resolv.conf' }
-  - { dir: '/var/log', name: 'messages' }
-  - { dir: '/etc', name: 'sysctl.conf' }
-  - { dir: '/etc', name: 'sudoers' }
-  - { dir: '/etc/security', name: 'limits.conf' }
-  - { dir: '/etc/security/limits.d', name: '*conf' }
+  - '{{ system_config_files }}'
   ignore_errors: yes
 
-- name: Download Installation Logs
+- name: Setup stdout_lines collection
+  set_fact:
+     lines: "{{ [0, 1] | map('extract', logs.results, 'stdout_lines') | list }}"
+
+- name: Download files found
   fetch:
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[0].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download Installation Logs
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[1].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download Installation Logs
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[2].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download Installation Logs
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[3].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download Installation Logs
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[4].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download Installation Logs
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[5].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download Installation Logs
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[6].stdout_lines }}'
-  ignore_errors: yes
-
-- name: Download Installation Logs
-  fetch:
-    src: "{{ item }}"
-    dest: '{{ conf_logs_dir }}'
-  with_items: '{{ logs.results[7].stdout_lines }}'
-  ignore_errors: yes
+  with_items: "{{ lines }}"

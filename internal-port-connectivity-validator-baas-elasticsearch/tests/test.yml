@@ -1,0 +1,6 @@
+---
+- include: facts.yml
+
+- hosts: elastic
+  roles:
+    - internal-port-connectivity-validator-baas-elasticsearch

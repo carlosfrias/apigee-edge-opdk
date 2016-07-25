@@ -1,0 +1,10 @@
+---
+- include: facts.yml
+
+- hosts: planet
+  roles:
+  - { role: fetch-files, fetch_files: '{{ apigee_property_files }}' }
+  tags:
+  - properties
+  - apigee-properties
+  - logs

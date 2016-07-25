@@ -1,0 +1,9 @@
+---
+# tasks file for internal-port-connectivity-validator-ui
+- name: Edge UI Http connnectivity status
+  wait_for:
+    port: '{{ ui_http_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: ui_http_port_status
+

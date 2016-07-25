@@ -1,0 +1,4 @@
+---
+- hosts: ms
+  roles:
+    - internal-port-connectivity-validator-ms

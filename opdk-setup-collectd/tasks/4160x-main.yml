@@ -1,0 +1,19 @@
+---
+- name: Prepare the collectd config file
+  template:
+    src: '{{ collectd_installation_config }}.j2'
+    dest: '/tmp/{{ collectd_installation_config }}'
+
+- name: Install collectd
+  shell: '{{ apigee_service }} apigee-collectd install'
+
+- name: Query Zookeeper status
+  shell: '{{ apigee_service }} apigee-zookeeper status'
+  register: zk_status
+
+- name: Install collectd-zookeeper if zookeeper is on this node
+  shell: '{{ apigee_service }} collectd-zookeeper install'
+  when: "{{ not zk_status | search('Error: missing dir') }}"
+
+- name: Setup collectd
+  shell: '{{ apigee_service }} apigee-collectd setup -f /tmp/{{ collectd_installation_config }}'

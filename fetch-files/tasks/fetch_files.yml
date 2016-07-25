@@ -1,0 +1,7 @@
+---
+- name: Fetch the files found
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ fetched_files_dir }}'
+  with_items:
+  - "{{ result.stdout_lines }}"

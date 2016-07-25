@@ -1,0 +1,18 @@
+---
+# tasks file for port-connectivity-validator-ms
+- name: MS Internal Mgmt port connnectivity status
+  wait_for:
+    port: '{{ ms_ext_mgmt_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: ms_ext_mgmt_port_status
+  ignore_errors: yes
+
+- name: MS Internal JMX port connnectivity status
+  wait_for:
+    port: '{{ ms_jmx_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: ms_jmx_port_status
+  ignore_errors: yes
+

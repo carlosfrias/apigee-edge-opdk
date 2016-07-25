@@ -2,7 +2,7 @@
 # defaults file for opdk-setup-default-settings
 
 # Target Java JDK version
-jdk_version: '1.8'
+jdk_version: '1.7'
 
 # System file path to use in JAVA_HOME
 java_home: /usr/lib/jvm/java-openjdk
@@ -83,32 +83,52 @@ archive_path: '{{ apigee_installation_home }}/data/apigee-mirror/{{ archive_name
 mp_pod: gateway
 
 # Apigee Edge Ports
-ms_jmx_port: 1099
-router_jmx_port: 1100
+cassandra_jmx_port: 7199
+cassandra_thrift_client_port: 9160
+cassandra_cql_native_port: 9042
+cassandra_non_ssl_gossip_port: 7000
+cassandra_ssl_gossip_port: 7001
+
+zk_data_port: 2181
+zk_leader_port: 2888
+zk_voter_port: 3888
+
+mp_int_mgmt_port: 4528
+mp_ext_mgmt_port: 8082
 mp_jmx_port: 1101
-qpid_jmx_port: 1102
-ingest_jmx_port: 1102
-pgserver_jmx_port: 1103
-pg_jmx_port: 1103
-zk_jmx_port: 2181
+mp_router_port: 8998
+
+ms_jmx_port: 1099
+ms_ext_mgmt_port: 8080
+
+router_jmx_port: 1100
+router_ext_mgmt_port: 8081
 router_int_mgmt_port: 4527
+
+qpid_jmx_port: 1102
 qpid_int_mgmt_port: 4529
+qpid_messaging_port: 5672
+qpid_ext_mgmt_port: 8083
+
+pg_jmx_port: 1103
 pg_int_mgmt_port: 4530
 pg_db_port: 5432
-qpid_router_mp_port: 5672
-cassandra_jmx_port: 7199
-ms_http_port: 8080
-router_ext_mgmt_port: 8081
-mp_self_port: 8082
-qpid_ext_mgmt_port: 8083
-qpid_self_port: 8083
-pgserver_self_port: 8084
 pg_ext_mgmt_port: 8084
+
 ui_http_port: 9000
+
 edge_proxy_port: 9001
-test_port: 9001
-cassandra_db_port: 9160
-open_ldap_port: 10389
+
+ldap_data_port: 10389
+
+influxdb_system_port: 25826
+influxdb_port: 8086
+
+grafana_username: admin
+grafana_password: '{{ grafana_username }}'
+
+collectd_installation_config: collectd-installation.conf
+influxdb_host: 127.0.0.1
 
 # Local folder in which to store logs and config files
 conf_logs_dir: configs_and_logs
@@ -153,6 +173,10 @@ baas_load_balancer_port: '8080'
 # Portal port. Default value is 9000.
 baas_portal_port: '9000'
 
+# Elastic search ports. Default values
+baas_elasticsearch_port_low: '9200'
+baas_elasticsearch_port_high: '9300'
+
 # SMTP information. BaaS requires an SMTP server.
 baas_smtp_host: 'smtp.gmail.com'
 baas_smtp_port: '465'
@@ -161,3 +185,53 @@ baas_smtp_user_pass: '{{ baas_admin_pass }}'
 baas_smtp_ssl: 'n'
 
 linked_apigee_installation_home: ''
+
+# Default system config files to download
+system_config_files:
+  - { dir: '/etc', name: 'hosts' }
+  - { dir: '/etc', name: 'hosts.allow' }
+  - { dir: '/etc', name: 'hosts.deny' }
+  - { dir: '/etc', name: 'environment' }
+  - { dir: '/etc', name: 'resolv.conf' }
+  - { dir: '/var/log', name: 'messages' }
+  - { dir: '/etc', name: 'sysctl.conf' }
+  - { dir: '/etc', name: 'sudoers' }
+  - { dir: '/etc/security', name: 'limits.conf' }
+  - { dir: '/etc/security/limits.d', name: '*conf' }
+
+apigee_config_files:
+  - { dir: '/tmp', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*router/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}', name: '*sh' }
+
+apigee_log_files:
+  - { dir: '/tmp', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}/var/log', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}/var/log', name: '*out' }
+  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
+
+apigee_property_files:
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*router/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*properties' }
+

@@ -1,0 +1,33 @@
+---
+# tasks file for internal-port-connectivity-validator-qpidd
+- name: Internal Qpid Mgmt port connectivity status
+  wait_for:
+    port: '{{ qpid_int_mgmt_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: qpid_int_mgmt_port_status
+  ignore_errors: yes
+
+- name: Internal Qpid Messaging port connectivity status
+  wait_for:
+    port: '{{ qpid_messaging_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: mp_router_port_status
+  ignore_errors: yes
+
+- name: Internal Qpid JMX port connectivity status
+  wait_for:
+    port: '{{ qpid_jmx_port }}'
+    host: '{{ local_address}}'
+    timeout: 1
+  register: qpid_jmx_port_status
+  ignore_errors: yes
+
+- name: Qpid Mgmt port connectivity status
+  wait_for:
+    port: '{{ qpid_ext_mgmt_port }}'
+    host: '{{ local_address}}'
+    timeout: 1
+  register: qpid_ext_mgmt_port_status
+  ignore_errors: yes

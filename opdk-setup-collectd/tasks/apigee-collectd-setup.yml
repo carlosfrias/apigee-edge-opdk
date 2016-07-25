@@ -1,0 +1,110 @@
+---
+
+- name: Collectd base dir exists
+  stat:
+    path: '{{ collectd_base_dir }}'
+  register: cbase
+
+- name: Collectd run dir exists
+  stat:
+    path: '{{ collectd_pid_file | dirname }}'
+  register: crun
+
+- name: Collectd plugin dir exists
+  stat:
+    path: '{{ collectd_plugin_dir }}'
+  register: cplugin
+
+- name: Collectd types dir exists
+  stat:
+    path: '{{ collectd_types_db_dir }}'
+  register: cplugin
+
+- name: is collectd installed?
+  set_fact:
+    installed_collectd: '{{ cbase.stat.exists and crun.stat.exists and cplugin.stat.exists and cplugin.stat.exists }}'
+
+- name: Install collectd dependencies
+  yum:
+    name: '{{ item }}'
+    state: present
+  with_items:
+  - '@Development Tools'
+  - libcurl
+  - libcurl-devel
+  - rrdtool
+  - rrdtool-devel
+  - perl-devel
+  - libgcrypt-devel
+  - gcc
+  - make
+  - gcc-c++
+  - yajl-devel
+  - kernel-devel
+  - automake
+  - perl-ExtUtils-Embed
+  - python-devel
+  - python-psutil
+  - man
+  when: '{{ not installed_collectd }}'
+
+- name: Clean up config files
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+  - '{{ collectd_conf_dir }}'
+  - '{{ collectd_conf_file }}'
+
+- name: Stop collectd if it's running
+  shell: "kill -9 `cat {{ collectd_pid_file }}`"
+  ignore_errors: yes
+
+- name: Remove collectd pid
+  file:
+    path: '{{ collectd_pid_file }}'
+    state: absent
+  ignore_errors: yes
+
+- name: Find python lib folder
+  shell: "python -c 'from distutils.sysconfig import get_python_lib; print get_python_lib()'"
+  register: python_lib_dir
+
+- name: Create folders
+  file:
+    path: '{{ item.dir }}'
+    state: '{{ item.state }}'
+  with_items:
+  - { dir: '{{ collectd_base_dir }}', state: 'directory' }
+  - { dir: '{{ collectd_conf_dir }}', state: 'directory' }
+  - { dir: '{{ collectd_plugin_dir }}', state: 'directory' }
+  - { dir: '{{ collectd_types_db_dir }}', state: 'directory' }
+  - { dir: '{{ collectd_src_parent_dir }}', state: 'directory' }
+
+- name: Copy collectd python dir
+  copy:
+    src: collectd/python/
+    dest: "{{ collectd_base_dir }}"
+
+- name: Copy collectd ruby dir
+  copy:
+    src: collectd/ruby/
+    dest: "{{ collectd_base_dir }}"
+
+- name: Set ruby as executable
+  file:
+    state: file
+    mode: 0755
+    path: '{{ item }}'
+  with_items:
+  - '{{ collectd_base_dir }}/tcpconnstates.rb'
+
+- name: Copy collectd share dir
+  copy:
+    src: collectd/share/
+    dest: "{{ collectd_types_db_dir }}"
+
+- name: Copy collectd java dir
+  copy:
+    src: collectd/java/
+    dest: "{{ collectd_types_db_dir }}/java"

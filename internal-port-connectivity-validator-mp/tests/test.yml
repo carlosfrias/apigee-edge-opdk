@@ -1,0 +1,7 @@
+---
+- include: facts.yml
+
+- hosts: rmp
+  roles:
+    - internal-port-connectivity-validator-mp
+

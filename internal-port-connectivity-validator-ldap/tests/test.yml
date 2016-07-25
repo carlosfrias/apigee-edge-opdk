@@ -1,0 +1,6 @@
+---
+- include: facts.yml
+
+- hosts: ms
+  roles:
+    - internal-port-connectivity-validator-ldap

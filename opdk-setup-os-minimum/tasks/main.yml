@@ -8,25 +8,25 @@
     backup: yes
     backrefs: yes
 
-- name: Add yum epel repository
+- name: Add yum epel repository for centos 7 or greater
   yum:
     name: "{{ item }}"
     state: present
   with_items:
     - epel-release
-  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "centos"
+  when: ansible_distribution_version | version_compare('7', '>=') and ansible_distribution | lower == "centos"
   register: epel_repo
   tags:
   - epel
 
-- name: Add yum epel repository and centos release SCL for centos version 6
+- name: Add yum epel repository for centos 6 or less
   yum:
     name: "{{ item }}"
     state: present
   with_items:
     - epel-release
     - centos-release-SCL
-  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "centos"
+  when: ansible_distribution_version | version_compare('7', '<') and ansible_distribution | lower == "centos"
   register: epel_repo
   tags:
   - epel
@@ -36,8 +36,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-  - '{{ epel_ol67 }}'
-  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "oraclelinux"
+  - '{{ epel_ol6 }}'
+  when: ansible_distribution_version | version_compare('7', '<') and ansible_distribution | lower == "oraclelinux"
   register: epel_repo
   tags:
   - epel
@@ -47,8 +47,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - '{{ epel_rhel72 }}'
-  when: ansible_distribution_major_version == "7" and ansible_distribution | lower == "redhat"
+    - '{{ epel_rhel7 }}'
+  when: ansible_distribution_version | version_compare('7', '>=') | lower == "redhat"
   register: epel_repo
   tags:
   - epel
