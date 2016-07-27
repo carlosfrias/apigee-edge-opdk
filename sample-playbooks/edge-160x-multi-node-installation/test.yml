@@ -1,4 +1,7 @@
 ---
-- hosts: localhost
+- hosts: '{{ hosts }}'
   roles:
-  - opdk-setup-bootstrap
+  - opdk-create-backup
+  tasks:
+  - hello:
+      name: 'Carlos'

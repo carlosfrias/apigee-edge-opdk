@@ -1,8 +1,4 @@
 ---
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
-
 - include: '4150703-main.yml'
   when: opdk_version | version_compare('4.16.01', '<')
 

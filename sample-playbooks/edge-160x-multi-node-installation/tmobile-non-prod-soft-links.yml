@@ -30,12 +30,7 @@
     - source
 
   - name: Move data folder
-    delegate_to: '{{ inventory_hostname }}'
-    synchronize:
-      owner: '{{ opdk_user_name }}'
-      group: '{{ opdk_group_name }}'
-      src: '{{ item.src }}'
-      dest: '{{ item.dest }}'
+    shell: 'cp -R {{ item.src }} {{ item.dest }}'
     with_items: '{{ apigee_data }}'
     tags:
     - data
@@ -43,6 +38,7 @@
   - name: Remove the old data folder
     file:
       path: '{{ item.src }}'
+      state: absent
     with_items: '{{ apigee_data }}'
     tags:
     - rm_data
@@ -87,12 +83,7 @@
     - source
 
   - name: Move data folder
-    delegate_to: '{{ inventory_hostname }}'
-    synchronize:
-      owner: '{{ opdk_user_name }}'
-      group: '{{ opdk_group_name }}'
-      src: '{{ item.src }}'
-      dest: '{{ item.dest }}'
+    shell: 'cp -R {{ item.src }} {{ item.dest }}'
     with_items: '{{ apigee_data }}'
     tags:
     - data
