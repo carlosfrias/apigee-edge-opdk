@@ -2,7 +2,7 @@
 # tasks file for opdk-setup-local-repository-archive
 - name: Clean up and repos in /tmp
   file:
-    path: '{{ archive_folder }}'/repos
+    path: '{{ archive_folder }}/repos'
     state: absent
 
 - name: Unarchive local archive to remote nodes

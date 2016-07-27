@@ -6,7 +6,7 @@
 #  register: remove_all_apigee_status
 #  ignore_errors: yes
 
-- name: Gracefully Stop apigee components
+- name: Gracefully Stop apigee components, if possible
   shell: '{{ apigee_all }} stop'
 
 - name: Release any additional apigee user owned processes
