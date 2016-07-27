@@ -1,10 +1,30 @@
 ---
 # tasks file for opdk-setup-bootstrap-rollback
 
-- name: Remove apigee, edge, baas and qpid packages
-  shell: 'rpm -e $(rpm -qa | egrep "(apigee-|edge-|baas-|qpid-|python-qpid|libdb-cxx|nginx)")'
-  register: remove_all_apigee_status
+#- name: Remove apigee, edge, baas and qpid packages
+#  shell: "rpm -e $(rpm -qa | egrep '(apigee-|edge-|baas-|qpid-|python-qpid|libdb-cxx|nginx)')"
+#  register: remove_all_apigee_status
+#  ignore_errors: yes
+
+- name: Gracefully Stop apigee components
+  shell: '{{ apigee_all }} stop'
+
+- name: Release any additional apigee user owned processes
+  shell: 'pkill -u {{ opdk_user_name }}'
   ignore_errors: yes
+
+- name: Remove apigee, edge, baas and qpid packages
+  yum:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+  - apigee
+  - edge
+  - baas
+  - qpid
+  - python-qpid
+  - libdb-cxx
+  - nginx
 
 - name: Clear all artifacts from YUM repo
   shell: 'yum clean all'
@@ -13,12 +33,12 @@
 - name: Set target bootstrap script name for 4.16.01
   set_fact:
     bootstrap_script: '{{ opdk_installer_path }}/bootstrap.sh'
-  when: opdk_version == '4.16.01'
+  when: opdk_version | version_compare('4.16.01', '==')
 
 - name: Set target bootstrap script name for 4.16.05
   set_fact:
-    bootstrap_script: '{{ opdk_installer_path }}/bootstrap_4.16.05.sh'
-  when: opdk_version == '4.16.01'
+    bootstrap_script: '{{ opdk_installer_path }}/bootstrap_{{ opdk_version }}.sh'
+  when: opdk_version | version_compare('4.16.01', '>')
 
 - name: Remove bootstrap script and folders
   ignore_errors: yes
@@ -27,6 +47,5 @@
     state: absent
     follow: yes
   with_items:
-  - '{{ apigee_installation_home }}'
   - '{{ bootstrap_script }}'
   - '{{ linked_apigee_installation_home }}'

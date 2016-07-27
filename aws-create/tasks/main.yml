@@ -14,10 +14,10 @@
     group: '{{ security_group }}'
     vpc_subnet_id: '{{ vpc_subnet_id }}'
     volumes:
-      - device_name: /dev/sda1
+      - device_name: '{{ device_name }}'
         volume_type: '{{ volume_type }}'
         volume_size: '{{ volume_size }}'
-        delete_on_termination: true
+        delete_on_termination: '{{ delete_on_termination }}'
     instance_tags:
       Name: '{{ name_prefix }}-{{ session_name }}-n{{ item }}'
       application: '{{ application }}'

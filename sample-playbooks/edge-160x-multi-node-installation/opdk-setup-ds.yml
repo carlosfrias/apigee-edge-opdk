@@ -2,7 +2,7 @@
 - hosts: '{{ hosts }}'
   serial: 1
   roles:
-  - opdk-setup-ds
-#  - { role: opdk-setup-component, profile: 'ds' }
+#  - opdk-setup-ds
+  - { role: opdk-setup-component, profile: 'ds' }
   tags:
   - ds

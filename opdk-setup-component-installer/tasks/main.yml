@@ -14,7 +14,3 @@
 - name: Install Apigee Setup
   shell: 'bash {{ apigee_service }} apigee-setup install'
   when: opdk_version | version_compare('4.16', '>=')
-
-- name: Install Apigee adminapi
-  shell: 'bash {{ apigee_service }} apigee-adminapi install'
-  when: opdk_version | version_compare('4.16', '>=')
