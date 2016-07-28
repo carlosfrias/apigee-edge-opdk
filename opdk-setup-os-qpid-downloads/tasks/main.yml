@@ -1,0 +1,45 @@
+---
+# tasks file for opdk-setup-os-qpid-downloads
+
+- name: Update os version packages
+  yum:
+    name: '{{ item }}'
+    state: latest
+    update_cache: yes
+  with_items:
+    - libaio
+    - libstdc++
+    - cyrus-sasl-lib
+    - nss-util
+    - nss
+    - nspr
+    - boost-program-options
+    - libuuid
+
+- name: Update qpid os version 6 packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - db4-cxx
+    - glibc
+    - boost-filesystem
+    - boost-system
+    - boost-test
+    - boost
+    - boost-devel
+  when: ansible_distribution_version | version_compare('7', '<')
+
+
+- name: Update qpid os version 7 packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+  - libgcc
+  - nss-softokn-freebl
+  - perl-libs
+  - zlib
+  when: ansible_distribution_version | version_compare('6', '>')

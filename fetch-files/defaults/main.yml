@@ -14,3 +14,18 @@ fetch_files:
   - { dir: '/etc', name: 'sudoers' }
   - { dir: '/etc/security', name: 'limits.conf' }
   - { dir: '/etc/security/limits.d', name: '*conf' }
+  - { dir: '/tmp', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}', name: '*yml' }
+  - { dir: '{{ apigee_installation_home }}', name: '*sh' }
+  - { dir: '/tmp', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*out' }
+  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }

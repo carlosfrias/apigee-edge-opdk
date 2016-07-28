@@ -8,9 +8,6 @@
 
 - name: Gracefully Stop apigee components, if possible
   shell: '{{ apigee_all }} stop'
-
-- name: Release any additional apigee user owned processes
-  shell: 'pkill -u {{ opdk_user_name }}'
   ignore_errors: yes
 
 - name: Remove apigee, edge, baas and qpid packages
@@ -18,13 +15,13 @@
     name: '{{ item }}'
     state: absent
   with_items:
-  - apigee
-  - edge
-  - baas
-  - qpid
-  - python-qpid
-  - libdb-cxx
-  - nginx
+  - apigee-*
+  - edge-*
+  - baas-*
+  - qpid-*
+  - python-qpid-*
+  - libdb-cxx-*
+  - nginx-*
 
 - name: Clear all artifacts from YUM repo
   shell: 'yum clean all'
@@ -49,3 +46,7 @@
   with_items:
   - '{{ bootstrap_script }}'
   - '{{ linked_apigee_installation_home }}'
+
+- name: Release any additional apigee user owned processes
+  shell: 'pkill -u {{ opdk_user_name }}'
+  ignore_errors: yes
