@@ -1,5 +1,4 @@
 ---
-
 - hosts: planet
   become: true
   strategy: free
@@ -40,15 +39,6 @@
   tags:
   - os
   - os-ds
-
-- hosts: ldap
-  become: true
-  strategy: free
-  roles:
-  - opdk-setup-os-ldap
-  tags:
-  - os
-  - os-ldap
 
 - hosts: rmp
   become: true

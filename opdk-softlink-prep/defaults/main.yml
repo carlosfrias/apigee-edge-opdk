@@ -1,0 +1,11 @@
+---
+# defaults file for opdk-softlink-prep
+target_dirs:
+  - /opt/apigee4/apigee4
+  - /var/prod/data/apigee4/data
+  - /var/prod/logs/apigee4/var/log
+soft_links:
+  - { dest: /opt/apigee, src: /opt/apigee4/apigee4 }
+  - { dest: /opt/apigee/data, src: /var/prod/data/apigee4/data }
+  - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4/var/log }
+

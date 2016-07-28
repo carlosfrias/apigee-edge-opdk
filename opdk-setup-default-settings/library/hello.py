@@ -5,11 +5,11 @@ from ansible.module_utils.basic import *
 def main():
     module = AnsibleModule(
         argument_spec = dict(
-            name=dict(required=True, type='str')
+            name=dict(required=True)
         )
     )
     name = module.params['name']
-    msg = "Hello {}".format(name)
+    msg = "Hello {}".format('testname')
     module.exit_json(changed=True,
                      ansible_facts=dict(
                              apigee_hello_facts=dict(

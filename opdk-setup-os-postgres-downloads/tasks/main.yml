@@ -1,0 +1,79 @@
+---
+# tasks file for opdk-setup-os-postgres-downloads
+- name: Update yum for postgres 93 packages on Centos 6
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - 'https://download.postgresql.org/pub/repos/yum/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-2.noarch.rpm'
+  when: ansible_distribution_version | version_compare('7', '<') and (ansible_distribution | lower == "centos" or ansible_distribution | lower == "redhat")
+
+- name: Update yum for postgres 93 packages on Centos 7
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+    - 'https://download.postgresql.org/pub/repos/yum/9.3/redhat/rhel-7-x86_64/pgdg-centos93-9.3-2.noarch.rpm'
+  when: ansible_distribution_version | version_compare('6', '>') and ansible_distribution | lower == "centos"
+
+- name: Update yum for postgres 93 packages on Redhat 7
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+    - 'http://yum.postgresql.org/9.3/redhat/rhel-7-x86_64/pgdg-redhat93-9.3-2.noarch.rpm'
+  when: ansible_distribution_version | version_compare('6', '>') and ansible_distribution | lower == "redhat"
+
+- name: Update yum for postegres 93 on Oracle Linux 6
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - 'https://download.postgresql.org/pub/repos/yum/9.3/redhat/rhel-6-x86_64/pgdg-oraclelinux93-9.3-2.noarch.rpm'
+  register: results
+  when: ansible_distribution_version | version_compare('7', '<') and ansible_distribution | lower == "oraclelinux"
+
+- name: Update yum for postegres 93 on Oracle Linux 7
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - 'https://download.postgresql.org/pub/repos/yum/9.3/redhat/rhel-7-x86_64/pgdg-oraclelinux93-9.3-2.noarch.rpm'
+  register: results
+  when: ansible_distribution_version | version_compare('6', '>')  and ansible_distribution | lower == "oraclelinux"
+
+- name: Add postgres system packages for Oracle Linux
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+  - boost-program-options
+  - cyrus-sasl-lib
+  - libaio
+  - libgcc
+  - libstdc++
+  - libuuid
+  - nspr
+  - nss
+  - nss-softokn-freebl
+  - perl-libs
+  - zlib
+
+- name: Update yum os packages for postgres
+  yum:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - uuid
+    - libxslt
+    - postgresql93
+    - postgresql93-libs
+    - postgresql93-contrib
+    - postgresql93-server

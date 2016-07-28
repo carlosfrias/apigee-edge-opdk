@@ -20,3 +20,22 @@
   - os
   - os-logs
   - logs
+
+
+- hosts: planet
+  roles:
+  - { role: fetch-files, fetch_files: '{{ apigee_config_files }}' }
+#  - opdk-setup-apigee-config-files
+  - opdk-setup-system-configs-logs
+  tags:
+  - configs
+  - logs
+
+
+- hosts: planet
+  roles:
+  - { role: fetch-files, fetch_files: '{{ apigee_property_files }}' }
+  tags:
+  - properties
+  - apigee-properties
+  - logs
