@@ -52,30 +52,10 @@ tag_Name_cfrias_1601_edge_ol68_1_n1
 tag_Name_cfrias_1601_edge_ol68_1_n2
 tag_Name_cfrias_1601_edge_ol68_1_n3
 
-[tag_Name_cfrias_1601_edge_ol68_1_n1:vars]
-rack=:1,1
-
-[tag_Name_cfrias_1601_edge_ol68_1_n2:vars]
-rack=:1,1
-
-[tag_Name_cfrias_1601_edge_ol68_1_n3:vars]
-rack=:1,1
-
 [dc-2-ds:children]
 tag_Name_cfrias_1601_edge_ol68_2_n1
 tag_Name_cfrias_1601_edge_ol68_2_n2
 tag_Name_cfrias_1601_edge_ol68_2_n3
-
-[tag_Name_cfrias_1601_edge_ol68_2_n1:vars]
-rack=:2,1
-
-[tag_Name_cfrias_1601_edge_ol68_2_n2:vars]
-rack=:2,1
-
-[tag_Name_cfrias_1601_edge_ol68_2_n3:vars]
-rack=:2,1
-
-
 
 [tag_Name_cfrias_1601_edge_ol68_2_n3:vars]
 zk_observer=true
