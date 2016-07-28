@@ -1,0 +1,28 @@
+---
+- hosts: ldap
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-os-ldap-downloads
+  tags:
+  - os
+  - os-ldap-yum
+
+- hosts: qpid
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-os-qpid-downloads
+  tags:
+  - os
+  - os-qpid-yum
+
+- hosts: pg
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-os-postgres-downloads
+  tags:
+  - os
+  - os-pg-yum
+
