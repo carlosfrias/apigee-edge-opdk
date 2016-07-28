@@ -1,5 +1,7 @@
 ---
 # tasks file for opdk-setup-default-settings
+- include: network-interface-name.yml
+
 - name: Get public address for node
   set_fact:
     public_address: '{{ inventory_hostname }}'
@@ -18,4 +20,25 @@
     local_address: '{{ ansible_ec2_local_ipv4 }}'
   when: "{{ ansible_bios_version | search('amazon') and ansible_ec2_local_ipv4 is defined }}"
 
-- include: network-interface-name.yml
+- name: Get local management server if on dc-1
+  set_fact:
+    local_mgmt_ip: "{{ hostvars[groups['dc-1-ms'][0]][interfaceName].ipv4.address }}"
+  when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1']
+
+- name: Get local management server if on dc-2
+  set_fact:
+    local_mgmt_ip: "{{ hostvars[groups['dc-2-ms'][0]][interfaceName].ipv4.address }}"
+  when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2']
+
+- name: Get local management server if on dc-1
+  set_fact:
+    public_mgmt_ip: "{{ groups['dc-1-ms'][0] }}"
+  when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1']
+
+- name: Get local management server if on dc-2
+  set_fact:
+    public_mgmt_ip: "{{ groups['dc-2-ms'][0] }}"
+  when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2']
+
+
+
