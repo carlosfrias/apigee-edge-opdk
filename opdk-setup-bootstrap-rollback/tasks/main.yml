@@ -47,6 +47,15 @@
   - '{{ bootstrap_script }}'
   - '{{ linked_apigee_installation_home }}'
 
-- name: Release any additional apigee user owned processes
+- name: Determine current user
+  shell: whoami
+  register: whoami
+
+- name: Determine if safe to kill user owned process
+  set_fact:
+    kill_user: whoami.stdout != '{{ opdk_user_name }}'
+
+- name: Release any apigee user owned processes
   shell: 'pkill -u {{ opdk_user_name }}'
   ignore_errors: yes
+  when: kill_user
