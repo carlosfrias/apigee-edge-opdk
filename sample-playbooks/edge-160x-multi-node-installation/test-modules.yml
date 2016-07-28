@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+
+  roles:
+  - opdk-setup-default-settings
+
+  tasks:
+  - name: Hello world
+    hello:
+

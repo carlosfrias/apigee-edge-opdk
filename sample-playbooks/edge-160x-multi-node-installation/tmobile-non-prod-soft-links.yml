@@ -86,7 +86,7 @@
   - opdk-setup-default-settings
 
   tasks:
-  
+
   - name: Create source folders
     file:
       owner: '{{ opdk_user_name }}'

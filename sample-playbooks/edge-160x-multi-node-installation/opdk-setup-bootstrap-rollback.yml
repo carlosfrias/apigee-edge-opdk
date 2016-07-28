@@ -5,3 +5,4 @@
   strategy: free
   roles:
   - opdk-setup-bootstrap-rollback
+  - restart-node

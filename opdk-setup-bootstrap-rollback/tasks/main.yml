@@ -8,6 +8,7 @@
 
 - name: Gracefully Stop apigee components, if possible
   shell: '{{ apigee_all }} stop'
+  ignore_errors: yes
 
 - name: Remove apigee, edge, baas and qpid packages
   yum:
