@@ -1,0 +1,37 @@
+---
+- hosts: ds,pg,qpid
+  vars:
+    target_dirs:
+    - /opt/apigee4/apigee4
+    - /var/prod/data/apigee4/data
+    - /var/prod/logs/apigee4/var/log
+    soft_links:
+    - { dest: /opt/apigee, src: /opt/apigee4/apigee4 }
+    - { dest: /opt/apigee/data, src: /var/prod/data/apigee4/data }
+    - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4/var/log }
+  roles:
+  - opdk-softlink-prep
+
+- hosts: ms
+  vars:
+    target_dirs:
+    - /opt/apigee4/apigee4/var
+    - /var/prod/data/apigee4/data/apigee-openldap/ldap
+    - /var/prod/logs/apigee4/var/log
+    soft_links:
+    - { dest: /opt/apigee, src: /opt/apigee4/apigee4 }
+    - { dest: /opt/apigee/data, src: /var/prod/data/apigee4/data }
+    - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4/var/log }
+  roles:
+  - opdk-softlink-prep
+
+- hosts: rmp
+  vars:
+    target_dirs:
+    - /opt/apigee4/var
+    - /var/prod/logs/apigee4
+    soft_links:
+    - { dest: /opt/apigee, src: /opt/apigee4/apigee }
+    - { dest: /opt/apigee/var/log, src: /var/prod/logs/apigee4 }
+  roles:
+  - opdk-softlink-prep

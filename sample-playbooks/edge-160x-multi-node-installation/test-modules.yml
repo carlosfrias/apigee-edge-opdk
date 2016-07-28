@@ -1,11 +1,10 @@
 ---
-- hosts: localhost
-  connection: local
-
+- hosts: ms
+  gather_facts: no
   roles:
   - opdk-setup-default-settings
 
   tasks:
   - name: Hello world
-    hello:
+    bootstrap:
 

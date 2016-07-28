@@ -1,7 +1,13 @@
 ---
 - hosts: '{{ hosts }}'
-  roles:
-  - opdk-create-backup
+#  roles:
+#  - opdk-create-backup
   tasks:
-  - hello:
-      name: 'Carlos'
+#  - hello:
+#      name: 'Carlos'
+
+  - name: whoami
+    shell: whoami
+    register: whoami
+
+  - debug: var=whoami
