@@ -1,29 +1,4 @@
 ---
-
-- name: Collectd base dir exists
-  stat:
-    path: '{{ collectd_base_dir }}'
-  register: cbase
-
-- name: Collectd run dir exists
-  stat:
-    path: '{{ collectd_pid_file | dirname }}'
-  register: crun
-
-- name: Collectd plugin dir exists
-  stat:
-    path: '{{ collectd_plugin_dir }}'
-  register: cplugin
-
-- name: Collectd types dir exists
-  stat:
-    path: '{{ collectd_types_db_dir }}'
-  register: cplugin
-
-- name: is collectd installed?
-  set_fact:
-    installed_collectd: '{{ cbase.stat.exists and crun.stat.exists and cplugin.stat.exists and cplugin.stat.exists }}'
-
 - name: Install collectd dependencies
   yum:
     name: '{{ item }}'
@@ -46,7 +21,11 @@
   - python-devel
   - python-psutil
   - man
-  when: '{{ not installed_collectd }}'
+  - python-devel
+  - openssl
+  - openssl-devel
+  - gcc
+  - sqlite-devel
 
 - name: Clean up config files
   file:

@@ -204,6 +204,8 @@ system_config_files:
   - { dir: '/etc', name: 'hosts.allow' }
   - { dir: '/etc', name: 'hosts.deny' }
   - { dir: '/etc', name: 'environment' }
+  - { dir: '/etc', name: 'profile' }
+  - { dir: '/etc', name: 'bashrc' }
   - { dir: '/etc', name: 'resolv.conf' }
   - { dir: '/var/log', name: 'messages' }
   - { dir: '/etc', name: 'sysctl.conf' }
@@ -212,38 +214,13 @@ system_config_files:
   - { dir: '/etc/security/limits.d', name: '*conf' }
 
 apigee_config_files:
-  - { dir: '/tmp', name: '*conf' }
+  - { dir: '{{ opdk_installer_path }}', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
-  - { dir: '{{ apigee_installation_home }}/token/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*router/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
-  - { dir: '{{ apigee_installation_home }}', name: '*sh' }
+  - { dir: '{{ apigee_installation_home }}/apigee-cassandra', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}/etc', name: 'default*.sh' }
 
 apigee_log_files:
-  - { dir: '/tmp', name: '*log' }
+  - { dir: '{{ opdk_installer_path }}', name: '*log' }
   - { dir: '{{ apigee_installation_home }}/var/log', name: '*log' }
   - { dir: '{{ apigee_installation_home }}/var/log', name: '*out' }
   - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
-
-apigee_property_files:
-  - { dir: '{{ apigee_installation_home }}/token/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*router/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*properties' }
-

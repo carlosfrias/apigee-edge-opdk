@@ -4,15 +4,22 @@ collectd_interval: 10
 collectd_timeout: 2
 collectd_read_threads: 5
 collectd_write_queue_limit_high: 3000
+
 collectd_pkg_name: collectd
-collectd_version: 5.4.2
+collectd_version: 5.5.0
+collectd_version_ext: -6.fc23.x86_64.rpm
+
 collectd_src_filename: '{{ collectd_pkg_name }}-{{ collectd_version }}.tar.gz'
 collectd_file_repository: 'http://collectd.org/files'
-collectd_file_sha_256: '5f7cfad5b24ed4f8b113cfb270e0f9e5a9f7c3af10443cb507fd40174a6c9028'
-collectd_generic_jmx_url: 'ftp://195.220.108.108/linux/fedora/linux/releases/23/Everything/x86_64/os/Packages/c/{{ collectd_generic_jmx_filename }}'
-collectd_java_filename:  'collectd-java-{{ collectd_version }}-3.fc22.x86_64.rpm'
-collectd_java_url: 'ftp://195.220.108.108/linux/fedora/linux/releases/23/Everything/x86_64/os/Packages/c/{{ collectd_java_filename }}'
-collectd_generic_jmx_filename:  'collectd-generic-jmx-{{ collectd_version }}-3.fc22.x86_64.rpm'
+
+collectd_filename: 'collectd-{{ collectd_version }}{{ collectd_version_ext }}'
+collectd_filename_url: 'ftp://rpmfind.net/linux/fedora/linux/releases/23/Everything/x86_64/os/Packages/c/{{ collected_filename }}'
+
+collectd_generic_jmx_filename:  'collectd-generic-jmx-{{ collectd_version }}{{ collectd_version_ext }}'
+collectd_generic_jmx_url: 'ftp://rpmfind.net/linux/fedora/linux/releases/23/Everything/x86_64/os/Packages/c/{{ collectd_generic_jmx_filename }}'
+
+collectd_java_filename:  'collectd-java-{{ collectd_version }}{{ collectd_version_ext }}'
+collectd_java_url: 'ftp://rpmfind.net/linux/fedora/linux/releases/23/Everything/x86_64/os/Packages/c/{{ collectd_java_filename }}'
 
 collectd_base_dir: /usr/var/lib/collectd
 collectd_conf_file: /etc/collectd.conf

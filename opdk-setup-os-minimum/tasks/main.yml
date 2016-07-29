@@ -98,11 +98,12 @@
     backup: yes
 
 - name: Add pip package manager
-  yum:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-  - python-pip
+  get_url:
+    url: https://bootstrap.pypa.io/get-pip.py
+    dest: /tmp/get-pip.py
+
+- name: Install pip package manager
+  shell: python /tmp/get-pip.py
 
 - name: Update pip package manager
   shell: 'pip install --upgrade pip'
@@ -117,3 +118,5 @@
   - httplib2
   - pexpect
   - passlib
+  - requests
+
