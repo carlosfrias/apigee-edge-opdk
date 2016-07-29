@@ -1,0 +1,10 @@
+---
+opdk_ldap_type: '1'
+config_files:
+  - { dir: '{{ opdk_installer_path }}', name: '*conf' }
+  - { dir: '{{ opdk_installer_path }}', name: '*log' }
+  - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
+  - { dir: '{{ apigee_installation_home }}/apigee-cassandra', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}/apigee-zookeeper', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/etc', name: '*sh' }
+

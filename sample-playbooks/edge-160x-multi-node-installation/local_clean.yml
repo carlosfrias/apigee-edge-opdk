@@ -13,3 +13,4 @@
     - 'ansible.log'
     - 'ssh_keys'
     - 'configs_and_logs'
+    - 'rpm_resources'

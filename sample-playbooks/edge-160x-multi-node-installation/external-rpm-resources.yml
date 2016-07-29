@@ -1,0 +1,4 @@
+---
+rpm_resources:
+- { target_rpm_name: 'openldap_servers.rpm', url: 'http://rpmfind.net/linux/centos/6.8/os/x86_64/Packages/openldap-servers-2.4.40-12.el6.x86_64.rpm', local_rpm_staging_dir: '{{ playbook_dir }}/rpm_resources', server_rpm_staging_dir: '/tmp' }
+- { target_rpm_name: 'openldap_client.rpm', url: 'http://rpmfind.net/linux/centos/6.8/os/x86_64/Packages/openldap-clients-2.4.40-12.el6.x86_64.rpm', local_rpm_staging_dir: '{{ playbook_dir }}/rpm_resources', server_rpm_staging_dir: '/tmp'  }
