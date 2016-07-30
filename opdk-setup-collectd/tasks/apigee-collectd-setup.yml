@@ -19,12 +19,10 @@
   - automake
   - perl-ExtUtils-Embed
   - python-devel
-  - python-psutil
   - man
   - python-devel
   - openssl
   - openssl-devel
-  - gcc
   - sqlite-devel
 
 - name: Clean up config files
