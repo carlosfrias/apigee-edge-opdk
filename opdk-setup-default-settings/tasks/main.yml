@@ -8,7 +8,7 @@
 
 - name: Get private address for node
   set_fact:
-    local_address: '{{ ansible_eth0.ipv4.address }}'
+    local_address: '{{ hostvars[inventory_hostname][interfaceName].ipv4.address }}'
 
 - name: Get public address for node on AWS
   set_fact:

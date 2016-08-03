@@ -3,3 +3,13 @@
   remote_user: root
   roles:
     - opdk-setup-default-settings
+
+  tasks:
+  - name: Selinux status
+    selinux_status:
+    register: status
+
+  - debug: var=status
+
+#  - name: Set Apigee facts
+#    apigee_facts: topology='cassandra' my_hostname='dc-1'

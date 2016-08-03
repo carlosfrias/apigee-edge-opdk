@@ -53,8 +53,19 @@
   tags:
   - epel
 
+#- name: Proactively remove qpid packages that cause yum update failures, ignore errors
+#  shell: 'rpm -e $(rpm -qa | egrep "(apigee-qpidd-|qpid-|python-qpid|libqpid)")'
+#  ignore_errors: true
+
 - name: Proactively remove qpid packages that cause yum update failures, ignore errors
-  shell: 'rpm -e $(rpm -qa | egrep "(apigee-qpidd-|qpid-|python-qpid|libqpid)")'
+  yum:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+  - apigee-qpidd-*
+  - qpid-*
+  - python-qpid*
+  - libqpid*
   ignore_errors: true
 
 - name: Keep yum downloads small
@@ -119,4 +130,5 @@
   - pexpect
   - passlib
   - requests
+  - kazoo
 
