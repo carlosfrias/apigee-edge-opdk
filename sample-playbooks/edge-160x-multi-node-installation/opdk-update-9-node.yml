@@ -47,6 +47,8 @@
   vars:
     hosts: 'dc-1-ui'
     components: 'ui'
+  tags:
+  - ui
 
 
 
@@ -98,4 +100,7 @@
   vars:
     hosts: 'dc-2-ui'
     components: 'ui'
+  tags:
+  - ui
+
 
