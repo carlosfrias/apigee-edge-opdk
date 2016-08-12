@@ -254,13 +254,14 @@
 
 - hosts: pg
   roles: 
-  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_jmx_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
-  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_int_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
-  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_db_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
-  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_ext_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_jmx_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_int_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_messaging_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_ext_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
     
-  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_jmx_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
-  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_int_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
-  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_db_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
-  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_ext_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
-  
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_jmx_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_int_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_messaging_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_ext_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
+  tags:
+  - pg_read_qpid
