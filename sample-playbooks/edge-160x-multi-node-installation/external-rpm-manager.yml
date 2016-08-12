@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+  - external-rpm-resources.yml
+  tasks:
+
+  - name: Create the local staging directory
+    file:
+      path: '{{ item.local_rpm_staging_dir }}'
+      state: directory
+      mode: 0755
+    with_items:
+    - '{{ rpm_resources }}'
+
+  - name: Download RPMs to local staging directory
+    get_url:
+      url: '{{ item.url }}'
+      dest: '{{ item.local_rpm_staging_dir }}/{{ item.target_rpm_name }}'
+    with_items:
+    - '{{ rpm_resources }}'
+
+
+- hosts: '{{ hosts }}'
+  vars_files:
+  - external-rpms-resources.yml
+  tasks:
+  - name: Copy local rpms to node
+    copy:
+      src: '{{ item.local_rpm_staging_dir }}/{{ item.target_rpm_name }}'
+      dest: '{{ item.server_rpm_staging_dir }}/{{ item.target_rpm_name }}'
+    with_items:
+    - '{{ rpm_resources }}'
+
+  - name: Install RPMs
+    yum:
+      name: '{{ item.server_rpm_staging_dir }}/{{ item.target_rpm_name }}'
+      state: present
+    with_items:
+    - '{{ rpm_resources }}'

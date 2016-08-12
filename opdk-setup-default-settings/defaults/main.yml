@@ -31,11 +31,14 @@ admin_pass: '{{ opdk_user_name }}'
 # Default Apigee Edge Private Cloud Version
 opdk_version: '4.16.01'
 
+# Apigee staging installation folder
+opdk_installer_path: "/tmp"
+
 # Default name of the backup archive of the apigee data folder
 apigee_data_backup_archive_name: apigee_data_backup.tar.gz
 
 # Default folder in which the apigee data backup archive will be stored.
-apigee_archive_storage_folder: /tmp
+apigee_archive_storage_folder: '{{ opdk_installer_path }}'
 
 # Default apigee installation home
 apigee_installation_home: /opt/apigee
@@ -51,9 +54,6 @@ apigee_setup: '{{ apigee_installation_home }}/apigee-setup/bin/setup.sh'
 
 # Apigee all command for 4.16.xx
 apigee_all: '{{ apigee_installation_home }}/apigee-service/bin/apigee-all'
-
-# Apigee staging installation folder
-opdk_installer_path: "/tmp"
 
 # Apigee license file path
 opdk_license_file_path: "{{ opdk_installer_path }}/license.conf"
@@ -75,6 +75,9 @@ apigee_repo_user: '{{ opdk_user_name }}'
 
 # Apigee bootstrap download uri
 apigee_repo_uri: 'software.apigee.com'
+
+# Apigee bootstrap download url
+apigee_repo_url: 'https://{{ apigee_repo_uri }}'
 
 # Apigee bootstrap script location
 #bootstrap_script: '{{ opdk_installer_path }}/bootstrap.sh'
@@ -204,6 +207,8 @@ system_config_files:
   - { dir: '/etc', name: 'hosts.allow' }
   - { dir: '/etc', name: 'hosts.deny' }
   - { dir: '/etc', name: 'environment' }
+  - { dir: '/etc', name: 'profile' }
+  - { dir: '/etc', name: 'bashrc' }
   - { dir: '/etc', name: 'resolv.conf' }
   - { dir: '/var/log', name: 'messages' }
   - { dir: '/etc', name: 'sysctl.conf' }
@@ -212,38 +217,13 @@ system_config_files:
   - { dir: '/etc/security/limits.d', name: '*conf' }
 
 apigee_config_files:
-  - { dir: '/tmp', name: '*conf' }
+  - { dir: '{{ opdk_installer_path }}', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
-  - { dir: '{{ apigee_installation_home }}/token/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*router/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
-  - { dir: '{{ apigee_installation_home }}', name: '*sh' }
+  - { dir: '{{ apigee_installation_home }}/apigee-cassandra', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}/etc', name: 'default*.sh' }
 
 apigee_log_files:
-  - { dir: '/tmp', name: '*log' }
+  - { dir: '{{ opdk_installer_path }}', name: '*log' }
   - { dir: '{{ apigee_installation_home }}/var/log', name: '*log' }
   - { dir: '{{ apigee_installation_home }}/var/log', name: '*out' }
   - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
-
-apigee_property_files:
-  - { dir: '{{ apigee_installation_home }}/token/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*router/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*properties' }
-  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*properties' }
-

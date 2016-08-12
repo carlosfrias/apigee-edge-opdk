@@ -3,7 +3,6 @@
 
 - hosts: planet
   roles:
-#  - opdk-setup-apigee-log-files
   - { role: fetch-files, fetch_files: '{{ apigee_log_files }}' }
 
   tags:
@@ -15,7 +14,6 @@
   strategy: free
   roles:
   - { role: fetch-files, fetch_files: '{{ system_config_files }}' }
-#  - opdk-setup-system-configs-logs
   tags:
   - os
   - os-logs
@@ -25,8 +23,6 @@
 - hosts: planet
   roles:
   - { role: fetch-files, fetch_files: '{{ apigee_config_files }}' }
-#  - opdk-setup-apigee-config-files
-  - opdk-setup-system-configs-logs
   tags:
   - configs
   - logs

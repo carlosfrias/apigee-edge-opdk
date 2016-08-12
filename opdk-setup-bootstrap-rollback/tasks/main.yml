@@ -53,7 +53,7 @@
 
 - name: Determine if safe to kill user owned process
   set_fact:
-    kill_user: whoami.stdout != '{{ opdk_user_name }}'
+    kill_user: '{{ whoami.stdout != opdk_user_name }}'
 
 - name: Release any apigee user owned processes
   shell: 'pkill -u {{ opdk_user_name }}'

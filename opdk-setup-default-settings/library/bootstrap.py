@@ -1,6 +1,9 @@
-import os
 import requests
 from ansible.module_utils.basic import *
+
+bootstrap_filename = None
+version = None
+url = None
 
 
 def store_bootstrap_script(filename, dest_directory, text):
@@ -11,7 +14,7 @@ def store_bootstrap_script(filename, dest_directory, text):
     except OSError:
         pass
 
-    file_path = '{}/{}'.format(dest_directory, filename)
+    file_path = dest_directory + '/' + filename
     script_file = open(file_path, 'w')
     script_file.write(text)
     script_file.close()
@@ -26,12 +29,8 @@ def set_bootstrap_filename(version=None):
 
 
 def download_bootstrap(uri, dest_directory):
-    resp = requests.get(
-            '{}/{}'.format(
-                    uri,
-                    bootstrap_filename
-            )
-    )
+    url = uri + '/' + bootstrap_filename
+    resp = requests.get(url)
     store_bootstrap_script(bootstrap_filename, dest_directory, resp.text)
     return resp.status_code
 
@@ -58,17 +57,17 @@ def main():
     if status_code >= 200 and status_code < 300:
         module.exit_json(changed=True,
                          ansible_facts=dict(
-                                 apigee_bootstrap_facts=dict(
-                                         bootstrap_request_status_code=status_code,
-                                         bootstrap_file_path=file_path,
-                                         bootstrap_filename=bootstrap_filename,
-                                         bootstrap_version=version
-                                 )
+                                 rc=0,
+                                 bootstrap_request_status_code=status_code,
+                                 bootstrap_script=file_path,
+                                 bootstrap_filename=bootstrap_filename,
+                                 bootstrap_version=version
                          )
                          )
     elif status_code >= 400:
         module.fail_json(changed=False,
                          msg="Failed to retrieve bootstrap script",
+                         rc=1,
                          bootstrap_request_status_code=status_code,
                          bootstrap_version=version
                          )
