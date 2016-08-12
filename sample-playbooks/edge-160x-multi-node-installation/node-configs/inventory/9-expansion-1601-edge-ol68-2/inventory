@@ -70,6 +70,16 @@ tag_Name_cfrias_1601_edge_ol68_1_n1
 [dc-2-ms:children]
 tag_Name_cfrias_1601_edge_ol68_2_n1
 
+[ui:children]
+dc-1-ui
+dc-2-ui
+
+[dc-1-ui:children]
+tag_Name_cfrias_1601_edge_ol68_1_n1
+
+[dc-2-ui:children]
+tag_Name_cfrias_1601_edge_ol68_2_n1
+
 [ldap:children]
 dc-1-ldap
 dc-2-ldap
@@ -135,3 +145,15 @@ tag_Name_cfrias_1601_edge_ol68_1_n9
 
 [dc-2-pgstandby:children]
 tag_Name_cfrias_1601_edge_ol68_2_n9
+
+[dc-1-central:children]
+dc-1-ui
+dc-1-ms
+dc-1-ds
+
+[dc-1-gateway:children]
+dc-1-rmp
+
+[dc-1-analytics:children]
+dc-1-qpid
+dc-1-pg

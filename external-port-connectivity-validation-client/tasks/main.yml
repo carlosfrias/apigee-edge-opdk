@@ -1,0 +1,16 @@
+---
+# tasks file for external-port-connectivity-validator-server
+- name: Source server to connect from
+  debug:
+    msg: 'Source Server: {{ local_address }}'
+
+- name: Validate for open port {{ target_server }}:{{ check_port }}
+  wait_for:
+    port: '{{ check_port }}'
+    host: '{{  target_server }}'
+    timeout: 5
+
+- name: Shutdown validation server
+  ignore_errors: yes
+  uri:
+    url: 'http://{{ target_server }}:{{ check_port }}/done'

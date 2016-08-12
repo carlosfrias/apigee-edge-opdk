@@ -52,6 +52,9 @@ nodetool: '{{ apigee_installation_home }}/apigee-cassandra/bin/nodetool'
 # Apigee setup command for 4.16.xx
 apigee_setup: '{{ apigee_installation_home }}/apigee-setup/bin/setup.sh'
 
+# Apigee update command for 4.16.xx
+apigee_update: '{{ apigee_installation_home }}/apigee-setup/bin/update.sh'
+
 # Apigee all command for 4.16.xx
 apigee_all: '{{ apigee_installation_home }}/apigee-service/bin/apigee-all'
 
@@ -224,6 +227,6 @@ apigee_config_files:
 
 apigee_log_files:
   - { dir: '{{ opdk_installer_path }}', name: '*log' }
+  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
   - { dir: '{{ apigee_installation_home }}/var/log', name: '*log' }
   - { dir: '{{ apigee_installation_home }}/var/log', name: '*out' }
-  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }

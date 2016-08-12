@@ -4,11 +4,15 @@
 # Need a get request on the /ping url that response with pong
 # Need a get request on the /exit url that kills the python process
 
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import os
+import sys
+# try:
 from ansible.module_utils.basic import *
-from subprocess import call
-6
+# except:
+#     pass
+
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+
 class CheckRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -25,24 +29,23 @@ def run(ip, port):
     httpd.serve_forever()
 
 
-def main(port):
+def main():
     module = AnsibleModule(
-            argument_spec = dict(
-                    port  = dict(required=True, type='str')
-            )
+        argument_spec = dict(
+            port = dict(required = True, type='str'),
+            ip = dict(required = True, type='str')
+        )
     )
-    port = module.params['port']
-    run('127.0.0.1', port)
 
+    run(module.param['ip'], int(module.params['port']))
 
+    module.exit_json(changed =  True)
 
-def test():
-    run('127.0.0.1', 8000)
-    # server_address = ('127.0.0.1', 8000)
-    # request_handler = CheckRequestHandler
-    # httpd = HTTPServer(server_address, request_handler)
-    # httpd.serve_forever(0.2)
 
 if __name__ == '__main__':
-    port = sys.argv[1]
-    main(port)
+    if sys.argv[1] != None and sys.argv[2] != None:
+        port = int(sys.argv[2])
+        ip = sys.argv[1]
+        run(ip, port)
+    else:
+        main()

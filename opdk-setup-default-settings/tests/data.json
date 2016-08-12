@@ -1,0 +1,60 @@
+{
+  "pg_self": {
+    "buildInfo": {
+      "buildNumber": "jenkins-5G_Release_Sanity-587",
+      "buildTimestamp": "1468520074447",
+      "rPMName": "apigee-rpm-1.0.0.587.5f00544.1607141801-160120_01",
+      "releaseID": "160120_01",
+      "sCMBranch": "origin/OPDK_1601",
+      "sCMRevision": "5f0054451f2271238c3adc29504233d89cb6e40c"
+    },
+    "externalHostName": "localhost",
+    "externalIP": "172.31.17.172",
+    "internalHostName": "localhost",
+    "internalIP": "172.31.17.172",
+    "isUp": true,
+    "pod": "analytics",
+    "reachable": true,
+    "region": "dc-1",
+    "tags": {
+      "property": [
+        {
+          "name": "started.at",
+          "value": "1470416695721"
+        },
+        {
+          "name": "startup.time",
+          "value": "3 seconds "
+        },
+        {
+          "name": "Profile",
+          "value": "AXPlatformAgentService"
+        },
+        {
+          "name": "rpc.port",
+          "value": "4530"
+        },
+        {
+          "name": "http.management.port",
+          "value": "8084"
+        },
+        {
+          "name": "startup.interval",
+          "value": "3945"
+        },
+        {
+          "name": "jmx.rmi.port",
+          "value": "1103"
+        },
+        {
+          "name": "up.time",
+          "value": "2 days 18 hours 31 minutes 52 seconds "
+        }
+      ]
+    },
+    "type": [
+      "postgres-server"
+    ],
+    "uUID": "6aa0667f-6ce0-4417-aecb-7c6ef7fad6bb"
+  }
+}

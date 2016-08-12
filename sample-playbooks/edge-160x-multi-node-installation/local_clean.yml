@@ -9,7 +9,7 @@
       state: absent
       force: yes
     with_items:
-    - '.ansible_cache'
+    - '~/.ansible/tmp/cache'
     - 'ansible.log'
     - 'ssh_keys'
     - 'configs_and_logs'

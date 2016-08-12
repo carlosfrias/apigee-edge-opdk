@@ -1,0 +1,41 @@
+---
+- include: facts.yml
+
+- hosts: dc-1-ms
+  roles:
+  - opdk-setup-default-settings
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_ext_mgmt_port }}' }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ ui_http_port }}' }
+
+#- hosts: ms
+#  roles:
+#  - opdk-setup-default-settings
+#  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ groups['ds'] }}" }
+
+
+
+
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_thrift_client_port }}' }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_cql_native_port }}' }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_non_ssl_gossip_port }}' }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_data_port }}' }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_leader_port }}' }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_voter_port }}' }
+
+
+#  - { role: external-port-connectivity-validator, check_port: '{{ ms_jmx_port }}' }
+#  - { role: external-port-connectivity-validator, check_port: '{{ ms_ext_mgmt_port }}' }
+#  - { role: external-port-connectivity-validator, check_port: '{{ ui_http_port }}' }
+#  - { role: external-port-connectivity-validator, check_port: '{{ ldap_data_port }}' }
+
+- hosts: ds[2]
+  roles:
+  - opdk-setup-default-settings
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_ext_mgmt_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ ui_http_port }}', target_servers: "{{ hostvars[groups['ms'][0]].ansible_eth0.ipv4.address}}" }
+
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_cql_native_port }}', target_servers: "{{ groups['ds'] }}" }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_servers: "{{ groups['ds'] }}" }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_data_port }}', target_servers: "{{ groups['ds'] }}" }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_leader_port }}', target_servers: "{{ groups['ds'] }}" }
+#  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_voter_port }}', target_servers: "{{ groups['ds'] }}" }

@@ -1,6 +1,4 @@
 ---
-- include: facts.yml
-
 - include: opdk-setup-os.yml
 
 - include: opdk-setup-openjdk.yml
