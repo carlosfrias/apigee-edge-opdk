@@ -2,17 +2,17 @@
 # tasks file for opdk-setup-sax-replication-master
 - name: Capture Interface Name if running Virtualbox
   set_fact:
-    interfaceName: "ansible_eth1"
+    interface_name: "ansible_eth1"
   when: "{{ ansible_bios_version | search('VirtualBox') }}"
 
 - name: Capture Interface Name if not running Virtualbox
   set_fact:
-    interfaceName: "ansible_eth0"
+    interface_name: "ansible_eth0"
   when: "{{ not ansible_bios_version | search('VirtualBox') }}"
 
 - name: Set peer Address for master
   set_fact:
-    target_host_address: "{{ hostvars[target_host_name][interfaceName].ipv4.address }}"
+    target_host_address: "{{ hostvars[target_host_name][interface_name].ipv4.address }}"
 
 - name: Setup Postgres replication
   become: yes

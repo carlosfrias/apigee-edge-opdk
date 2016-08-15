@@ -1,7 +1,7 @@
 {% for host in groups['ds']%}
-IP{{ loop.index }}={{ hostvars[host][interfaceName].ipv4.address }}
+IP{{ loop.index }}={{ hostvars[host][interface_name].ipv4.address }}
 {% endfor %}
-HOSTIP={{ hostvars[inventory_hostname][interfaceName].ipv4.address }}
+HOSTIP={{ hostvars[inventory_hostname][interface_name].ipv4.address }}
 
 ADMIN_EMAIL={{ opdk_user_email }}
 

@@ -1,11 +1,11 @@
 ---
 # tasks file for opdk-setup-silent-file
 
-- include: network-interface-name.yml
-
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
+#- include: network-interface-name.yml
+#
+#- include: common_integrated_facts.yml
+#
+#- include: aws_integrated_facts.yml
 
 - name: Remove the old response file
   file:

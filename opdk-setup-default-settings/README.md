@@ -1,7 +1,7 @@
-Role Name
-=========
+opdk-setup-default-settings
+===========================
 
-A brief description of the role goes here.
+This role provides a set of sensible default variables for installing Apigee On Premise Private Cloud. The 
 
 Requirements
 ------------
@@ -30,9 +30,9 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+Apache License Version 2.0, January 2004
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Carlos Frias

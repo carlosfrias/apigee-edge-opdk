@@ -8,7 +8,7 @@
   register: result
 
 - name: Sync the local mirror
-  shell: "{{ apigee_service }} apigee-mirror sync --only-new-rpms"
+  shell: "{{ apigee_service }} apigee-mirror sync --only-new-rpms apigeereleasever={{ apigee_mirror_version }}"
 
 - name: Create archive
   shell: "{{ apigee_service }} apigee-mirror package"
