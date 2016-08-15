@@ -1,0 +1,267 @@
+---
+- include: facts.yml
+
+- hosts: ms
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_ext_mgmt_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ui_http_port }}' }
+  tags:
+  - ds_read_ms
+
+- hosts: ds
+  roles:
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_ext_mgmt_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_jmx_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ui_http_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  tags:
+  - ds_read_ms
+
+- hosts: ms
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_ext_mgmt_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ui_http_port }}' }
+  tags:
+  - rmp_read_ms
+
+- hosts: rmp
+  roles:
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_ext_mgmt_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_jmx_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ui_http_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  tags:
+  - rmp_read_ms
+
+- hosts: ms
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_ext_mgmt_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ui_http_port }}' }
+  tags:
+  - qpid_read_ms
+
+- hosts: qpid
+  roles:
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_ext_mgmt_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_jmx_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ui_http_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  tags:
+  - qpid_read_ms
+
+- hosts: ms
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_ext_mgmt_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ms_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ui_http_port }}' }
+  tags:
+  - pg_read_ms
+
+- hosts: pg
+  roles:
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_ext_mgmt_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ms_jmx_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ui_http_port }}', target_server: "{{ hostvars[groups['ms'][0]].local_address }}" }
+  tags:
+  - pg_read_ms
+
+- hosts: ds
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_thrift_client_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_cql_native_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_non_ssl_gossip_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_data_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_leader_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_voter_port }}' }
+  tags: 
+  - ds_read_ds
+  
+- hosts: ds
+  roles:
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  tags: 
+  - ds_read_ds
+
+
+- hosts: ds
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_thrift_client_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_cql_native_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_non_ssl_gossip_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_data_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_leader_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_voter_port }}' }
+  tags:
+  - rmp_read_ds
+
+- hosts: rmp
+  roles:
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  tags:
+  - rmp_read_ds
+
+- hosts: rmp
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ edge_proxy_port }}' }
+  tags:
+  - ms_read_rmp
+
+- hosts: ms
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ edge_proxy_port }}',target_server: "{{ hostvars[groups['rmp'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ edge_proxy_port }}',target_server: "{{ hostvars[groups['rmp'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ edge_proxy_port }}',target_server: "{{ hostvars[groups['rmp'][2]].local_address }}" }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ edge_proxy_port }}',target_server: "{{ hostvars[groups['rmp'][3]].local_address }}" }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ edge_proxy_port }}',target_server: "{{ hostvars[groups['rmp'][4]].local_address }}" }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ edge_proxy_port }}',target_server: "{{ hostvars[groups['rmp'][5]].local_address }}" }
+  tags:
+  - ms_read_rmp
+
+
+- hosts: ds
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_thrift_client_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_cql_native_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ cassandra_non_ssl_gossip_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_data_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_leader_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ zk_voter_port }}' }
+  tags:
+  - qs_read_ds
+
+- hosts: qpid
+  roles:
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][0]].local_address }}"  }
+
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][1]].local_address }}"  }
+
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_jmx_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_thrift_client_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_cql_native_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ cassandra_non_ssl_gossip_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_data_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_leader_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ zk_voter_port }}', target_server: "{{ hostvars[groups['ds'][2]].local_address }}"  }
+  tags:
+  - qs_read_ds
+
+
+
+- hosts: ldap
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ ldap_data_port }}' }
+  tags:
+  - ms_read_ldap
+
+- hosts: ms
+  roles:
+  - opdk-setup-default-settings
+  - { role: external-port-connectivity-validation-client, check_port: '{{ ldap_data_port }}', target_server: "{{ hostvars[groups['ldap'][0]].local_address }}" }
+  tags:
+  - ms_read_ldap
+
+
+- hosts: pg
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ pg_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ pg_int_mgmt_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ pg_db_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ pg_ext_mgmt_port }}' }
+  tags:
+  - pg_read_pg
+
+- hosts: pg
+  roles:
+  - opdk-setup-default-settings
+  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_jmx_port }}', target_server: "{{ hostvars[groups['pg'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_int_mgmt_port }}', target_server: "{{ hostvars[groups['pg'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_db_port }}', target_server: "{{ hostvars[groups['pg'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_ext_mgmt_port }}', target_server: "{{ hostvars[groups['pg'][0]].local_address }}" }
+
+  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_jmx_port }}', target_server: "{{ hostvars[groups['pg'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_int_mgmt_port }}', target_server: "{{ hostvars[groups['pg'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_db_port }}', target_server: "{{ hostvars[groups['pg'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ pg_ext_mgmt_port }}', target_server: "{{ hostvars[groups['pg'][1]].local_address }}" }
+  tags:
+  - pg_read_pg
+
+
+- hosts: qpid
+  roles:
+  - { role: external-port-connectivity-validation-server, check_port: '{{ qpid_jmx_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ qpid_int_mgmt_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ qpid_messaging_port }}' }
+  - { role: external-port-connectivity-validation-server, check_port: '{{ qpid_ext_mgmt_port }}' }
+  tags:
+  - pg_read_qpid
+
+- hosts: pg
+  roles: 
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_jmx_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_int_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_messaging_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_ext_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][0]].local_address }}" }
+    
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_jmx_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_int_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_messaging_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
+  - { role: external-port-connectivity-validation-client, check_port: '{{ qpid_ext_mgmt_port }}', target_server: "{{ hostvars[groups['qpid'][1]].local_address }}" }
+  tags:
+  - pg_read_qpid

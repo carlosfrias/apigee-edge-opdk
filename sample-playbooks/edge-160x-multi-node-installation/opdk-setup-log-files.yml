@@ -2,6 +2,7 @@
 - include: facts.yml
 
 - hosts: planet
+  strategy: free
   roles:
   - { role: fetch-files, fetch_files: '{{ apigee_log_files }}' }
 
@@ -21,17 +22,9 @@
 
 
 - hosts: planet
+  strategy: free
   roles:
   - { role: fetch-files, fetch_files: '{{ apigee_config_files }}' }
   tags:
   - configs
-  - logs
-
-
-- hosts: planet
-  roles:
-  - { role: fetch-files, fetch_files: '{{ apigee_property_files }}' }
-  tags:
-  - properties
-  - apigee-properties
   - logs

@@ -1,15 +1,79 @@
 ---
-- hosts: localhost
+#- hosts: ms
+#  remote_user: root
+#  roles:
+#    - opdk-setup-default-settings
+#
+#  tasks:
+##  - name: Selinux status
+##    selinux_status:
+##    register: status
+#
+##  - name: Set Apigee facts
+##    apigee_facts: topology='cassandra' my_hostname='dc-1'
+#
+#  - name: opdk server self
+#    opdk_server_self:
+#      server_type: 'mgmt'
+#      username: '{{ opdk_user_email }}'
+#      password: '{{ opdk_user_pass }}'
+#    register: status
+#
+#- hosts: rmp
+#  remote_user: root
+#  roles:
+#    - opdk-setup-default-settings
+#
+#  tasks:
+#  - name: opdk server self
+#    opdk_server_self:
+#      server_type: 'mp'
+#      username: '{{ opdk_user_email }}'
+#      password: '{{ opdk_user_pass }}'
+#    register: status
+#
+#  - name: opdk server self
+#    opdk_server_self:
+#      server_type: 'router'
+#      username: '{{ opdk_user_email }}'
+#      password: '{{ opdk_user_pass }}'
+#    register: status
+#
+#- hosts: qpid
+#  remote_user: root
+#  roles:
+#    - opdk-setup-default-settings
+#
+#  tasks:
+#  - name: opdk server self
+#    opdk_server_self:
+#      server_type: 'qpid'
+#      username: '{{ opdk_user_email }}'
+#      password: '{{ opdk_user_pass }}'
+#    register: status
+
+- hosts: '{{ hosts }}'
   remote_user: root
   roles:
     - opdk-setup-default-settings
 
   tasks:
-  - name: Selinux status
-    selinux_status:
-    register: status
+  - name: Obtain server self report
+    opdk_server_self:
+      server_type: '{{ server_type }}'
+      username: '{{ opdk_user_email }}'
+      password: '{{ opdk_user_pass }}'
 
-  - debug: var=status
+  - debug:
+      var: edge_ms_self.type[0]
 
-#  - name: Set Apigee facts
-#    apigee_facts: topology='cassandra' my_hostname='dc-1'
+#  - name: OPDK Server registration
+#    opdk_server_registration:
+#      username: '{{ opdk_user_email }}'
+#      password: '{{ opdk_user_pass }}'
+#      mgmt_server_ip: "{{ local_mgmt_ip }}"
+#      server_pod: '{{ edge_ms_self.pod }}'
+#      server_uuid: '{{ edge_ms_self.uUID }}'
+#      server_type: '{{ edge_ms_self.type }}'
+#      server_region: '{{ edge_ms_self.region }}'
+#      server_ip: '{{ edge_ms_self.internalIP }}'

@@ -13,8 +13,10 @@
   when: results | failed
 
 - name: Install bootstrap
-  shell: '{{ bootstrap_script }} apigeeuser={{ apigee_repo_user }} apigeepassword="{{ apigee_repo_password }}" JAVA_FIX=C'
+  shell: 'bash {{ bootstrap_script }} apigeeuser={{ apigee_repo_user }} apigeepassword="{{ apigee_repo_password }}" JAVA_FIX=C'
+  args:
+    creates: '{{ apigee_installation_home }}/apigee-service/bin/apigee-service'
   register: results
   env:
     JAVA_HOME: '{{ java_home }}'
-  failed_when: results.rc > 0 or results | failed
+  failed_when: results is defined and results.rc is defined and results.rc > 0 or results | failed

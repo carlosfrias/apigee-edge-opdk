@@ -1,8 +1,8 @@
 ---
 - hosts: planet
-  strategy: free
-  tasks:
+  pre_tasks:
   - setup:
   - ec2_facts:
-  tags:
-  - facts
+  roles:
+  - opdk-setup-default-settings
+

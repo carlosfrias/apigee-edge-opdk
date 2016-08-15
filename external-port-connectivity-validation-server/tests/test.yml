@@ -1,0 +1,16 @@
+---
+- include: facts.yml
+
+- hosts: ms
+  roles:
+  - { role: external-port-connectivity-validator-server, check_port: '{{ cassandra_jmx_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ cassandra_thrift_client_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ cassandra_cql_native_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ cassandra_non_ssl_gossip_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ zk_data_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ zk_leader_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ zk_voter_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ ms_jmx_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ ms_ext_mgmt_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ ui_http_port }}' }
+  - { role: external-port-connectivity-validator-server, check_port: '{{ ldap_data_port }}' }

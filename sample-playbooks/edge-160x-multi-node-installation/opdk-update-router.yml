@@ -1,0 +1,23 @@
+---
+- hosts: '{{ hosts }}'
+  roles:
+  - opdk-setup-default-settings
+
+  tasks:
+  - name: Delete any files in /opt/nginx/conf.d
+    file:
+      path: '/opt/nginx/conf.d/'
+      state: absent
+
+  - name: Restore folder /opt/nginx/conf.d
+    file:
+      path: '/opt/nginx/conf.d/'
+      state: directory
+      owner: '{{ opdk_user_name }}'
+      group: '{{ opdk_group_name }}'
+      mode: 0755
+
+  - name: Restart edge router
+    shell: '{{ apigee_service }} edge-router restart'
+
+

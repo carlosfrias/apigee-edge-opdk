@@ -16,3 +16,10 @@
   shell: setenforce 0
   when: "ansible_os_family | lower == 'redhat' and ansible_distribution_major_version == '7' and 'enabled' in status.stdout"
 
+- name: Refresh setup facts
+  setup:
+
+- name: Fail playbook if selinux is running
+  fail:
+    msg: 'SELinux MUST be disabled, selinux has been updated, please restart the node.'
+  when: "{{ ansible_selinux.status | lower != 'disabled' }}"

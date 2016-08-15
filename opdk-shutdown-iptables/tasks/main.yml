@@ -5,9 +5,10 @@
     name: iptables
     state: stopped
   when: (ansible_distribution | lower == "centos" or ansible_distribution | lower == "oraclelinux")  and ansible_distribution_major_version | version_compare("6", "==") and not ansible_virtualization_type | lower == "docker"
+  register: iptables_status
 
-- name: Stop Iptables service
-  service:
-    name: firewalld
-    state: stopped
-  when: (ansible_distribution | lower == "centos" or ansible_distribution | lower == "oraclelinux")  and ansible_distribution_major_version | version_compare("7", "==") and not ansible_virtualization_type | lower == "docker"
+- name: Fail playbook if Iptables is running
+  fail:
+    msg: 'IPtables MUST be disabled'
+  when: "{{ iptables_status.state!= 'stopped' }}"
+
