@@ -1,0 +1,23 @@
+---
+
+- include: facts.yml
+
+- hosts: ms
+  tasks:
+
+#  - name: Startup a simple http server on port '{{ check_port }}'
+#    shell: python -m SimpleHTTPServer {{ check_port }}
+#    async: 1
+#    poll: 0
+
+  - name: Startup a simple http server on port '{{ check_port }}'
+    external_validator:
+      port: '{{ check_port }}'
+    async: 5
+    poll: 0
+
+  - name: Check for available server port
+    wait_for:
+      port: '{{ check_port }}'
+      timeout: 1
+

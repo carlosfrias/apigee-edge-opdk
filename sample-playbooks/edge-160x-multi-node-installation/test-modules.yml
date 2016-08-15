@@ -6,5 +6,5 @@
 
   tasks:
   - name: Hello world
-    bootstrap:
+    hello:
 

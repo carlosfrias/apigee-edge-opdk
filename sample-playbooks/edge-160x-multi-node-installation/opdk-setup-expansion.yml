@@ -1,6 +1,4 @@
 ---
-- include: facts.yml
-
 - include: opdk-setup-os.yml
 
 - include: opdk-setup-openjdk.yml
@@ -49,6 +47,8 @@
 - include: opdk-setup-ms.yml
   vars:
     hosts: 'dc-2-ms'
+  tags:
+  - ms2
 
 - include: opdk-setup-rmp.yml
   vars:

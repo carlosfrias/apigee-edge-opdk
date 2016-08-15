@@ -1,0 +1,106 @@
+---
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1-ds'
+    components: 'zk'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1-ds'
+    components: 'cs'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1-qpid'
+    components: 'qpid'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1-pg'
+    components: 'ps'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1-ldap'
+    components: 'ldap'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1[5:8]'
+    components: 'edge'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1[0]'
+    components: 'edge'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1[3:4]'
+    components: 'edge'
+
+- include: opdk-update-router.yml
+  vars:
+    hosts: 'dc-1-rmp'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-1-ui'
+    components: 'ui'
+  tags:
+  - ui
+
+
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2-ds'
+    components: 'zk'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2-ds'
+    components: 'cs'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2-qpid'
+    components: 'qpid'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2-pg'
+    components: 'ps'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2-ldap'
+    components: 'ldap'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2[5:8]'
+    components: 'edge'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2[0]'
+    components: 'edge'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2[3:4]'
+    components: 'edge'
+
+- include: opdk-update-router.yml
+  vars:
+    hosts: 'dc-2-rmp'
+
+- include: opdk-update-component.yml
+  vars:
+    hosts: 'dc-2-ui'
+    components: 'ui'
+  tags:
+  - ui
+
+
