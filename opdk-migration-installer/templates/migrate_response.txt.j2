@@ -10,6 +10,6 @@ APIGEE_ADMINPW={{  opdk_user_pass }}
 OLD_APIGEE_ROOT={{  opdk_old_apigee_root }}
 OLD_DATA_ROOT={{ opdk_old_data_root }}
 
-LICENSE_FILE={{ opdk_license_file_path }}
+LICENSE_FILE={{ opdk_license_target_file_path }}
 
 CASS_HOSTS="{% for host in groups['ds'] %} $IP{{loop.index}}:1,1{% endfor %}"

@@ -8,7 +8,7 @@ MSIP=Neither a dc-1 or dc-2 inventory group was defined
 {% endif %}
 ADMIN_EMAIL={{ opdk_user_email }}
 APIGEE_ADMINPW="{{ opdk_user_pass }}"
-LICENSE_FILE={{ opdk_license_file_path }}
+LICENSE_FILE={{ opdk_license_target_file_path }}
 USE_LDAP_REMOTE_HOST={{ opdk_ldap_remote_host }}
 LDAP_TYPE={{ opdk_ldap_type }}
 {% if opdk_ldap_type == '2' %}

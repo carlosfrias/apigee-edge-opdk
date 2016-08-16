@@ -1,28 +1,30 @@
 # Apigee OPDK Roles
 
-This is a set of Ansible roles that are used to install, configure and manage Apigee
-OPDK instances. The following is a list of functionality provided by these roles:
+This repository contains a set of Ansible roles that are used to install, configure and manage Apigee
+OPDK instances.
 
- * Planet installation over multiple nodes
- * AIO profile installation
- * AIO profile with monitoring on 15.07.03
- * Selectively rollback the installation of a component to assist in the correction of an issue
- * Roles are idempotent for 15.07
- * Response file is dynamically generated to the defined planet
- * Installation cover Apigee Edge OPDK 15.07.03, 16.01 and 16.05
+# Functionality Available
+The Apigee OPDK Roles enable you to manage the installation and configuration the OPDK. The following is a list of 
+functionality provided by these roles:
+
+ * Installation of an arbitrarily sized data center
+ * Selective rollback of an installed component to assist in troubleshooting
+ * Roles are idempotent for 15.07 and tolerate being executed multiple times without damaging the installation
+ * Silent installation file is dynamically generated to the defined planet and data center.
+ * Roles install Apigee Edge OPDK 15.07.03, 16.01 and 16.05 by simply specifying the desired version
  * Integrated AWS to manage the lifecycle of AMI instances 
-
+ * Roles adjust to account for either CentOS 6 or greater; Oracle Linux 6 or greater and RHEL 6 or greater. 
+ * Roles adjust to also account for whether they are executed in within the virtualized environments provisioned by AWS 
+  and Vagrant or a non-virtualized server.  
  
- * Additional work as needed during client engagement.
- 
-## Usage Samples
-The sample-playbooks folder contains usage samples that can guide you to 
-quick setup. Please consult this folder for starter files and configurations.
+# Usage Samples
+The sample-playbooks folder contains usage samples that will guide you. The smaple-playbooks folders contains fully 
+functional configurations. They typically require that you provide your own inventory file. Please consult this folder 
+for starter files and configurations.
   
-## License and OPDK Binaries
-Please note that you must provide the OPDK binaries and your license file.
-
- **License:** The license file must be placed in the same folder where 
+# OPDK License
+Please note that you must provide the OPDK binaries and your license file. The license file must be placed in the 
+location specified by the  
  the playbook is located and must be named license.txt. 
  
  **OPDK Binaries:** The opdk binaries must be placed in the same folder

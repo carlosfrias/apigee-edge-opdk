@@ -38,7 +38,7 @@ defaults.
 * opdk_installer_archive_name: File name of the opdk archive
 * opdk_installer_archive_path: Absolute path to the opdk archive
 * opdk_response_file_path: Absolute path to the response file
-* opdk_license_file_path: Absoluute path to the license file
+* opdk_license_target_file_path: Absoluute path to the license file
 * apigee_installation_path_prefix: Apigee installation target prefix
 * apigee_installation_home: Apigee installation target 
 * apigee_install_script: Apigee installation script

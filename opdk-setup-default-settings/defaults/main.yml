@@ -62,10 +62,10 @@ apigee_update: '{{ apigee_installation_home }}/apigee-setup/bin/update.sh'
 apigee_all: '{{ apigee_installation_home }}/apigee-service/bin/apigee-all'
 
 # Apigee license file path
-opdk_license_file_path: "{{ opdk_installer_path }}/license.conf"
+opdk_license_target_file_path: "{{ opdk_installer_path }}/license.conf"
 
 # Apigee license file provided by customer
-opdk_license_file_name: '~/.apigee/license.txt'
+opdk_license_source_file_name: '~/.apigee/license.txt'
 
 # Apigee silent installation configuration file
 opdk_installation_config_file: "{{ opdk_installer_path }}/silent-install.conf"

@@ -1,8 +1,8 @@
 ---
 - name: Copy license file
   copy:
-    src: "{{ opdk_license_file_name }}"
-    dest: "{{ opdk_license_file_path }}"
+    src: "{{ opdk_license_source_file_name }}"
+    dest: "{{ opdk_license_target_file_path }}"
     owner: '{{ opdk_user_name }}'
     group: '{{ opdk_group_name }}'
     mode: 0644
