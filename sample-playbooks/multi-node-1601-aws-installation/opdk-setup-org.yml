@@ -1,7 +1,0 @@
----
-- hosts: ms
-  strategy: free
-  roles:
-  - opdk-setup-org
-  tags:
-  - org

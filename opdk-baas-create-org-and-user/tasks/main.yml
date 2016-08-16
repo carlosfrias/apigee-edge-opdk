@@ -1,0 +1,57 @@
+---
+# tasks file for opdk-baas-onboarding
+#- name: Create Baas org and user
+#  expect:
+#    command: 'python {{ apigee_installation_home }}/baas-usergrid/bin/create_org_and_user.py -o {{ org_name }} -a {{ baas_admin_name }} -p {{ baas_admin_pass }}'
+#    responses:
+#      (?i)username for authentication: '{{ baas_superuser_name }}'
+#      (?i)password for authentication: '{{ baas_superuser_pass }}'
+#  register: result
+#  ignore_errors: true
+
+- name: Retrieve access token for superuser - {{ baas_superuser_name }}
+  delegate_to: '{{ public_address }}'
+  uri:
+    url: '{{ endpoint }}/management/token'
+    method: POST
+    timeout: 180
+    body_format: json
+    body:
+      username: '{{ baas_superuser_name }}'
+      password: '{{ baas_superuser_pass }}'
+      grant_type: 'password'
+  register: token_response
+
+- name: Set superuser access token
+  set_fact:
+    access_token: '{{ token_response.json.access_token }}'
+
+- name: Create organization - {{ org_name }}
+  delegate_to: '{{ public_address }}'
+  uri:
+    url: '{{ endpoint }}/management/organizations'
+    method: POST
+    timeout: 180
+    body_format: json
+    body:
+      organization: '{{ org_name }}'
+      username: '{{ baas_admin_name }}'
+      name: '{{ baas_admin_name }}'
+      email: '{{ baas_admin_email }}'
+      password: '{{ baas_admin_pass }}'
+    HEADER_Authorization: 'Bearer {{ access_token }}'
+  register: org_response
+
+- name: Activate and confirm user - {{ baas_admin_name }}
+  delegate_to: '{{ public_address }}'
+  uri:
+    url: '{{ endpoint }}/management/users/{{ baas_admin_name }}'
+    timeout: 180
+    method: PUT
+    body_format: json
+    body:
+      activated: True
+      confirmed: True
+    HEADER_Authorization: 'Bearer {{ access_token }}'
+  register: user_response
+

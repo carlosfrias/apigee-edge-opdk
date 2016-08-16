@@ -1,0 +1,8 @@
+---
+# tasks file for opdk-create-backup
+- name:  Backup the data directory
+  shell: 'tar -zcvf {{apigee_archive_storage_folder}}/{{ apigee_data_backup_archive_name }} {{ apigee_installation_home }}/data'
+  args:
+    creates: '{{ apigee_archive_storage_folder }}/{{ apigee_data_backup_archive_name }}'
+  register: backup_status
+  failed_when: not backup_status.changed

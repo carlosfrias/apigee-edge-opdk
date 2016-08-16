@@ -1,0 +1,13 @@
+---
+# tasks file for opdk-setup-component
+
+- name: Setup Apigee component for version 4.16.01 or greater - {{ profile }}
+  shell: '{{ apigee_setup }} -p {{ profile }} -f {{ opdk_installation_config_file }}'
+  when: opdk_version | version_compare('4.16.01', '>=')
+
+- name: Obtain server self report - {{ profile }}
+  opdk_server_self:
+    server_type: '{{ server_type }}'
+    username: '{{ opdk_user_email }}'
+    password: '{{ opdk_user_pass }}'
+  when: '{{ server_type is defined }}'

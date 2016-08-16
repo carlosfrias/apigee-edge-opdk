@@ -1,0 +1,6 @@
+---
+- include: facts.yml
+
+- hosts: pg
+  roles:
+    - internal-port-connectivity-validator-postgres

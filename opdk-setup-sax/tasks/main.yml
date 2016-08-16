@@ -14,10 +14,10 @@
   when: opdk_version | version_compare('4.16.01', '>=')
 
 - name: Sax installation
-  shell: '{{ apigee_setup }} -p sax -f {{ opdk_response_file_path }}'
+  shell: '{{ apigee_setup }} -p sax -f {{ opdk_installation_config_file }}'
   when: opdk_version | version_compare('4.16.01', '>=') and opdk_version | version_compare('4.16.05', '<')
 
 - name: Sax installation
-  shell: '{{ apigee_setup }} -p sax -f {{ opdk_response_file_path }}'
+  shell: '{{ apigee_setup }} -p sax -f {{ opdk_installation_config_file }}'
   register: sax_install_results
   when: opdk_version | version_compare('4.16.05', '>=')

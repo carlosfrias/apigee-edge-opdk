@@ -1,0 +1,3 @@
+---
+# defaults file for opdk-baas-onboarding
+endpoint: http://127.0.0.1:8080

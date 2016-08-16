@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    fetch_files:
+    - { dir: '~', name: '.bashrc' }
+    - { dir: '~', name: 'id_rsa.pub' }
+    - { dir: '~', name: '.profile' }
+
+  roles:
+  - fetch-files

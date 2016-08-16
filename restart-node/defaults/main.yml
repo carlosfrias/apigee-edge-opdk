@@ -1,0 +1,7 @@
+---
+# defaults file for restart-node
+reboot: false
+delay: 10
+async: 10
+poll: 0
+

@@ -1,6 +1,6 @@
 ---
 # tasks file for opdk-setup-logs
-- name: Find installation logs and configs to download
+- name: Find installation property files to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
   with_items:
@@ -13,6 +13,8 @@
   - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*properties' }
   - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*properties' }
   - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*properties' }
   ignore_errors: yes
 
 - name: Download properties
@@ -78,3 +80,16 @@
   with_items: '{{ logs.results[8].stdout_lines }}'
   ignore_errors: yes
 
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[9].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download properties
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[10].stdout_lines }}'
+  ignore_errors: yes

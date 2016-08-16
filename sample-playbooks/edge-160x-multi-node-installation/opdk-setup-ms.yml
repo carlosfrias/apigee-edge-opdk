@@ -1,0 +1,7 @@
+---
+- hosts: '{{ hosts }}'
+  roles:
+#  - opdk-setup-ms
+  - { role: opdk-setup-component, profile: 'ms', server_type: 'ms' }
+  tags:
+  - ms

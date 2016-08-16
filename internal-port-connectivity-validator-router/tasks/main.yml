@@ -1,0 +1,33 @@
+---
+# tasks file for internal-port-connectivity-validator-router
+- name: MP and Router port connectivity status
+  wait_for:
+    port: '{{ router_int_mgmt_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: router_int_mgmt_port_status
+  ignore_errors: yes
+
+- name: Router JMX port connectivity status
+  wait_for:
+    port: '{{ router_jmx_port }}'
+    host: '{{ local_address}}'
+    timeout: 1
+  register: router_jmx_port_status
+  ignore_errors: yes
+
+- name: Router Mgmt port connectivity status
+  wait_for:
+    port: '{{ router_ext_mgmt_port }}'
+    host: '{{ local_address}}'
+    timeout: 1
+  register: router_ext_mgmt_port_status
+  ignore_errors: yes
+
+- name: Router proxy port connectivity status
+  wait_for:
+    port: '{{ edge_proxy_port }}'
+    host: '{{ local_address}}'
+    timeout: 1
+  register: edge_proxy_port_status
+  ignore_errors: yes

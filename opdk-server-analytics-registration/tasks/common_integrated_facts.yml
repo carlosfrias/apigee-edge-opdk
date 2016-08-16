@@ -1,8 +1,0 @@
----
-- name: Get public address
-  set_fact:
-    public_address: '{{ ansible_hostname }}'
-
-- name: Get private address
-  set_fact:
-    local_address: '{{ ansible_eth0.ipv4.address }}'

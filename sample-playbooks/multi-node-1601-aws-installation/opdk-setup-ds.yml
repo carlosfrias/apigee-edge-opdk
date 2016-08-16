@@ -1,7 +1,0 @@
----
-- hosts: ds
-  serial: 1
-  roles:
-  - opdk-setup-ds
-  tags:
-  - ds

@@ -1,0 +1,18 @@
+---
+# tasks file for opdk-softlink-prep
+- name: Create soft link target folders
+  file:
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+    state: directory
+    path:  '{{ item }}'
+  with_items: '{{ target_dirs }}'
+
+- name: Create soft link to target folder
+  file:
+    owner: '{{ opdk_user_name }}'
+    group: '{{ opdk_group_name }}'
+    state: link
+    dest: '{{ item.dest }}'
+    src: '{{ item.src }}'
+  with_items: '{{ soft_links }}'

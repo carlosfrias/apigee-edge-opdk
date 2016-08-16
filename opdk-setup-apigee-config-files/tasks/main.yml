@@ -15,6 +15,8 @@
   - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*usergrid/', name: '*conf' }
   - { dir: '{{ apigee_installation_home }}', name: '*yaml' }
   - { dir: '{{ apigee_installation_home }}', name: '*sh' }
   ignore_errors: yes
@@ -101,6 +103,19 @@
     src: "{{ item }}"
     dest: '{{ conf_logs_dir }}'
   with_items: '{{ logs.results[11].stdout_lines }}'
+  ignore_errors: yes
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[12].stdout_lines }}'
+  ignore_errors: yes
+
+- name: Download config files
+  fetch:
+    src: "{{ item }}"
+    dest: '{{ conf_logs_dir }}'
+  with_items: '{{ logs.results[13].stdout_lines }}'
   ignore_errors: yes
 
 

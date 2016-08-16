@@ -1,0 +1,24 @@
+---
+- hosts: '{{ hosts }}'
+  serial: 1
+  roles:
+  - opdk-setup-postgres
+#  - { role: opdk-setup-component, profile: 'ps' }
+  - opdk-setup-postgres-master
+  tags:
+  - pg
+  - pgmaster
+
+- hosts: '{{ hosts }}'
+  serial: 1
+  roles:
+  - opdk-setup-default-settings
+  tasks:
+  - name: Obtain server self report
+    opdk_server_self:
+      server_type: 'ps'
+      username: '{{ opdk_user_email }}'
+      password: '{{ opdk_user_pass }}'
+  tags:
+  - pg
+  - pgmaster

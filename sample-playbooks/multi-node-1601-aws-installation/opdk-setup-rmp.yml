@@ -1,7 +1,0 @@
----
-- hosts: rmp
-  strategy: free
-  roles:
-  - opdk-setup-rmp
-  tags:
-  - rmp

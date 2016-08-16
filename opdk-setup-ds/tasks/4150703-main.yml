@@ -24,7 +24,7 @@
     timeout: 1
 
 - name: Setup Cassandra and Zookeeper for version less than 4.16.01
-  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p ds"
+  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_installation_config_file }} -p ds"
   register: results
   ignore_errors: true
   when: cassandra_db_port_status | failed or zookeeper_jmx_port_status | failed or cassandra_jmx_port_status | failed

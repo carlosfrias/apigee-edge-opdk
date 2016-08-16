@@ -1,0 +1,9 @@
+---
+# tasks file for internal-port-connectivity-validator-ldap
+- name: MS Internal LDAP port connnectivity status
+  wait_for:
+    port: '{{ ldap_data_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: ms_ext_mgmt_port_status
+  ignore_errors: yes

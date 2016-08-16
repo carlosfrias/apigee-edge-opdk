@@ -1,0 +1,86 @@
+
+# Must resolve to IP address or DNS name of host - not to 127.0.0.1 or localhost.
+HOSTIP={{ hostvars[public_address][interface_name].ipv4.address }}
+
+# Define the API BaaS administrator account.
+# User name - default is "superuser".
+AS_ADMIN={{ baas_superuser_name }}
+AS_ADMIN_EMAIL={{ baas_superuser_email }}
+AS_PASSWD={{ baas_superuser_pass }}
+
+# Specify Cassandra configuration information.
+{% if groups['dc-1-cassandra'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-cassandra'] | length > 0 %}
+CASS_HOSTS="{% for host in groups['dc-1-cassandra'] %}{{ hostvars[host][interface_name].ipv4.address }}:1,1{% if not loop.last %} {% endif %}{% endfor %}"
+{% elif groups['dc-2-cassandra'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-cassandra'] | length > 0 %}
+CASS_HOSTS="{% for host in groups['dc-2-cassandra'] %}{{ hostvars[host][interface_name].ipv4.address }}:2,1{% if not loop.last %} {% endif %}{% endfor %}"
+{% else %}
+CASS_HOSTS="{% for host in groups['cassandra'] %}{{ hostvars[host][interface_name].ipv4.address }}{%  if hostvars[host].rack is defined and hostvars[host].rack %}{{ hostvars[host].rack }}{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
+{% endif %}
+
+# Cassandra uname/pword if you enabled Cassandra authentication.
+# Even if you have not enabled Cassandra authentication,
+# you must pass values for these properties.
+CASS_USERNAME={{ opdk_cass_username }}
+# Default value
+CASS_PASSWORD={{ opdk_cass_password }}
+
+# Specify BaaS Cassandra connection information.
+# Specify the data center name.
+# Default is dc-1.
+{% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
+BAAS_CASS_LOCALDC=dc-1
+{% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
+BAAS_CASS_LOCALDC=dc-2
+{% endif %}
+
+# Replication is in the form "dataCenterName:#CassandraNodes".
+# For example, for dc-1 with three Cassandra nodes, it is dc-1:3.
+{% if groups['dc-1-cassandra'] is defined and inventory_hostname in groups['dc-1'] %}
+BAAS_CASS_REPLICATION=dc-1:{{ groups['dc-1-cassandra'] | length }}
+{% elif groups['dc-2-cassandra'] is defined and inventory_hostname in groups['dc-2'] %}
+BAAS_CASS_REPLICATION=dc-2:{{ groups['dc-2-cassandra'] | length }}
+{% else %}
+BAAS_CASS_REPLICATION=dc-1:{{ groups['cassandra'] | length }}
+{% endif %}
+
+# ElasticSearch IPs or DNS names, separated by spaces.
+{% if groups['dc-1-elastic'] is defined and inventory_hostname in groups['dc-1'] %}
+ES_HOSTS="{% for host in groups['dc-1-elastic'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
+{% elif groups['dc-2-elastic'] is defined and inventory_hostname in groups['dc-2'] %}
+ES_HOSTS="{% for host in groups['dc-2-elastic'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
+{% else %}
+ES_HOSTS="{% for host in groups['elastic'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
+{% endif %}
+
+# API BaaS Stack information.
+# Default cluster name is "apigee_baas"
+BAAS_USERGRID_CLUSTERNAME="{{ baas_cluster_name }}"
+
+# URL and port of the load balancer for the API BaaS Stack nodes, # or IP/DNS and port of a single Stack node with no load balancer.
+{% if baas_load_balancer_host is defined and baas_load_balancer_host and baas_load_balancer_port is defined and baas_load_balancer_port %}
+BAAS_USERGRID_URL="http://{{ baas_load_balancer_host }}:{{ baas_load_balancer_port }}"
+{% elif groups['portal'][0] is defined and groups['baas'][0] and baas_portal_port is defined and baas_portal_port %}
+BAAS_USERGRID_URL="http://{{ groups['baas'][0] }}:{{ baas_load_balancer_port }}"
+{% endif %}
+
+# API BaaS Portal information.
+# URL and port number of load balancer, if there is one in front of the Portal, # or the URL and port of the Portal node.
+{% if groups['dc-1-portal'] is defined and inventory_hostname in groups['dc-1'] %}
+BAAS_PORTAL_URL="http://{{ hostvars[groups['dc-1-portal'][0]][interface_name].ipv4.address }}:{{baas_portal_port }}"
+{% elif groups['dc-2-portal'] is defined and inventory_hostname in groups['dc-2'] %}
+BAAS_PORTAL_URL="http://{{ hostvars[groups['dc-2-portal'][0]][interface_name].ipv4.address }}:{{ baas_portal_port }}"
+{% else %}
+BAAS_PORTAL_URL="http://{{ hostvars[groups['portal'][0]][interface_name].ipv4.address }}:{{ baas_portal_port }}"
+{% endif %}
+
+# Portal port. Default value is 9000.
+BAAS_PORTAL_LISTEN_PORT={{ baas_portal_port }}
+
+# SMTP information. BaaS requires an SMTP server.
+SMTPHOST={{ baas_smtp_host }}
+SMTPPORT={{ baas_smtp_port }}
+SMTPUSER='{{ baas_smtp_user }}'
+SMTPPASSWORD='{{ baas_smtp_user_pass }}'
+SMTPSSL={{ baas_smtp_ssl }}
+
+LICENSE_FILE={{ opdk_license_target_file_path }}

@@ -1,7 +1,0 @@
----
-- hosts: '{{ hosts }}'
-  strategy: free
-  roles:
-  - opdk-setup-ms
-  tags:
-  - ms

@@ -1,0 +1,80 @@
+---
+#- name: Copy collectd source tarball
+#  register: collectd_src_copy_status
+#  copy:
+#    src: '{{ collectd_src_filename }}'
+#    dest: '/tmp/'
+
+#- block:
+#
+#  - name: Download source tarball
+#    get_url:
+#      dest: '/tmp/'
+#      url: '{{ collectd_file_repository }}/{{ collectd_src_filename }}'
+#      sha256sum: '{{ collectd_file_sha_256 }}'
+#
+#  - name: Copy downloaded source tarball to local machine
+#    fetch:
+#      dest: '{{ collectd_src_filename }}'
+#      src: '/tmp/{{ collectd_src_filename }}'
+#      flat: yes
+#
+#  when: collectd_src_copy_status | failed
+
+- name: Copy collectd-generic-jmx rpm
+  copy:
+    src: '{{ item }}'
+    dest: '/tmp/'
+  with_items:
+  - '{{ collectd_filename }}'
+  - '{{ collectd_generic_jmx_filename }}'
+  - '{{ collectd_java_filename }}'
+  register: collectd_generic_jmx_copy_status
+
+- block:
+
+    - name: Download collected rpms
+      get_url:
+        dest: /tmp/
+        url: '{{ item }}'
+      with_items:
+      - '{{ collectd_generic_jmx_url }}'
+      - '{{ collectd_java_url }}'
+#      - '{{ collectd_filename_url }}'
+
+    - name: Copy downloaded collected rpms to local machine
+      fetch:
+        dest: '{{ item }}'
+        src: '/tmp/{{ item }}'
+        flat: yes
+      with_items:
+      - '{{ collectd_generic_jmx_filename }}'
+      - '{{ collectd_java_filename }}'
+
+  when:  collectd_generic_jmx_copy_status | failed
+
+#- name: Unarchive {{ collectd_pkg_name }}-{{ collectd_version }} tarball
+#  unarchive:
+#    src: '/tmp/{{ collectd_src_filename }}'
+#    dest: '{{ collectd_src_parent_dir }}'
+#    copy: no
+#    creates: '{{ collectd_src_parent_dir }}/{{ collectd_pkg_name }}-{{ collectd_version }}'
+#
+#- name: Configure {{ collectd_pkg_name }}-{{ collectd_version }} build
+#  shell: ./configure --prefix=/usr --with-java --with-python --with-librrd --enable-rrdtool --enable-aggregation --enable-debug --sysconfdir=/etc --localstatedir=/var --libdir=/usr/lib --mandir=/usr/share/man
+#  args:
+#    chdir: '{{ collectd_src_parent_dir }}/{{ collectd_pkg_name }}-{{ collectd_version }}'
+#
+#- name: Make {{ collectd_pkg_name }}-{{ collectd_version }}
+#  shell: make all install
+#  args:
+#    chdir: '{{ collectd_src_parent_dir }}/{{ collectd_pkg_name }}-{{ collectd_version }}'
+
+- name: Install collectd & dependencies
+  yum:
+    name: '{{ item }}'
+    state: present
+  with_items:
+  - '/tmp/{{ collectd_filename }}'
+  - '/tmp/{{ collectd_generic_jmx_filename }}'
+  - '/tmp/{{ collectd_java_filename }}'

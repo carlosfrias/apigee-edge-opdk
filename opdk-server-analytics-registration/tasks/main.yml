@@ -1,14 +1,5 @@
 ---
 # tasks file for opdk-server-analytics-registration
-
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
-
-- include: network-interface-name.yml
-
-- include: mgmt_ip.yml
-
 - name: Get Server Self
   uri:
     url: 'http://{{ local_address }}:{{ self_port }}/v1/servers/self'

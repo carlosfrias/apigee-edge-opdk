@@ -7,21 +7,21 @@
 - include: aws_integrated_facts.yml
 
 - name: Checking for Management Server Port
-  register: ms_http_port_status
+  register: ms_ext_mgmt_port_status
   ignore_errors: true
   wait_for:
-    port: '{{ ms_http_port }}'
+    port: '{{ ms_ext_mgmt_port }}'
     host: '{{ local_address }}'
     timeout: 1
 
 - name: Management Server Port Status report
   debug:
-    var: ms_http_port_status
+    var: ms_ext_mgmt_port_status
 
 - name: Management server is not running
   fail:
     msg: "Management server is not running"
-  when: ms_http_port_status | failed
+  when: ms_ext_mgmt_port_status | failed
 
 - include: 4150703-main.yml
   when: opdk_version | version_compare('4.16.01', '<')

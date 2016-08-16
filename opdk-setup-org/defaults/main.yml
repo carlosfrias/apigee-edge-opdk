@@ -8,7 +8,6 @@ user_name: opdk@apigee.com
 user_pass: Apigee123!
 first_name: Opdk
 last_name: User
-org_name: opdk
 virtual_host_port: 9001
 virtual_host_name: default
 virtual_host_alias: '127.0.0.1'

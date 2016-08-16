@@ -9,6 +9,6 @@ apigee_migrate: '{{ apigee_installation_home }}/apigee-migrate/bin/migrate.sh'
 
 opdk_version: '4.16.05'
 
-opdk_license_file_name: ~/.apigee/license.txt
+opdk_license_source_file_name: ~/.apigee/license.txt
 
 

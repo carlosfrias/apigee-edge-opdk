@@ -1,31 +1,31 @@
 ---
 # tasks file for opdk-setup-silent-file
 
-- include: network-interface-name.yml
-
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
+#- include: network-interface-name.yml
+#
+#- include: common_integrated_facts.yml
+#
+#- include: aws_integrated_facts.yml
 
 - name: Remove the old response file
   file:
-    path: "{{ opdk_response_file_path }}"
+    path: "{{ opdk_installation_config_file }}"
     state: absent
 
-- name: Construct the response file
+- name: Construct the silent-install file
   template:
     src: 'silent-install.conf.j2'
-    dest: "{{ opdk_response_file_path }}"
+    dest: "{{ opdk_installation_config_file }}"
     force: yes
     owner: '{{ opdk_user_name }}'
     group: '{{ opdk_group_name }}'
     mode: 0644
   when: provided_response_file is not defined or not provided_response_file
 
-- name: Copy provided response file
+- name: Copy provided silent-install file
   copy:
     src: "{{ provided_response_file }}"
-    dest: "{{ opdk_response_file_path }}"
+    dest: "{{ opdk_installation_config_file }}"
     owner: '{{ opdk_user_name }}'
     group: '{{ opdk_group_name }}'
     mode: 0644

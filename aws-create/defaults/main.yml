@@ -24,3 +24,5 @@ aws_region: 'us-east-1'
 session_name: 'session'
 volume_type: gp2
 volume_size: 30
+delete_on_termination: true
+device_name: /dev/sda1

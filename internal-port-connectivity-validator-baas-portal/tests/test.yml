@@ -1,0 +1,6 @@
+---
+- include: facts.yml
+
+- hosts: portal
+  roles:
+    - internal-port-connectivity-validator-baas-portal

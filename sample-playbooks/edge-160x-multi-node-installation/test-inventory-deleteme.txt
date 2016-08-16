@@ -1,0 +1,19 @@
+dc-1:
+     ds:
+      - 172.31.20.136
+      - 172.31.20.137
+      - 172.31.20.138
+
+
+[dc-1-ds]
+emp23 ansible_host=172.31.20.136 ansible_password=password1 ansible_ssh_key=~/.ssh/cfrias.pem zk_observer=true
+172.31.20.137 ansible_password=password1 ansible_ssh_key=~/.ssh/cfrias.pem zk_observer=true
+172.31.20.138
+
+[ds]
+emp23
+172.31.20.137
+
+
+dc-1:
+  ds: { 172.31.20.136, 172.31.20.137, 172.31.20.138 }

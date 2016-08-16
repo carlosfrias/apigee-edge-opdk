@@ -1,0 +1,11 @@
+---
+# tasks file for opdk-baas-setup-component
+
+- include: network-interface-name.yml
+
+- include: common_integrated_facts.yml
+
+- include: aws_integrated_facts.yml
+
+- name: Install Baas profile - {{ profile }}
+  shell: '{{ apigee_setup }} -p {{ profile }} -f {{ opdk_baas_silent_install_file_path }}'

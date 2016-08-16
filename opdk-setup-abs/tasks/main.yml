@@ -1,6 +1,6 @@
 ---
 # tasks file for opdk-setup-abs
 - name: Setup Router Server
-  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p abs"
+  shell: "{{ apigee_setup }} -f {{ opdk_installation_config_file }} -p abs"
   register: results
 

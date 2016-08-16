@@ -6,3 +6,7 @@
 - name: Get private address
   set_fact:
     local_address: '{{ ansible_eth0.ipv4.address }}'
+
+- name: Get public address for RMP node
+  set_fact:
+    rmp_public_address: "{{ hostvars[groups['dc-1-rmp'][0]].ansible_hostname }}"

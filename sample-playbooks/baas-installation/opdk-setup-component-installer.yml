@@ -1,0 +1,16 @@
+---
+- include: facts.yml
+
+- hosts: planet
+  roles:
+  - opdk-baas-silent-config-file
+  tags:
+  - silent
+  - common
+
+- hosts: planet
+  roles:
+  - opdk-setup-component-installer
+  tags:
+  - installer
+  - common

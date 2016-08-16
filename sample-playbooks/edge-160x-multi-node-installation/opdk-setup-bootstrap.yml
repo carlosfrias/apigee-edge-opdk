@@ -1,0 +1,8 @@
+---
+- hosts: '{{ hosts }}'
+  strategy: free
+  roles:
+  - opdk-setup-bootstrap
+  tags:
+  - bootstrap
+  - common

@@ -1,0 +1,11 @@
+---
+- include: facts.yml
+
+- hosts: '{{ hosts }}'
+  roles:
+  - { role: fetch-files, fetch_files: '{{ system_config_files }}' }
+  - { role: fetch-files, fetch_files: '{{ apigee_log_files }}' }
+  tags:
+  - logs
+  - apigee-logs
+  - configs

@@ -1,12 +1,12 @@
 ---
 # tasks file for opdk-setup-logs
-- name: Find installation logs and configs to download
+- name: Find installation log files to download
   shell: "find {{ item.dir }} -type f -name '{{ item.name }}'"
   register: logs
   with_items:
   - { dir: '/tmp', name: '*log' }
   - { dir: '{{ apigee_installation_home }}/var/log/', name: '*log' }
-  - { dir: '{{ apigee_installation_home }}', name: '*out' }
+  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*out' }
   - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
   ignore_errors: yes
 

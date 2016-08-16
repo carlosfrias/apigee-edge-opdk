@@ -1,7 +1,7 @@
 ---
 # defaults file for opdk-setup-logs
 apigee_installation_path_prefix: /opt
-apigee_installation_dir: apigee4
+apigee_installation_dir: apigee
 apigee_installation_home: "{{ apigee_installation_path_prefix }}/{{ apigee_installation_dir }}"
 apigee_bin: "{{ apigee_installation_home }}/bin"
 all_status: "{{ apigee_bin }}/all-status.sh"
@@ -11,6 +11,19 @@ opdk_user_name: apigee
 opdk_user_home: /home/{{ opdk_user_name }}
 opdk_staging_folder_name: opdk
 opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
-opdk_response_file_path: "{{ opdk_installer_path }}/response.txt"
+opdk_installation_config_file: "{{ opdk_installer_path }}/response.txt"
 
 conf_logs_dir: configs_and_logs
+
+property_files:
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*router/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*properties' }
+  - { dir: '{{ apigee_installation_home }}/*baas-usergrid/', name: '*properties' }

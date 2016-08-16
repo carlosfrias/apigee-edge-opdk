@@ -1,0 +1,52 @@
+---
+
+- hosts: planet
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-apigee-user
+  tags:
+  - apigee
+  - os
+
+- hosts: planet
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-aws
+  tags:
+  - apigee
+  - os
+  - aws
+
+- hosts: planet
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-selinux-disable
+  - opdk-shutdown-iptables
+  - opdk-time-sync
+  - opdk-setup-os-minimum
+  - opdk-setup-os-common
+  tags:
+  - os
+  - os-basic
+
+- hosts: cassandra
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-os-ds
+  tags:
+  - os
+  - os-ds
+
+- hosts: baas
+  become: true
+  strategy: free
+  roles:
+  - opdk-setup-os-ds
+  tags:
+  - os
+  - os-baas
+

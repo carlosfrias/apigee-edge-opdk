@@ -1,0 +1,11 @@
+---
+- hosts: '{{ hosts }}'
+  serial: 1
+  vars:
+    copy_archive: false
+    archive_name: apigee-4.16.01.tar.gz
+    archive_folder: /tmp
+  roles:
+  - opdk-setup-bootstrap-archive
+  tags:
+  - bootstrap-archive

@@ -1,5 +1,8 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: planet
+  become: root
+  vars:
+    sym_dir: /u01/apigee
   roles:
     - opdk-setup-apigee-user
+

@@ -8,7 +8,7 @@ MSIP=Neither a dc-1 or dc-2 inventory group was defined
 {% endif %}
 ADMIN_EMAIL={{ opdk_user_email }}
 APIGEE_ADMINPW="{{ opdk_user_pass }}"
-LICENSE_FILE={{ opdk_license_file_path }}
+LICENSE_FILE={{ opdk_license_target_file_path }}
 USE_LDAP_REMOTE_HOST={{ opdk_ldap_remote_host }}
 LDAP_TYPE={{ opdk_ldap_type }}
 {% if opdk_ldap_type == '2' %}
@@ -30,16 +30,16 @@ REGION=dc-1
 REGION=dc-2
 {% endif %}
 USE_ZK_CLUSTER={{ opdk_use_zk_cluster }}
-ZK_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if hostvars[host]['zk_observer'] is defined and hostvars[host]['zk_observer'] %}:observer{% endif %} {% endfor %}"
+ZK_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if hostvars[host]['zk_observer'] is defined and hostvars[host]['zk_observer'] %}:observer{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
 {% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
-ZK_CLIENT_HOSTS="{% for host in groups['dc-1-ds'] %}{{ hostvars[host][interface_name].ipv4.address }} {% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc-1-ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc-2-ds'] %}{{ hostvars[host][interface_name].ipv4.address }} {% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc-2-ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% else %}
-ZK_CLIENT_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }} {% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% endif %}
 USE_CASS_CLUSTER={{ opdk_use_cass_cluster }}
-CASS_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{%  if hostvars[host].rack is defined and hostvars[host].rack %}{{ hostvars[host].rack }}{% endif %} {% endfor %}"
+CASS_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host][interface_name].ipv4.address }}{% if host in groups['dc-1'] %}:1,1{% elif host in groups['dc-2'] %}:2,1{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
 CASS_USERNAME={{ opdk_cass_username }}
 CASS_PASSWORD={{ opdk_cass_password }}
 SKIP_SMTP={{ opdk_skip_smpt }}

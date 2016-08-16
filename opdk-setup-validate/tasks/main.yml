@@ -1,7 +1,10 @@
 ---
 # tasks file for opdk-setup-validate
 
-- include: network-interface-name.yml
+#- include: network-interface-name.yml
+
+- name: Install Apigee Validate
+  shell: '{{ apigee_service }} apigee-validate install'
 
 - name: Create apigee-validate.conf file
   template:
@@ -13,7 +16,7 @@
 
 - name: Validate OPDK Installation
   expect:
-    command: 'bash {{ apigee_service }} apigee-validate setup -f {{ apigee_validate_config_file }}'
+    command: '{{ apigee_service }} apigee-validate setup -f {{ apigee_validate_config_file }}'
     responses:
       '(?i)Press a key:': '\n'
   register: status

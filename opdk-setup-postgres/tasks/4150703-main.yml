@@ -34,7 +34,7 @@
 
 - name: Setup Postgres
   ignore_errors: yes
-  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_response_file_path }} -p ps"
+  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_installation_config_file }} -p ps"
   when: pg_db_port_status | failed and pg_ext_mgmt_port_status | failed and pg_int_mgmt_port_status | failed and pg_jmx_port_status | failed
 
 - name: Status of Postgres Database Port

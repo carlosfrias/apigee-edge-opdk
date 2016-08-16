@@ -1,8 +1,8 @@
 ---
 - name: Copy license file
   copy:
-    src: "{{ opdk_license_file_name }}"
-    dest: "{{ opdk_license_file_path }}"
+    src: "{{ opdk_license_source_file_name }}"
+    dest: "{{ opdk_license_target_file_path }}"
     owner: '{{ opdk_user_name }}'
     group: '{{ opdk_group_name }}'
     mode: 0644
@@ -13,12 +13,12 @@
 
 - name: Install Apigee Setup
   shell: 'bash {{ apigee_service }} apigee-setup install'
+  args:
+    creates: '{{ apigee_installation_home }}/apigee-setup/bin/setup.sh }}'
   when: opdk_version | version_compare('4.16', '>=')
 
-- name: Install Apigee Validate
-  shell: 'bash {{ apigee_service }} apigee-validate install'
-  when: opdk_version | version_compare('4.16', '>=')
-
-- name: Install Apigee adminapi
+- name: Install Apigee Admin
   shell: 'bash {{ apigee_service }} apigee-adminapi install'
+  args:
+    creates: '{{ apigee_installation_home }}/apigee-adminapi/bin/apigee-adminapi.sh }}'
   when: opdk_version | version_compare('4.16', '>=')

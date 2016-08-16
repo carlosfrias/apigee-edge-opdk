@@ -1,3 +1,19 @@
 ---
 # defaults file for opdk-setup-logs
 
+config_files:
+  - { dir: '/tmp/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/customer/', name: '*' }
+  - { dir: '{{ apigee_installation_home }}/token/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*message-processor/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*router/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*postgresql/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*postgres-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*cassandra*/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpid-server/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*qpidd/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*zookeeper/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*tomcat/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/*baas-usergrid/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}/', name: '*sh' }

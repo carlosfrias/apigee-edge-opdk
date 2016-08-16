@@ -1,0 +1,15 @@
+---
+# tasks file for opdk-setup-local-repository
+- name: Install the local mirror
+  shell: "{{ apigee_service }} apigee-mirror install"
+
+- name: Clear the local mirror data directory
+  shell: "{{ apigee_service }} apigee-mirror clean"
+  register: result
+
+- name: Sync the local mirror
+  shell: "{{ apigee_service }} apigee-mirror sync --only-new-rpms apigeereleasever={{ apigee_mirror_version }}"
+
+- name: Create archive
+  shell: "{{ apigee_service }} apigee-mirror package"
+  register: result

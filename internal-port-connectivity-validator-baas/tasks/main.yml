@@ -1,0 +1,10 @@
+---
+# tasks file for internal-port-connectivity-validator-baas
+
+- name: Baas Mgmt port connectivity status
+  wait_for:
+    port: '{{ baas_load_balancer_port }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: baas_load_balancer_port_status
+  ignore_errors: yes

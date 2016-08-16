@@ -1,0 +1,13 @@
+---
+# tasks file for internal-port-connectivity-validator-baas-elasticsearch
+
+- name: Elasticsearch data port connectivity status
+  wait_for:
+    port: '{{ item }}'
+    host: '{{ local_address }}'
+    timeout: 1
+  register: baas_elasticsearch_port_status
+  ignore_errors: yes
+  with_items:
+  - '{{ baas_elasticsearch_port_low }}'
+  - '{{ baas_elasticsearch_port_high }}'

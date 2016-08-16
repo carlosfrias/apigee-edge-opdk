@@ -1,0 +1,4 @@
+---
+- hosts: '{{ hosts }}'
+  roles:
+  - { role: opdk-update-component, apigee_component: '{{ components }}' }

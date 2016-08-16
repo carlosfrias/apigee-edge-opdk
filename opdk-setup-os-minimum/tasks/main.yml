@@ -8,25 +8,25 @@
     backup: yes
     backrefs: yes
 
-- name: Add yum epel repository
+- name: Add yum epel repository for centos 7 or greater
   yum:
     name: "{{ item }}"
     state: present
   with_items:
     - epel-release
-  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "centos"
+  when: ansible_distribution_version | version_compare('7', '>=') and ansible_distribution | lower == "centos"
   register: epel_repo
   tags:
   - epel
 
-- name: Add yum epel repository and centos release SCL for centos version 6
+- name: Add yum epel repository for centos 6 or less
   yum:
     name: "{{ item }}"
     state: present
   with_items:
     - epel-release
     - centos-release-SCL
-  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "centos"
+  when: ansible_distribution_version | version_compare('7', '<') and ansible_distribution | lower == "centos"
   register: epel_repo
   tags:
   - epel
@@ -36,8 +36,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-  - '{{ epel_ol67 }}'
-  when: ansible_distribution_major_version == "6" and ansible_distribution | lower == "oraclelinux"
+  - '{{ epel_ol6 }}'
+  when: ansible_distribution_version | version_compare('7', '<') and ansible_distribution | lower == "oraclelinux"
   register: epel_repo
   tags:
   - epel
@@ -47,14 +47,25 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - '{{ epel_rhel72 }}'
-  when: ansible_distribution_major_version == "7" and ansible_distribution | lower == "redhat"
+    - '{{ epel_rhel7 }}'
+  when: ansible_distribution_version | version_compare('7', '>=') | lower == "redhat"
   register: epel_repo
   tags:
   - epel
 
+#- name: Proactively remove qpid packages that cause yum update failures, ignore errors
+#  shell: 'rpm -e $(rpm -qa | egrep "(apigee-qpidd-|qpid-|python-qpid|libqpid)")'
+#  ignore_errors: true
+
 - name: Proactively remove qpid packages that cause yum update failures, ignore errors
-  shell: 'rpm -e $(rpm -qa | egrep "(apigee-qpidd-|qpid-|python-qpid|libqpid)")'
+  yum:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+  - apigee-qpidd-*
+  - qpid-*
+  - python-qpid*
+  - libqpid*
   ignore_errors: true
 
 - name: Keep yum downloads small
@@ -98,11 +109,12 @@
     backup: yes
 
 - name: Add pip package manager
-  yum:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-  - python-pip
+  get_url:
+    url: https://bootstrap.pypa.io/get-pip.py
+    dest: /tmp/get-pip.py
+
+- name: Install pip package manager
+  shell: python /tmp/get-pip.py
 
 - name: Update pip package manager
   shell: 'pip install --upgrade pip'
@@ -117,3 +129,6 @@
   - httplib2
   - pexpect
   - passlib
+  - requests
+  - kazoo
+

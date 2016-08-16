@@ -1,0 +1,58 @@
+---
+- include: facts.yml
+
+- include: opdk-setup-os.yml
+
+- include: opdk-setup-openjdk.yml
+  vars:
+    hosts: 'dc-1'
+    jdk_version: '1.8'
+
+- include: opdk-setup-bootstrap.yml
+  vars:
+    hosts: 'dc-1'
+
+- include: opdk-setup-component-installer.yml
+
+- hosts: 'cassandra'
+  roles:
+  - { role: opdk-baas-setup-component, profile: 'c' }
+  tags:
+  - cassandra
+
+- hosts: 'elastic'
+  roles:
+  - { role: opdk-baas-setup-component, profile: 'e' }
+  tags:
+  - elastic
+
+- hosts: 'baas'
+  serial: 1
+  roles:
+  - { role: opdk-baas-setup-component, profile: 'b' }
+  tags:
+  - baas
+
+- hosts: 'portal'
+  roles:
+  - { role: opdk-baas-setup-component, profile: 'p' }
+  tags:
+  - portal
+
+- hosts: 'baas[0]'
+  roles:
+  - opdk-baas-create-org-and-user
+  tags:
+  - org
+
+- include: opdk-setup-config-files.yml
+  vars:
+    hosts: 'planet'
+
+- include: opdk-setup-log-files.yml
+  vars:
+    hosts: 'planet'
+
+- include: opdk-setup-property-files.yml
+  vars:
+    hosts: 'planet'

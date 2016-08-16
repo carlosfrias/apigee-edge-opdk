@@ -1,6 +1,6 @@
 ---
 - name: Setup LDAP
-  shell: "{{ apigee_setup }} -f {{ opdk_response_file_path }} -p ld"
+  shell: "{{ apigee_setup }} -f {{ opdk_installation_config_file }} -p ld"
   register: ldap_results
   when: ld_port_status | failed
 

@@ -1,9 +1,5 @@
 ---
 # tasks file for opdk-setup-ps
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
-
 - include: 4150703-main.yml
   when: opdk_version | version_compare('4.16.01', '<')
 
@@ -17,5 +13,5 @@
   when: opdk_version | version_compare('4.16.01', '>=')
 
 - name: Postgresql Server installation
-  shell: '{{ apigee_setup }} -p ps -f {{ opdk_response_file_path }}'
+  shell: '{{ apigee_setup }} -p ps -f {{ opdk_installation_config_file }}'
   when: opdk_version | version_compare('4.16.01', '>=')
