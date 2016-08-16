@@ -6,12 +6,12 @@
 - block:
   - name: Capture interface Name if running Centos on Virtualbox
     set_fact:
-      interfaceName: "ansible_eth1"
+      interface_name: "ansible_eth1"
     when: "{{ ansible_bios_version | search('VirtualBox') }}"
 
   - name: Capture Interface Name if running Centos
     set_fact:
-      interfaceName: "ansible_eth0"
+      interface_name: "ansible_eth0"
     when: "{{ not ansible_bios_version | search('VirtualBox') }}"
   when: "{{ ansible_distribution | lower == 'centos' }} "
 
@@ -20,24 +20,24 @@
   - block:
     - name: Capture Interface Name if running Oracle Linux 7 on Virtualbox
       set_fact:
-        interfaceName: "ansible_enp0s8"
+        interface_name: "ansible_enp0s8"
       when: "{{ ansible_bios_version | search('VirtualBox') }}"
 
     - name: Capture Interface Name if running Oracle Linux 7
       set_fact:
-        interfaceName: "ansible_enp0s3"
+        interface_name: "ansible_enp0s3"
       when: "{{ not ansible_bios_version | search('VirtualBox') }}"
     when: ansible_distribution_major_version == '7'
 
   - block:
     - name: Capture Interface Name if running Oracle Linux 6 on Virtualbox
       set_fact:
-        interfaceName: "ansible_eth1"
+        interface_name: "ansible_eth1"
       when: "{{ ansible_bios_version | search('VirtualBox') }}"
 
     - name: Capture Interface Name if running Oracle Linux 6
       set_fact:
-        interfaceName: "ansible_eth0"
+        interface_name: "ansible_eth0"
       when: "{{ not ansible_bios_version | search('VirtualBox') }}"
     when: ansible_distribution_major_version == '6'
 

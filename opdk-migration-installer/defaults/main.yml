@@ -14,8 +14,8 @@ opdk_staging_folder_name: opdk
 opdk_installer_path: "{{ opdk_user_home }}/{{ opdk_staging_folder_name }}"
 opdk_migrate_response_filename: migrate_response.txt
 opdk_migrate_response_file_path: "{{ opdk_installer_path }}/{{ opdk_migrate_response_filename }}"
-opdk_license_file_name: license.txt
-opdk_license_file_path: "{{ opdk_installer_path }}/{{ opdk_license_file_name }}"
+opdk_license_source_file_name: license.txt
+opdk_license_target_file_path: "{{ opdk_installer_path }}/{{ opdk_license_source_file_name }}"
 opdk_old_apigee_root: /opt
 opdk_old_data_root: /opt
 

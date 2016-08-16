@@ -1,7 +1,7 @@
 {% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
-MSIP={{ hostvars[groups['dc-1-ms'][0]][interfaceName].ipv4.address }}
+MSIP={{ hostvars[groups['dc-1-ms'][0]][interface_name].ipv4.address }}
 {% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
-MSIP={{ hostvars[groups['dc-2-ms'][0]][interfaceName].ipv4.address }}
+MSIP={{ hostvars[groups['dc-2-ms'][0]][interface_name].ipv4.address }}
 {% else %}
 MSIP=Neither a dc-1 or dc-2 inventory group was defined
 {% endif %}
@@ -23,9 +23,9 @@ REGION=Neither a dc-1 or dc-2 inventory group was defined
 MP_POD={{ mp_pod }}
 
 {% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
-MP_IP={{ hostvars[groups['dc-1-rmp'][0]][interfaceName].ipv4.address }}
+MP_IP={{ hostvars[groups['dc-1-rmp'][0]][interface_name].ipv4.address }}
 {% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
-MP_IP={{ hostvars[groups['dc-2-rmp'][0]][interfaceName].ipv4.address }}
+MP_IP={{ hostvars[groups['dc-2-rmp'][0]][interface_name].ipv4.address }}
 {% else %}
 MP_IP=Neither a dc-1 or dc-2 inventory group was defined
 {% endif %}

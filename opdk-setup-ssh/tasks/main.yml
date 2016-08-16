@@ -1,9 +1,9 @@
 ---
 # tasks file for opdk-setup-ssh
 
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
+#- include: common_integrated_facts.yml
+#
+#- include: aws_integrated_facts.yml
 
 - name: target_host_name
   debug:

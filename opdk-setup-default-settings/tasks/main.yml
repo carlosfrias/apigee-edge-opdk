@@ -15,7 +15,7 @@
 
 - name: Get private address for node
   set_fact:
-    local_address: '{{ hostvars[inventory_hostname][interfaceName].ipv4.address }}'
+    local_address: '{{ hostvars[inventory_hostname][interface_name].ipv4.address }}'
 
 - name: Get public address for node on AWS
   set_fact:
@@ -29,12 +29,12 @@
 
 - name: Get local management server if on dc-1
   set_fact:
-    local_mgmt_ip: "{{ hostvars[groups['dc-1-ms'][0]][interfaceName].ipv4.address }}"
+    local_mgmt_ip: "{{ hostvars[groups['dc-1-ms'][0]][interface_name].ipv4.address }}"
   when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1']
 
 - name: Get local management server if on dc-2
   set_fact:
-    local_mgmt_ip: "{{ hostvars[groups['dc-2-ms'][0]][interfaceName].ipv4.address }}"
+    local_mgmt_ip: "{{ hostvars[groups['dc-2-ms'][0]][interface_name].ipv4.address }}"
   when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2']
 
 - name: Get local management server if on dc-1
@@ -70,7 +70,7 @@
 
 - name: Cache interface name for node
   cache:
-    key: 'interfaceName'
-    value: '{{ interfaceName }}'
+    key: 'interface_name'
+    value: '{{ interface_name }}'
 
 

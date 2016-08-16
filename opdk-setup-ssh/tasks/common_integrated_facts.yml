@@ -9,5 +9,5 @@
 
 - name: Get target local address
   set_fact:
-    target_local_address: '{{ hostvars[target_host_name][interfaceName].ipv4.address }}'
-  when: hostvars[target_host_name][interfaceName].ipv4.address is defined
+    target_local_address: '{{ hostvars[target_host_name][interface_name].ipv4.address }}'
+  when: hostvars[target_host_name][interface_name].ipv4.address is defined
