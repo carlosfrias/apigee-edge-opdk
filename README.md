@@ -1,7 +1,9 @@
-# Apigee OPDK Roles
+# Apigee OPDK and BaaS Roles
 
 This repository contains a set of Ansible roles that are used to install, configure and manage Apigee
-OPDK instances.
+OPDK and BaaS instances. These roles provide an automated installation process for Apigee Edge Private Cloud and Apgiee
+BaaS Private Cloud. The automated installatin process consists of the orchestration of the installation across an 
+arbitrarily sized data center. 
 
 # Functionality Available
 The Apigee OPDK Roles enable you to manage the installation and configuration the OPDK. The following is a list of 
@@ -21,202 +23,148 @@ functionality provided by these roles:
 The sample-playbooks folder contains usage samples that will guide you. The smaple-playbooks folders contains fully 
 functional configurations. They typically require that you provide your own inventory file. Please consult this folder 
 for starter files and configurations.
+
+# OPDK Setup Default Settings
+The default settings for OPDK are found in the role opdk-setup-default-settings. This role is inherited by all OPDK roles.
+**This means that the role opdk-setup-default-settings is a dependency for all roles.** This enables the distribution 
+of default settings from a centralized source while still enabling the user to override the settings as required for 
+their specific use. 
+
+# OPDK Modules
+Several Ansible modules are provided for the use of OPDK roles. The Ansible modules are stored in the library folder of 
+the role **opdk-setup-default-settings**. 
   
 # OPDK License
-Please note that you must provide the OPDK binaries and your license file. The license file must be placed in the 
-location specified by the  
- the playbook is located and must be named license.txt. 
- 
- **OPDK Binaries:** The opdk binaries must be placed in the same folder
- where the playbook is located. 15.07.03 is the default binary. Please 
- update the variable opdk_installer_archive_name used in the opdk-setup-installer
- if you have different name for your binary archive.
-  
-## Vagrant and Virtualbox
-These roles were developed using Vagrant and Virtualbox for provisioning
-of an operating system and private network. 
+Please note that you must provide your OPDK license file. The license file must be placed at the location specified by 
+the variable opdk_license_source_file_name on the control machine.
 
-## Operating Systems
-These roles can distinguish between CentOS 6.x or CentOS 7.x and adjust
-the required tasks to suit. 
+# OPDK Binaries
+The opdk binaries are downloaded dynamically. If you are installing 15.07.03 then you must also provide your download 
+credentials so that the binaries may be downloaded. 
 
-## Roles that Prepare the OS
-Roles have been defined to condition the operating system. These roles are:
+# Installation Conventions
+These roles assume the existence of a hidden apigee folder in your user home folder that provisions any necessary 
+resources such as license files, user credentials, ansible encrypted vaults or binaries that should not be stored in 
+source control. This convention is used in the starter ansible configuration file.
 
- * opdk-dns-resolver
- * opdk-setup-selinux-disable
- * opdk-time-sync
- * opdk-shutdown-iptables
- * opdk-setup-os  
- 
-## OPDK Installer
-A role has been defined to setup the opdk installer on each node of the
- planet. This role is **opdk-setup-installer** 
+# Ansible Configuration
+Ansible uses an in-memory cache. The starter ansible.cfg file provided below configures the cache to your file system. 
+This configuration is offered because it is easier to develop roles when you can examine the values in the cache. 
 
-## Role Variables
-Each role contains a default set of variables. These settings are very 
-likely to function if a playbook execute on Vagrant with Virtualbox. Given
-that these variables have been defined as defaults it is possible to override them
-either from the command line, a variable file or variable definintions in 
-a playbook. 
+## Ansible Configuration Starter File
+The following ansible.cfg file is offered as a starter file for your use. This files assumes the availability of the 
+.apigee folder in user home. The use of .apigee folder in user home is meant to help avoid an inadvertent security event.
+Ansible can store credentials in the cache. A cache that is inadvertently committed to source control could result in a
+security event. 
 
-## Ansible Configuration
-The main issue here is to ensure that ansible can find the ssh private keys
-and the location of these roles. An example ansible.cfg file that works with
-Vagrant and Virtualbox can be as follows: 
-
-    [default]
+    [defaults]
     host_key_checking = false
-    hostfile = aio-inventory
-    forks = 25
-    remote_user = vagrant
-    private_key_file = ~/.vagrant.d/insecure_private_key
-    log_path = ./installation-logs-configs/ansible.log 
+    hostfile = ./inventory
+    library = ./library:~/.ansible/library
+    forks = 50
+    private_key_file = ~/.ssh/id_rsa
+    roles_path = ~/.ansible/roles
+    log_path = ~/.ansible/tmp/ansible.log
     retry_files_enabled = False
-    roles_path = ../opdk-roles
+    executable = /bin/bash
+    gathering = smart
+    fact_caching = jsonfile
+    fact_caching_connection = ~/.ansible/tmp/cache
+    module_name = shell
+    local_tmp = ~/.ansible/tmp
+    
+    # 15 minute timeout on the Ansible cache
+    fact_caching_timeout = 7200
 
-## Sample Vagrantfile for AIO Installation
-This sample vagrant file will invoke the playbook for you:
+# Ansible Inventory Files
+Ansible provides rich semantics for inventory files. We leverage the ansible model by applying a semantic convention 
+that is based on the Apigee Private Cloud domain model for referencing server nodes as collections of planets and 
+regions. This means that the normal Ansible inventory files are used as is with the exception of the semantic conventions
+for inventory group names. 
+
+# Inventory File Conventions
+These roles depend on use of conventions in the inventory file. Specifically inventory file conventions are ansible 
+groups must be defined. These ansible groups are semantically linked to the documentation. The ansible groups used as 
+conventions correspond to the installation roles and server categorizations called out in the Apigee Private Cloud 
+Installation and Configuration Guide. It has been useful to use planet and region designations combined with the 
+documented installation role names to create categorization semantics that should be fairly intuitive once you read the 
+Apigee Private Cloud Installation and Configuration Guide. 
+
+# Inventory Planet and Installation Role Conventions 
+A planet refers to all server nodes across all data centers. These semantics are held via the use of group names for  
+all nodes that fulfill a specific purpose. The installation roles provide the semantic model we followed. The inventory 
+file group names for planet level semantics are listed as follows: 
+
+    [planet]
+    # Listing of all nodes
+    
+    [ds]
+    # Listing of all the Cassandra and Zookeeper nodes
+    
+    [ms]
+    # Listing of all the Management Server nodes
+    
+    [ldap]
+    # Listing of all the OpenLDAP nodes
+    
+    [rmp]
+    # Listing of all the Router and Message Processor nodes
+     
+    [qpid]
+    # Listing of all Qpid nodes
+    
+    [pg]
+    # Listing of all Postgres nodes
+    
+    [pgmaster]
+    # Listing of the single Postgres master node
+    
+    [pgstandby]
+    # Listing of the single Postgres standby node
+    
+    [ui]
+    # Listing of all UI nodes
+    
+# Inventory Region and Installation Role Conventions
+A region represents subset of a planet. The semantics used for installation roles are congruent with a region. Region 
+have been referenced as data centers. The internal configurations of OPDK and BaaS support many regions as dc-1, dc-2 
+and so forth. Following this historical precedent we also define the regions with their corresponding installation role
+to provide a semantic model as follows:
  
-    # -*- mode: ruby -*-
-    # vi: set ft=ruby :
+    [dc-1]
+    # Listing of all nodes in data center 1 (dc-1)
     
-    Vagrant.configure(2) do |config|
-      config.ssh.insert_key = false
-      # config.vm.box = "nrel/CentOS-6.5-x86_64"
-      # config.vm.box = "nrel/CentOS-6.7-x86_64"
-      config.vm.box = "centos/7"
+    [dc-1-ds]
+    # Listing of all the Cassandra and Zookeeper nodes in dc-1
     
-      config.vm.define "a1n1" do |node|
-        node.vm.hostname = "a1n1"
-        node.vm.network "private_network", type: "dhcp"
-        node.vm.network "forwarded_port", guest: 80, host: 9090
-        node.vm.network "forwarded_port", guest: 1099, host: 1099
-        node.vm.network "forwarded_port", guest: 1100, host: 1100
-        node.vm.network "forwarded_port", guest: 1101, host: 1101
-        node.vm.network "forwarded_port", guest: 1102, host: 1102
-        node.vm.network "forwarded_port", guest: 1103, host: 1103
-        node.vm.network "forwarded_port", guest: 2181, host: 2181
-        node.vm.network "forwarded_port", guest: 3000, host: 3000
-        node.vm.network "forwarded_port", guest: 3306, host: 3306
-        node.vm.network "forwarded_port", guest: 7199, host: 7199
-        node.vm.network "forwarded_port", guest: 8080, host: 8080
-        node.vm.network "forwarded_port", guest: 8081, host: 8081
-        node.vm.network "forwarded_port", guest: 8082, host: 8082
-        node.vm.network "forwarded_port", guest: 8083, host: 8083
-        node.vm.network "forwarded_port", guest: 8084, host: 8084
-        node.vm.network "forwarded_port", guest: 9000, host: 9000
-        node.vm.network "forwarded_port", guest: 9001, host: 9001
-      end
+    [dc-1-ms]
+    # Listing of all the Management Server nodes in dc-1
+     
+    [dc-1-ldap]
+    # Listing of all OpenLDAP nodes in dc-1
     
-      config.vm.provider :virtualbox do |vb|
-        vb.memory = 4096
-      end
+    [dc-1-rmp]
+    # Listing of all Router and Message Processor nodes in dc-1
     
-      config.vm.provision :ansible do |ansible|
-        ansible.playbook = "opdk-setup-aio.yml"
-        ansible.verbose = "vv"
-        ansible.inventory_path = 'aio-inventory'
-        ansible.extra_vars = {hosts: "dc-1"}
-      end
+    [dc-1-qpid]
+    # Listing of all Qpid nodes in dc-1
     
-    end
-
-
-## Sample Vagrantfile for 5 Node Installation
-This sample Vagrantfile requires that you invoke the playbook separately:
-
-    # -*- mode: ruby -*-
-    # vi: set ft=ruby :
+    [dc-1-pg]
+    # Listing of all Postgres nodes in dc-1
     
-    ms_jmx_port = 1099
-    router_jmx_port = 1100
-    mp_jmx_port = 1101
-    ingest_jmx_port = 1102
-    pgserver_jmx_port = 1103
-    pg_db_port = 5432
-    zk_jmx_port = 2181
-    cassandra_jmx_port = 7199
-    ms_http_port = 8080
-    router_self_port = 8081
-    mp_self_port = 8082
-    qpid_self_port = 8083
-    pgserver_self_port = 8084
-    cassandra_db_port = 9160
-    ui_http_port = 9000
-    edge_proxy_port = 9001
-    mysql_port = 3306
-    open_ldap_port = 10389
-    graphite_http_port = 80
-    grafana_http_port = 3000
+    [dc-1-pgmaster]
+    # Listing of the single Postgres master node in dc-1
     
-    Vagrant.configure(2) do |config|
-      config.ssh.insert_key = false
-      # config.vm.box = "nrel/CentOS-6.5-x86_64"
-      config.vm.box = "nrel/CentOS-6.7-x86_64"
-      # config.vm.box = "centos/7"
+    [dc-1-pgstanby]
+    # Listing of the single Postgres standby node in dc-1
     
-      config.vm.define "a5n1" do |node|
-        node.vm.hostname = "a5n1"
-        # node.vm.network "private_network", type: "dhcp"
-        node.vm.network "private_network", ip: "172.28.128.5"
-        node.vm.network "forwarded_port", guest: ms_http_port, host: ms_http_port
-        node.vm.network "forwarded_port", guest: ms_jmx_port, host: ms_jmx_port
-        node.vm.network "forwarded_port", guest: grafana_http_port, host: grafana_http_port
-        node.vm.network "forwarded_port", guest: cassandra_jmx_port, host: cassandra_jmx_port
-        node.vm.network "forwarded_port", guest: cassandra_db_port, host: cassandra_db_port
-        node.vm.network "forwarded_port", guest: zk_jmx_port, host: zk_jmx_port
-        node.vm.network "forwarded_port", guest: ui_http_port, host: ui_http_port
-        node.vm.network "forwarded_port", guest: edge_proxy_port, host: edge_proxy_port
-        node.vm.network "forwarded_port", guest: open_ldap_port, host: open_ldap_port
-        node.vm.provider :virtualbox do |vb|
-          vb.memory = 1024
-        end
-      end
+    [dc-1-ui]
+    # Listing of the UI node in dc-1
     
-      config.vm.define "a5n2" do |node|
-        node.vm.hostname = "a5n2"
-        # node.vm.network "private_network", type: "dhcp"
-        node.vm.network "private_network", ip: "172.28.128.6"
-        node.vm.network "forwarded_port", guest: router_jmx_port, host: router_jmx_port
-        node.vm.network "forwarded_port", guest: router_self_port, host: router_self_port
-        node.vm.network "forwarded_port", guest: mp_jmx_port, host: mp_jmx_port
-        node.vm.network "forwarded_port", guest: mp_self_port, host: mp_self_port
-        node.vm.provider :virtualbox do |vb|
-          vb.memory = 1024
-        end
-      end
-    
-      config.vm.define "a5n3" do |node|
-        node.vm.hostname = "a5n3"
-        # node.vm.network "private_network", type: "dhcp"
-        node.vm.network "private_network", ip: "172.28.128.7"
-        node.vm.provider :virtualbox do |vb|
-          vb.memory = 1024
-        end
-      end
-    
-      config.vm.define "a5n4" do |node|
-        node.vm.hostname = "a5n4"
-        # node.vm.network "private_network", type: "dhcp"
-        node.vm.network "private_network", ip: "172.28.128.8"
-        node.vm.network "forwarded_port", guest: qpid_self_port, host: qpid_self_port
-        node.vm.network "forwarded_port", guest: pgserver_self_port, host: pgserver_self_port
-        node.vm.network "forwarded_port", guest: pg_db_port, host: pg_db_port
-        node.vm.network "forwarded_port", guest: pgserver_jmx_port, host: pgserver_jmx_port
-        node.vm.network "forwarded_port", guest: ingest_jmx_port, host: ingest_jmx_port
-        node.vm.provider :virtualbox do |vb|
-          vb.memory = 4096
-        end
-      end
-    
-      config.vm.define "a5n5" do |node|
-        node.vm.hostname = "a5n5"
-        # node.vm.network "private_network", type: "dhcp"
-        node.vm.network "private_network", ip: "172.28.128.9"
-        node.vm.provider :virtualbox do |vb|
-          vb.memory = 4096
-        end
-      end
-    
-    end
+# Zookeeper Observer Nodes
+Zookeeper nodes can be designated as an observer node. Ansible inventory files allow variables to be assigned to servers.
+These roles will update the silent installation configuration file correctly for any zookeeper node that is assigned the 
+ variable zk_observer.
+  
+     zk_observer=true
+     
