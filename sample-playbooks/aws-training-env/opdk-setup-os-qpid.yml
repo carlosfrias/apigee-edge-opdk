@@ -1,0 +1,15 @@
+---
+- hosts: '{{ hosts }}'
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-selinux-disable
+  - opdk-shutdown-iptables
+  - opdk-time-sync
+  - opdk-setup-os-minimum
+  - opdk-setup-os-common
+  - opdk-setup-os-qpid
+  tags:
+  - os-qpid

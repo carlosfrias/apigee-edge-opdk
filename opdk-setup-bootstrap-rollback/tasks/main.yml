@@ -23,6 +23,7 @@
   - libdb-cxx-*
   - nginx-*
 
+
 - name: Clear all artifacts from YUM repo
   shell: 'yum clean all'
   ignore_errors: yes

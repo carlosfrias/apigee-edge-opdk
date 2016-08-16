@@ -1,9 +1,16 @@
 ---
 - include: facts.yml
-
+  
 - hosts: "{{ hosts }}"
-  strategy: free
+  serial: 1
   become: yes
   roles:
   - opdk-setup-os-rollback
-
+  
+- hosts: "{{ hosts }}"
+  serial: 1
+  become: yes
+  tasks: 
+  - name: unjoin the user
+    shell: 'source /var/lib/cloud/scripts/on-shutdown/vas_unjoin.sh 1 && reboot now'
+    ignore_errors: yes

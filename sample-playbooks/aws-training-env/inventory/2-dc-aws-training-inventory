@@ -1,0 +1,115 @@
+[planet:children]
+dc-1
+dc-2
+
+[dc-1]
+devapgw001 ansible_ssh_host=DEVAPGW001.unix.gsm1900.org 
+devapgw002 ansible_ssh_host=DEVAPGW002.unix.gsm1900.org
+devapgw003 ansible_ssh_host=DEVAPGW003.unix.gsm1900.org
+devapgw101 ansible_ssh_host=DEVAPGW101.unix.gsm1900.org
+devapgw102 ansible_ssh_host=DEVAPGW102.unix.gsm1900.org
+devapgw103 ansible_ssh_host=DEVAPGW103.unix.gsm1900.org
+devapgw104 ansible_ssh_host=DEVAPGW104.unix.gsm1900.org
+devapgw105 ansible_ssh_host=DEVAPGW105.unix.gsm1900.org
+devapgw106 ansible_ssh_host=DEVAPGW106.unix.gsm1900.org
+devapgw107 ansible_ssh_host=DEVAPGW107.unix.gsm1900.org
+devapax101 ansible_ssh_host=DEVAPAX101.unix.gsm1900.org
+devapax102 ansible_ssh_host=DEVAPAX102.unix.gsm1900.org
+devapax001 ansible_ssh_host=DEVAPAX001.unix.gsm1900.org 
+devapax002 ansible_ssh_host=DEVAPAX002.unix.gsm1900.org
+
+[dc-2]
+devapgw701 ansible_ssh_host=DEVAPGW701.unix.gsm1900.org 
+devapgw702 ansible_ssh_host=DEVAPGW702.unix.gsm1900.org
+devapgw703 ansible_ssh_host=DEVAPGW703.unix.gsm1900.org
+devapgw801 ansible_ssh_host=DEVAPGW801.unix.gsm1900.org
+devapgw802 ansible_ssh_host=DEVAPGW802.unix.gsm1900.org
+devapgw803 ansible_ssh_host=DEVAPGW803.unix.gsm1900.org
+devapgw804 ansible_ssh_host=DEVAPGW804.unix.gsm1900.org
+devapgw805 ansible_ssh_host=DEVAPGW805.unix.gsm1900.org
+devapgw806 ansible_ssh_host=DEVAPGW806.unix.gsm1900.org
+devapgw807 ansible_ssh_host=DEVAPGW807.unix.gsm1900.org
+devapax801 ansible_ssh_host=DEVAPAX801.unix.gsm1900.org
+devapax802 ansible_ssh_host=DEVAPAX802.unix.gsm1900.org
+devapax701 ansible_ssh_host=DEVAPAX701.unix.gsm1900.org 
+devapax702 ansible_ssh_host=DEVAPAX702.unix.gsm1900.org
+
+[ds:children]
+dc-1-ds
+dc-2-ds
+
+[dc-1-ds]
+devapgw001
+devapgw002
+devapgw003
+
+[dc-2-ds]
+devapgw701
+devapgw702
+devapgw703
+
+[ms:children]
+dc-1-ms
+dc-2-ms
+
+[dc-1-ms]
+devapgw107
+
+[dc-2-ms]
+devapgw807
+
+[rmp:children]
+dc-1-rmp
+dc-2-rmp
+
+[dc-1-rmp]
+devapgw101
+devapgw102
+devapgw103
+devapgw104
+devapgw105
+devapgw106
+
+[dc-2-rmp]
+devapgw801
+devapgw802
+devapgw803
+devapgw804
+devapgw805
+devapgw806
+
+[qpid:children]
+dc-1-qpid
+dc-2-qpid
+
+[dc-1-qpid]
+devapax101
+devapax102
+
+[dc-2-qpid]
+devapax801
+devapax802
+
+[pg:children]
+dc-1-pg
+dc-2-pg
+
+[dc-1-pg]
+devapax001
+devapax002
+
+[dc-2-pg]
+devapax701
+devapax702
+
+[dc-1-pgmaster]
+devapax001
+
+[dc-1-pgstandby]
+devapax002
+
+[dc-2-pgmaster]
+devapax701
+
+[dc-2-pgstandby]
+devapax702
