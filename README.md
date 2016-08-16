@@ -1,4 +1,4 @@
-# Apigee OPDK and BaaS Roles
+# Apigee Roles for OPDK and BaaS
 
 This repository contains a set of Ansible roles that are used to install, configure and manage Apigee
 OPDK and BaaS instances. These roles provide an automated installation process for Apigee Edge Private Cloud and Apgiee
