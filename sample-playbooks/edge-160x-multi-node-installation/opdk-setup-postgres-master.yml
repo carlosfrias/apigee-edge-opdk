@@ -3,7 +3,6 @@
   serial: 1
   roles:
   - opdk-setup-postgres
-#  - { role: opdk-setup-component, profile: 'ps' }
   - opdk-setup-postgres-master
   tags:
   - pg
