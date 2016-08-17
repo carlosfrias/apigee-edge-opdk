@@ -1,11 +1,5 @@
 ---
 # tasks file for opdk-setup-bootstrap-rollback
-
-#- name: Remove apigee, edge, baas and qpid packages
-#  shell: "rpm -e $(rpm -qa | egrep '(apigee-|edge-|baas-|qpid-|python-qpid|libdb-cxx|nginx)')"
-#  register: remove_all_apigee_status
-#  ignore_errors: yes
-
 - name: Gracefully Stop apigee components, if possible
   shell: '{{ apigee_all }} stop'
   ignore_errors: yes
@@ -46,6 +40,7 @@
   with_items:
   - '{{ bootstrap_script }}'
   - '{{ linked_apigee_installation_home }}'
+  - /opt/nginx
 
 - name: Determine current user
   shell: whoami
