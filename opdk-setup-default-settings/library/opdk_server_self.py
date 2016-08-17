@@ -45,31 +45,31 @@ def main():
 
     if status_code >= 200 and status_code < 300:
         server_self = map_server_self(resp)
-        if server_type == 'ms':
-            module.exit_json(changed=True,
-                             ansible_facts=dict(
-                                     edge_ms_self = server_self
-                             ))
-        if server_type == 'router':
-            module.exit_json(changed=True,
-                             ansible_facts=dict(
-                                     edge_router_self = server_self
-                             ))
-        if server_type == 'mp':
-            module.exit_json(changed=True,
-                             ansible_facts=dict(
-                                     edge_mp_self = server_self
-                             ))
-        if server_type == 'qs':
-            module.exit_json(changed=True,
-                             ansible_facts=dict(
-                                     edge_qpid_self = server_self
-                             ))
-        if server_type == 'ps':
-            module.exit_json(changed=True,
-                             ansible_facts=dict(
-                                     edge_pg_self = server_self
-                             ))
+        # if server_type == 'ms':
+        module.exit_json(changed=True,
+                         ansible_facts=dict(
+                                 edge_self = server_self
+                         ))
+        # if server_type == 'router':
+        #     module.exit_json(changed=True,
+        #                      ansible_facts=dict(
+        #                              edge_router_self = server_self
+        #                      ))
+        # if server_type == 'mp':
+        #     module.exit_json(changed=True,
+        #                      ansible_facts=dict(
+        #                              edge_mp_self = server_self
+        #                      ))
+        # if server_type == 'qs':
+        #     module.exit_json(changed=True,
+        #                      ansible_facts=dict(
+        #                              edge_qpid_self = server_self
+        #                      ))
+        # if server_type == 'ps':
+        #     module.exit_json(changed=True,
+        #                      ansible_facts=dict(
+        #                              edge_pg_self = server_self
+        #                      ))
     elif status_code > 400:
         module.fail_json(changed=False,
                          rc=1,
