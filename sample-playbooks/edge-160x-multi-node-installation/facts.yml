@@ -9,3 +9,7 @@
   - opdk-setup-default-settings
   tags:
   - facts
+
+- include: opdk-server-self.yml
+  tags:
+  - facts

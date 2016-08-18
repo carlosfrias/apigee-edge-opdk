@@ -2,14 +2,17 @@
 - hosts: rmp
   roles:
   - opdk-setup-default-settings
+
   tasks:
   - name: Obtain router server self report
+    ignore_errors: yes
     opdk_server_self:
       server_type: 'router'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
 
   - name: Obtain message processor server self report
+    ignore_errors: yes
     opdk_server_self:
       server_type: 'mp'
       username: '{{ opdk_user_email }}'
@@ -21,8 +24,9 @@
   - opdk-setup-default-settings
   tasks:
   - name: Obtain postgres server self report
+    ignore_errors: yes
     opdk_server_self:
-      server_type: 'pg'
+      server_type: 'ps'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
 
@@ -32,8 +36,9 @@
   - opdk-setup-default-settings
   tasks:
   - name: Obtain qpid server self report
+    ignore_errors: yes
     opdk_server_self:
-      server_type: 'qpid'
+      server_type: 'qs'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
 
@@ -43,6 +48,7 @@
   - opdk-setup-default-settings
   tasks:
   - name: Obtain management server self report
+    ignore_errors: yes
     opdk_server_self:
       server_type: 'ms'
       username: '{{ opdk_user_email }}'
