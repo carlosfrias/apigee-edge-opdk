@@ -1,10 +1,14 @@
 ---
-- include: ../../facts.yml
 
-- hosts: '{{ hosts }}'
+- hosts: "{{ hosts }}"
   connection: local
-  strategy: free
+
+  vars_files:
+  - ~/.apigee/credentials.yml
+
+  pre_tasks:
+  - setup:
+  - ec2_facts:
+
   roles:
   - aws-terminate
-
-

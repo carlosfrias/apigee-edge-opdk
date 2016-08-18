@@ -1,6 +1,11 @@
 ---
+
 - hosts: localhost
   connection: local
-  strategy: free
+  vars_files:
+  - "~/.apigee/credentials.yml"
+  pre_tasks:
+  - name: "Load provisioning settings for {{ install_region }}"
+    include_vars: "aws_create_settings-{{ install_region }}.yml"
   roles:
   - aws-create

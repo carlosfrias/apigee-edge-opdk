@@ -20,7 +20,7 @@
 
   - name: Copy local public keys too server
     authorized_key:
-      user: root
+      user: '{{ user }}'
       state: present
       key: "{{ lookup('file', '{{ pubkey }}') }}"
 
