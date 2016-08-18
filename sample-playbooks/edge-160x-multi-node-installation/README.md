@@ -1,43 +1,13 @@
 # Steps to Complete for Installation
-- hosts: apigee
 
-- hosts: ds
-  sudo: true
-  gather_facts: no
-  tasks:
-    - name: Run Apigee DS Profile
-    - name: Run nodetool on ring
+    ansible-playbook --vault-password-file=~/.apigee/cfrias_vault_password_file.txt node-configs/settings/aws_create.yml -e install_region=dc-1
 
-- hosts: ms
-  sudo: true
-  gather_facts: no
-  tasks:
-    - name: Run Apigee MS Profile
+    ansible-playbook -i node-configs/inventory/9-dc-1-1601-edge-ol68-1/ update-root-user.yml -e hosts=planet
 
-- hosts: sax
-  sudo: true
-  gather_facts: no
-  tasks:
-    - name: Install Postgresql with default configuration
-    - name: Enable password-less SSH access between apigee users for postgresql
+    ansible-playbook --vault-password-file=~/.apigee/cfrias_vault_password_file.txt -i node-configs/inventory/9-dc-1-1601-edge-ol68-1/ installation.yml -e install_region=dc-1 -u root
 
-- hosts: master
-  sudo: true
-  gather_facts: no
-  tasks:
-    - name: Configure Postgres master as the apigee user
+    ansible -i node-configs/inventory/9-dc-1-1601-edge-ol68-1/ -a "reboot now" planet -b
 
-- hosts: slave
-  sudo: true
-  gather_facts: no
-  tasks:
-    - name: Stop postgres service
-    - name: Configure Postgres slave as the apigee user
+    ansible -i node-configs/inventory/9-dc-1-1601-edge-ol68-1/ -m ping planet
 
-- hosts: ms
-  sudo: true
-  gather_facts: no
-  tasks:
-    - name: Register Posgresql with ms
-    - name: Initially setup organization
-
+    ansible-playbook --vault-password-file=~/.apigee/cfrias_vault_password_file.txt -i node-configs/inventory/9-dc-1-1601-edge-ol68-1/ installation.yml -e install_region=dc-1 -u root
