@@ -209,27 +209,28 @@ linked_apigee_installation_home: ''
 
 # Default system config files to download
 system_config_files:
-  - { dir: '/etc', name: 'hosts' }
-  - { dir: '/etc', name: 'hosts.allow' }
-  - { dir: '/etc', name: 'hosts.deny' }
-  - { dir: '/etc', name: 'environment' }
-  - { dir: '/etc', name: 'profile' }
-  - { dir: '/etc', name: 'bashrc' }
-  - { dir: '/etc', name: 'resolv.conf' }
-  - { dir: '/var/log', name: 'messages' }
-  - { dir: '/etc', name: 'sysctl.conf' }
-  - { dir: '/etc', name: 'sudoers' }
-  - { dir: '/etc/security', name: 'limits.conf' }
-  - { dir: '/etc/security/limits.d', name: '*conf' }
+  - { dir: '/etc/', name: 'hosts' }
+  - { dir: '/etc/', name: 'hosts.allow' }
+  - { dir: '/etc/', name: 'hosts.deny' }
+  - { dir: '/etc/', name: 'environment' }
+  - { dir: '/etc/', name: 'profile' }
+  - { dir: '/etc/', name: 'bashrc' }
+  - { dir: '/etc/', name: 'resolv.conf' }
+  - { dir: '/var/log/', name: 'messages' }
+  - { dir: '/etc/', name: 'sysctl.conf' }
+  - { dir: '/etc/', name: 'sudoers' }
+  - { dir: '/etc/security/', name: 'limits.conf' }
+  - { dir: '/etc/security/limits.d/', name: '*conf' }
 
 apigee_config_files:
-  - { dir: '{{ opdk_installer_path }}', name: '*conf' }
-  - { dir: '{{ apigee_installation_home }}/customer', name: '*' }
-  - { dir: '{{ apigee_installation_home }}/apigee-cassandra', name: '*yaml' }
-  - { dir: '{{ apigee_installation_home }}/etc', name: 'default*.sh' }
+  - { dir: '{{ opdk_installer_path }}/', name: '*conf' }
+  - { dir: '{{ apigee_installation_home }}/customer/', name: '*' }
+  - { dir: '{{ apigee_installation_home }}/apigee-cassandra/', name: '*yaml' }
+  - { dir: '{{ apigee_installation_home }}/etc/', name: 'default*.sh' }
 
 apigee_log_files:
-  - { dir: '{{ opdk_installer_path }}', name: '*log' }
-  - { dir: '{{ opdk_installer_path }}', name: '*.txt' }
-  - { dir: '{{ apigee_installation_home }}/var/log', name: '*log' }
-  - { dir: '{{ apigee_installation_home }}/var/log', name: '*out' }
+  - { dir: '{{ opdk_installer_path }}/', name: '*.log' }
+  - { dir: '{{ opdk_installer_path }}/var/log/', name: '*.log' }
+  - { dir: '{{ opdk_installer_path }}/', name: '*.txt' }
+  - { dir: '{{ apigee_installation_home }}/var/log/', name: '*.log' }
+  - { dir: '{{ apigee_installation_home }}/', name: '*.out' }

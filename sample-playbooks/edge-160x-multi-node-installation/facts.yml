@@ -1,8 +1,11 @@
 ---
 - hosts: planet
+  vars_files:
+  - ~/.apigee/credentials.yml
   pre_tasks:
   - setup:
   - ec2_facts:
   roles:
   - opdk-setup-default-settings
-
+  tags:
+  - facts

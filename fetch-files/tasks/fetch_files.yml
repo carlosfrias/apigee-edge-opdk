@@ -1,5 +1,6 @@
 ---
 - name: Fetch the files found
+  ignore_errors: yes
   fetch:
     src: "{{ item }}"
     dest: '{{ fetched_files_dir }}'
