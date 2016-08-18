@@ -1,0 +1,6 @@
+---
+- hosts: '{{ hosts }}'
+  strategy: free
+  become: true
+  roles:
+  - { role: restart-node, reboot: true }

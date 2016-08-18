@@ -3,5 +3,6 @@
 - name: Start Apigee
   shell: '{{ apigee_all }} restart'
   register: start_cmd_report
+  ignore_errors: yes
   when: opdk_version | version_compare('4.16.01', '>=')
 

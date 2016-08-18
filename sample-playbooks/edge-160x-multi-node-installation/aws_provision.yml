@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+  - ~/.apigee/credentials.yml
+  tasks:
+
+  - name: Load provisioning settings for {{ install_region }}
+    include_vars: 'aws_provision_settings-{{ install_region }}.yml'
+
+- include: node-configs/settings/aws_create.yml

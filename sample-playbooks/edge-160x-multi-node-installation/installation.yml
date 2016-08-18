@@ -1,0 +1,10 @@
+---
+- hosts: planet
+  tasks:
+  - name: Load credentials from encrypted file
+    include_vars: '~/.apigee/credentials.yml'
+
+  - name: Load installation settings for {{ install_region }}
+    include_vars: 'installation_settings-{{ install_region }}.yml'
+
+- include: opdk-setup-{{ install_region }}.yml
