@@ -171,5 +171,5 @@ These roles will update the silent installation configuration file correctly for
      zk_observer=true
      
 # OPDK Roles     
-[OPDK Setup Default Settings](tree/development/opdk-setup-default-settings)
+[OPDK Setup Default Settings](opdk-setup-default-settings)
 
