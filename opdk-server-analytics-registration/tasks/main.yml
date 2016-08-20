@@ -1,18 +1,25 @@
 ---
 # tasks file for opdk-server-analytics-registration
-- name: Get Server Self
-  uri:
-    url: 'http://{{ local_address }}:{{ self_port }}/v1/servers/self'
-    user: '{{ opdk_user_email }}'
-    password: '{{ opdk_user_pass }}'
-    body_format: json
-  register: response
+#- name: Get Server Self
+#  uri:
+#    url: 'http://{{ local_address }}:{{ self_port }}/v1/servers/self'
+#    user: '{{ opdk_user_email }}'
+#    password: '{{ opdk_user_pass }}'
+#    body_format: json
+#  register: response
+#  delegate_to: '{{ inventory_hostname }}'
+
+- name: Obtain server self report
   delegate_to: '{{ inventory_hostname }}'
+  opdk_server_self:
+    server_type: '{{ server_type }}'
+    username: '{{ opdk_user_email }}'
+    password: '{{ opdk_user_pass }}'
 
 - name: Register ax group
    uri:
       url: "http://{{ local_mgmt_ip }}:8080/v1/analytics/groups/ax/{{ ax_group_name }}/servers"
-      body: "uuid={{ uuid }}&type={{ server_type }}"
+      body: "uuid={{ server.uuid }}&type={{ server.server_type }}"
       user: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
       body_format: json
