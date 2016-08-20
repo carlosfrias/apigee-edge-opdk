@@ -42,6 +42,16 @@
   - '{{ linked_apigee_installation_home }}'
   - /opt/nginx
 
+- name: Remove analytics data on rolback: {{ remove_data_on_rollback }}
+  ignore_errors: yes
+  file:
+    path: '{{ item }}'
+    state: absent
+    follow: yes
+  with_items:
+  - '{{ apigee_installation_home }}/data'
+  when: remove_data_on_rollback is defined and remove_data_on_rollback
+
 - name: Determine current user
   shell: whoami
   register: whoami
