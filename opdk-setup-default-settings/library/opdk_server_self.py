@@ -1,4 +1,5 @@
 import requests
+import json
 from ansible.module_utils.basic import *
 from requests.auth import HTTPBasicAuth
 
@@ -51,6 +52,7 @@ def main():
         module.exit_json(changed=True,
                          ansible_facts=facts
                          )
+
         # if server_type == 'router':
         #     module.exit_json(changed=True,
         #                      ansible_facts=dict(
