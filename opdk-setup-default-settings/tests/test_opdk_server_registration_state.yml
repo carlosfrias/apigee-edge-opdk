@@ -79,4 +79,4 @@
       mgmt_server_ip: '{{ local_mgmt_ip }}'
 
   - debug:
-      var: registered
+      var: edge_ms_self
