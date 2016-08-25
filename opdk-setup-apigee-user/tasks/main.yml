@@ -1,9 +1,5 @@
 ---
 # tasks file for opdk-setup-apigee-user
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
-
 - name: Create the apigee group
   group:
     name: "{{ opdk_group_name }}"

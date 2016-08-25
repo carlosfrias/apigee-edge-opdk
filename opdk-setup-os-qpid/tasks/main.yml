@@ -2,8 +2,8 @@
 # tasks file for opdk-setup-os-qpid
 - name: Update limits.conf
   copy:
-    src: apigee.limits.conf
-    dest: /etc/security/limits.d/apigee.limits.conf
+    src: apigee-qpid.limits.conf
+    dest: /etc/security/limits.d/apigee-qpid.limits.conf
     owner: root
     group: root
     mode: 0644

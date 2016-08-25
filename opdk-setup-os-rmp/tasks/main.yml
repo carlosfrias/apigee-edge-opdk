@@ -18,8 +18,8 @@
 
 - name: Update limits config
   copy:
-    src: rmp.limits.conf
-    dest: /etc/security/limits.d/rmp.limits.conf
+    src: apigee-rmp.limits.conf
+    dest: /etc/security/limits.d/apigee-rmp.limits.conf
     owner: root
     group: root
     mode: 0644
