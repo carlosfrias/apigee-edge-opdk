@@ -1,10 +1,12 @@
 ---
 - name: Install Java JDK
+  become: yes
   yum:
     name: "java-{{ jdk_version }}.0-openjdk-devel"
     state: present
 
 - name: Update environment with path to JAVA_HOME
+  become: yes
   lineinfile:
     dest: /etc/environment
     regexp: "^export JAVA_HOME"
