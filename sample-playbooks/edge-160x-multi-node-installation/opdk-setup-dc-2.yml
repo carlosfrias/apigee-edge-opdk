@@ -1,14 +1,14 @@
 ---
 
-- include: facts.yml
+- include: prep_os/facts.yml
 
-- include: os_prep/opdk-setup-os.yml
+- include: prep_os/opdk-setup-os.yml
 
-- include: os_prep/opdk-setup-openjdk.yml
+- include: prep_os/opdk-setup-openjdk.yml
   vars:
     hosts: 'dc-2'
 
-- include: opdk-setup-bootstrap-archive.yml
+- include: prep_bootstrap/opdk-setup-bootstrap-archive.yml
   vars:
     hosts: 'dc-2'
   when: existing_archive is defined and existing_archive

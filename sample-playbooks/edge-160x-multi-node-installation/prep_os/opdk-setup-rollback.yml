@@ -1,5 +1,5 @@
 ---
-- include: facts.yml
+- include: ../prep_os/facts.yml
 
 - include: opdk-setup-bootstrap-rollback.yml
 

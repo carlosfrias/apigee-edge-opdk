@@ -1,5 +1,5 @@
 ---
-- include: facts.yml
+- include: ../prep_os/facts.yml
 
 - hosts: planet
   strategy: free

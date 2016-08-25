@@ -1,42 +1,42 @@
 ---
 
-- include: facts.yml
+- include: prep_os/facts.yml
 
-- include: os_prep/opdk-setup-os.yml
+- include: prep_os/opdk-setup-os.yml
 
-- include: os_prep/opdk-setup-openjdk.yml
+- include: prep_os/opdk-setup-openjdk.yml
   vars:
     hosts: 'dc-1'
 
-- include: opdk-setup-bootstrap.yml
+- include: prep_bootstrap/opdk-setup-bootstrap.yml
   vars:
     hosts: 'dc-1-ms'
   when: create_archive is defined and create_archive
 
-- include: opdk-setup-bootstrap-archive-create-download.yml
+- include: prep_bootstrap/opdk-setup-bootstrap-archive-create-download.yml
   vars:
     hosts: 'ms'
   when: create_archive is defined and create_archive
 
-- include: opdk-setup-bootstrap-rollback.yml
+- include: prep_bootstrap/opdk-setup-bootstrap-rollback.yml
   vars:
     hosts: 'dc-1-ms'
   when: create_archive is defined and create_archive
 
-- include: opdk-setup-os.yml
+- include: prep_os/opdk-setup-os.yml
   when: create_archive is defined and create_archive
 
-- include: opdk-setup-openjdk.yml
+- include: prep_os/opdk-setup-openjdk.yml
   vars:
     hosts: 'dc-1-ms'
   when: create_archive is defined and create_archive
 
-- include: opdk-setup-bootstrap-archive.yml
+- include: prep_bootstrap/opdk-setup-bootstrap-archive.yml
   vars:
     hosts: 'dc-1'
   when: (existing_archive is defined and existing_archive) or (create_archive is defined and create_archive)
 
-- include: opdk-setup-bootstrap.yml
+- include: prep_bootstrap/opdk-setup-bootstrap.yml
   vars:
     hosts: 'dc-1'
   when: create_archive is not defined or not create_archive
@@ -69,16 +69,16 @@
   vars:
     hosts: 'dc-1-pgstandby'
 
-- include: opdk-setup-startup.yml
+- include: validation/opdk-setup-startup.yml
 
-- include: opdk-setup-validate.yml
+- include: validation/opdk-setup-validate.yml
 
-- include: opdk-setup-org.yml
+- include: validation/opdk-setup-org.yml
   vars:
     hosts: 'dc-1-ms[0]'
 
-- include: opdk-setup-status.yml
+- include: validation/opdk-setup-status.yml
   vars:
     hosts: 'dc-1'
 
-- include: opdk-setup-log-files.yml
+- include: validation/opdk-setup-log-files.yml
