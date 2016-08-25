@@ -178,9 +178,38 @@ baas_superuser_pass: '{{ opdk_user_pass }}'
 # Cassandra uname/pword if you enabled Cassandra authentication.
 # Even if you have not enabled Cassandra authentication,
 # you must pass values for these properties.
-opdk_cass_username: '{{ opdk_user_name }}'
+opdk_cass_username: 'cassandra'
+
 # Default value
-opdk_cass_password: '{{ opdk_user_pass }}'
+opdk_cass_password: '{{ opdk_cass_username }}'
+
+# Default setting to use a cassandra ring
+opdk_use_cass_cluster: 'y'
+
+# Default silent-install configuration file settings for OpenLDAP
+opdk_ldap_type: '1'
+opdk_ldap_remote_host: 'n'
+opdk_ldap_pass: '{{ opdk_user_pass }}'
+
+# Default to enable analytics
+opdk_enable_ax: 'y'
+
+# Default pod
+opdk_mp_pod: 'gateway'
+
+# Default to enable use of the zookeeper cluster
+opdk_use_zk_cluster: 'y'
+
+# SMTP settings for Edge Configuration
+opdk_skip_smpt: 'y'
+opdk_smtp_host: 'smtp.example.com'
+opdk_smtp_port: '25'
+opdk_smtp_user: 'smtp@example.com'
+opdk_smtp_password: 'smtppwd'
+opdk_smtp_ssl: 'n'
+
+# Default to bind OPDK on all network interfaces
+opdk_bind_on_all_interfaces: 'y'
 
 # API BaaS Stack information.
 # Default cluster name is "apigee_baas"
