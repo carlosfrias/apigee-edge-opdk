@@ -2,9 +2,9 @@
 
 - include: facts.yml
 
-- include: opdk-setup-os.yml
+- include: os_prep/opdk-setup-os.yml
 
-- include: opdk-setup-openjdk.yml
+- include: os_prep/opdk-setup-openjdk.yml
   vars:
     hosts: 'dc-2'
 
