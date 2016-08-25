@@ -1,7 +1,4 @@
 ---
-
-- include: aws_facts.yml
-
 - hosts: rmp
   vars_files:
   - opdk-setup-settings.yml

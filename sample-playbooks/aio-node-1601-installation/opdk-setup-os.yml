@@ -7,20 +7,14 @@
   - opdk-setup-selinux-disable
   - opdk-shutdown-iptables
   - opdk-time-sync
-  - opdk-setup-hostfile
   - opdk-setup-os-common
-  - opdk-setup-os-common-extra
+  - opdk-setup-os-minimum
   - opdk-setup-os-dev-validation
+  - opdk-setup-apigee-user
+  - opdk-setup-os-ds
+  - opdk-setup-os-rmp
+  - opdk-setup-os-qpid
+  - opdk-setup-os-postgres
   tags:
   - common
   - os
-
-- hosts: planet
-  become: true
-  vars_files:
-  - opdk-setup-settings.yml
-  roles:
-  - opdk-setup-apigee-user
-  tags:
-  - common
-  - apigee

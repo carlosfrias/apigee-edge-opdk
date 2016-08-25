@@ -1,5 +1,5 @@
 ---
-- hosts: '{{ hosts }}'
+- hosts: planet
   strategy: free
   tasks:
   - setup:

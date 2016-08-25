@@ -1,8 +1,17 @@
 ---
-- include: aws_facts.yml
-  tags:
-  - aws
-  - common
+- hosts: planet
+  become: yes
+  tasks:
+  - name: install selinux python bindings
+    yum:
+      name: libselinux-python
+      state: present
+
+  - setup:
+
+- include: update-root-user.yml
+  vars:
+    hosts: planet
 
 - include: opdk-setup-os.yml
   tags:
@@ -32,6 +41,6 @@
 - hosts: dc-1
   strategy: free
   roles:
-  - opdk-setup-apigee-config-files
+  - opdk-setup-apigee-log-files
   tags:
   - logs
