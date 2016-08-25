@@ -4,4 +4,4 @@
 - name: Rebuild Cassandra nodes
   shell: '{{ nodetool }} -h {{ local_address }} rebuild {{ opdk_region }}'
   environment:
-    JAVA_HOME: '{{ opdk_java_home }}'
+    JAVA_HOME: '{{ java_home }}'
