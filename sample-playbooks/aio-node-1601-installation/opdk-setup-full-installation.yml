@@ -19,11 +19,6 @@
 
 - include: opdk-setup-bootstrap.yml
 
-- include: opdk-setup-openjdk.yml
-  tags:
-  - openjdk2
-  - common
-
 - include: opdk-setup-installer.yml
 
 - include: opdk-setup-aio.yml
