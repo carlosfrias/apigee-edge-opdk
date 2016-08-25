@@ -1,4 +1,0 @@
----
-- include: aws_terminate.yml
-
-- include: aws_create.yml

@@ -1,9 +1,0 @@
----
-- hosts: dc-1-ds
-  serial: 1
-  vars_files:
-  - opdk-setup-settings.yml
-  roles:
-  - opdk-cassandra-client-update
-  tags:
-  - cassandra-client-update

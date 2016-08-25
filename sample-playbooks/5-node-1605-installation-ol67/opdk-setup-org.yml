@@ -1,9 +1,0 @@
----
-- hosts: ms
-  strategy: free
-  vars_files:
-  - opdk-setup-settings.yml
-  roles:
-  - opdk-setup-org
-  tags:
-  - org

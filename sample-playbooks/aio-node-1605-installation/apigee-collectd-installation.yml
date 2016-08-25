@@ -1,9 +1,0 @@
----
-- hosts: dc-1
-  become: true
-
-  vars:
-    collectd_version: 5.5.0
-
-  roles:
-  - opdk-setup-collectd

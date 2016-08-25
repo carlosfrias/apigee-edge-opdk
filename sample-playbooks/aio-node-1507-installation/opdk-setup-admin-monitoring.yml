@@ -1,9 +1,0 @@
----
-- hosts: dc-1
-  become: true
-
-  roles:
-  - opdk-setup-collectd
-  - opdk-setup-graphite
-  - opdk-setup-grafana
-  - opdk-setup-status

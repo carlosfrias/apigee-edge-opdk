@@ -1,2 +1,0 @@
-OLD_APIGEE_ROOT=/opt
-OLD_DATA_ROOT=/opt

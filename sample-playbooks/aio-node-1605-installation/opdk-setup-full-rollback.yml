@@ -1,6 +1,0 @@
----
-- include: aws_facts.yml
-
-- include: opdk-setup-installation-rollback.yml
-
-- include: opdk-setup-os-rollback.yml

@@ -1,5 +1,0 @@
----
-- hosts: "{{ hosts }}"
-  connection: local
-  roles:
-  - aws-stop

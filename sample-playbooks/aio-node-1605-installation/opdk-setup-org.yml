@@ -1,6 +1,0 @@
----
-- hosts: ms
-  vars_files:
-  - opdk-setup-settings.yml
-  roles:
-  - opdk-setup-org

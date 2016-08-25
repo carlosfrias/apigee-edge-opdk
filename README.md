@@ -18,7 +18,8 @@ functionality provided by these roles:
  * Roles adjust to account for either CentOS 6 or greater; Oracle Linux 6 or greater and RHEL 6 or greater. 
  * Roles adjust to also account for whether they are executed in within the virtualized environments provisioned by AWS 
   and Vagrant or a non-virtualized server.  
- * Check that port are accessible and available prior to installing any component.
+ * Check that ports are accessible and available prior to installing any component.
+ * Check that all expected ports are in use post-installation.
  
  
 # Usage Samples

@@ -1,6 +1,0 @@
----
-- hosts: '{{ hosts }}'
-  become: yes
-
-  role:
-  - opdk-setup-org

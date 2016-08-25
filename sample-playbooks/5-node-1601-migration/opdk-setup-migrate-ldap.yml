@@ -1,9 +1,0 @@
----
-- hosts: ldap
-  serial: 1
-  vars_files:
-  - opdk-setup-settings.yml
-  roles:
-  - opdk-migration-ldap
-  tags:
-  - ldap

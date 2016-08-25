@@ -1,8 +1,0 @@
----
-
-- name: Update replication strategy
-  shell: '{{ installation_home }}/apigee-cassandra/bin/cassandra-cli -f update_replication_strategy.cql -h {{ ansible_ec2_local_ipv4 }} -k Locks'
-
-- name: Disable scheduler
-  lineinfile:
-

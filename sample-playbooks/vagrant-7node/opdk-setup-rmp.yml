@@ -1,5 +1,0 @@
----
-- hosts: "rmp"
-  become: true
-  roles:
-  - opdk-setup-rmp

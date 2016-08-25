@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  connection: local
-  vars_files:
-  - aws_settings.yml
-  roles:
-  - aws-create

@@ -1,7 +1,0 @@
----
-- include: opdk-setup-installer-rollback.yml
-
-- hosts: dc-1
-  strategy: free
-  roles:
-  - opdk-setup-os-common-rollback

@@ -1,7 +1,0 @@
----
-- hosts: dc1
-  become: true
-
-  roles:
-  - apigee-startup
-  - opdk-setup-status

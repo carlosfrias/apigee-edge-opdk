@@ -1,9 +1,0 @@
----
-- hosts: ds
-  serial: 1
-  vars_files:
-  - opdk-setup-settings.yml
-  roles:
-  - opdk-migration-cs-zk
-  tags:
-  - cs_zk

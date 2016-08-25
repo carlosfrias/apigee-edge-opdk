@@ -1,8 +1,0 @@
-[dc1]
-a1n1 ansible_host=127.0.0.1 ansible_port=2222
-
-[ds]
-a1n1
-
-[monitor]
-a5n1

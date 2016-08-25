@@ -1,5 +1,0 @@
----
-- hosts: sax
-  become: true
-  roles:
-  - opdk-setup-sax
