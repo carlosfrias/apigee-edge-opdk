@@ -1,0 +1,10 @@
+---
+
+- hosts: dc-2-ds
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-cassandra-rebuild
+  tags:
+  - cass-rebuild

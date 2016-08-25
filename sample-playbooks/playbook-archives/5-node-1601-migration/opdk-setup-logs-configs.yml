@@ -1,0 +1,19 @@
+---
+- hosts: dc-1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-system-configs-logs
+  - opdk-setup-apigee-configs-logs
+  tags:
+  - configs
+  - 1601_configs
+
+- hosts: dc-1
+  roles:
+  - opdk-setup-system-configs-logs
+  - opdk-setup-apigee-configs-logs
+  tags:
+  - configs
+  - 1507_configs
+

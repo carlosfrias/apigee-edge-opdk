@@ -1,0 +1,9 @@
+---
+- hosts: dc-1
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-installer
+  tags:
+  - installer

@@ -1,0 +1,8 @@
+---
+- hosts: dc-1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-startup
+  tags:
+  - startup

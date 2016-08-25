@@ -1,0 +1,6 @@
+---
+- hosts: "ds"
+  become: true
+
+  roles:
+  - opdk-setup-ds

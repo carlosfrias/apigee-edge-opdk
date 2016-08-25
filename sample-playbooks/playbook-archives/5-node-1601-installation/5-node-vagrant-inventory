@@ -1,0 +1,38 @@
+[dc-1]
+a5n1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222
+a5n2 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200
+a5n3 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201
+a5n4 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2202
+a5n5 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2203
+
+[ds]
+a5n1
+a5n2
+a5n3
+
+[ldap]
+a5n1
+
+[ms]
+a5n1
+
+[rmp]
+a5n2
+a5n3
+
+[qpid]
+a5n4
+a5n5
+
+[pg]
+a5n4
+a5n5
+
+[pgmaster]
+a5n4
+
+[pgslave]
+a5n5
+
+[monitor]
+a5n3

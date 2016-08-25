@@ -1,0 +1,12 @@
+---
+- include: opdk-setup-os.yml
+
+- include: opdk-setup-openjdk.yml
+
+- include: opdk-setup-bootstrap.yml
+
+- include: opdk-setup-installer.yml
+
+- include: opdk-setup-migration-installer.yml
+
+- include: opdk-setup-migrate-components.yml

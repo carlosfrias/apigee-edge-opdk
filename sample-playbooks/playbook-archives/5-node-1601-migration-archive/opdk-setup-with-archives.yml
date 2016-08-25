@@ -1,0 +1,24 @@
+---
+- include: aws_facts.yml
+
+- include: opdk-setup-os-admin-user.yml
+  tags:
+  - os
+
+- include: opdk-setup-openjdk.yml
+
+- include: opdk-setup-bootstrap.yml
+
+- include: opdk-setup-create-archive.yml
+
+- include: opdk-setup-bootstrap-archive.yml
+
+- include: opdk-setup-bootstrap-rollback.yml
+
+- include: opdk-setup-openjdk.yml
+
+- include: opdk-setup-bootstrap-archive-installer.yml
+
+- include: opdk-setup-migration-installer.yml
+
+- include: opdk-setup-migrate-components.yml

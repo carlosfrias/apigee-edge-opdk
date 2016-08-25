@@ -1,0 +1,10 @@
+---
+- hosts: dc-1
+  connection: local
+  gather_facts: false
+  strategy: free
+  vars_files:
+  - aws_settings.yml
+  roles:
+  - aws-start
+

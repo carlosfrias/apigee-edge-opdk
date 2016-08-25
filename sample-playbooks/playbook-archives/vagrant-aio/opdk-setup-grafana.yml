@@ -1,0 +1,6 @@
+---
+- hosts: dc1
+  become: true
+
+  roles:
+  - opdk-setup-grafana

@@ -1,0 +1,9 @@
+---
+- hosts: qpid
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-migration-qpid-ps
+  tags:
+  - qpid_ps

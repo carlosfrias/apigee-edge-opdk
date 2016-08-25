@@ -1,0 +1,10 @@
+---
+- hosts: dc-1
+  connection: local
+  vars_files:
+  - aws_settings.yml
+  tasks:
+  - ec2_facts:
+  - setup:
+  roles:
+  - aws-stop

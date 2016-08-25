@@ -1,0 +1,62 @@
+---
+- hosts: dc-1
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+   - opdk-setup-selinux-disable
+   - opdk-dns-resolver
+   - opdk-shutdown-iptables
+   - opdk-time-sync
+   - opdk-setup-hostfile
+   - opdk-setup-apigee-user
+   - opdk-setup-os-common
+
+- hosts: ds
+  become: true
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-ds
+
+- hosts: ldap
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-ldap
+
+- hosts: rmp
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-rmp
+
+- hosts: qpid
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-qpid
+
+- hosts: pg
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-os-postgres
+
+- hosts: dc-1
+  become: true
+  strategy: free
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-system-configs-logs

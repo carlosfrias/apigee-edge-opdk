@@ -1,0 +1,19 @@
+---
+
+- hosts: dc-2-ds
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-ds
+  tags:
+  - dc-2-ds
+
+- hosts: dc-1-ds
+  serial: 1
+  vars_files:
+  - opdk-setup-settings.yml
+  roles:
+  - opdk-setup-ds
+  tags:
+  - dc-1-ds

@@ -1,0 +1,25 @@
+---
+- hosts: '{{ hosts }}'
+  become: yes
+  tasks:
+  - name: Copy local public keys too server
+    authorized_key:
+      user: root
+      state: present
+      key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+  - name: Enable root login over SSH
+    lineinfile:
+      state: present
+      dest: /etc/ssh/sshd_config
+      regexp: '(^#)(PermitRootLogin yes)'
+      line: '\2'
+      backrefs: yes
+    notify:
+    - Restart SSH service
+
+  handlers:
+  - name: Restart SSH service
+    service:
+      name: sshd
+      state: restarted
