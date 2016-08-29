@@ -1,4 +1,8 @@
 ---
+#- include: prep_os/update-user.yml
+#  vars:
+#    hosts: 'planet'
+#    user: 'root'
 
 - include: prep_os/facts.yml
 
@@ -41,31 +45,31 @@
     hosts: 'dc-1'
   when: create_archive is not defined or not create_archive
 
-- include: opdk-setup-component-installer.yml
+- include: component_installations/opdk-setup-component-installer.yml
   vars:
     hosts: 'dc-1'
 
-- include: opdk-setup-ds.yml
+- include: component_installations/opdk-setup-ds.yml
   vars:
     hosts: 'dc-1-ds'
 
-- include: opdk-setup-ms.yml
+- include: component_installations/opdk-setup-ms.yml
   vars:
     hosts: 'dc-1-ms'
 
-- include: opdk-setup-rmp.yml
+- include: component_installations/opdk-setup-rmp.yml
   vars:
     hosts: 'dc-1-rmp'
 
-- include: opdk-setup-qpid.yml
+- include: component_installations/opdk-setup-qpid.yml
   vars:
     hosts: 'dc-1-qpid'
 
-- include: opdk-setup-postgres-master.yml
+- include: component_installations/opdk-setup-postgres-master.yml
   vars:
     hosts: 'dc-1-pgmaster'
 
-- include: opdk-setup-postgres-standby.yml
+- include: component_installations/opdk-setup-postgres-standby.yml
   vars:
     hosts: 'dc-1-pgstandby'
 

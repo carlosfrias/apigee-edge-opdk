@@ -1,7 +1,7 @@
 ---
 - name: Get user status
   uri:
-    url: 'http://{{ local_address }}:{{ ms_http_port }}/v1/users/{{ user_name }}'
+    url: 'http://{{ local_address }}:{{ ms_ext_mgmt_port }}/v1/users/{{ opdk_user_email }}'
     user: '{{ admin_user }}'
     password: '{{ admin_pass }}'
     body_format: json
@@ -13,7 +13,7 @@
     var: user_results
 
 - name: Create user
-  shell: "{{ create_user }} -P {{ admin_pass }} -u {{ user_name }} -p {{ user_pass }} -f {{ first_name }} -l {{ last_name }}"
+  shell: "{{ create_user }} -P {{ admin_pass }} -u {{ opdk_user_email }} -p {{ opdk_user_pass }} -f {{ first_name }} -l {{ last_name }}"
   when: not user_results.status == 200
   register: user_create_results
 
@@ -23,7 +23,7 @@
 
 - name: Get org status
   uri:
-    url: 'http://{{ local_address }}:{{ ms_http_port }}/v1/organizations/{{ org_name }}'
+    url: 'http://{{ local_address }}:{{ ms_ext_mgmt_port }}/v1/organizations/{{ org_name }}'
     user: '{{ admin_user }}'
     password: '{{ admin_pass }}'
     body_format: json
@@ -36,7 +36,7 @@
     var: org_results
 
 - name: Create an organization
-  shell: "{{ create_org }} -a {{ user_name }} -o {{ org_name }} -P {{ admin_pass }}"
+  shell: "{{ create_org }} -a {{ opdk_user_email }} -o {{ org_name }} -P {{ admin_pass }}"
   when: not org_results.status == 200
   register: create_status
 
@@ -55,7 +55,7 @@
 
 - name: Get environment status
   uri:
-    url: 'http://{{ local_address }}:{{ ms_http_port }}/v1/organizations/{{ org_name }}/environments/{{ env_name }}'
+    url: 'http://{{ local_address }}:{{ ms_ext_mgmt_port }}/v1/organizations/{{ org_name }}/environments/{{ env_name }}'
     user: '{{ admin_user }}'
     password: '{{ admin_pass }}'
     body_format: json

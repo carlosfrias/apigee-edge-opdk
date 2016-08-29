@@ -23,10 +23,10 @@ opdk_user_pass: Apigee123!
 opdk_user_home: /home/{{ opdk_user_name }}
 
 # Apigee admin user name
-admin_user: '{{ opdk_user_name }}'
+admin_user: '{{ opdk_user_email }}'
 
 # Apigee admin user password
-admin_pass: '{{ opdk_user_name }}'
+admin_pass: '{{ opdk_user_pass }}'
 
 # Default Apigee Edge Private Cloud Version
 opdk_version: '4.16.01'
@@ -160,6 +160,39 @@ conf_logs_dir: configs_and_logs
 
 # Organization name used in Edge and Baas setups
 org_name: opdk
+
+# Default for creating a new user in org
+new_user: 'y'
+
+# Default for first_name in creating new user
+first_name: Opdk
+
+# Default for last_name in creating new user
+last_name: User
+
+# Virtual host port for the org
+virtual_host_port: 9001
+
+# Virtual Host name for the org
+virtual_host_name: default
+
+# Virtual host alias
+virtual_host_alias: '127.0.0.1'
+
+# Environment name
+env_name: test
+
+# Default analytics group
+ax_group: axgroup001
+
+# Default onboarding provisioning file name
+onboarding_config: 'apigee-provision.conf'
+
+# Default onboarding provisioning file path
+onboarding_config_file_path: "{{ opdk_installer_path }}/{{ onboarding_config }}"
+
+# Default onboarding provisioning directory
+apigee_provision_dir: '{{ apigee_installation_home }}/apigee-provision'
 
 # Default location and name of the Baas Silent Install file
 opdk_baas_silent_install_file_path: /tmp/baas-silent-install.conf

@@ -3,8 +3,6 @@
 
 - hosts: "{{ hosts }}"
   become: true
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-bootstrap-rollback
   - opdk-setup-os-common-rollback

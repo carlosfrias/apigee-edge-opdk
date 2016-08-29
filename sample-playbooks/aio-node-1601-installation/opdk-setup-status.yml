@@ -1,7 +1,5 @@
 ---
 - hosts: planet
-  vars_files:
-  - opdk-setup-settings.yml
   roles:
   - opdk-setup-status
   tags:

@@ -1,11 +1,5 @@
 ---
 
-- include: network-interface-name.yml
-
-- include: common_integrated_facts.yml
-
-- include: aws_integrated_facts.yml
-
 - name: Checking for Management Server Port
   register: ms_ext_mgmt_port_status
   ignore_errors: true

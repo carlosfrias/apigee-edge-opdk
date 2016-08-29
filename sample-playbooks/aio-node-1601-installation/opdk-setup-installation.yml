@@ -6,6 +6,7 @@
     yum:
       name: libselinux-python
       state: present
+    when: ansible_bios_version | lower | search('virtualbox')
 
   - setup:
 

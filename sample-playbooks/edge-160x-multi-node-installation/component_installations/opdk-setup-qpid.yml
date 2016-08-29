@@ -1,5 +1,6 @@
 ---
 - hosts: '{{ hosts }}'
+  serial: 1
   roles:
   - { role: opdk-setup-component, profile: 'qs', server_type: 'qs'}
   tags:

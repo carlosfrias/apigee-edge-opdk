@@ -1,5 +1,8 @@
 ---
-- include: aws_facts.yml
+- hosts: planet
+  strategy: free
+  tasks:
+  - setup:
 
 - include: opdk-setup-installation-rollback.yml
 

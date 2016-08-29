@@ -7,4 +7,4 @@
   - name: Load installation settings for {{ install_region }}
     include_vars: 'installation_settings-{{ install_region }}.yml'
 
-- include: component_installations/opdk-setup-{{ install_region }}.yml
+- include: opdk-setup-{{ install_region }}.yml

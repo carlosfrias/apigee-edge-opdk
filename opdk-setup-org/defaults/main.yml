@@ -1,25 +1,6 @@
 ---
 # defaults file for opdk-setup-org
-
-admin_user: opdk@apigee.com
-admin_pass: Apigee123!
-new_user: y
-user_name: opdk@apigee.com
-user_pass: Apigee123!
-first_name: Opdk
-last_name: User
-virtual_host_port: 9001
-virtual_host_name: default
-virtual_host_alias: '127.0.0.1'
-env_name: test
-ms_http_port: 8080
-ax_group: axgroup001
-
 create_user: "{{ apigee_bin }}/create-user.sh"
 create_org: "{{ apigee_bin }}/create-org.sh"
 create_roles: "{{ apigee_bin }}/create-roles.sh"
 add_env: "{{ apigee_bin }}/add-env.sh"
-
-onboarding_config: 'apigee-provision.conf'
-onboarding_config_file_path: "{{ opdk_installer_path }}/{{ onboarding_config }}"
-apigee_provision_dir: '{{ apigee_installation_home }}/apigee-provision'

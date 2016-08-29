@@ -1,16 +1,18 @@
 ---
 # tasks file for opdk-setup-silent-file
-
-#- include: network-interface-name.yml
-#
-#- include: common_integrated_facts.yml
-#
-#- include: aws_integrated_facts.yml
-
 - name: Remove the old response file
   file:
     path: "{{ opdk_installation_config_file }}"
     state: absent
+
+- name: Construct cassandra hosts configuration string
+  cassandra_hosts:
+    groups: '{{ groups }}'
+    inventory_hostname: '{{ inventory_hostname }}'
+    hostvars: '{{ hostvars }}'
+
+- debug: var=cassandra_hosts
+- pause:
 
 - name: Construct the silent-install file
   template:

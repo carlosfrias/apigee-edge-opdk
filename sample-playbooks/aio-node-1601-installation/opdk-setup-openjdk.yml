@@ -1,5 +1,5 @@
 ---
 - hosts: planet
-  become: true
+  become: yes
   roles:
   - opdk-setup-openjdk

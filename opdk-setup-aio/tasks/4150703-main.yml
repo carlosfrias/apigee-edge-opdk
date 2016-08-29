@@ -57,14 +57,8 @@
   debug:
     msg: "Is AIO installed? {{ install_aio }}"
 
-- block:
-  - name: Setup of aio profile
-    shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_installation_config_file }} -p aio"
-    ignore_errors: yes
-    register: aio_install_results
-
-  - name: AIO Install Report
-    debug:
-      var: aio_install_results
-
+- name: Setup of aio profile
+  shell: "{{ apigee_installation_home }}/share/installer/apigee-setup.sh -f {{ opdk_installation_config_file }} -p aio"
+  ignore_errors: yes
+  register: aio_install_results
   when: not install_aio

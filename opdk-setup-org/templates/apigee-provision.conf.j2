@@ -1,9 +1,8 @@
-# Specify the IP or DNS name of the Management Server.
-MSIP="{{ hostvars[hostvars[inventory_hostname]['groups']['ms'][0]][interface_name].ipv4.address }}"
+# Specify the IP or DNS name of the Management Server.MSIP="{{ local_mgmt_ip }}"
 
 # Specify the Edge admin credentials.
-ADMIN_EMAIL={{ admin_user }}
-APIGEE_ADMINPW={{ admin_pass }} # If omitted, you are prompted for it.
+ADMIN_EMAIL={{ opdk_user_email }}
+APIGEE_ADMINPW={{ opdk_user_pass }} # If omitted, you are prompted for it.
 
 # Specify organization name and administrator.
 ORG_NAME={{ org_name }} # lowercase only, no spaces, underscores, or periods.
@@ -12,22 +11,21 @@ ORG_NAME={{ org_name }} # lowercase only, no spaces, underscores, or periods.
 # Do not use sys admin as organization administrator.
 #
 # Create a new user for the organization administrator.
-{% if new_user == 'y' %}
-
 NEW_USER="{{ new_user }}"
+{% if new_user == 'y' %}
 # New user information if NEW_USER="y". USER_NAME=new@user.com
-USER_NAME={{ user_name }}
+USER_NAME={{ opdk_user_email }}
 FIRST_NAME={{ first_name }}
 LAST_NAME={{ last_name }}
-USER_PWD={{ user_pass }}
-ORG_ADMIN={{ user_name }}
+USER_PWD={{ opdk_user_pass }}
+ORG_ADMIN={{ opdk_user_email }}
 
 {% else %}
 
 # Specify an existing user as the organization admin, # omit USER_NAME, FIRST_NAME, LAST_NAME, USER_PWD.
 # NEW_USER="n"
 # ORG_ADMIN=existing@user.com
-ORG_ADMIN={{ user_name }}
+ORG_ADMIN={{ opdk_user_email }}
 
 {% endif %}
 
@@ -39,7 +37,11 @@ VHOST_PORT={{ virtual_host_port }}
 VHOST_NAME={{ virtual_host_name }}
 
 # If you have a DNS entry for the virtual host.
-VHOST_ALIAS={{ rmp_public_address }}
+{% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}
+VHOST_ALIAS={{ groups['dc-1-rmp'][0] }}
+{% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
+VHOST_ALIAS={{ groups['dc-2-rmp'][0] }}
+{% endif %}
 
 {#{% if groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] %}#}
 {#VHOST_ALIAS={{ hostvars[groups['dc-1-rmp'][0]]['ansible_fqdn'] }}#}

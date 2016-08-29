@@ -1,7 +1,10 @@
-import requests
-import json
+try:
+    import requests
+    from requests.auth import HTTPBasicAuth
+except:
+    pass
+
 from ansible.module_utils.basic import *
-from requests.auth import HTTPBasicAuth
 
 BASE_SERVER_URL = 'http://localhost'
 SERVER_SELF_URI = '/v1/servers/self'
@@ -29,56 +32,45 @@ def map_server_self(server_self):
     return reported
 
 
-
 def main():
-    module = AnsibleModule(argument_spec=dict(
-            username=dict(required = True, type='str', no_log=True),
-            password=dict(required = True, type='str', no_log=True),
-            server_type=dict(required = True, type='str', choices=['ms', 'router', 'mp', 'qs', 'ps'])
-    ))
+    module = AnsibleModule(
+            argument_spec=dict(
+                    username=dict(required=True, type='str', no_log=True),
+                    password=dict(required=True, type='str', no_log=True),
+                    server_type=dict(required=True, type='str', choices=['ms', 'router', 'mp', 'qs', 'ps'])
+            )
+    )
 
     username = module.params['username']
     password = module.params['password']
     server_type = module.params['server_type']
+    try:
+        resp = get_server_self(server_type, username, password)
+        status_code = resp.status_code
 
-    resp = get_server_self(server_type, username, password)
-    status_code = resp.status_code
-
-    if status_code >= 200 and status_code < 300:
-        server_self = map_server_self(resp)
-        facts = {}
-        facts['edge_' + server_type + '_self'] = server_self
-        # if server_type == 'ms':
-        module.exit_json(changed=True,
-                         ansible_facts=facts
-                         )
-
-        # if server_type == 'router':
-        #     module.exit_json(changed=True,
-        #                      ansible_facts=dict(
-        #                              edge_router_self = server_self
-        #                      ))
-        # if server_type == 'mp':
-        #     module.exit_json(changed=True,
-        #                      ansible_facts=dict(
-        #                              edge_mp_self = server_self
-        #                      ))
-        # if server_type == 'qs':
-        #     module.exit_json(changed=True,
-        #                      ansible_facts=dict(
-        #                              edge_qpid_self = server_self
-        #                      ))
-        # if server_type == 'ps':
-        #     module.exit_json(changed=True,
-        #                      ansible_facts=dict(
-        #                              edge_pg_self = server_self
-        #                      ))
-    elif status_code > 400:
-        module.fail_json(changed=False,
-                         rc=1,
-                         msg="Failed to retrieve server self",
-                         status_code=status_code,
-                         )
+        if status_code >= 200 and status_code < 300:
+            server_self = map_server_self(resp)
+            facts = {}
+            facts['edge_' + server_type + '_self'] = server_self
+            # if server_type == 'ms':
+            module.exit_json(
+                    changed=True,
+                    ansible_facts=facts
+            )
+        elif status_code > 400:
+            module.fail_json(
+                    changed=False,
+                    rc=1,
+                    msg="Failed to retrieve server self",
+                    status_code=status_code,
+            )
+    except:
+        module.fail_json(
+                changed=False,
+                rc=1,
+                msg="Server is not available",
+                status_code=500,
+        )
 
 
 if __name__ == '__main__':

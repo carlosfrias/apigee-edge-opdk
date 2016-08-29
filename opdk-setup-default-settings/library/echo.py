@@ -2,8 +2,6 @@ import ast
 import json
 from ansible.module_utils.basic import *
 
-
-
 def to_json(data):
     data = ast.literal_eval(data)
     data = json.dumps(data)

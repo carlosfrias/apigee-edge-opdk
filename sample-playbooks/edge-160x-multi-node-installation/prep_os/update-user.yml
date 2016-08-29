@@ -6,6 +6,7 @@
   vars:
     pubkey: '~/.ssh/id_rsa.pub'
     delay_before_check: 10
+
   tasks:
   - name: Wait for port 22
     wait_for:

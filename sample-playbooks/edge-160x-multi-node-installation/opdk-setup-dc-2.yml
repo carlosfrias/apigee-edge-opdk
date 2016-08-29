@@ -13,72 +13,72 @@
     hosts: 'dc-2'
   when: existing_archive is defined and existing_archive
 
-- include: opdk-setup-bootstrap-create-download.yml
+- include: prep_bootstrap/opdk-setup-bootstrap-create-download.yml
   vars:
     hosts: 'dc-2-ms'
   when: create_archive is defined and create_archive
 
-- include: opdk-setup-bootstrap.yml
+- include: prep_bootstrap//opdk-setup-bootstrap.yml
   vars:
     hosts: 'dc-2'
   when: create_archive is not defined or not create_archive
 
-- include: opdk-setup-component-installer.yml
+- include: component_installations/opdk-setup-component-installer.yml
   vars:
     hosts: 'planet'
 
-- include: opdk-setup-ds.yml
+- include: component_installations/opdk-setup-ds.yml
   vars:
     hosts: 'dc-2-ds'
 
-- include: opdk-setup-ds.yml
+- include: component_installations/opdk-setup-ds.yml
   vars:
     hosts: 'dc-1-ds'
 
-- include: opdk-cassandra-client-update.yml
+- include: component_updates/opdk-cassandra-client-update.yml
   vars:
      hosts: 'dc-1-ms'
 
-- include: opdk-setup-ms.yml
+- include: component_installations/opdk-setup-ms.yml
   vars:
     hosts: 'dc-1-ms'
 
-- include: opdk-cassandra-rebuild.yml
+- include: component_installations/opdk-cassandra-rebuild.yml
   vars:
     hosts: 'dc-2-ds'
 
-- include: opdk-setup-ms.yml
+- include: component_installations/opdk-setup-ms.yml
   vars:
     hosts: 'dc-2-ms'
   tags:
   - ms2
 
-- include: opdk-setup-rmp.yml
+- include: component_installations/opdk-setup-rmp.yml
   vars:
     hosts: 'dc-2-rmp'
 
-- include: opdk-setup-rmp.yml
+- include: component_installations/opdk-setup-rmp.yml
   vars:
     hosts: 'dc-1-rmp'
 
-- include: opdk-setup-qpid.yml
+- include: component_installations/opdk-setup-qpid.yml
   vars:
     hosts: 'dc-2-qpid'
 
-- include: opdk-setup-postgres-master.yml
+- include: component_installations/opdk-setup-postgres-master.yml
   vars:
     hosts: 'dc-2-pgmaster'
 
-- include: opdk-setup-postgres-standby.yml
+- include: component_installations/opdk-setup-postgres-standby.yml
   vars:
     hosts: 'dc-2-pgstandby'
 
-- include: opdk-setup-startup.yml
+- include: validation/opdk-setup-startup.yml
 
-- include: opdk-setup-validate.yml
+- include: validation/opdk-setup-validate.yml
 
-- include: opdk-setup-status.yml
+- include: validation/opdk-setup-status.yml
   vars:
     hosts: 'planet'
 
-- include: opdk-setup-log-files.yml
+- include: validation/opdk-setup-log-files.yml

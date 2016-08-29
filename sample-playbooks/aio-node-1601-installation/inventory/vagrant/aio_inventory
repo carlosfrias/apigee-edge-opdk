@@ -1,49 +1,49 @@
-aio_node ansible_host=127.0.0.1 ansible_port=2222 ansible_password=vagrant
+127.0.0.1 ansible_host=localhost ansible_port=2222 ansible_password=vagrant
 
 [planet]
-aio_node
+127.0.0.1 
 
 [dc-1]
-aio_node
+127.0.0.1 
 
 [ds]
-aio_node
+127.0.0.1 
 
 [dc-1-ds]
-aio_node
+127.0.0.1 
 
 [ldap]
-aio_node
+127.0.0.1 
 
 [dc-1-ldap]
-aio_node
-
-[dc-1-ms]
-aio_node
+127.0.0.1 
 
 [ms]
-aio_node
+127.0.0.1 
+
+[dc-1-ms]
+127.0.0.1 
 
 [rmp]
-aio_node
+127.0.0.1 
 
 [dc-1-rmp]
-aio_node
+127.0.0.1 
 
 [qpid]
-aio_node
+127.0.0.1 
 
 [dc-1-qpid]
-aio_node
+127.0.0.1 
 
 [pg]
-aio_node
+127.0.0.1 
 
 [dc-1-pg]
-aio_node
+127.0.0.1 
 
 [ui]
-aio_node
+127.0.0.1 
 
 [dc-1-ui]
-aio_node
+127.0.0.1 

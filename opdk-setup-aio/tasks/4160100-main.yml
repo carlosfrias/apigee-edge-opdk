@@ -2,7 +2,3 @@
 - name: Apigee AIO installation
   shell: '{{ apigee_setup }} -p aio -f {{ opdk_installation_config_file }}'
   register: aio_install_results
-
-- name: AIO Install Report
-  debug:
-    var: aio_install_results

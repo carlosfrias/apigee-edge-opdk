@@ -1,6 +1,6 @@
 ---
 - hosts: '{{ hosts }}'
-  strategy: free
+  serial: 1
   roles:
 #  - opdk-setup-rmp
   - { role: opdk-setup-component, profile: 'rmp' }
@@ -8,7 +8,7 @@
   - rmp
 
 - hosts: '{{ hosts }}'
-  strategy: free
+  serial: 1
   roles:
   - opdk-setup-default-settings
   tasks:
