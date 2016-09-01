@@ -5,10 +5,10 @@
     - opdk-setup-default-settings
 
   tasks:
-  - setup:
-  - ec2_facts:
+#  - setup:
+#  - ec2_facts:
 
-  - name: Obtain server self report
+  - name: Configure cassandra hosts
     cassandra_hosts:
       inventory_hostname: '{{ inventory_hostname }}'
       hostvars: '{{ hostvars }}'

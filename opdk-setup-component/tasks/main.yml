@@ -6,6 +6,7 @@
   when: opdk_version | version_compare('4.16.01', '>=')
 
 - name: Obtain server self report - {{ profile }}
+  ignore_errors: yes
   opdk_server_self:
     server_type: '{{ server_type }}'
     username: '{{ opdk_user_email }}'

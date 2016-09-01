@@ -42,7 +42,7 @@
   - '{{ linked_apigee_installation_home }}'
   - /opt/nginx
 
-- name: Remove analytics data on rolback: {{ remove_data_on_rollback }}
+- name: Remove analytics data on rolback
   ignore_errors: yes
   file:
     path: '{{ item }}'

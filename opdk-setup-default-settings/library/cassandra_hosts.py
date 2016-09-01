@@ -13,65 +13,65 @@ LEAD_GROUP = 'lead_group'
 
 
 def build_cass_hosts_config(inventory_hostname, hostvars):
-    ds_groups = extract_cassandra_groups(hostvars[inventory_hostname])
-    configured_cassandra_racks = configure_cassandra_racks(ds_groups, hostvars, inventory_hostname)
-    # local_inventory_hostname = hostvars[inventory_hostname]['local_address']
-    # if not local_inventory_hostname:
-    #     raise ValueError("local inventory_hostname failed: " + local_inventory_hostname)
-    # prioritized_groups = prioritize_cassandra_racks(configured_cassandra_racks, inventory_hostname, hostvars)
-    # return ' '.join(prioritized_groups)
-    return configured_cassandra_racks
+    cassandra_groups = extract_cassandra_groups(hostvars[inventory_hostname], hostvars)
+    configured_cassandra_racks = configure_cassandra_racks(cassandra_groups, hostvars, inventory_hostname)
+    cassandra_lead_found = determine_lead_group(configured_cassandra_racks,inventory_hostname, hostvars[inventory_hostname][GROUPS])
+    prioritized_groups = prioritize_cassandra_groups(cassandra_lead_found)
+    return ' '.join(prioritized_groups)
+    # return prioritized_groups
 
 
-def extract_cassandra_groups(inventory_vars):
-    ds_groups = []
+def extract_cassandra_groups(inventory_vars, hostvars):
+    cassandra_groups = {}
     for name in inventory_vars[GROUPS]:
         if 'dc-' in name and '-ds' in name:
-            ds_groups.append(name)
-    return ds_groups
+            cassandra_groups[name] = list(inventory_vars[GROUPS][name])
+
+    cassandra_ip_mappings= { 'lead_group': '' }
+    for cassandra_group_name in cassandra_groups:
+        cassandra_ip_mappings[cassandra_group_name] = {}
+        for ds_ip in cassandra_groups[cassandra_group_name]:
+            cassandra_ip_mappings[cassandra_group_name][ds_ip] = { 'private_ip': hostvars[ds_ip][SEMANTIC_PRIVATE_ADDRESS] }
+    return cassandra_ip_mappings
 
 
-def configure_cassandra_racks(ds_groups, hostvars, inventory_hostname):
-    cass_groups = {}
-    for group_name in ds_groups:
-        group_name_parts = group_name.split('-')
-        groups = hostvars[inventory_hostname][GROUPS]
-        for inventory_ip in groups[group_name]:
-            lead_group = False
-            if inventory_hostname == inventory_ip:
-                lead_group = True
-            cass_groups[group_name] = {
-                PUBLIC_ADDRESS: hostvars[inventory_ip][SEMANTIC_PUBLIC_ADDRESS],
-                LOCAL_ADDRESS: hostvars[inventory_ip][SEMANTIC_PRIVATE_ADDRESS],
-                RACK: ":" + group_name_parts[1] + ",1",
-                LEAD_GROUP: lead_group
-            }
-    return cass_groups
+def configure_cassandra_racks(cassandra_groups, hostvars, inventory_hostname):
+    for cassandra_group_name in cassandra_groups:
+        group_name_parts = cassandra_group_name.split('-')
+        for ds_ip in cassandra_groups[cassandra_group_name]:
+            cassandra_groups[cassandra_group_name][ds_ip]['private_ip'] = cassandra_groups[cassandra_group_name][ds_ip]['private_ip'] + ":" + group_name_parts[1] + ',1'
+    return cassandra_groups
 
 
-def prioritize_cassandra_racks(cassandra_groups, inventory_hostname, hostvars):
-    temp_group = cassandra_groups.copy()
-    priority_group_name = None
-    prioritized = []
-
-
-    for group in cassandra_groups:
-        if group[LEAD_GROUP]:
-            prioritized.append(group)
-            break
-
-
-        for ip in cassandra_groups[group]:
-            if ip.find(inventory_hostname) > -1:
-                priority_group_name = group
+def determine_lead_group(cassandra_groups, inventory_hostname, groups):
+    for group_name in groups:
+        if 'dc-' in group_name:
+            if inventory_hostname in groups[group_name]:
+                group_name_split = group_name.split('-')
+                cassandra_groups['lead_group'] = group_name_split[0] + '-' + group_name_split[1]
                 break
-    if not priority_group_name:
-        raise ValueError("priority_group_name was not set: " + inventory_hostname)
-    temp_group.pop(priority_group_name, None)
-    prioritized.extend(cassandra_groups[priority_group_name])
-    for group in temp_group:
-        prioritized.extend(temp_group[group])
-    return prioritized
+    return cassandra_groups
+
+
+def prioritize_cassandra_groups(cassandra_groups):
+    prioritized_groups = []
+    ds_lead_group = cassandra_groups['lead_group'] + '-ds'
+    # prioritized_groups.append(ds_lead_group)
+    del cassandra_groups['lead_group']
+
+    for ds_ip in cassandra_groups[ds_lead_group]:
+            prioritized_groups.append(cassandra_groups[ds_lead_group][ds_ip]['private_ip'])
+            # prioritized_groups.append(cassandra_groups[ds_lead_group][ds_ip]['private_ip'])
+            # prioritized_groups.append(cassandra_groups[ds_lead_group][ds_ip])
+            # prioritized_groups.append(cassandra_groups[ds_lead_group])
+            # prioritized_groups.append(ds_ip)
+    del cassandra_groups[ds_lead_group]
+
+    for cassandra_group_name in cassandra_groups:
+        for ds_ip in cassandra_groups[cassandra_group_name]:
+            prioritized_groups.append(cassandra_groups[cassandra_group_name][ds_ip]['private_ip'])
+
+    return prioritized_groups
 
 
 def main():
