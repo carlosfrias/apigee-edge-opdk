@@ -1,7 +1,6 @@
 ---
 - hosts: localhost
   connection: local
-  strategy: free
   vars_files:
   - aws_settings.yml
   roles:

@@ -2,6 +2,9 @@
 
 - hosts: planet
   gather_facts: yes
+  vars:
+    public_ip_field_name: 'public_address'
+    private_ip_field_name: 'local_address'
   pre_tasks:
   - setup:
 
