@@ -1,8 +1,8 @@
 ---
 - hosts: rmp
+  serial: 1
   roles:
   - opdk-setup-default-settings
-
   tasks:
   - name: Obtain router server self report
     ignore_errors: yes
@@ -10,6 +10,7 @@
       server_type: 'router'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
+  - debug: var="edge_router_self"
 
   - name: Obtain message processor server self report
     ignore_errors: yes
@@ -17,6 +18,9 @@
       server_type: 'mp'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
+
+  - debug: var="edge_mp_self"
+
 
 - hosts: pg
   serial: 1
@@ -30,6 +34,9 @@
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
 
+  - debug: var="edge_ps_self"
+
+
 - hosts: qpid
   serial: 1
   roles:
@@ -42,6 +49,9 @@
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
 
+  - debug: var="edge_qs_self"
+
+
 - hosts: ms
   serial: 1
   roles:
@@ -53,3 +63,6 @@
       server_type: 'ms'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
+
+  - debug: var="edge_ms_self"
+

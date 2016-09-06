@@ -1,5 +1,5 @@
 ---
-- hosts: ds
+- hosts: '{{ region }}-ds'
   serial: 1
   roles:
   - opdk-startup
@@ -7,7 +7,7 @@
   - start-ds
   - startup
 
-- hosts: ms
+- hosts: '{{ region }}-ms'
   serial: 1
   roles:
   - opdk-startup
@@ -15,7 +15,7 @@
   - start-ms
   - startup
 
-- hosts: rmp
+- hosts: '{{ region }}-rmp'
   serial: 1
   roles:
   - opdk-startup
@@ -23,11 +23,19 @@
   - start-rmp
   - startup
 
-- hosts: sax
+- hosts: '{{ region }}-qpid'
   serial: 1
   roles:
   - opdk-startup
   tags:
-  - startup-sax
+  - startup-qpid
+  - startup
+
+- hosts: '{{ region }}-pg'
+  serial: 1
+  roles:
+  - opdk-startup
+  tags:
+  - startup-pg
   - startup
 

@@ -1,16 +1,16 @@
-try:
-    import requests
-    from requests.auth import HTTPBasicAuth
-except:
-    pass
-
+import requests
+from requests import ConnectionError
+import sys
+from requests.auth import HTTPBasicAuth
 from ansible.module_utils.basic import *
 
 BASE_SERVER_URL = 'http://localhost'
 SERVER_SELF_URI = '/v1/servers/self'
 SERVER_PORTS = {'ms': '8080',
                 'router': '8081',
+                'r': '8081',
                 'mp': '8082',
+                'rmp': '8082',
                 'qs': '8083',
                 'ps': '8084'}
 
@@ -37,7 +37,7 @@ def main():
             argument_spec=dict(
                     username=dict(required=True, type='str', no_log=True),
                     password=dict(required=True, type='str', no_log=True),
-                    server_type=dict(required=True, type='str', choices=['ms', 'router', 'mp', 'qs', 'ps'])
+                    server_type=dict(required=True, type='str', choices=['ms', 'router', 'r', 'mp', 'qs', 'ps', 'rmp'])
             )
     )
 
@@ -47,29 +47,24 @@ def main():
     try:
         resp = get_server_self(server_type, username, password)
         status_code = resp.status_code
+    except ConnectionError as ex:
+        status_code = 500
+        msg = str(ex) + " Did you run on the correct server?"
+        print(msg)
 
-        if status_code >= 200 and status_code < 300:
-            server_self = map_server_self(resp)
-            facts = {}
-            facts['edge_' + server_type + '_self'] = server_self
-            # if server_type == 'ms':
-            module.exit_json(
-                    changed=True,
-                    ansible_facts=facts
-            )
-        elif status_code > 400:
-            module.fail_json(
-                    changed=False,
-                    rc=1,
-                    msg="Failed to retrieve server self",
-                    status_code=status_code,
-            )
-    except:
+    if status_code >= 200 and status_code < 300:
+        server_self = map_server_self(resp)
+        facts = {}
+        facts['edge_' + server_type + '_self'] = server_self
+        module.exit_json(
+                changed=True,
+                ansible_facts=facts
+        )
+    elif status_code > 400:
         module.fail_json(
                 changed=False,
-                rc=1,
-                msg="Server is not available",
-                status_code=500,
+                msg=msg,
+                status_code=status_code,
         )
 
 

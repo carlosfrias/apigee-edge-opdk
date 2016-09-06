@@ -1,8 +1,13 @@
 ---
-- include: ../prep_os/facts.yml
-
 - hosts: "{{ hosts }}"
+  become: yes
   strategy: free
   roles:
   - opdk-setup-bootstrap-rollback
+
+- hosts: "{{ hosts }}"
+  become: yes
+  strategy: free
+  roles:
   - restart-node
+

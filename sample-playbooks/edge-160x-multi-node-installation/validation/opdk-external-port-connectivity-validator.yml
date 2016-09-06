@@ -202,8 +202,6 @@
   tags:
   - qs_read_ds
 
-
-
 - hosts: ldap
   roles:
   - { role: external-port-connectivity-validation-server, check_port: '{{ ldap_data_port }}' }
@@ -212,7 +210,6 @@
 
 - hosts: ms
   roles:
-  - opdk-setup-default-settings
   - { role: external-port-connectivity-validation-client, check_port: '{{ ldap_data_port }}', target_server: "{{ hostvars[groups['ldap'][0]].local_address }}" }
   tags:
   - ms_read_ldap
@@ -229,7 +226,6 @@
 
 - hosts: pg
   roles:
-  - opdk-setup-default-settings
   - { role: external-port-connectivity-validation-client, check_port: '{{ pg_jmx_port }}', target_server: "{{ hostvars[groups['pg'][0]].local_address }}" }
   - { role: external-port-connectivity-validation-client, check_port: '{{ pg_int_mgmt_port }}', target_server: "{{ hostvars[groups['pg'][0]].local_address }}" }
   - { role: external-port-connectivity-validation-client, check_port: '{{ pg_db_port }}', target_server: "{{ hostvars[groups['pg'][0]].local_address }}" }

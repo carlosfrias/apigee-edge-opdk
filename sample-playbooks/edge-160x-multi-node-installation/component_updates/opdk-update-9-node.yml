@@ -50,8 +50,6 @@
   tags:
   - ui
 
-
-
 - include: opdk-update-component.yml
   vars:
     hosts: 'dc-2-ds'

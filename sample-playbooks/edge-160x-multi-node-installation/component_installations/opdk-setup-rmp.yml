@@ -1,9 +1,27 @@
 ---
 - hosts: '{{ hosts }}'
+  strategy: free
+#  pre_tasks:
+#  - setup:
+#  - ec2_facts:
+  roles:
+  - opdk-time-sync
+  - opdk-setup-os-minimum
+  - opdk-setup-os-common
+  - opdk-setup-apigee-user
+  - opdk-setup-os-rmp
+  - opdk-setup-openjdk
+  - opdk-setup-bootstrap
+  - opdk-setup-silent-installation-config
+  - opdk-setup-component-installer
+  tags:
+  - os-rmp
+  - os
+
+- hosts: '{{ hosts }}'
   serial: 1
   roles:
-#  - opdk-setup-rmp
-  - { role: opdk-setup-component, profile: 'rmp' }
+  - { role: opdk-setup-component, profile: 'rmp',  server_type: 'mp' }
   tags:
   - rmp
 

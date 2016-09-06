@@ -6,7 +6,7 @@
     state: present
 
 - name: Create the apigee user
-  delegate_to: '{{ public_address }}'
+#  delegate_to: '{{ public_address }}'
   user:
     name: "{{ opdk_user_name }}"
     comment: "OPDK user"

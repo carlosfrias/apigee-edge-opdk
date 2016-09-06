@@ -1,6 +1,6 @@
 from ansible.module_utils.basic import *
 import ast
-import simplejson as json
+import json
 
 
 GROUPS = 'groups'
@@ -79,8 +79,8 @@ def main():
             argument_spec=dict(
                     inventory_hostname=dict(required=True),
                     hostvars=dict(required=True),
-                    public_ip_field_name=dict(required=True, choices=['ec2_ip_address']),
-                    private_ip_field_name=dict(required=True, choices=['ec2_private_ip_address'])
+                    public_ip_field_name=dict(required=True, choices=['ec2_ip_address', 'public_address']),
+                    private_ip_field_name=dict(required=True, choices=['ec2_private_ip_address', 'local_address'])
             )
     )
     global SEMANTIC_PRIVATE_ADDRESS, SEMANTIC_PUBLIC_ADDRESS

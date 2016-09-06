@@ -2,9 +2,8 @@
 # tasks file for restart-node
 
 - name: Restart the node
+  become: true
   ignore_errors: yes
   shell: 'reboot now'
-  delay: '{{ delay }}'
   async: '{{ async }}'
   poll: '{{ poll }}'
-  when: reboot is defined and reboot

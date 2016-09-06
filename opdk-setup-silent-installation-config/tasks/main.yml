@@ -5,15 +5,12 @@
     path: "{{ opdk_installation_config_file }}"
     state: absent
 
-- name: Construct cassandra hosts configuration string when on a cassandra node
+- name: Construct cassandra hosts configuration
   cassandra_hosts:
     inventory_hostname: '{{ inventory_hostname }}'
     hostvars: '{{ hostvars }}'
-    public_ip_field_name: 'ec2_ip_address'
-    private_ip_field_name: 'ec2_private_ip_address'
-#  when: "{{ inventory_hostname in groups['ds'] }}"
-
-- debug: var=cassandra_hosts
+    public_ip_field_name: '{{ public_ip_field_name}}'
+    private_ip_field_name: '{{ private_ip_field_name }}'
 
 - name: Construct the silent-install file
   template:

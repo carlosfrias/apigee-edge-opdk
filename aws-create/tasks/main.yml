@@ -29,7 +29,7 @@
       team_contact_info: '{{ team_contact_info }}'
       env: '{{ env }}'
   register: status
-  with_sequence: start={{ start }} end={{ node_count }}
+  with_sequence: start={{ start }} end={{ end }}
 
 - name: Provision AMI instances Report
   debug:

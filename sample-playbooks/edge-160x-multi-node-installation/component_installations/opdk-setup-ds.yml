@@ -1,5 +1,39 @@
 ---
 - hosts: '{{ hosts }}'
+  strategy: free
+  roles:
+  - opdk-time-sync
+  - opdk-setup-os-minimum
+  - opdk-setup-os-common
+  - opdk-setup-apigee-user
+  - opdk-setup-os-ds
+  tags:
+  - os-ds
+  - os
+
+- hosts: '{{ hosts }}'
+  strategy: free
+  roles:
+  - opdk-setup-openjdk
+  tags:
+  - openjdk
+
+- hosts: '{{ hosts }}'
+  strategy: free
+  roles:
+  - opdk-setup-bootstrap
+  tags:
+  - bootstrap
+
+- hosts: '{{ hosts }}'
+  strategy: free
+  roles:
+  - opdk-setup-silent-installation-config
+  - opdk-setup-component-installer
+  tags:
+  - silent
+
+- hosts: '{{ hosts }}'
   serial: 1
   roles:
   - { role: opdk-setup-component, profile: 'ds' }

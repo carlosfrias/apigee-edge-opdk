@@ -1,5 +1,4 @@
 ---
-
 - hosts: pg
   serial: 1
   roles:

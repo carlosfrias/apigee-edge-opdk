@@ -1,6 +1,7 @@
 ---
 - hosts: ms
   roles:
+  - opdk-setup-org-config
   - opdk-setup-org
   tags:
   - org

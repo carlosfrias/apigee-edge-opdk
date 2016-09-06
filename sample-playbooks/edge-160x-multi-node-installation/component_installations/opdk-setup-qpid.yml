@@ -1,5 +1,24 @@
 ---
 - hosts: '{{ hosts }}'
+  strategy: free
+#  pre_tasks:
+#  - setup:
+#  - ec2_facts:
+  roles:
+  - opdk-time-sync
+  - opdk-setup-os-minimum
+  - opdk-setup-os-common
+  - opdk-setup-apigee-user
+  - opdk-setup-os-qpid
+  - opdk-setup-openjdk
+  - opdk-setup-bootstrap
+  - opdk-setup-silent-installation-config
+  - opdk-setup-component-installer
+  tags:
+  - os-qpid
+  - os
+
+- hosts: '{{ hosts }}'
   serial: 1
   roles:
   - { role: opdk-setup-component, profile: 'qs', server_type: 'qs'}

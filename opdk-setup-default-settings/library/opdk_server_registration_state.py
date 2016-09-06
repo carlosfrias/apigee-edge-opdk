@@ -52,7 +52,11 @@ def main():
     current_registration = get_server_registration(server_self, mgmt_server_ip, username, password)
     status_code = str(current_registration.status_code)
     current_server = current_registration.json()
-    server_self['registered'] = compare_registration(server_self, current_server)
+    try:
+        server_self['registered'] = compare_registration(server_self, current_server)
+    except:
+        status_code = 500
+
     if status_code == '200':
         if server_self['registered']:
             module.exit_json(
@@ -61,7 +65,7 @@ def main():
                             changed=True,
                             msg='server is registered',
                             rc=0,
-                            registered=server_self
+                            registered=server_self['registered']
                     )
             )
     else:

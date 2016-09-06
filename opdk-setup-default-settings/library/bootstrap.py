@@ -25,7 +25,7 @@ def set_bootstrap_filename(version=None):
     if version == '4.16.01' or version is None:
         bootstrap_filename = 'bootstrap.sh'
     else:
-        bootstrap_filename = 'bootstrap_{}.sh'.format(version)
+        bootstrap_filename = 'bootstrap_' + version + '.sh'
 
 
 def download_bootstrap(uri, dest_directory):

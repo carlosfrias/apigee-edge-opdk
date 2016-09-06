@@ -23,10 +23,18 @@
   - restart-rmp
   - restart
 
-- hosts: sax
+- hosts: qpid
   serial: 1
   roles:
   - opdk-restart
   tags:
-  - restart-sax
+  - restart-qpid
+  - restart
+
+- hosts: pg
+  serial: 1
+  roles:
+  - opdk-restart
+  tags:
+  - restart-pg
   - restart

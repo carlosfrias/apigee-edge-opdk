@@ -1,7 +1,6 @@
 ---
 - hosts: '{{ hosts }}'
   strategy: free
-  gather_facts: yes
   roles:
   - opdk-setup-silent-installation-config
   tags:
@@ -10,7 +9,6 @@
 
 - hosts: '{{ hosts }}'
   strategy: free
-  gather_facts: yes
   roles:
   - opdk-setup-component-installer
   tags:

@@ -7,19 +7,24 @@
     line: '\1disabled'
     backrefs: yes
     backup: yes
-
-- name: Obtain status of selinux
-  shell: sestatus
-  register: status
-
-- name: Temporarily disable selinux on redhat OS families version 7
-  shell: setenforce 0
-  when: "ansible_os_family | lower == 'redhat' and ansible_distribution_major_version == '7' and 'enabled' in status.stdout"
+  when: "{{ ansible_selinux.status | lower != 'disabled' }}"
 
 - name: Refresh setup facts
   setup:
 
-- name: Fail playbook if selinux is running
-  fail:
-    msg: 'SELinux MUST be disabled, selinux has been updated, please restart the node.'
+- name: Restart playbook if selinux is running
+  debug:
+    msg: 'SELinux MUST be disabled, selinux has been updated, restarting node now...'
   when: "{{ ansible_selinux.status | lower != 'disabled' }}"
+
+- name: Restarting node
+  become: true
+  shell: "reboot now"
+  when: "{{ ansible_selinux.status | lower != 'disabled' }}"
+#
+#- name: Continue after restart if possible
+#  wait_for:
+#    port: '22'
+#    host: '{{ ansible_host }}'
+#    delay: '{{ restart_delay }}'
+#    state: present

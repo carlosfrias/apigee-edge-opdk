@@ -1,6 +1,4 @@
 ---
-- include: ../prep_os/facts.yml
-
 - hosts: '{{ hosts }}'
   roles:
   - opdk-setup-status
