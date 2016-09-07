@@ -38,13 +38,13 @@
 
   - name: Remove original_hd
     shell: "{{ vbox_manage }} closemedium {{ original_hd }}"
-#
+
 #  - name: Rename swap file to original
 #    copy:
 #      src: '{{ swap_hd }}'
 #      dest: '{{ original_hd }}'
 #      force: yes
-#
+
 #  - name: Attached resized hd to vm
 #    shell: "{{ vbox_manage }} modifyvm aio_node --hda {{ original_hd }}"
 

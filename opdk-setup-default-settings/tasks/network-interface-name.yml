@@ -2,7 +2,7 @@
 - name: Normal interface name for redhat family
   set_fact:
     interface_name: 'ansible_eth0'
-  when: ansible_os_family | lower == 'redhat'
+  when: ansible_os_family | lower == 'redhat' or ansible_os_family | lower == 'centos'
 
 - name: Capture interface Name if running Centos on Virtualbox
   set_fact:

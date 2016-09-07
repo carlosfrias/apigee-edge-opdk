@@ -30,7 +30,12 @@ def extract_cassandra_groups(inventory_vars, hostvars):
     for cassandra_group_name in cassandra_groups:
         cassandra_ip_mappings[cassandra_group_name] = {}
         for ds_ip in cassandra_groups[cassandra_group_name]:
-            cassandra_ip_mappings[cassandra_group_name][ds_ip] = { 'private_ip': hostvars[ds_ip][SEMANTIC_PRIVATE_ADDRESS] }
+            try:
+                private_ip = hostvars[ds_ip][SEMANTIC_PRIVATE_ADDRESS]
+            except:
+                private_ip = hostvars[ds_ip]['ansible_eth0']['ipv4']['address']
+
+            cassandra_ip_mappings[cassandra_group_name][ds_ip] = { 'private_ip': private_ip }
     return cassandra_ip_mappings
 
 
@@ -73,18 +78,14 @@ def main():
             argument_spec=dict(
                     inventory_hostname=dict(required=True),
                     hostvars=dict(required=True),
-                    public_ip_field_name=dict(required=True, choices=['ec2_ip_address', 'public_address']),
-                    private_ip_field_name=dict(required=True, choices=['ec2_private_ip_address', 'local_address'])
+                    public_ip_field_name=dict(required=False, choices=['ec2_ip_address', 'public_address']),
+                    private_ip_field_name=dict(required=False, choices=['ec2_private_ip_address', 'local_address'])
             )
     )
     global SEMANTIC_PRIVATE_ADDRESS, SEMANTIC_PUBLIC_ADDRESS
     SEMANTIC_PRIVATE_ADDRESS = module.params['private_ip_field_name']
     SEMANTIC_PUBLIC_ADDRESS = module.params['public_ip_field_name']
     inventory_hostname = module.params['inventory_hostname']
-
-    print(SEMANTIC_PUBLIC_ADDRESS)
-    print(SEMANTIC_PRIVATE_ADDRESS)
-    print(inventory_hostname)
 
     hostvars = module.params['hostvars']
     hostvars = ast.literal_eval(hostvars)

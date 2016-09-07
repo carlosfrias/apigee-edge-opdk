@@ -3,7 +3,9 @@ OPDK Setup Default Settings
 
 This role provides a set of default variables and modules for installing the Apigee OPDK. This role 
 is a dependency to other roles that support installing the Apigee OPDK. This role provides default settings that must be 
-provided if none are provided by the user.
+provided if none are provided by the user. 
+
+The intention of this file is that a user can simply copy this file as the starter file for their settings. This 
 
 Requirements
 ------------

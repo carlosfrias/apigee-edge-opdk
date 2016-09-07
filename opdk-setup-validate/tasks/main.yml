@@ -1,8 +1,6 @@
 ---
 # tasks file for opdk-setup-validate
 
-#- include: network-interface-name.yml
-
 - name: Install Apigee Validate
   shell: '{{ apigee_service }} apigee-validate install'
 

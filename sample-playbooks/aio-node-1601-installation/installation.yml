@@ -1,6 +1,11 @@
 ---
 - hosts: planet
   become: yes
+  pre_tasks:
+
+  - name: Load credentials from encrypted file
+    include_vars: '~/.apigee/credentials.yml'
+
   tasks:
   - name: install selinux python bindings
     yum:
@@ -9,6 +14,8 @@
     when: ansible_bios_version | lower | search('virtualbox')
 
   - setup:
+
+
 
 - include: facts.yml
 
@@ -35,11 +42,11 @@
 
 - include: opdk-setup-aio.yml
 
+- include: opdk-setup-org.yml
+
 - include: opdk-setup-validate.yml
 
 - include: opdk-setup-validate-cleanup.yml
-
-- include: opdk-setup-org.yml
 
 - hosts: dc-1
   strategy: free

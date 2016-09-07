@@ -80,11 +80,11 @@
   tags:
   - org
 
-- include: validation/opdk-setup-startup.yml
-  vars:
-    region: 'dc-2'
-  tags:
-  - startup
+#- include: validation/opdk-setup-startup.yml
+#  vars:
+#    region: 'dc-2'
+#  tags:
+#  - startup
 
 - include: validation/opdk-setup-validate.yml
   tags:

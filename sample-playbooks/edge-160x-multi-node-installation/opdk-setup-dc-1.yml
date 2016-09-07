@@ -1,55 +1,4 @@
 ---
-#- include: prep_os/update-user.yml
-#  vars:
-#    hosts: 'planet'
-#    user: 'root'
-
-#- include: prep_os/facts.yml
-
-#- include: prep_os/opdk-setup-os.yml
-
-#- include: prep_os/opdk-setup-openjdk.yml
-#  vars:
-#    hosts: 'dc-1'
-
-#- include: prep_bootstrap/opdk-setup-bootstrap.yml
-#  vars:
-#    hosts: 'dc-1-ms'
-#  when: create_archive is defined and create_archive
-
-#- include: prep_bootstrap/opdk-setup-bootstrap-archive-create-download.yml
-#  vars:
-#    hosts: 'ms'
-#  when: create_archive is defined and create_archive
-
-#- include: prep_bootstrap/opdk-setup-bootstrap-rollback.yml
-#  vars:
-#    hosts: 'dc-1-ms'
-#  when: create_archive is defined and create_archive
-
-#- include: prep_os/opdk-setup-os.yml
-#  when: create_archive is defined and create_archive
-
-#- include: prep_os/opdk-setup-openjdk.yml
-#  vars:
-#    hosts: 'dc-1-ms'
-#  when: create_archive is defined and create_archive
-
-#- include: prep_bootstrap/opdk-setup-bootstrap-archive.yml
-#  vars:
-#    hosts: 'dc-1'
-#  when: (existing_archive is defined and existing_archive) or (create_archive is defined and create_archive)
-
-#- include: prep_bootstrap/opdk-setup-bootstrap.yml
-#  vars:
-#    hosts: 'dc-1'
-#  when: create_archive is not defined or not create_archive
-
-#- include: component_installations/opdk-setup-component-installer.yml
-#  vars:
-#    hosts: 'dc-1'
-
-#- include: component_installations/opdk-setup-ds.yml
 - include: component_installations/opdk-install-component.yml
   vars:
     hosts: 'dc-1-ds'
@@ -57,7 +6,6 @@
   tags:
   - ds
 
-#- include: component_installations/opdk-setup-ms.yml
 - include: component_installations/opdk-install-component.yml
   vars:
     hosts: 'dc-1-ms'
@@ -65,7 +13,6 @@
   tags:
   - ms
 
-#- include: component_installations/opdk-setup-rmp.yml
 - include: component_installations/opdk-install-component.yml
   vars:
     hosts: 'dc-1-rmp'
@@ -73,7 +20,6 @@
   tags:
   - rmp
 
-#- include: component_installations/opdk-setup-qpid.yml
 - include: component_installations/opdk-install-component.yml
   vars:
     hosts: 'dc-1-qpid'
@@ -93,16 +39,6 @@
   tags:
   - pgstandby
 
-- include: validation/opdk-setup-startup.yml
-  vars:
-    region: 'dc-1'
-  tags:
-  - startup
-
-- include: validation/opdk-setup-validate.yml
-  tags:
-  - validate
-
 - include: validation/opdk-setup-org-config.yml
   vars:
     hosts: 'dc-1-ms'
@@ -114,6 +50,16 @@
     hosts: 'dc-1-ms'
   tags:
   - org
+
+#- include: validation/opdk-setup-startup.yml
+#  vars:
+#    region: 'dc-1'
+#  tags:
+#  - startup
+
+- include: validation/opdk-setup-validate.yml
+  tags:
+  - validate
 
 - include: validation/opdk-setup-status.yml
   vars:
