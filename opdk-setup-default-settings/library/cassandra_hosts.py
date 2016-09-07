@@ -18,7 +18,6 @@ def build_cass_hosts_config(inventory_hostname, hostvars):
     cassandra_lead_found = determine_lead_group(configured_cassandra_racks,inventory_hostname, hostvars[inventory_hostname][GROUPS])
     prioritized_groups = prioritize_cassandra_groups(cassandra_lead_found)
     return ' '.join(prioritized_groups)
-    # return prioritized_groups
 
 
 def extract_cassandra_groups(inventory_vars, hostvars):
@@ -56,15 +55,10 @@ def determine_lead_group(cassandra_groups, inventory_hostname, groups):
 def prioritize_cassandra_groups(cassandra_groups):
     prioritized_groups = []
     ds_lead_group = cassandra_groups['lead_group'] + '-ds'
-    # prioritized_groups.append(ds_lead_group)
     del cassandra_groups['lead_group']
 
     for ds_ip in cassandra_groups[ds_lead_group]:
             prioritized_groups.append(cassandra_groups[ds_lead_group][ds_ip]['private_ip'])
-            # prioritized_groups.append(cassandra_groups[ds_lead_group][ds_ip]['private_ip'])
-            # prioritized_groups.append(cassandra_groups[ds_lead_group][ds_ip])
-            # prioritized_groups.append(cassandra_groups[ds_lead_group])
-            # prioritized_groups.append(ds_ip)
     del cassandra_groups[ds_lead_group]
 
     for cassandra_group_name in cassandra_groups:
@@ -87,6 +81,10 @@ def main():
     SEMANTIC_PRIVATE_ADDRESS = module.params['private_ip_field_name']
     SEMANTIC_PUBLIC_ADDRESS = module.params['public_ip_field_name']
     inventory_hostname = module.params['inventory_hostname']
+
+    print(SEMANTIC_PUBLIC_ADDRESS)
+    print(SEMANTIC_PRIVATE_ADDRESS)
+    print(inventory_hostname)
 
     hostvars = module.params['hostvars']
     hostvars = ast.literal_eval(hostvars)

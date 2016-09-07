@@ -14,10 +14,10 @@ opdk_user_name: apigee
 opdk_group_name: "{{ opdk_user_name }}"
 
 # OPDK User Email
-opdk_user_email: opdk@apigee.com
+opdk_user_email: ''
 
 # OPDK User Password
-opdk_user_pass: Apigee123!
+opdk_user_pass: ''
 
 # Home folder of the Apigee user
 opdk_user_home: /home/{{ opdk_user_name }}
@@ -85,9 +85,6 @@ apigee_repo_uri: 'software.apigee.com'
 # Apigee bootstrap download url
 apigee_repo_url: 'https://{{ apigee_repo_uri }}'
 
-# Apigee bootstrap script location
-#bootstrap_script: '{{ opdk_installer_path }}/bootstrap.sh'
-
 # Choose whether to copy the Apigee Mirror archive from your control machine or use an existing archive on the server.
 copy_archive: yes
 
@@ -145,18 +142,17 @@ ldap_data_port: 10389
 influxdb_system_port: 25826
 influxdb_port: 8086
 
-grafana_username: admin
+grafana_username: ''
 grafana_password: '{{ grafana_username }}'
 
+# Default collectd installation file
 collectd_installation_config: collectd-installation.conf
+
+# Default influxdb host
 influxdb_host: 127.0.0.1
 
 # Local folder in which to store logs and config files
 conf_logs_dir: configs_and_logs
-
-#--------------------------------
-# Baas Default Variables, this section could be a candidate for
-# export into another role just for Baas defaults.
 
 # Organization name used in Edge and Baas setups
 org_name: opdk
@@ -201,20 +197,16 @@ opdk_baas_silent_install_file_path: /tmp/baas-silent-install.conf
 opdk_baas_provided_silent_install_file: ''
 
 # Define the API BaaS administrator account.
-baas_admin_name: 'baas_admin'
-baas_admin_email: '{{ baas_admin_name }}@apigee.com'
-baas_admin_pass: '{{ opdk_user_pass }}'
-baas_superuser_name: 'superuser'
-baas_superuser_email: 'superuser@apigee.com'
-baas_superuser_pass: '{{ opdk_user_pass }}'
+baas_admin_name: ''
+baas_admin_email: ''
+baas_admin_pass: ''
+baas_superuser_name: ''
+baas_superuser_email: ''
+baas_superuser_pass: ''
 
-# Cassandra uname/pword if you enabled Cassandra authentication.
-# Even if you have not enabled Cassandra authentication,
-# you must pass values for these properties.
-opdk_cass_username: 'cassandra'
-
-# Default value
-opdk_cass_password: '{{ opdk_cass_username }}'
+# Cassandra username and password must be provided regardless of whether you enable authentication.
+opdk_cass_username: ''
+opdk_cass_password: ''
 
 # Default setting to use a cassandra ring
 opdk_use_cass_cluster: 'y'
@@ -222,7 +214,7 @@ opdk_use_cass_cluster: 'y'
 # Default silent-install configuration file settings for OpenLDAP
 opdk_ldap_type: '1'
 opdk_ldap_remote_host: 'n'
-opdk_ldap_pass: '{{ opdk_user_pass }}'
+opdk_ldap_pass: ''
 
 # Default to enable analytics
 opdk_enable_ax: 'y'
@@ -237,8 +229,8 @@ opdk_use_zk_cluster: 'y'
 opdk_skip_smpt: 'y'
 opdk_smtp_host: 'smtp.example.com'
 opdk_smtp_port: '25'
-opdk_smtp_user: 'smtp@example.com'
-opdk_smtp_password: 'smtppwd'
+opdk_smtp_user: ''
+opdk_smtp_password: ''
 opdk_smtp_ssl: 'n'
 
 # Default to bind OPDK on all network interfaces
@@ -263,8 +255,8 @@ baas_elasticsearch_port_high: '9300'
 # SMTP information. BaaS requires an SMTP server.
 baas_smtp_host: 'smtp.gmail.com'
 baas_smtp_port: '465'
-baas_smtp_user: '{{ baas_admin_email }}'
-baas_smtp_user_pass: '{{ baas_admin_pass }}'
+baas_smtp_user: ''
+baas_smtp_user_pass: ''
 baas_smtp_ssl: 'n'
 
 linked_apigee_installation_home: ''

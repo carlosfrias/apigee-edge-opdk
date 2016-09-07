@@ -1,10 +1,9 @@
 import requests
+from requests.auth import HTTPBasicAuth
 from ansible.module_utils.basic import *
 
 bootstrap_filename = None
-version = None
 url = None
-
 
 def store_bootstrap_script(filename, dest_directory, text):
     global file_path
@@ -28,31 +27,36 @@ def set_bootstrap_filename(version=None):
         bootstrap_filename = 'bootstrap_' + version + '.sh'
 
 
-def download_bootstrap(uri, dest_directory):
+def download_bootstrap(uri, dest_directory, user_name=None, password=None):
+    auth = None
+    if user_name is not None and password is not None:
+        auth = HTTPBasicAuth(user_name, password)
     url = uri + '/' + bootstrap_filename
-    resp = requests.get(url)
+    resp = requests.get(url, auth=auth)
     store_bootstrap_script(bootstrap_filename, dest_directory, resp.text)
     return resp.status_code
 
 
 def main():
-    global version
-
     module = AnsibleModule(
             argument_spec=dict(
                     url=dict(required=False, type='str', default='http://software.apigee.com'),
-                    version=dict(required=False, type='str', choices=['4.16.01', '4.16.05'], default='4.16.01'),
+                    version=dict(required=False, type='str', choices=['4.16.01', '4.16.05', '4.16.09'], default='4.16.01'),
                     dest_dir=dict(required=False, type='str', default='/tmp'),
+                    user_name = dict(required=False, type='str'),
+                    password = dict(required=False, type='str')
             )
     )
 
     bootstrap_uri = module.params['url']
     version = module.params['version']
     dest = module.params['dest_dir']
+    user_name = module.params['user_name']
+    password = module.params['password']
 
     set_bootstrap_filename(version)
 
-    status_code = download_bootstrap(bootstrap_uri, dest)
+    status_code = download_bootstrap(bootstrap_uri, dest, user_name, password)
 
     if status_code >= 200 and status_code < 300:
         module.exit_json(changed=True,
