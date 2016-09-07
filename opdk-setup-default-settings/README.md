@@ -3,15 +3,13 @@ OPDK Setup Default Settings
 
 This role provides a set of default variables and modules for installing the Apigee OPDK. This role 
 is a dependency to other roles that support installing the Apigee OPDK. This role provides default settings that must be 
-provided if
-none are provided by the user.
+provided if none are provided by the user.
 
 Requirements
 ------------
 The installation of Apigee OPDK requires root access. Credentials must also be supplied to override the empty placeholders
 provided here. It is recommended that credentials be consolidated into a single credentials.yml file that can be stored 
-separately. 
-
+separately. It is assumed that files containing credentials are stored in the ~/.apigee folder. 
 
 Role Variables
 --------------
@@ -373,7 +371,7 @@ Default settings for removing data on rollback
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No dependencies
 
 Example Playbook
 ----------------
@@ -382,7 +380,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: opdk-setup-default-settings }
 
 License
 -------
