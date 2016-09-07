@@ -10,6 +10,8 @@
 
   - setup:
 
+- include: facts.yml
+
 - include: update-root-user.yml
   vars:
     hosts: planet

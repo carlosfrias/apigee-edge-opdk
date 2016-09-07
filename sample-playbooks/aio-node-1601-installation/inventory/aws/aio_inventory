@@ -9,7 +9,7 @@ tag_Name_cfrias_1601_aio_1_n1
 [ds:children]
 tag_Name_cfrias_1601_aio_1_n1
 
-[dc-1-ds]
+[dc-1-ds:children]
 tag_Name_cfrias_1601_aio_1_n1
 
 [ldap:children]

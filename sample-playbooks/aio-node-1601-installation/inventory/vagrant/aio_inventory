@@ -1,7 +1,5 @@
-127.0.0.1 ansible_port=2222 ansible_password=vagrant
-
 [planet]
-127.0.0.1
+127.0.0.1 ansible_port=2222 ansible_password=vagrant
 
 [dc-1]
 127.0.0.1

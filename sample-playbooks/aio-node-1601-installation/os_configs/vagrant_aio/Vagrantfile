@@ -70,16 +70,19 @@ Vagrant.configure(2) do |config|
   config.vm.provider :virtualbox do |vb|
     # vmdk_path = '/Users/carlosfrias/.vagrant.d/boxes/uclbioresource-VAGRANTSLASH-oracle68/1.0.0/virtualbox'
     # tmp1 = vmdk_path + '/' + 'box-disk1.vmdk'
-    # tmp2 = vmdk_path + '/' + 'tmp-disk.vdi'
-    # tmp3 = vmdk_path + '/' + 'resized-disk.vdi'
-    #
-    # %x[rm -f #{tmp2} #{tmp3}]
+    # tmp2 = vmdk_path + '/' + 'resized-disk.vdi'
+    # tmp3 = vmdk_path + '/' + 'backup-disk.vdi'
+
+    # %x[rm -f #{tmp2}]
+    # vb.customize "pre-boot", ["closemedium", tmp2]
     # vb.customize "pre-boot", ["clonehd",  tmp1, tmp2, "--format", "VDI"]
     # vb.customize "pre-boot", ["modifyhd", tmp2, "--resize", "32678"]
     # vb.customize "pre-boot", ["clonehd",  tmp2, tmp3, "--format", "VMDK"]
-    #
+
     # %x[rm -f #{tmp1} #{tmp2}]
     # %x[mv #{tmp3} #{tmp1}]
+    # vb.customize "pre-boot", ["closemedium", tmp2]
+    # vb.customize "pre-boot", ["closemedium", tmp3]
 
     vb.memory = 8192
   end

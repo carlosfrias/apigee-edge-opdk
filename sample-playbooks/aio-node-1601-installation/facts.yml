@@ -10,6 +10,6 @@
   tags:
   - facts
 
-- include: ../validation/opdk-server-self.yml
+- include: opdk-server-self.yml
   tags:
   - facts

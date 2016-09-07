@@ -10,7 +10,7 @@
       server_type: 'router'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
-  - debug: var="edge_router_self"
+  - debug: var=edge_router_self
 
   - name: Obtain message processor server self report
     ignore_errors: yes
@@ -18,8 +18,7 @@
       server_type: 'mp'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
-
-  - debug: var="edge_mp_self"
+  - debug: var=edge_mp_self
 
 
 - hosts: pg
@@ -33,8 +32,7 @@
       server_type: 'ps'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
-
-  - debug: var="edge_ps_self"
+  - debug: var=edge_ps_self
 
 
 - hosts: qpid
@@ -48,8 +46,7 @@
       server_type: 'qs'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
-
-  - debug: var="edge_qs_self"
+  - debug: var=edge_qs_self
 
 
 - hosts: ms
@@ -63,6 +60,5 @@
       server_type: 'ms'
       username: '{{ opdk_user_email }}'
       password: '{{ opdk_user_pass }}'
-
-  - debug: var="edge_ms_self"
+  - debug: var=edge_ms_self
 
