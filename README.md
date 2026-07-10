@@ -4,6 +4,14 @@
 
 This is the foundational OPDK automation work: ~120 roles that treat a deployment as a **Planet → Region → Pod → Host → Service** hierarchy, derive nearly every operational decision from that graph and the Ansible inventory, and reconcile server state against the Apigee management REST API. Originally built 2015–2016 for Apigee Edge Private Cloud 15.07 / 16.01 / 16.05 and Apigee BaaS Private Cloud; the approach was later factored into the modular `apigee-opdk-*` role corpus (175+ repositories) for later releases.
 
+## Framework context
+
+This repository is the 2015–2016 origin of the Apigee OPDK Ansible automation framework. The monolithic framework you see here modeled an Apigee planet as an object graph and converged it idempotently via custom Python modules against the Apigee Management Server REST API.
+
+That approach evolved into today's modular `apigee-opdk-*` role corpus — one repository per concern, so each role can be tested, versioned, and reused independently. The modern entry point for the OPDK lifecycle is [`apigee-opdk-playbook-setup-ansible`](https://github.com/carlosfrias/apigee-opdk-playbook-setup-ansible).
+
+For the portfolio view that routes to all skill domains, see the [`apigee-hybrid-workspace` Skills Assessment](https://github.com/carlosfrias/apigee-hybrid-workspace/blob/master/SKILLS-ASSESSMENT.md).
+
 <!-- BEGIN Google Required Disclaimer -->
 
 ## Not Google Product Clause
