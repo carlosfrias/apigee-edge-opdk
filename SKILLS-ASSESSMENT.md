@@ -53,10 +53,10 @@ Most "Ansible automation" is a collection of roles. This is a framework: the inv
 
 ## Related repos
 
-- [`apigee-opdk-playbook-maintenance-opdk-upgrade`](https://github.com/carlosfrias/apigee-opdk-playbook-maintenance-opdk-upgrade/blob/main/SKILLS-ASSESSMENT.md) — two-layer traffic fencing + topology-aware rollback
-- [`apigee-opdk-cassandra-rebuild`](https://github.com/carlosfrias/apigee-opdk-cassandra-rebuild/blob/main/SKILLS-ASSESSMENT.md) — Cassandra ring rebuild
-- [`apigee-opdk-setup-postgres-failover`](https://github.com/carlosfrias/apigee-opdk-setup-postgres-failover/blob/main/SKILLS-ASSESSMENT.md) — Postgres HA switchover
-- [`apigee-hybrid-workspace`](https://github.com/carlosfrias/apigee-hybrid-workspace/blob/main/SKILLS-ASSESSMENT.md) — Kubernetes-native Apigee Hybrid portfolio hub
+- [`apigee-opdk-playbook-maintenance-opdk-upgrade`](https://github.com/carlosfrias/apigee-opdk-playbook-maintenance-opdk-upgrade/blob/master/SKILLS-ASSESSMENT.md) — two-layer traffic fencing + topology-aware rollback
+- [`apigee-opdk-cassandra-rebuild`](https://github.com/carlosfrias/apigee-opdk-cassandra-rebuild/blob/master/SKILLS-ASSESSMENT.md) — Cassandra ring rebuild
+- [`apigee-opdk-setup-postgres-failover`](https://github.com/carlosfrias/apigee-opdk-setup-postgres-failover/blob/master/SKILLS-ASSESSMENT.md) — Postgres HA switchover
+- [`apigee-hybrid-workspace`](https://github.com/carlosfrias/apigee-hybrid-workspace/blob/master/SKILLS-ASSESSMENT.md) — Kubernetes-native Apigee Hybrid portfolio hub
 
 ## Provenance
 
