@@ -51,20 +51,8 @@ opdk-setup-default-settings   ← keystone role: defaults + custom module librar
 
 **Why inventory as the source of truth?** DCs, regions, racks, seeds, and roles are derived from Ansible groups (`dc_1`..`dc_n`, `planet`, component groups) rather than hardcoded, so the framework scales with the inventory.
 
----
-
-## Capabilities — what this credentials
-
-> Ansible is the medium. The engineering below is the evidence of the expertise applied.
-
-- **Distributed-systems operations** — rolling, `serial:1`, dependency-ordered changes that preserve Cassandra quorum and routing availability.
-- **Cassandra cluster administration** — `nodetool rebuild` from a named source DC, ring expansion across DCs, client/data-node package split, registration via the MS.
-- **Postgres HA & Apigee analytics** — master/standby replication, axgroup/consumer-group/datastore registration, scope binding by (org, env).
-- **Apigee platform lifecycle** — the `apigee-setup` profile taxonomy and two-phase `install` → `setup -f <response file>` toolchain.
-- **Linux systems administration** — idempotent, proxy-aware OS-prerequisites pipeline (EPEL → iptables → yum → limits → sysctl → SELinux → reboot-gate → OpenJDK).
-- **Network & port validation** — per-component internal/external port-connectivity validators with client/server split for cross-node reachability through firewalls.
-- **AWS provisioning** — `aws-create`/`-start`/`-stop`/`-terminate` lifecycle with the canonical Apigee port matrix.
-- **Framework architecture** — object-graph topology model, idempotent REST reconciliation, keystone-role design.
+> [!NOTE]
+> Engineering portfolio note — this project demonstrates distributed-systems architecture and Apigee platform operations. See the [skills assessment →](SKILLS-ASSESSMENT.md) for the expertise applied.
 
 ---
 
