@@ -2,7 +2,7 @@
 
 > **A framework that models an Apigee planet as an object graph and converges it idempotently** — install, configure, expand, migrate, recover, and tear down distributed API-gateway infrastructure across arbitrarily sized, multi-datacenter topologies.
 
-This is the foundational OPDK automation work: ~120 roles that treat a deployment as a **Planet → Region → Pod → Host → Service** hierarchy, derive nearly every operational decision from that graph and the Ansible inventory, and reconcile server state against the Apigee management REST API. Originally built 2015–2016 for Apigee Edge Private Cloud 15.07 / 16.01 / 16.05 and Apigee BaaS Private Cloud; the approach was later factored into the modular `apigee-opdk-*` role corpus (175+ repositories) for later releases.
+This is the foundational OPDK automation work: ~120 roles that treat a deployment as a **Planet → Region → Pod → Host → Service** hierarchy, derive nearly every operational decision from that graph and the Ansible inventory, and reconcile server state against the Apigee management REST API. Originally built 2015–2016 for Apigee Edge Private Cloud 15.07 / 16.01 / 16.05 and Apigee BaaS Private Cloud; the approach was later factored into the modular `apigee-opdk-*` role corpus (170+ repositories) for later releases.
 
 ## Framework context
 
